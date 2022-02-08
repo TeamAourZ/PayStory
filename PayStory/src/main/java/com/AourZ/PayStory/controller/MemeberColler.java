@@ -19,4 +19,10 @@ public class MemeberColler {
 	public String register() {
 		return "member/register";
 	}
+	
+	@RequestMapping("/chatbot")
+	public String chatbot() {
+		return "chatbot/chatbot";
+	}
+	
 }
