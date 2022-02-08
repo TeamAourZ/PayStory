@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemeberColler {
 	@RequestMapping("/")
 	public String index() {
-		return "index";
+		return "board/main";
 	}
 
 	@RequestMapping("/login")
