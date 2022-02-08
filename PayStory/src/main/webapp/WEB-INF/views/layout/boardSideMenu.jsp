@@ -21,10 +21,9 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<c:url value='/'/>">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="sidebar-brand-icon">
+                    <img alt="logo" src="/main/images/logo.png" style="width: 100%;">
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
             </a>
 
             <!-- Divider -->
@@ -47,7 +46,7 @@
 
             <!-- Nav Item - 상세 내역 조회 -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="#">
                     <i class="fas fa-tasks"></i>
                     <span>상세 내역 조회</span>
                 </a>
@@ -55,7 +54,7 @@
 
             <!-- Nav Item - 수입 | 지출 내역 추가 -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="#">
                     <i class="fas fa-plus-circle"></i>
                     <span>수입 | 지출 내역 추가</span>
                 </a>
@@ -66,7 +65,7 @@
 
             <!-- Nav Item - 게시판 -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="#">
                     <i class="far fa-clipboard"></i>
                     <span>게시판</span>
                 </a>
@@ -74,7 +73,7 @@
 
             <!-- Nav Item - 챗봇 -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="#">
                     <i class="fas fa-robot"></i>
                     <span>챗봇</span>
                 </a>
