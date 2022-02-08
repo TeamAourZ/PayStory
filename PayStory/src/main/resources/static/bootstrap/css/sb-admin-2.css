@@ -10344,7 +10344,7 @@ a:focus {
 }
 
 .sidebar .nav-item.active .nav-link {
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .sidebar .nav-item .collapse {
@@ -10543,7 +10543,7 @@ a:focus {
     margin-right: 0.25rem;
   }
   .sidebar .nav-item .nav-link span {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     display: inline;
   }
   .sidebar .nav-item .nav-link[data-toggle="collapse"]::after {
@@ -10605,7 +10605,7 @@ a:focus {
     width: 6.5rem;
   }
   .sidebar.toggled .nav-item .nav-link span {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     display: block;
   }
   .sidebar.toggled .nav-item .nav-link i {
