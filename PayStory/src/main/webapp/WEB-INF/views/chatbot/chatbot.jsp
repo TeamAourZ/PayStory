@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,7 +10,8 @@
 	    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 	    <link rel="stylesheet" type="text/css" href="/main/css/style.css">
-	    <script src="/main/js/skill.js"></script>
+	    <script src="/main/js/jquery-3.6.0.min.js"></script>
+	    <script src="/main/js/chatbot.js"></script>
 	</head>
 	
 	<body>
@@ -91,7 +94,7 @@
 	            </div>
 	            
 	            <!-- chatbox -->
-	            <div class="chatBox" id="chatBox">
+	            <div id="chatBox">
 	                <!-- <div class="message my_message">
 	                    <p>Hi<br><span>12:15</span></p>
 	                </div>
@@ -101,11 +104,11 @@
 	            </div>
 	            <!-- chat input -->
 	            <div class="chatbox_input">
-	            	<form id = "chatForm" method = "post">
+	            	<form id = "chatForm">
 		                <ion-icon name="happy-outline"></ion-icon>
 		                <ion-icon name="document-attach-outline"></ion-icon>
-		                <input type="text" placeholder="메시지를 입력해주세요.">
-		                <ion-icon type="submit" id="submitBtn" value="전송" name="enter"></ion-icon>
+		                <input type="text" id="message" name="message" size="30" placeholder="질문을 입력하세요">	
+		                <ion-icon type="submit" id="submit" value="전송" name="enter"></ion-icon>
 		                <ion-icon name="mic"></ion-icon>
 	                </form>
 	            </div>

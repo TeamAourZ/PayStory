@@ -239,7 +239,7 @@ body
     color: #555;
 }
 /* chatBox */
-.chatBox
+#chatBox
 {
     position: relative;
     width: 100%;
@@ -247,14 +247,16 @@ body
     padding: 50px;
     overflow-y: auto;
 }
-.message
+
+
+.msgBox	/* 메시지 박스 */
 {
     position: relative;
     display: flex;
     width: 100%;
     margin: 5px 0;
 }
-.message p
+.msgBox span	/* 인사말 */
 {
     position: relative;
     right: 0;
@@ -265,7 +267,7 @@ body
     border-radius: 10px;
     font-size: 0.9em;
 }
-.message p::before
+.msgBox span::before	/* 모서리 */
 {
     content: '';
     position: absolute;
@@ -275,28 +277,28 @@ body
     height: 20px;
     background: linear-gradient(135deg, #0d6efd 0%, #0d6efd 50%, transparent 70%, transparent);
 }
-.message p span
+/* .message p span 시간
 {
     display: block;
     margin-top: 5px;
     font-size: 0.85em;
     opacity: 0.5;
-}
-.my_message
+} */
+.send
 {
     justify-content: flex-end;
 }
-.frnd_message
+.receive
 {
     justify-content: flex-start;
 }
-.frnd_message p
+.receive span
 {
     background: #ced4da;
     text-align: left;
 
 }
-.message.frnd_message p::before
+.msgBox.receive span::before
 {
     content: '';
     position: absolute;
