@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AccountBookController {
+	@RequestMapping("/home")
+	public String home() {
+		return "accountBook/home";
+	}
+
 	@RequestMapping("/accountBook/add")
 	public String addForm() {
 		return "accountBook/addForm";
