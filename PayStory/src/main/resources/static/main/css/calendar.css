@@ -1,7 +1,12 @@
 @charset "UTF-8";
 
-.dateBox {
-    margin: 0 20px 10px 20px;
+#calendarBtnBox i {
+	color: rgba(128, 128, 128, 0.5);
+    cursor: pointer;
+}
+
+#yearMonth {
+	color: rgba(0, 0, 0, 0.9);
 }
 
 .daySel {
@@ -13,6 +18,9 @@
 .daySel div:first-child {
     background: rgba(231, 76, 60, 0.32);
 }
+.daySel div:last-child {
+	background: rgba(52, 152, 219, 0.24);
+}
 .daySel div {
     font-size: 15pt;
     border-radius: 5px;
@@ -23,7 +31,7 @@
 .dateSel {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-row-gap: 5px;
+    grid-row-gap: 20px;
     grid-column-gap: 30px;
 }
 .dateSel div {
@@ -32,4 +40,16 @@
     font-weight: bold;
     border-radius: 5px;
     border: 1px solid rgba(2, 224, 224, 0.51);
+}
+.dateSel div.date {
+	cursor: pointer;
+}
+
+.daySel div, .dateSel div {
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.today {
+	color: rgba(0, 0, 0, 1);
+	background: rgba(224, 224, 224, 0.51);
 }

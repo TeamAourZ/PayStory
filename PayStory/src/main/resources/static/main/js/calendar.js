@@ -11,7 +11,8 @@ $(function() {
 	/* 달력 채우기 */
 	function makeCalendar(year, month) {
 		/*연도, 월 표시*/
-		$('.yearMonth').text(`${year}년 ${month + 1}월`);
+		$('#yearMonth').text(`${year}년 ${month + 1}월`);
+		//$('#yearMonth').text(`${year}년 ${(month + 1) < 10 ? `${month + 1}` : `${month + 1}`}월`);
 
 		const firstDay = new Date(year, month, 1).getDay();		// 이번달 첫째 날의 요일
 		const lastDate = new Date(year, month + 1, 0).getDate();	// 이번달 마지막 날 (다음달의 0번째 일은 이번달의 마지막날과 같다.)
@@ -19,18 +20,25 @@ $(function() {
 
 		/* 첫째 날 전까지 공란 */
 		for (let i = 0; i < firstDay; i++) {
-			$('.dateSel').append('<div></div>');
+			$('.dateSel').append('<div class="border"></div>');
 		}
 
 		/* 날짜 채우기 */
 		for (let i = 1; i <= lastDate; i++) {
 			let dateClass = `${year}-${(month + 1) < 10 ? `0${month + 1}` : `${month + 1}`}-${i < 10 ? `0${i}` : `${i}`}`;
-			$('.dateSel').append(`<div class="date ${dateClass}">${i}</div>`);
+			$('.dateSel').append(`<div class="pl-1 date ${dateClass}">${i}</div>`);
 		}
 
 		/* 남은 날 공란 */
 		for (let i = 6; i > lastDay; i--) {
-			$('.dateSel').append('<div></div>');
+			$('.dateSel').append('<div class="border"></div>');
+		}
+
+		/* 달력 크기 맞추기 */
+		if ($('.dateSel').children('div').length == 35) {
+			for (let i = 0; i < 7; i++) {
+				$('.dateSel').append('<div class="border"></div>');
+			}
 		}
 	};
 	makeCalendar(nowYear, nowMonth);
@@ -47,7 +55,7 @@ $(function() {
 	checkToday();
 
 	/* 이전 버튼 클릭 */
-	$('.prevMonthBtn').on('click', () => {
+	$('#prevMonthBtn').on('click', () => {
 		$('.dateSel').children().remove();
 
 		nowMonth--;
@@ -61,7 +69,7 @@ $(function() {
 	});
 
 	/* 다음 버튼 클릭 */
-	$('.nextMonthBtn').on('click', () => {
+	$('#nextMonthBtn').on('click', () => {
 		$('.dateSel').children().remove();
 
 		nowMonth++;
@@ -75,7 +83,7 @@ $(function() {
 	});
 
 	/* today 버튼 클릭 */
-	$('.todayBtn').on('click', () => {
+	$('#todayBtn').on('click', () => {
 		$('.dateSel').children().remove();
 
 		const date = new Date();
@@ -93,7 +101,8 @@ $(function() {
 	$(document).on('click', '.date', function(e) {
 		e.stopImmediatePropagation();
 		let date = $(this)[0].classList[1];
-		location.href = "/havediary/" + date;
+		//location.href = "/havediary/" + date;
+		location.href = "#";
 	})
 
 });
