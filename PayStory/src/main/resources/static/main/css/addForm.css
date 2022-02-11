@@ -1,0 +1,6 @@
+@charset "UTF-8";
+/* addForm.css */
+
+input:focus,
+input:active {outline: none;}
+.item2 {margin-bottom: 0;}

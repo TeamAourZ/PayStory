@@ -18,6 +18,7 @@
         rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/main/css/addForm.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -52,50 +53,136 @@
                     </div>
                     
                     <!-- Form panels -->
-					<div class="tab-content bg-white py-3 px-4 mx-3 rounded">
-					
+					<div class="tab-content w-75 m-auto p-4 bg-white rounded">
 						<!--지출 Form-->
 						<div class="tab-pane fade in show active" id="expenditure" role="tabpanel">
-							<br>
-					
-							<form>
-								<div class="form-group">
-									<label for="exampleInputEmail1">Email address</label>
-									<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-									<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+							<form id="expenditureForm" class="my-4">
+								<div class="form-row px-3"> 
+									<!-- Form 영역 --> 
+									<div class="col-md-8"> 
+										<!-- 영수증 등록 -->
+										<div class="custom-file mb-3"> 
+											<label class="custom-file-label" for="uploadReceipt">영수증 등록</label>
+											<input type="file" class="custom-file-input shadow-none" id="uploadReceipt">
+										</div>
+										<!-- 날짜 -->
+										<div class="form-group"> 
+											<label for="date">날짜</label>
+											<input type="date" class="form-control shadow-none" id="date">
+										</div>
+										<!-- 태그 -->
+										<div class="form-group"> 
+											<label for="tags">태그</label>
+											<select id="tags" class="form-control form-control-sm">
+												<option selected>태그를 선택해주세요.</option>
+												<option>식품</option>
+												<option>용품</option>
+												<option>외식</option>
+												<option>주거/통신</option>
+												<option>교육/문화/미용/건강</option>
+												<option>교통/차량</option>
+												<option>경조사/용돈 등 사회생활</option>
+												<option>저축/보험</option>
+												<option>기타</option>
+											</select>
+										</div>
+										<!-- 상호명 -->
+										<div class="form-group">
+											<label for="expenditureSource">상호명</label>
+											<input type="text" class="form-control form-control-sm shadow-none" id="expenditureSource">
+										</div>
+										<!-- 아이템 1-->
+										<div class="form-group form-row">
+											<div class="col-sm-8">
+												<label for="expenditureItem">내용</label>
+												<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem">
+											</div>
+											<div class="col-sm-4">
+												<label for="expenditureItemAmount">금액</label>
+												<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItemAmount">
+											</div>
+										</div>
+										<!-- 아이템 2-->
+										<div class="form-group form-row item2">
+											<div class="col-sm-8">
+												<label for="expenditureItem">내용</label>
+												<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem">
+											</div>
+											<div class="col-sm-4">
+												<label for="expenditureItemAmount">금액</label>
+												<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItemAmount">
+											</div>
+										</div>
+										<!-- 총 금액 -->
+										<div class="form-group row px-2">
+											<label for="expenditureTotalAmount" class="col-sm-8 col-form-label text-right">총 금액</label>
+											<div class="col-sm-4">
+												<input type="text" readonly class="form-control-plaintext text-right" id="expenditureTotalAmount" value="12,000원">
+											</div>
+										</div>
+										<!-- 메모 -->
+										<div class="form-group">
+											<label for="expenditureMemo">메모</label>
+											<textarea class="form-control shadow-none" id="expenditureMemo" rows="3"></textarea>
+										</div>
+									</div>
+									<!-- 이미지 영역 -->
+									<div class="col-md-4 border rounded text-center mb-3">
+									</div>
 								</div>
-								<div class="form-group">
-									<label for="exampleInputPassword1">Password</label>
-									<input type="password" class="form-control" id="exampleInputPassword1">
+								<div class="d-flex align-items-center justify-content-center mt-3">
+									<button type="submit" class="btn btn-primary w-25 mr-3">등록</button>
+									<button type="reset" class="btn btn-primary w-25">취소</button>
 								</div>
-								<div class="form-group form-check">
-									<input type="checkbox" class="form-check-input" id="exampleCheck1">
-									<label class="form-check-label" for="exampleCheck1">Check me out</label>
-								</div>
-								<button type="submit" class="btn btn-primary">Submit</button>
 							</form>
-					
-						</div>
-					
+						</div> <!--  End 지출 Form -->
+						
 						<!-- 수입 Form -->
-						<div class="tab-pane fade" id="income" role="tabpanel">
-							<br>
-					
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus
-							  reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione
-							  porro voluptate odit minima.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus
-							  reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione
-							  porro voluptate odit minima.</p>
-					
-						</div>
-					 	<!--/.Panel 2-->
+						<div class="tab-pane fade px-5" id="income" role="tabpanel">
+							<form id="incomeForm" class="my-4">
+								<!-- 날짜 -->
+								<div class="form-group"> 
+									<label for="date">날짜</label>
+									<input type="date" class="form-control shadow-none" id="date">
+								</div>
+								<!-- 태그 -->
+								<div class="form-group"> 
+									<label for="tags">태그</label>
+									<select id="tags" class="form-control">
+										<option selected>태그를 선택해주세요.</option>
+										<option>급여</option>
+										<option>보너스</option>
+										<option>사업소득</option>
+										<option>금융소득</option>
+										<option>기타</option>
+									</select>
+								</div>
+								<!-- 수입원 -->
+								<div class="form-group">
+									<label for="incomeSource">수입원</label>
+									<input type="text" class="form-control shadow-none" id="incomeSource">
+								</div>
+								<!-- 금액 -->
+								<div class="form-group">
+									<label for="incomeAmount">금액</label>
+									<input type="text" class="form-control shadow-none" id="incomeAmount">
+								</div>
+								<!-- 메모 -->
+								<div class="form-group">
+									<label for="expenditureMemo">메모</label>
+									<textarea class="form-control shadow-none" id="expenditureMemo" rows="3"></textarea>
+								</div>
+								<div class="d-flex align-items-center justify-content-center mt-3">
+									<button type="submit" class="btn btn-primary w-25 mr-3">등록</button>
+									<button type="reset" class="btn btn-primary w-25">취소</button>
+								</div>
+							</form>							
+						</div> <!--  End 수입 Form -->
 					</div>
                 </div>
 			</div>
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
 
@@ -105,24 +192,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <jsp:include page="/WEB-INF/views/layout/logoutModal.jsp" flush="true"/>
 
     <!-- Bootstrap core JavaScript-->
     <script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
@@ -133,12 +203,5 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/bootstrap/js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="/bootstrap/vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="/bootstrap/js/demo/chart-area-demo.js"></script>
-    <script src="/bootstrap/js/demo/chart-pie-demo.js"></script>
 </body>
 </html>
