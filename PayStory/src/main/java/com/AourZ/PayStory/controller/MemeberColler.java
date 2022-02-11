@@ -5,14 +5,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MemeberColler {
+	
 	@RequestMapping("/")
-	public String index() {
-		return "board/main";
+	public String Landing() {
+		return "index";
 	}
 
 	@RequestMapping("/login")
 	public String login() {
 		return "member/login";
+	}
+	
+	@RequestMapping("/loginTest")
+	public String loginTest() {
+		return "member/loginTest";
 	}
 
 	@RequestMapping("/register")
