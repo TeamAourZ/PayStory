@@ -18,12 +18,11 @@
         rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
-    <link href="/main/css/addForm.css" rel="stylesheet">
-    
     <style type="text/css">
     	input:focus,
 		input:active {outline: none;}
 		.item2 {margin-bottom: 0;}
+		textarea {resize: none;}
     </style>
 </head>
 
@@ -128,8 +127,14 @@
 										</div>
 										<!-- 메모 -->
 										<div class="form-group">
-											<label for="expenditureMemo">메모</label>
-											<textarea class="form-control shadow-none" id="expenditureMemo" rows="3"></textarea>
+											<div class="textWrap d-flex align-item-center justify-content-between">
+												<label for="expenditureMemo">메모</label>
+												<div class="textLength">
+													<span class="textCount">0</span>
+													<span class="textTotal">/100자</span>
+												</div>
+											</div>
+											<textarea class="memoBox form-control shadow-none" id="expenditureMemo" rows="3" maxlength="100"></textarea>
 										</div>
 									</div>
 									<!-- 이미지 영역 -->
@@ -175,8 +180,14 @@
 								</div>
 								<!-- 메모 -->
 								<div class="form-group">
-									<label for="expenditureMemo">메모</label>
-									<textarea class="form-control shadow-none" id="expenditureMemo" rows="3"></textarea>
+									<div class="textWrap d-flex align-item-center justify-content-between">
+										<label for="expenditureMemo">메모</label>
+										<div class="textLength">
+											<span class="textCount">0</span>
+											<span class="textTotal">/100자</span>
+										</div>
+									</div>
+									<textarea class="memoBox form-control shadow-none" id="expenditureMemo" rows="3" maxlength="100"></textarea>
 								</div>
 								<div class="d-flex align-items-center justify-content-center mt-3">
 									<button type="submit" class="btn btn-primary w-25 mr-3">등록</button>
@@ -209,5 +220,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/bootstrap/js/sb-admin-2.min.js"></script>
+    
+    <!-- Page level scripts -->
+    <script src="/main/js/addForm.js"></script>
 </body>
 </html>
