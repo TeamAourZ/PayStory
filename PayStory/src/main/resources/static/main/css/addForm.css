@@ -1,12 +1,21 @@
 @charset "UTF-8";
 /* addForm.css */
 
+/* 기본 css  */
 input:focus,
 input:active {outline: none;}
-
 textarea {resize: none;}
 
-.item2 {margin-bottom: 0;}
-
+/* 영수증 이미지 영역 */
 .form-row > .col,
 .form-row > [class*="col-"] {padding: 5px;}
+
+/* 아이템 추가/ 삭제 버튼 */
+.fa-plus-circle {font-size: 2rem;}
+#itemWrap > .form-group{margin-bottom: 0;}
+.fa-minus-circle {
+	position: absolute;
+    bottom: 10%;
+    left: 20%;
+    font-size: 1.5rem;
+}

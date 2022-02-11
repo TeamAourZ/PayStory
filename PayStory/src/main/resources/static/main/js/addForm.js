@@ -8,7 +8,7 @@
 		if(e.keycode == 13) e.preventDefault();
 	})
 	
-	// 파일 업로드시 파일 이름 표시하고 이미지 영역에 미리보기
+	// 파일 업로드
 	$("#uploadReceipt").on('change',function(e){
 		// 파일 이름 표시
 		let fileName = $(this).val();
@@ -34,6 +34,35 @@
 			}
 			render.readAsDataURL(f);		
 		});
+	});
+	
+	// 아이템 추가 버튼 클릭
+	$('.addItem').on('click', function(e){
+		e.preventDefault();
+		addItem();
+	});
+	
+	// 아이템 추가
+	function addItem(){
+		let itemHTML = '<div class="col-xl-7"><label for="expenditureItem">내용</label>'+
+				   '<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem" required>'+'</div>';
+		let priceHTML = '<div class="col-xl-4"><label for="expenditureItemAmount">금액</label>'+
+					  '<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItemAmount" required>'+'</div>';
+		let removeBtn = '<div class="col-xl-1"><button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button></div>';
+		let addItem = '<div class="item form-group form-row">'+itemHTML+priceHTML+removeBtn+'</div></div>';
+
+		$('#itemWrap').append(addItem);
+	} 
+	
+	// 아이템 삭제 버튼 클릭
+	$(document).on('click', '.removeItem', function(e){
+		e.preventDefault();
+		// 아이템이 한개면 삭제후 바로 새로 생성
+		if($('.item').length == 1){
+			$(this).parent().parent().remove(); 
+			addItem();
+		}
+		$(this).parent().parent().remove();
 	});
 	
 	// 메모 글자수 제한
