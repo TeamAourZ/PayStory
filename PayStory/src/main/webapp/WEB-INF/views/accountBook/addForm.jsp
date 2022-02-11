@@ -19,6 +19,12 @@
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
     <link href="/main/css/addForm.css" rel="stylesheet">
+    
+    <style type="text/css">
+    	input:focus,
+		input:active {outline: none;}
+		.item2 {margin-bottom: 0;}
+    </style>
 </head>
 
 <body id="page-top">
