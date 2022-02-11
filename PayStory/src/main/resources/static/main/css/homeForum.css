@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+#homeCategoryBox {
+	gap: 10px;
+	cursor: pointer;
+}
+
+#homePostBox {
+	/* 임시 */border: 1px solid black;
+	gap: 10px;
+}
+
+#homePostBox div {
+	/* 임시 */border: 1px solid black;
+}

@@ -26,27 +26,25 @@ $(function() {
 		/* 날짜 채우기 */
 		for (let i = 1; i <= lastDate; i++) {
 			let dateClass = `${year}-${(month + 1) < 10 ? `0${month + 1}` : `${month + 1}`}-${i < 10 ? `0${i}` : `${i}`}`;
-			let text = "@@@@@@"; // 공휴일 명칭
+			let text = ""; // 공휴일 명칭
+
 			$('.dateSel').append(`
-											<div class="infoBox d-flex flex-column">
-												<div class="dateBox d-flex h-40">
-													<div class="date ${dateClass} rounded-circle m-1">${i}</div>
-													<div class="text-xs mt-2">${text}</div>
-												</div>
-												<div class="countBox d-flex w-50 h-60 align-items-start align-self-center text-center mt-1">
-													<div class="incomeCount rounded-circle w-50">
-														1
-													</div>
-													<div class="expenditureCount rounded-circle w-50">
-														2
-													</div>
-												</div>
-											</div>
+				<div class="infoBox d-flex flex-column">
+					<div class="dateBox d-flex h-40">
+						<div class="date ${dateClass} rounded-circle m-1">${i}</div>
+						<div class="text-xs mt-2 mr-1">${text}</div>
+					</div>
+					<div class="countBox d-flex w-50 h-60 align-items-start align-self-center text-center mt-1">
+						<div class="incomeCount rounded-circle w-50">
+							1
+						</div>
+						<div class="expenditureCount rounded-circle w-50">
+							2
+						</div>
+					</div>
+				</div>
 			`);
 		}
-		
-		/* 요일별 색상 지정 - 토, 일 */
-		
 
 		/* 남은 날 공란 */
 		for (let i = 6; i > lastDay; i--) {
@@ -59,6 +57,21 @@ $(function() {
 				$('.dateSel').append('<div class="infoBox border"></div>');
 			}
 		}
+
+		/* 요일별 색상 지정 - 토, 일 */
+		$('.date').each(function(index) {
+			let day = new Date(year, month, index + 1);
+			day = day.getDay();
+
+			if (day == 0) { // 일요일
+				$(this).css('color', 'red');
+			} else if (day == 6) { // 토요일
+				$(this).css('color', 'blue');
+			} else {
+				$(this).css('color', 'black');
+			}
+
+		});
 	};
 	makeCalendar(nowYear, nowMonth);
 
@@ -68,6 +81,8 @@ $(function() {
 			if ($(this).text() == date.getDate() &&
 				nowYear == date.getFullYear() && nowMonth == date.getMonth()) {
 				$(this).addClass('today');
+				$(this).parent('div.dateBox').parent('div.infoBox').css('border', '1px solid black');
+				$(this).addClass('selected');
 			}
 		})
 	};
@@ -114,14 +129,22 @@ $(function() {
 		checkToday();
 	});
 
-	/* 달력 클릭시 이벤트 */
-	// 해당 날짜에 작성된 일기가 있으면 일기 조회 폼으로 이동(showDetailDiary)
-	// 없으면 일기 작성 폼으로 이동(diaryForm)
-	$(document).on('click', '.date', function(e) {
+	/* 달력 클릭 이벤트 */
+	$(document).on('click', '.infoBox', function(e) {
 		e.stopImmediatePropagation();
-		let date = $(this)[0].classList[1];
-		//location.href = "/havediary/" + date;
-		location.href = "#";
+
+		for (let i = 0; i < $('.infoBox').length; i++) {
+			console.log($('.infoBox').eq(i)[0].classList[1]);
+			if ($('.infoBox').eq(i)[0].classList[1] !== "border") {
+				$('.infoBox').eq(i).css('border', '1px solid rgba(2, 224, 224, 0.51)');
+				$('.infoBox').eq(i).children('div.dateBox').children('div.date').removeClass('selected');
+			}
+		}
+
+		if ($(this)[0].classList[1] !== "border") {
+			$(this).css('border', '1px solid black');
+			$(this).children('div.dateBox').children('div.date').addClass('selected');
+		}
 	})
 
 });

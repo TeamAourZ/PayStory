@@ -49,10 +49,6 @@
 	cursor: pointer;
 }
 
-.daySel div, .dateSel div.dateBox {
-	color: rgba(0, 0, 0, 0.7);
-}
-
 .today {
 	color: rgba(0, 0, 0, 1);
 	background: rgba(0, 255, 100, 0.51);

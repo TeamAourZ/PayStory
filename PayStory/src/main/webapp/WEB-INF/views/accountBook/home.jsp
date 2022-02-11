@@ -8,7 +8,8 @@
 		<meta charset="UTF-8">
 		<title>PayStory</title>
 		<!-------- CSS : Custom -------->
-		<link href="<c:url value='/main/css/calendar.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/homeCalendar.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/homeForum.css' />" rel="stylesheet" type="text/css">
 		
 		<!-------- CSS : Bootstrap -------->
 		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -17,7 +18,8 @@
 		
 		<!-------- JS : Custom -------->
 		<script src="<c:url value='/main/js/jquery-3.6.0.min.js' />"></script>
-		<script src="<c:url value='/main/js/calendar.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/homeCalendar.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/homeForum.js' />" type="text/javascript"></script>
 		
 		<!-------- JS : Bootstrap -------->
 	</head>
@@ -84,7 +86,20 @@
 									</div>
 									<!-- Card Body -->
 									<div class="card-body">
-										<h1>내용</h1>
+										<div id="homePostBox" class="d-flex flex-column mb-1"> <!-- mb-1 : 임시 -->
+											<div id="homeCategoryBox" class="d-flex">
+												<div class="">최신글</div>
+												<div class="">공지사항</div>
+											</div>
+											<!-- s
+												(js 작성 필요)
+												<div class="d-flex justify-content-around">
+													<div class="forumCategoryName rounded">카테고리 명</div>
+													<div class="forumTitle rounded">제목</div>
+													<div class="forumWritor rounded">글쓴이</div>
+												</div>
+											 -->
+										</div>
 									</div>
 								</div>
 							</div>
