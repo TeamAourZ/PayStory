@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Dashboard</title>
+    <meta name="description" content="Pay Story 가계부 - 수입/지출 내역 추가">
+    <meta name="author" content="AourZ">
+    <title>수입 | 지출 내역 추가</title>
 
     <!-- Custom fonts for this template-->
     <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -66,56 +66,46 @@
 									<!-- Form 영역 --> 
 									<div class="col-md-8"> 
 										<!-- 영수증 등록 -->
+										<label for="uploadReceipt">영수증 등록</label>
 										<div class="custom-file mb-3"> 
-											<label class="custom-file-label" for="uploadReceipt">영수증 등록</label>
-											<input type="file" class="custom-file-input shadow-none" id="uploadReceipt">
+											<input type="file" id="uploadReceipt" class="custom-file-input shadow-none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadReceipt">
+											<label class="custom-file-label shadow-none" for="uploadReceipt">파일 선택</label>
 										</div>
 										<!-- 날짜 -->
 										<div class="form-group"> 
 											<label for="date">날짜</label>
-											<input type="date" class="form-control shadow-none" id="date">
+											<input type="date" class="form-control shadow-none" id="date" required>
 										</div>
 										<!-- 태그 -->
 										<div class="form-group"> 
 											<label for="tags">태그</label>
-											<select id="tags" class="form-control form-control-sm">
-												<option selected>태그를 선택해주세요.</option>
-												<option>식품</option>
-												<option>용품</option>
-												<option>외식</option>
-												<option>주거/통신</option>
-												<option>교육/문화/미용/건강</option>
-												<option>교통/차량</option>
-												<option>경조사/용돈 등 사회생활</option>
-												<option>저축/보험</option>
-												<option>기타</option>
+											<select id="tags" class="form-control form-control-sm" required>
+												<option selected disabled>태그를 선택해주세요.</option>
+												<option value="5">식품</option>
+												<option value="6">용품</option>
+												<option value="7">외식</option>
+												<option value="8">주거/통신</option>
+												<option value="9">교육/문화/미용/건강</option>
+												<option value="10">교통/차량</option>
+												<option value="11">경조사/용돈 등 사회생활</option>
+												<option value="12">저축/보험</option>
+												<option value="13">기타</option>
 											</select>
 										</div>
 										<!-- 상호명 -->
 										<div class="form-group">
 											<label for="expenditureSource">상호명</label>
-											<input type="text" class="form-control form-control-sm shadow-none" id="expenditureSource">
+											<input type="text" class="form-control form-control-sm shadow-none" id="expenditureSource" required>
 										</div>
-										<!-- 아이템 1-->
+										<!-- 아이템 -->
 										<div class="form-group form-row">
 											<div class="col-sm-8">
 												<label for="expenditureItem">내용</label>
-												<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem">
+												<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem" required>
 											</div>
 											<div class="col-sm-4">
 												<label for="expenditureItemAmount">금액</label>
-												<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItemAmount">
-											</div>
-										</div>
-										<!-- 아이템 2-->
-										<div class="form-group form-row item2">
-											<div class="col-sm-8">
-												<label for="expenditureItem">내용</label>
-												<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem">
-											</div>
-											<div class="col-sm-4">
-												<label for="expenditureItemAmount">금액</label>
-												<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItemAmount">
+												<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItemAmount" required>
 											</div>
 										</div>
 										<!-- 총 금액 -->
@@ -138,8 +128,7 @@
 										</div>
 									</div>
 									<!-- 이미지 영역 -->
-									<div class="col-md-4 border rounded text-center mb-3">
-									</div>
+									<div class="col-md-4 border rounded text-center mb-3"></div>
 								</div>
 								<div class="d-flex align-items-center justify-content-center mt-3">
 									<button type="submit" class="btn btn-primary w-25 mr-3">등록</button>
@@ -154,29 +143,29 @@
 								<!-- 날짜 -->
 								<div class="form-group"> 
 									<label for="date">날짜</label>
-									<input type="date" class="form-control shadow-none" id="date">
+									<input type="date" class="form-control shadow-none" id="date" required>
 								</div>
 								<!-- 태그 -->
 								<div class="form-group"> 
 									<label for="tags">태그</label>
-									<select id="tags" class="form-control">
-										<option selected>태그를 선택해주세요.</option>
-										<option>급여</option>
-										<option>보너스</option>
-										<option>사업소득</option>
-										<option>금융소득</option>
-										<option>기타</option>
+									<select id="tags" class="form-control" required>
+										<option selected disabled>태그를 선택해주세요.</option>
+										<option value="1">급여</option>
+										<option value="2">보너스</option>
+										<option value="3">사업소득</option>
+										<option value="4">금융소득</option>
+										<option value="13">기타</option>
 									</select>
 								</div>
 								<!-- 수입원 -->
 								<div class="form-group">
 									<label for="incomeSource">수입원</label>
-									<input type="text" class="form-control shadow-none" id="incomeSource">
+									<input type="text" class="form-control shadow-none" id="incomeSource" required>
 								</div>
 								<!-- 금액 -->
 								<div class="form-group">
 									<label for="incomeAmount">금액</label>
-									<input type="text" class="form-control shadow-none" id="incomeAmount">
+									<input type="text" class="form-control shadow-none" id="incomeAmount" required>
 								</div>
 								<!-- 메모 -->
 								<div class="form-group">

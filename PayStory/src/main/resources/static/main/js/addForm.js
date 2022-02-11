@@ -3,7 +3,19 @@
  */
  
  $(function(){
-	$('.memoBox').keyup(function (e) { 
+	// 엔터키 눌렀을 때 submit 안 되도록
+	$(document).on('keydown', function(e){
+		if(e.keycode == 13) e.preventDefault();
+	})
+	
+	// 파일 업로드시 파일이름 보이게
+	$("#uploadReceipt").on('change',function(){
+	  var fileName = $(this).val();
+	  $(".custom-file-label").text(fileName.substring(12));
+	});
+	
+	// 메모 글자수 제한
+	$('.memoBox').on('keyup', function(e){ 
 		let content = $(this).val(); 
 		// 글자수 세기 
 		if (content.length == 0 || content == '') { 
