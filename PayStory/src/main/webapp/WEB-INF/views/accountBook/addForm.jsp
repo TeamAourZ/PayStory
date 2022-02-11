@@ -18,16 +18,7 @@
         rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
-    <style type="text/css">
-    	input:focus,
-		input:active {outline: none;}
-		textarea {resize: none;}
-		.item2 {margin-bottom: 0;}
-		.form-row > .col,
-		.form-row > [class*="col-"] {
-		  padding: 5px;
-		}
-    </style>
+    <link href="/main/css/addForm.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -83,8 +74,8 @@
 										<!-- 태그 -->
 										<div class="form-group"> 
 											<label for="tags">태그</label>
-											<select id="tags" class="form-control form-control-sm" required>
-												<option selected disabled>태그를 선택해주세요.</option>
+											<select id="tags" class="form-control form-control-sm shadow-none" required>
+												<option selected disabled value="">태그를 선택해주세요.</option>
 												<option value="5">식품</option>
 												<option value="6">용품</option>
 												<option value="7">외식</option>
@@ -155,7 +146,7 @@
 								<div class="form-group"> 
 									<label for="tags">태그</label>
 									<select id="tags" class="form-control" required>
-										<option selected disabled>태그를 선택해주세요.</option>
+										<option selected disabled value="">태그를 선택해주세요.</option>
 										<option value="1">급여</option>
 										<option value="2">보너스</option>
 										<option value="3">사업소득</option>
