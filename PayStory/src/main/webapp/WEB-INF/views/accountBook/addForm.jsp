@@ -21,8 +21,12 @@
     <style type="text/css">
     	input:focus,
 		input:active {outline: none;}
-		.item2 {margin-bottom: 0;}
 		textarea {resize: none;}
+		.item2 {margin-bottom: 0;}
+		.form-row > .col,
+		.form-row > [class*="col-"] {
+		  padding: 5px;
+		}
     </style>
 </head>
 
@@ -128,7 +132,9 @@
 										</div>
 									</div>
 									<!-- 이미지 영역 -->
-									<div class="col-md-4 border rounded text-center mb-3"></div>
+									<div class="col-md-4 border rounded text-center mb-3">
+										<img id="receiptImg" />
+									</div>
 								</div>
 								<div class="d-flex align-items-center justify-content-center mt-3">
 									<button type="submit" class="btn btn-primary w-25 mr-3">등록</button>

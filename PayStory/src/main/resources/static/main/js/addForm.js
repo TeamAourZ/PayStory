@@ -8,10 +8,32 @@
 		if(e.keycode == 13) e.preventDefault();
 	})
 	
-	// 파일 업로드시 파일이름 보이게
-	$("#uploadReceipt").on('change',function(){
-	  var fileName = $(this).val();
-	  $(".custom-file-label").text(fileName.substring(12));
+	// 파일 업로드시 파일 이름 표시하고 이미지 영역에 미리보기
+	$("#uploadReceipt").on('change',function(e){
+		// 파일 이름 표시
+		let fileName = $(this).val();
+	  	$(".custom-file-label").text(fileName.substring(12));
+	  	
+	  	// 이미지 영역에 미리보기
+	  	let file = e.target.files;
+	  	let fileArr = Array.prototype.slice.call(file);
+	  	
+	  	fileArr.forEach(function(f){
+			if(!f.type.match('image.*')) {
+				alert("이미지 파일만 가능합니다.");
+				return;
+			}
+			
+			let render = new FileReader();
+			render.onload = function(e){
+				$('#receiptImg').attr('src', e.target.result);
+				$('#receiptImg').css({
+					'width':'100%',
+					'height':'100%'
+				});
+			}
+			render.readAsDataURL(f);		
+		});
 	});
 	
 	// 메모 글자수 제한
