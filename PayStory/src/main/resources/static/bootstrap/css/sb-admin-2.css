@@ -7613,8 +7613,16 @@ button.bg-dark:focus {
   height: 25% !important;
 }
 
+.h-40 {
+  height: 40% !important;
+}
+
 .h-50 {
   height: 50% !important;
+}
+
+.h-60 {
+  height: 60% !important;
 }
 
 .h-75 {

@@ -9,11 +9,15 @@
 	color: rgba(0, 0, 0, 0.9);
 }
 
+#otherBtnBox {
+	gap: 5px;
+}
+
 .daySel {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-gap: 30px;
+    grid-gap: 15px;
 }
 .daySel div:first-child {
     background: rgba(231, 76, 60, 0.32);
@@ -31,25 +35,37 @@
 .dateSel {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-row-gap: 20px;
-    grid-column-gap: 30px;
+    grid-row-gap: 15px;
+    grid-column-gap: 15px;
 }
-.dateSel div {
+.dateSel div.infoBox {
     min-height: 90px;
     font-size: 13pt;
     font-weight: bold;
     border-radius: 5px;
     border: 1px solid rgba(2, 224, 224, 0.51);
 }
-.dateSel div.date {
+.dateSel div.infoBox {
 	cursor: pointer;
 }
 
-.daySel div, .dateSel div {
+.daySel div, .dateSel div.dateBox {
 	color: rgba(0, 0, 0, 0.7);
 }
 
 .today {
 	color: rgba(0, 0, 0, 1);
-	background: rgba(224, 224, 224, 0.51);
+	background: rgba(0, 255, 100, 0.51);
+}
+
+.countBox {
+	gap: 10px;
+}
+
+.incomeCount {
+	border: 2px solid blue;
+}
+
+.expenditureCount {
+	border: 2px solid red;
 }

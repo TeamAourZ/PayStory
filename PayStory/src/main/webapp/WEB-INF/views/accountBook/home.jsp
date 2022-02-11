@@ -108,9 +108,15 @@
 											<span id="yearMonth" class="text-lg font-weight-bold mr-3 ml-3"></span>
 											<i id="nextMonthBtn" class="fas fa-angle-right fa-2x m-1"></i>
 										</div>
-										<div id="otherBtnBox">
-											<i id="selectDayAddDataBtn" class="fas fa-plus fa-2x m-1"></i>
-											<i id="todayBtn" class="far fa-calendar fa-2x m-1"></i>
+										<div id="otherBtnBox" class="d-flex flex-column align-items-end">
+											<div>
+												<i id="selectDayAddDataBtn" class="fas fa-plus fa-2x m-1"></i>
+												<i id="todayBtn" class="far fa-calendar fa-2x m-1"></i>
+											</div>
+											<div>
+												<i class="far fa-circle" style="color: blue;"> : 수입</i>&nbsp;
+												<i class="far fa-circle" style="color: red;"> : 지출</i>
+											</div>
 										</div>
 									</div>
 									<div id="dateBox" class="m-2">

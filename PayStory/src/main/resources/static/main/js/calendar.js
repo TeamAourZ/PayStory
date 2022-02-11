@@ -20,24 +20,43 @@ $(function() {
 
 		/* 첫째 날 전까지 공란 */
 		for (let i = 0; i < firstDay; i++) {
-			$('.dateSel').append('<div class="border"></div>');
+			$('.dateSel').append('<div class="infoBox border"></div>');
 		}
 
 		/* 날짜 채우기 */
 		for (let i = 1; i <= lastDate; i++) {
 			let dateClass = `${year}-${(month + 1) < 10 ? `0${month + 1}` : `${month + 1}`}-${i < 10 ? `0${i}` : `${i}`}`;
-			$('.dateSel').append(`<div class="pl-1 date ${dateClass}">${i}</div>`);
+			let text = "@@@@@@"; // 공휴일 명칭
+			$('.dateSel').append(`
+											<div class="infoBox d-flex flex-column">
+												<div class="dateBox d-flex h-40">
+													<div class="date ${dateClass} rounded-circle m-1">${i}</div>
+													<div class="text-xs mt-2">${text}</div>
+												</div>
+												<div class="countBox d-flex w-50 h-60 align-items-start align-self-center text-center mt-1">
+													<div class="incomeCount rounded-circle w-50">
+														1
+													</div>
+													<div class="expenditureCount rounded-circle w-50">
+														2
+													</div>
+												</div>
+											</div>
+			`);
 		}
+		
+		/* 요일별 색상 지정 - 토, 일 */
+		
 
 		/* 남은 날 공란 */
 		for (let i = 6; i > lastDay; i--) {
-			$('.dateSel').append('<div class="border"></div>');
+			$('.dateSel').append('<div class="infoBox border"></div>');
 		}
 
 		/* 달력 크기 맞추기 */
 		if ($('.dateSel').children('div').length == 35) {
 			for (let i = 0; i < 7; i++) {
-				$('.dateSel').append('<div class="border"></div>');
+				$('.dateSel').append('<div class="infoBox border"></div>');
 			}
 		}
 	};
