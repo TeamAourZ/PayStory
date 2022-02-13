@@ -8,6 +8,10 @@
     width: 65%;
 }
 
+.delbox {
+	float: left;
+}
+
 .plusbox {
 	float: left;
 }
@@ -34,6 +38,18 @@
     color: #fff;
     background-color: #858796;
     border-color: #858796;
+}
+
+.delbtn {
+	width: 60px;
+	height: 60px;
+	border-radius: 10px;
+	overflow: hidden;
+	margin: 15px;
+}
+
+.delImage {
+	width: 100%;
 }
 
 .plusbtn {

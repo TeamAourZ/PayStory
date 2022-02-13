@@ -49,9 +49,9 @@
                         <form id="createPublicForm" name="createPublicForm">
                            	<input id="title" type="text" name="title" class="inputbox" placeholder="제목" size="50">
                             <input id="budget" type="text" name="budget" class="inputbox" placeholder="예산(원)" size="50">
-                            <input id="email" type="text" name="email" class="inputbox plusbox" placeholder="초대할 이메일주소" size="50">
+                            <input id="email1" type="text" name="email1" class="inputbox plusbox" placeholder="초대할 이메일주소" size="50">
                             
-                            <button type="button" id="plusbtn" class="plusbtn plusbox"><img class="plusImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/1200px-Plus_symbol.svg.png" alt=""></button>
+                            <button type="button" id="plusbtn" class="plusbtn plusbox"><img class="plusImage" src="https://download.seaicons.com/icons/custom-icon-design/mono-general-1/512/add-icon.png" alt="" ></button>
                             <div class="clearboth"></div>
                             <div class="choice">
                             <button type="submit" id="submitbtn1" class="btn1">생성</button>
@@ -132,11 +132,30 @@
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     
     <script type="text/javascript">
+    var emailSize = 1;
+    
     $('.grid').masonry({
    	  // options
    	  itemSelector: '.grid-item',
    	  columnWidth: 200
    	});
+    
+   /*  function addEmail() {
+		alert("test");	
+	} */
+    
+    $('#plusbtn').on('click', function(){
+    	emailSize+=1;
+    	$('#plusbtn').before("<input id='email"+emailSize+"' type='text' name='email"+emailSize+"' class='inputbox plusbox' placeholder='초대할 이메일주소' size='50'>");
+    	$('#plusbtn').before("<button type='button' id='delbtn"+emailSize+"' class='delbtn delbox'><img class='delImage' src='https://download.seaicons.com/icons/custom-icon-design/mono-general-1/512/delete-icon.png' alt='' onclick='delEmail("+emailSize+")'></button>");
+	});
+
+	function delEmail(index) {
+		$("#email"+index).remove();
+		$("#delbtn"+index).remove();
+	}
     </script>
+    
+    
 </body>
 </html>
