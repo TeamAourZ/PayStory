@@ -1,0 +1,12 @@
+@charset "UTF-8";
+/* addForm.css */
+
+input:focus,
+input:active {outline: none;}
+
+textarea {resize: none;}
+
+.item2 {margin-bottom: 0;}
+
+.form-row > .col,
+.form-row > [class*="col-"] {padding: 5px;}
