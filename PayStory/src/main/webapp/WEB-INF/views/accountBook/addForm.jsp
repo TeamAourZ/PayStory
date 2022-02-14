@@ -107,7 +107,7 @@
 													<div class="card-body">
 													  	<!-- 아이템 리스트 -->
 														<div id="itemWrap">
-															<div class="item form-group form-row">
+															<div class="item default form-group form-row">
 																<div class="col-7">
 																	<label for="expenditureItem">내용</label>
 																	<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem" required>
@@ -150,8 +150,8 @@
 									</div>
 									<!-- 이미지 영역 -->
 									<div class="imgArea col-lg-4 border rounded text-center mb-3">
+										<i class="fa fa-image"></i>
 										<span class="imgtext">영수증 이미지 미리보기</span>
-										<i class="fa fa-regular fa-image"></i>
 										<img id="receiptImg" />
 									</div>
 								</div>

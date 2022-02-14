@@ -19,7 +19,7 @@
 	  	let fileArr = Array.prototype.slice.call(file);
 	  	
 	  	fileArr.forEach(function(f){
-			$('.imgtext').text(" ");
+			// $('.imgtext').text(" ");
 			if(!f.type.match('image.*')) {
 				alert("이미지 파일만 가능합니다.");
 				return;
@@ -30,7 +30,7 @@
 				$('#receiptImg').attr('src', e.target.result);
 				$('#receiptImg').css({
 					'width':'100%',
-					'height':'100%'
+					'height':'95%'
 				});
 			}
 			render.readAsDataURL(f);		
@@ -50,25 +50,31 @@
 	
 	// 아이템 추가
 	function addItem(){
-		let itemHTML = '<div class="col-xl-7"><label for="expenditureItem">내용</label>'+
+		let itemHTML = '<div class="col-7">'+
 				   '<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem" required>'+'</div>';
-		let priceHTML = '<div class="col-xl-4"><label for="expenditureItemAmount">금액</label>'+
+		let priceHTML = '<div class="col-4">'+
 					  '<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItemAmount" required>'+'</div>';
-		let removeBtn = '<div class="col-xl-1"><button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button></div>';
+		let removeBtn = '<div class="col-1"><button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button></div>';
 		let addItem = '<div class="item form-group form-row">'+itemHTML+priceHTML+removeBtn+'</div></div>';
 
 		$('#itemWrap').append(addItem);
 	} 
-	
 	// 아이템 삭제 버튼 클릭
 	$(document).on('click', '.removeItem', function(e){
 		e.preventDefault();
-		// 아이템이 한개면 삭제후 바로 새로 생성
-		if($('.item').length == 1){
-			$(this).parent().parent().remove(); 
-			addItem();
+		let currentItem = $(this).parent().parent();
+		
+		// 맨 위의 아이템이면
+		if(currentItem.hasClass('default')){
+			if(currentItem.next()){ // 다음 아이템이 있으면 다음 아이템 삭제
+				currentItem.next().remove();
+			}else { // 없으면 내용만 삭제
+				currentItem.find('#expenditureItem').val(" ");
+				currentItem.find('#expenditureItemAmount').val(" ");
+			}
+		}else {
+			currentItem.remove(); 
 		}
-		$(this).parent().parent().remove();
 	});
 	
 	// 메모 글자수 제한
@@ -97,7 +103,9 @@
 	$(window).resize(function(){
 		console.log($(window).width())
 		if($(window).width() <= 990) {
-			$('#receiptImg').remove();
+			$('#receiptImg').addClass('hidden');
+		}else {
+			$('#receiptImg').removeClass('hidden');
 		}
 	});
 	

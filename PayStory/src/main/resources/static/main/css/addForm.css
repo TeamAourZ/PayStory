@@ -7,10 +7,14 @@ input:active {outline: none;}
 textarea {resize: none;}
 
 /* 영수증 이미지 영역 */
-.imgArea {max-height: 540px;}
+.imgArea {
+	max-height: 540px;
+	cursor: pointer;
+}
 .form-row > .col,
 .form-row > [class*="col-"] {padding: 5px;}
 .fa-image.hidden {display: none;}
+#receiptImg.hidden {display: none;}
 
 /* 아이템 리스트 */
 .accordion > .card > .card-header {
@@ -36,9 +40,9 @@ textarea {resize: none;}
 	background: none;	
 }
 
-/* .card-body {
+.card-body {
     padding: 1.25rem 1.25rem 0.5rem;
-} */
+}
 
 /* 아이템 추가/ 삭제 버튼 */
 .fa-plus-circle {font-size: 2rem;}
