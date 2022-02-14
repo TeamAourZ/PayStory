@@ -23,6 +23,7 @@
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/main/css/publicCreate.css">
+   
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -44,8 +45,9 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
+                    <div id="createBox">
                    	<h5>공유가계부 만들기</h5>
-                   	<div>
+                   
                         <form id="createPublicForm" name="createPublicForm">
                            	<input id="title" type="text" name="title" class="inputbox" placeholder="제목" size="50">
                             <input id="budget" type="text" name="budget" class="inputbox" placeholder="예산(원)" size="50">
@@ -131,7 +133,7 @@
     
     <!-- <script src="https://naver.github.io/egjs-infinitegrid/release/latest/dist/infinitegrid.min.js" crossorigin="anonymous"></script> -->
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    
+    <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript">
     var emailSize = 1;
     
