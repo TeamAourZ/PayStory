@@ -7,9 +7,10 @@ input:active {outline: none;}
 textarea {resize: none;}
 
 /* 영수증 이미지 영역 */
-.imgArea {max-height: 550px;}
+.imgArea {max-height: 540px;}
 .form-row > .col,
 .form-row > [class*="col-"] {padding: 5px;}
+.fa-image.hidden {display: none;}
 
 /* 아이템 리스트 */
 .accordion > .card > .card-header {
@@ -47,4 +48,12 @@ textarea {resize: none;}
     bottom: 10%;
     left: 20%;
     font-size: 1.5rem;
+}
+
+
+/* 반응형: 가로 960px 이하 */
+@media (max-width: 990px) {
+	/* 영수증 이미지 영역을 제일 위로 */
+	.imgArea {order: 1;}
+	.formArea {order: 2;}
 }

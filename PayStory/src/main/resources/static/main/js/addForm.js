@@ -37,7 +37,7 @@
 		});
 	});
 	
-	// 아이템 보기 버튼 클릭
+	// 아이템 보기 버튼 클릭 - css 적용
 	$('.showItem').on('click', function(){
 		$('.fa-angle-down').toggleClass('open');
 	});
@@ -89,4 +89,16 @@
 			alert('글자수는 100자까지 입력 가능합니다.'); 
 		} 
 	});
+	
+	/* 
+		화면 크기 가로 960px 이하면
+		- 아이콘 클릭 또는 후버시 영수증 이미지 확대 모달창 띄우기
+	*/
+	$(window).resize(function(){
+		console.log($(window).width())
+		if($(window).width() <= 990) {
+			$('#receiptImg').remove();
+		}
+	});
+	
 });

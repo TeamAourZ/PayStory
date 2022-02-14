@@ -53,13 +53,13 @@
                     </div>
                     
                     <!-- Form panels -->
-					<div class="tab-content w-75 m-auto p-4 bg-white rounded">
+					<div class="tab-content p-4 bg-white rounded">
 						<!--지출 Form-->
 						<div class="tab-pane fade in show active" id="expenditure" role="tabpanel">
 							<form id="expenditureForm" class="my-4">
 								<div class="form-row px-3"> 
 									<!-- Form 영역 --> 
-									<div class="col-md-8"> 
+									<div class="formArea col-lg-8"> 
 										<!-- 영수증 등록 -->
 										<label for="uploadReceipt">영수증 등록</label>
 										<div class="custom-file mb-3"> 
@@ -108,15 +108,15 @@
 													  	<!-- 아이템 리스트 -->
 														<div id="itemWrap">
 															<div class="item form-group form-row">
-																<div class="col-xl-7">
+																<div class="col-7">
 																	<label for="expenditureItem">내용</label>
 																	<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem" required>
 																</div>
-																<div class="col-xl-4">
+																<div class="col-4">
 																	<label for="expenditureItemAmount">금액</label>
 																	<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItemAmount" required>
 																</div>
-																<div class="col-xl-1">
+																<div class="col-1">
 																	<button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button>
 																</div>
 															</div>
@@ -131,8 +131,8 @@
 										</div>
 										<!-- 총 금액 -->
 										<div class="form-group row px-2 mt-2">
-											<label for="expenditureTotalAmount" class="col-xl-8 col-form-label text-right">총 금액</label>
-											<div class="col-xl-4">
+											<label for="expenditureTotalAmount" class="col-8 col-form-label text-right">총 금액</label>
+											<div class="col-4">
 												<input type="text" readonly class="form-control-plaintext text-right" id="expenditureTotalAmount" value="12,000원">
 											</div>
 										</div>
@@ -149,8 +149,9 @@
 										</div>
 									</div>
 									<!-- 이미지 영역 -->
-									<div class="imgArea col-md-4 border rounded text-center mb-3">
+									<div class="imgArea col-lg-4 border rounded text-center mb-3">
 										<span class="imgtext">영수증 이미지 미리보기</span>
+										<i class="fa fa-regular fa-image"></i>
 										<img id="receiptImg" />
 									</div>
 								</div>
