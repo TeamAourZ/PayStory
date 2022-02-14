@@ -9,12 +9,12 @@
 		   <!-- Topbar Navbar -->
 		   <ul class="navbar-nav ml-auto">
 		       <!-- Nav Item - 내 가계부 -->
-		       <li class="nav-item dropdown no-arrow mx-1">
-		           <a class="nav-link" href="#" id="alertsDropdown" role="button"
+		        <li class="nav-item dropdown no-arrow mx-1">
+		           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
 		               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		              <button class="btn btn-outline-secondary">내 가계부</button>
+		               <button class="btn btn-outline-secondary">내 가계부</button>
 		           </a>
-		        </li>   
+		       </li>  
 		
 		       <!-- Nav Item - 공용 가계부 -->
 		       <li class="nav-item dropdown no-arrow mx-1">

@@ -1,0 +1,206 @@
+@charset "UTF-8";
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+*{
+	list-style: none;
+	text-decoration: none;
+	border-collapse: collapse;
+	margin: 0px;
+	padding: 0px;
+	color: #000;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.contents_bold {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.contents2 {
+	font-size: 20px;
+	font-weight: lighter;
+}
+
+.contents3 {
+	font-size: 14px;
+	font-weight: 100;
+}
+/*************** Header *******************/
+.headerBox {
+	width: 1240px;
+	height:60px;
+	margin: 0 auto;
+	margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 0px 10px rhba(0, 0, 0, 0.1);
+}
+
+.userBox {
+	margin-top: 20px;
+}
+
+.userBox ul li {
+	display: inline-block;
+	margin-left: 20px;
+
+}
+
+/* .headerBox {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	width: 1140px;
+}
+
+.logoBox {
+	margin: 0 auto;
+}
+
+.userBox {
+	display: flex;
+	list-style: none;
+	padding-left: 0;
+}
+
+.userBox ul li {
+	padding: 8px 8px;
+	display: inline-block;
+}  */
+
+/**************** Slide ****************/
+.section input[id*="slide"] {
+	display: none;
+}
+
+.section .slidwrap {
+	max-width: 1362px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.section .slidelist {
+	white-space: nowrap;
+	font-size: 0;
+}
+
+.section .slidelist > li {
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	transition: all .5s;
+}
+
+.section .slidelist > li > a {
+	display: block;
+	position: relative;
+}
+
+.section .slidelist > li > a img {
+	width: 100%;
+}
+
+.section .slidelist label {
+	position: absolute;
+	z-index: 10;
+	top: 50%;
+	transform: translateY(-50%);
+	padding: 50px;
+	cursor: pointer;
+}
+
+.section .slidelist .left {
+	left: 30px;
+	background: center center / 100% no-repeat;
+}
+
+.section .slidelist .right {
+	right: 30px;
+	background: center center / 100% no-repeat;
+}
+
+.section [id="slide01"]:checked ~ .slidwrap .slidelist > li {transform:translateX(0%);}
+.section [id="slide02"]:checked ~ .slidwrap .slidelist > li {transform:translateX(-100%);}
+
+
+/**************** 소개글 ****************/
+ .main_text {
+ 	width: 100%;
+ 	height: 700px;
+ 	margin-top: atuo;
+ 	background: #f1f2f3;
+}
+
+.main_text > h1 {
+	padding-top: 116px;
+	text-align: center;
+	font-size: 60px;
+	color: #0d6efd;
+}
+
+.main_text > .contents {
+	text-align: center;
+	font-size: 25px;
+	margin-top: 10px;
+}
+
+.fn {
+	display: flex;
+ 	width:1280px;
+ 	height: 400px;
+ 	margin: 0 auto;
+}
+
+.fn > li {
+	flex: 1;
+	background-color: #ffffff;
+	height: 350px;
+	margin-top: 49px;
+	text-align: center;
+}
+
+.fn > li > .fn_img {
+	margin-top: 36px;
+}
+
+.fn > li:not(:last-child) {
+	margin-right: 20px;
+}
+
+.fn .contents3 {
+	width: 190px;
+	margin: 0 auto;
+	margin-top: 11px;
+	letter-spacing: -1px;
+}
+
+/**************** 기능설명 ****************/
+ .fn_text {
+ 	width: 100%;
+ 	height: 700px;
+ 	margin-top: atuo;
+ 	margin-left: 100px;
+}
+
+.fn_text > h1 {
+	padding-top: 116px;
+	text-align: left;
+	font-size: 40px;
+	color: #0d6efd;
+}
+
+.fn_text > .contents {
+	text-align: left;
+	font-size: 60px;
+	margin-top: 30px;
+	font-weight: 500;
+	letter-spacing: 3px;
+}
+
+
+
+
+
+
+
+
