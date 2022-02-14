@@ -60,7 +60,7 @@
 
             <!-- Nav Item - 챗봇 -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="chatbotP">
                     <i class="fas fa-robot"></i>
                     <span>챗봇</span>
                 </a>

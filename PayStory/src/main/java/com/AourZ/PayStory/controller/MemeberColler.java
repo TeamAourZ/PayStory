@@ -26,8 +26,8 @@ public class MemeberColler {
 		return "member/register";
 	}
 	
-	@RequestMapping("/chatbot")
-	public String chatbot() {
+	@RequestMapping("/chatbotP")
+	public String chatbotP() {
 		return "chatbot/chatbot";
 	}
 	
