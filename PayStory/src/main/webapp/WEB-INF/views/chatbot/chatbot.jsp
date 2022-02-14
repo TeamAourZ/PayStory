@@ -19,7 +19,6 @@
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
     <!-- Chatbot CSS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/7031b090f1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/main/css/style.css">
 </head>
@@ -42,8 +41,9 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <div class="container">
+                
+					<!-- Chatbot row -->
+                    <div class="container_chatbot">
 				        <div class="leftSide">
 				            <!-- header -->
 				            <div class="header">
@@ -136,19 +136,20 @@
 					                
 				                </form>
 				                <form id= "chatForm2">
-				                	<button id="record" ><i class="fa-solid fa-microphone"></i></button>
-					                <button id="stop"><i class="fa-solid fa-stop"></i></button>
-					                <div id="sound-clips"></div><br>
+				                	<button id="record" type="button"><i class="fa-solid fa-microphone"></i></button>
+					                <button id="stop" type="button"><i class="fa-solid fa-stop"></i></button>
+					                <div id="sound-clips"></div>
 				                </form>
+				                <div>
+									<audio preload="auto" controls></audio>
+								</div>
 				            </div>
-				            <div>
-								<audio preload="auto" controls></audio>
-							</div>
+				            
 				        </div>
 				        
-				    </div>
-                </div>
-			</div>
+				    </div>	<!-- Chatbot container row end -->
+                </div>	<!-- container-fluid end -->
+			</div>	<!-- Content end -->
         </div>
         <!-- End of Content Wrapper -->
     </div>

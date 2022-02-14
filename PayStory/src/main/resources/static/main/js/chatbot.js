@@ -49,7 +49,7 @@
                     const a = document.createElement('a');
 					                       
                     clipContainer.appendChild(a);
-                    soundClips.appendChild(clipContainer);                        
+                    soundClips.appendChild(clipContainer);
 					
                     //chunks에 저장된 녹음 데이터를 audio 양식으로 설정
                     //audio.controls = true;

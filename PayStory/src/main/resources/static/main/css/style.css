@@ -1,24 +1,11 @@
 @charset "UTF-8";
-*
-{
-    margin: 0;
-    padding: 0;
-    box-sizing:border-box;
-    font-family: 'Open Sans', sans-serif;
-}
-body
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    /* background: linear-gradient(#99CCFF, #99CCFF, white, white ); */
-}
-.container
+
+
+.container_chatbot
 {
     position: relative;
-    width: 1396px;
-    max-width: 100%;
+    
+    width: 100%;
     height: calc(100vh - 40px);
     background-color: #fff;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,0.06),0 2px 5px rgba(0,0,0,0.06);
@@ -26,20 +13,20 @@ body
     padding: 0;
 }
 
-.container .leftSide
+.container_chatbot .leftSide
 {
     position: relative;
     flex: 30%;
     background: #ededed;
     border-right: 1px solid rgba(0,0,0,0.2);
 }
-.container .rightSide
+.container_chatbot .rightSide
 {
     position: relative;
     flex: 70%;
     background: #fff;
 }
-.container .rightSide::before
+.container_chatbot .rightSide::before
 {
     content: '';
     position: absolute;
