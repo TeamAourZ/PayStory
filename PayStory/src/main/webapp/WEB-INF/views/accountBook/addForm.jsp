@@ -93,20 +93,29 @@
 											<input type="text" class="form-control form-control-sm shadow-none" id="expenditureSource" required>
 										</div>
 										<!-- 아이템 -->
-										<div class="form-group form-row">
-											<div class="col-sm-8">
-												<label for="expenditureItem">내용</label>
-												<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem" required>
-											</div>
-											<div class="col-sm-4">
-												<label for="expenditureItemAmount">금액</label>
-												<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItemAmount" required>
+										<div id="itemWrap">
+											<div class="item form-group form-row">
+												<div class="col-xl-7">
+													<label for="expenditureItem">내용</label>
+													<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem" required>
+												</div>
+												<div class="col-xl-4">
+													<label for="expenditureItemAmount">금액</label>
+													<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItemAmount" required>
+												</div>
+												<div class="col-xl-1">
+													<button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button>
+												</div>
 											</div>
 										</div>
+										<!-- 아이템 추가 버튼 -->
+										<div class="addBtn w-100 d-flex justify-content-center">
+											<button class="addItem btn shadow-none"><i class="fas fa-plus-circle"></i></button>
+										</div>
 										<!-- 총 금액 -->
-										<div class="form-group row px-2">
-											<label for="expenditureTotalAmount" class="col-sm-8 col-form-label text-right">총 금액</label>
-											<div class="col-sm-4">
+										<div class="form-group row px-2 mt-2">
+											<label for="expenditureTotalAmount" class="col-xl-8 col-form-label text-right">총 금액</label>
+											<div class="col-xl-4">
 												<input type="text" readonly class="form-control-plaintext text-right" id="expenditureTotalAmount" value="12,000원">
 											</div>
 										</div>

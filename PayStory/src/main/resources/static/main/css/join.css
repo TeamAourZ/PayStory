@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.btn-naver {
+	color: #fff;
+	background-color: #03c75a;
+	/* border-color: #fff; */
+}
+
+.bg-image {
+	background-position: center;
+	background-size: cover;
+	
+}
