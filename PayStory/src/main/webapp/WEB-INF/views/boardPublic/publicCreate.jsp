@@ -44,7 +44,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                   	깃허브 테스트
+                   	<h5>공유가계부 만들기</h5>
                    	<div>
                         <form id="createPublicForm" name="createPublicForm">
                            	<input id="title" type="text" name="title" class="inputbox" placeholder="제목" size="50">
@@ -56,6 +56,7 @@
                             <div class="choice">
                             <button type="submit" id="submitbtn1" class="btn1">생성</button>
                             <button type="reset" id="resetbtn1" class="btn1">취소</button>
+                            <i class="fa-solid fa-plus"></i>
                             </div>
                        	 	</form>
                         </div>
@@ -148,6 +149,7 @@
     	emailSize+=1;
     	$('#plusbtn').before("<input id='email"+emailSize+"' type='text' name='email"+emailSize+"' class='inputbox plusbox' placeholder='초대할 이메일주소' size='50'>");
     	$('#plusbtn').before("<button type='button' id='delbtn"+emailSize+"' class='delbtn delbox'><img class='delImage' src='https://download.seaicons.com/icons/custom-icon-design/mono-general-1/512/delete-icon.png' alt='' onclick='delEmail("+emailSize+")'></button>");
+    	
 	});
 
 	function delEmail(index) {
