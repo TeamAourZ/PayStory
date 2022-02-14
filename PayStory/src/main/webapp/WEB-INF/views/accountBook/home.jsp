@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>PayStory</title>
 		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/homeCalendar.css' />" rel="stylesheet" type="text/css">
@@ -14,7 +14,7 @@
 		<!-------- CSS : Bootstrap -------->
 		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/bootstrap/css/sb-admin-2.css' />" rel="stylesheet">
-		<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" rel="stylesheet" crossorigin="anonymous">
+		<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"rel="stylesheet">
 		
 		<!-------- JS : Custom -------->
 		<script src="<c:url value='/main/js/jquery-3.6.0.min.js' />"></script>
@@ -30,24 +30,17 @@
 	
 			<!-- Content Wrapper -->
 			<div id="content-wrapper" class="d-flex flex-column">
-	
-				<!-- Top Menu Bar  -->
-				<jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />
-	
 				<!-- Main Content -->
-				<div class="d-flex">
-					<!-- 차트, 게시판 -->
-					<article class="w-30">
-						<!-- 차트 -->
-						<section id="chartSection">
-							<!-- Pie Chart -->
-							<div id="chartBox">
-								<!--
-									DB에서 해당 유저의 해당 월의 데이터 가져오기
-									태그별 분류 및 합계 계산
-									태그별 아이콘 및 명칭 생성
-								 -->
-								<div class="card shadow mb-4 ml-4">
+				<div id="content">
+					<!-- Top Menu Bar  -->
+					<jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />
+					
+					<div class="container-fluid">
+						<div class="row">
+							<!-- 차트, 게시판 -->
+							<div class="col-lg-12 col-xl-3">
+								<!-- 차트 : 월별 통계 -->
+								<div class="card shadow mb-4">
 									<!-- Card Header -->
 									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 										<h6 class="m-0 font-weight-bold text-primary">월별 통계</h6>
@@ -73,13 +66,9 @@
 										</div>
 									</div>
 								</div>
-							</div>
-						</section>
-	
-						<!-- 게시판 -->
-						<section id="forumSection">
-							<div id="forumBox">
-								<div class="card shadow mb-4 ml-4">
+								
+								<!-- 게시판 : 최신글 -->
+								<div class="card shadow mb-4">
 									<!-- Card Header -->
 									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 										<h6 class="m-0 font-weight-bold text-primary">최신글</h6>
@@ -103,15 +92,10 @@
 									</div>
 								</div>
 							</div>
-						</section>
-					</article>
-	
-					<!-- 달력 -->
-					<article class="w-70">
-						<!-- 달력 -->
-						<section id="calendar">
-							<div id="calendarBox">
-								<div class="card shadow mb-4 mr-4 ml-4">
+							
+							<!-- 달력 -->
+							<div class="col-lg-12 col-xl-9">
+								<div class="card shadow mb-4">
 									<!-- Card Header -->
 									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 										<h6 class="m-0 font-weight-bold text-primary">{가계부 타이틀}</h6>
@@ -129,27 +113,27 @@
 												<i id="todayBtn" class="far fa-calendar fa-2x m-1"></i>
 											</div>
 											<div>
-												<i class="far fa-circle" style="color: blue;"> : 수입</i>&nbsp;
-												<i class="far fa-circle" style="color: red;"> : 지출</i>
+												<i class="far fa-circle" style="color: #2768fa;"> : 수입</i>&nbsp;
+												<i class="far fa-circle" style="color: #ffb500;"> : 지출</i>
 											</div>
 										</div>
 									</div>
 									<div id="dateBox" class="m-2">
-										<div class="daySel mb-2">
-											<div>일</div>
-											<div>월</div>
-											<div>화</div>
-											<div>수</div>
-											<div>목</div>
-											<div>금</div>
-											<div>토</div>
+										<div class="daySel mb-2 mr-1">
+											<div>SUN</div>
+											<div>MON</div>
+											<div>TUE</div>
+											<div>WED</div>
+											<div>THU</div>
+											<div>FRI</div>
+											<div>SAT</div>
 										</div>
 										<div class="dateSel"></div>
 									</div>
 								</div>
 							</div>
-						</section>
-					</article>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -160,6 +144,7 @@
 		<script src="<c:url value='/bootstrap/vendor/jquery-easing/jquery.easing.min.js' />"></script>
 		<script src="<c:url value='/bootstrap/js/sb-admin-2.min.js' />"></script>
 		<script src="<c:url value='/bootstrap/vendor/chart.js/Chart.min.js' />"></script>
+		
 		<!-------- JS : Custom -------->
 		<script src="<c:url value='/main/js/pieChart.js' />"></script>
 	</body>

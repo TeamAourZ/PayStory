@@ -1,5 +1,5 @@
 /**
- * homeCalendar.js
+ * detailViewCalendar.js
  */
 
 $(function() {
@@ -30,18 +30,16 @@ $(function() {
 
 			$('.dateSel').append(`
 				<div class="infoBox d-flex flex-column">
-					<div class="dateBox d-flex align-items-center text-center">
+					<div class="dateBox d-flex h-40">
 						<div class="date ${dateClass} rounded-circle m-1">${i}</div>
-						<div class="text-xs text-truncate">${text}</div>
+						<div class="text-xs mt-2 mr-1">${text}</div>
 					</div>
-					<div class="countBox mr-1 mb-1 ml-1 align-items-center text-center">
-						<div class="row pl-3 mb-1">
-							<div class="col-2 incomeCount rounded-circle p-0">11</div>
-							<div class="col-md-9 incomeValue text-left text-truncate mr-1 ml-1 p-0">123,123,113</div>
+					<div class="countBox d-flex w-50 h-60 align-items-start align-self-center text-center mt-1">
+						<div class="incomeCount rounded-circle w-50">
+							1
 						</div>
-						<div class="row pl-3">
-							<div class="col-2 expenditureCount rounded-circle p-0">21</div>
-							<div class="col-md-9 expenditureValue text-left text-truncate mr-1 ml-1 p-0">-123,123,113</div>
+						<div class="expenditureCount rounded-circle w-50">
+							2
 						</div>
 					</div>
 				</div>
@@ -65,10 +63,12 @@ $(function() {
 			let day = new Date(year, month, index + 1);
 			day = day.getDay();
 
-			if (day == 6 || day == 0) { // 토요일, 일요일
-				$(this).css('color', '#ffb500');
+			if (day == 0) { // 일요일
+				$(this).css('color', 'red');
+			} else if (day == 6) { // 토요일
+				$(this).css('color', 'blue');
 			} else {
-				$(this).css('color', '#2768fa');
+				$(this).css('color', 'black');
 			}
 
 		});
@@ -93,7 +93,7 @@ $(function() {
 		$('.dateSel').children().remove();
 
 		nowMonth--;
-		if (nowMonth === -1) {	// 0월이 되면 이전 연도 12월로 변경
+		if (nowMonth === -1) {		// 0월이 되면 이전 연도 12월로 변경
 			nowYear--;
 			nowMonth += 12;
 		}
@@ -134,9 +134,9 @@ $(function() {
 		e.stopImmediatePropagation();
 
 		for (let i = 0; i < $('.infoBox').length; i++) {
-			//console.log($('.infoBox').eq(i)[0].classList[1]);
+			console.log($('.infoBox').eq(i)[0].classList[1]);
 			if ($('.infoBox').eq(i)[0].classList[1] !== "border") {
-				$('.infoBox').eq(i).css('border', '1px solid #b5b1b1');
+				$('.infoBox').eq(i).css('border', '1px solid rgba(2, 224, 224, 0.51)');
 				$('.infoBox').eq(i).children('div.dateBox').children('div.date').removeClass('selected');
 			}
 		}

@@ -10,6 +10,11 @@ public class AccountBookController {
 		return "accountBook/home";
 	}
 
+	@RequestMapping("/detailView")
+	public String detailView() {
+		return "accountBook/detailView";
+	}
+
 	@RequestMapping("/accountBook/add")
 	public String addForm() {
 		return "accountBook/addForm";

@@ -19,35 +19,34 @@
     grid-template-columns: repeat(7, 1fr);
     grid-gap: 15px;
 }
-.daySel div:first-child, .daySel div:last-child {
-    background: #ffb500;
+.daySel div:first-child {
+    background: rgba(231, 76, 60, 0.32);
+}
+.daySel div:last-child {
+	background: rgba(52, 152, 219, 0.24);
 }
 .daySel div {
-    color: white;
-    font-size: 13pt;
-    border-radius: 15px;
-    background: #2768fa;
+    font-size: 15pt;
+    border-radius: 5px;
+    background: rgba(241, 196, 14, 0.2);
     text-align: center;
 }
 
 .dateSel {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-gap: 15px;
+    grid-row-gap: 15px;
+    grid-column-gap: 15px;
 }
 .dateSel div.infoBox {
     min-height: 90px;
     font-size: 13pt;
     font-weight: bold;
     border-radius: 5px;
-    border: 1px solid #b5b1b1;
+    border: 1px solid rgba(2, 224, 224, 0.51);
 }
-.dateSel div.infoBox div {
+.dateSel div.infoBox {
 	cursor: pointer;
-}
-
-.date {
-	width: 24px;
 }
 
 .today {
@@ -55,24 +54,14 @@
 	background: rgba(0, 255, 100, 0.51);
 }
 
-.incomeCount {
-	min-width: 21px;
-	border: 1px solid #2768fa;
-	font-size: 9pt;
+.countBox {
+	gap: 10px;
 }
 
-.incomeValue {
-	color: #2768fa;
-	font-size: 9pt;
+.incomeCount {
+	border: 2px solid blue;
 }
 
 .expenditureCount {
-	min-width: 21px;
-	border: 1px solid #ffb500;
-	font-size: 9pt;
-}
-
-.expenditureValue {
-	color: #ffb500;
-	font-size: 9pt;
+	border: 2px solid red;
 }
