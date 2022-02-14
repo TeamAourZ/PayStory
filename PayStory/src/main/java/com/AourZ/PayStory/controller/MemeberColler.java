@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemeberColler {
 	@RequestMapping("/")
 	public String index() {
-		return "board/main";
+		return "accountBook/addForm";
 	}
 
 	@RequestMapping("/login")
@@ -20,8 +20,8 @@ public class MemeberColler {
 		return "member/register";
 	}
 	
-	@RequestMapping("/chatbot")
-	public String chatbot() {
+	@RequestMapping("/chatbotP")
+	public String chatbotP() {
 		return "chatbot/chatbot";
 	}
 	
