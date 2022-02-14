@@ -3,31 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-		<!-- Custom fonts for this template-->
-	    <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-	    <link
-	        href="https://fonts.googleapis.com/css?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap"
-	        rel="stylesheet">
-	
-	    <!-- Custom styles for this template-->
-	    <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
-	</head>
 	<body>
-		<!-- Topbar -->
 	    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 		   
 		   <!-- Topbar Navbar -->
 		   <ul class="navbar-nav ml-auto">
 		       <!-- Nav Item - 내 가계부 -->
-		       <li class="nav-item dropdown no-arrow mx-1">
-		           <a class="nav-link" href="#" id="alertsDropdown" role="button"
+		        <li class="nav-item dropdown no-arrow mx-1">
+		           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
 		               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		              <button class="btn btn-outline-secondary">내 가계부</button>
+		               <button class="btn btn-outline-secondary">내 가계부</button>
 		           </a>
-		        </li>   
+		       </li>  
 		
 		       <!-- Nav Item - 공용 가계부 -->
 		       <li class="nav-item dropdown no-arrow mx-1">
@@ -75,15 +62,5 @@
 		    </ul>
 		</nav>
 		<!-- End of Topbar -->
-                
-		<!-- Bootstrap core JavaScript-->
-		<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
-		<script src="/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-		
-		<!-- Core plugin JavaScript-->
-		<script src="/bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
-		
-		<!-- Custom scripts for all pages-->
-		<script src="/bootstrap/js/sb-admin-2.min.js"></script>
 	</body>
 </html>

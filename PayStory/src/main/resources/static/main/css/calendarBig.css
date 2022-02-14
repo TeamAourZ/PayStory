@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+.dateSelB {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 15px;
+}
+.dateSelB div.infoBox {
+    min-height: 90px;
+    font-size: 13pt;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid #b5b1b1;
+}
+.dateSelB div.infoBox div {
+	cursor: pointer;
+}
+
+.date {
+	width: 24px;
+}
+
+.today {
+	color: rgba(0, 0, 0, 1);
+	background: rgba(0, 255, 100, 0.51);
+}
+
+.incomeCount {
+	min-width: 21px;
+	border: 1px solid #2768fa;
+	font-size: 9pt;
+}
+
+.incomeValue {
+	color: #2768fa;
+	font-size: 9pt;
+}
+
+.expenditureCount {
+	min-width: 21px;
+	border: 1px solid #ffb500;
+	font-size: 9pt;
+}
+
+.expenditureValue {
+	color: #ffb500;
+	font-size: 9pt;
+}
