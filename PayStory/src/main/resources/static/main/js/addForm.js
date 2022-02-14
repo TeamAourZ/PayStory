@@ -19,6 +19,7 @@
 	  	let fileArr = Array.prototype.slice.call(file);
 	  	
 	  	fileArr.forEach(function(f){
+			$('.imgtext').text(" ");
 			if(!f.type.match('image.*')) {
 				alert("이미지 파일만 가능합니다.");
 				return;
@@ -34,6 +35,11 @@
 			}
 			render.readAsDataURL(f);		
 		});
+	});
+	
+	// 아이템 보기 버튼 클릭
+	$('.showItem').on('click', function(){
+		$('.fa-angle-down').toggleClass('open');
 	});
 	
 	// 아이템 추가 버튼 클릭

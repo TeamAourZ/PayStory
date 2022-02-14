@@ -92,25 +92,42 @@
 											<label for="expenditureSource">상호명</label>
 											<input type="text" class="form-control form-control-sm shadow-none" id="expenditureSource" required>
 										</div>
-										<!-- 아이템 -->
-										<div id="itemWrap">
-											<div class="item form-group form-row">
-												<div class="col-xl-7">
-													<label for="expenditureItem">내용</label>
-													<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem" required>
+										<!-- 아이템 아코디언 -->
+										<div class="accordion" id="itemAccordian">
+											<div class="card">
+												<div class="card-header" id="heading">
+													<h2 class="mb-0">
+														<button class="showItem btn btn-light btn-block text-left collapsed d-flex justify-content-between shadow-none py-2 px-3" type="button" data-toggle="collapse" data-target="#items" aria-expanded="false" aria-controls="items">
+														  상세 항목 
+														  <i class="fas fa-angle-down"></i>
+														</button>
+													</h2>
 												</div>
-												<div class="col-xl-4">
-													<label for="expenditureItemAmount">금액</label>
-													<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItemAmount" required>
-												</div>
-												<div class="col-xl-1">
-													<button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button>
+												<div id="items" class="collapse" aria-labelledby="heading" data-parent="#itemAccordian">
+													<div class="card-body">
+													  	<!-- 아이템 리스트 -->
+														<div id="itemWrap">
+															<div class="item form-group form-row">
+																<div class="col-xl-7">
+																	<label for="expenditureItem">내용</label>
+																	<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItem" required>
+																</div>
+																<div class="col-xl-4">
+																	<label for="expenditureItemAmount">금액</label>
+																	<input type="text" class="form-control form-control-sm shadow-none" id="expenditureItemAmount" required>
+																</div>
+																<div class="col-xl-1">
+																	<button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button>
+																</div>
+															</div>
+														</div>
+														<!-- 아이템 추가 버튼 -->
+														<div class="addBtn w-100 d-flex justify-content-center">
+															<button class="addItem btn shadow-none"><i class="fas fa-plus-circle"></i></button>
+														</div>
+													</div>
 												</div>
 											</div>
-										</div>
-										<!-- 아이템 추가 버튼 -->
-										<div class="addBtn w-100 d-flex justify-content-center">
-											<button class="addItem btn shadow-none"><i class="fas fa-plus-circle"></i></button>
 										</div>
 										<!-- 총 금액 -->
 										<div class="form-group row px-2 mt-2">
@@ -132,7 +149,8 @@
 										</div>
 									</div>
 									<!-- 이미지 영역 -->
-									<div class="col-md-4 border rounded text-center mb-3">
+									<div class="imgArea col-md-4 border rounded text-center mb-3">
+										<span class="imgtext">영수증 이미지 미리보기</span>
 										<img id="receiptImg" />
 									</div>
 								</div>

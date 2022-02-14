@@ -7,8 +7,37 @@ input:active {outline: none;}
 textarea {resize: none;}
 
 /* 영수증 이미지 영역 */
+.imgArea {max-height: 550px;}
 .form-row > .col,
 .form-row > [class*="col-"] {padding: 5px;}
+
+/* 아이템 리스트 */
+.accordion > .card > .card-header {
+	height: 2.5rem;
+    padding: 0;
+}
+
+.fa-angle-down {
+	font-size: 1.8rem;
+    color: #858796;
+    transition: all ease 1s;
+}
+
+.fa-angle-down.open {
+    transform: rotate(180deg);
+    transition: all ease 1s;
+}
+
+.showItem:focus,
+.showItem:hover,
+.showItem:active {
+	border: none;
+	background: none;	
+}
+
+/* .card-body {
+    padding: 1.25rem 1.25rem 0.5rem;
+} */
 
 /* 아이템 추가/ 삭제 버튼 */
 .fa-plus-circle {font-size: 2rem;}
