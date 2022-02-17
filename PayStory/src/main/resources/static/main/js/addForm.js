@@ -33,10 +33,24 @@
 					'width':'100%',
 					'height':'95%'
 				});
+				$('#imgArea').addClass('hasImage');
+				$('.hasImage').attr({
+					'data-toggle' : 'modal',
+					'data-target' : '#receiptModal'
+				});
 			}
 			render.readAsDataURL(f);		
 		});
 	});
+	
+	// 이미지 영역 클릭 이벤트 : 이미지가 있으면 modal에 이미지 넣기 OK
+	$('#imgArea').on('click', function(){
+		if($(this).hasClass('hasImage')){
+			$('#receiptImgModal').attr('src', $(this).find('#receiptImg').attr('src'));
+		}else{
+			alert('이미지를 업로드 해주세요.');
+		}		
+	})
 	
 	// 반응형 CSS 설정 OK
 	$(window).resize(function(){

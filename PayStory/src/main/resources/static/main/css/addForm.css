@@ -19,10 +19,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 }
 
 /* 영수증 이미지 영역 */
-#imgArea {
-	max-height: 560px; 
-	cursor: pointer;
-}
+#imgArea {max-height: 560px;}
 
 .form-row > .col,
 .form-row > [class*="col-"] {padding: 5px;}
@@ -34,7 +31,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 .tooltipContent {
     display: none;
     position: absolute;
-    top: 8%;
+    top: 50%;
     left: 50%;
     width: 80%;
     height: 7%;
@@ -43,19 +40,24 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     text-align: center;
     opacity: 0.8;
     border-radius: 3px;
-    transform: translate(-50%, -8%);
+    transform: translate(-50%, -50%);
     z-index: 1;
 }
 
-#imgArea:hover .tooltipContent {
+.tooltipContent p {margin: 0;}
+
+#receiptImgModal {width: 100%;}
+
+/* 영수증 이미지 있을 때 */
+.hasImage {cursor: pointer;}
+
+.hasImage:hover .tooltipContent {
 	display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#imgArea:hover .tooltipContent.hidden {display: none;}
-
-.tooltipContent p {margin: 0;}
+.hasImage:hover .tooltipContent.hidden {display: none;}
 
 /* 아이템 리스트 */
 .accordion > .card > .card-header {
