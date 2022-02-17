@@ -5,20 +5,22 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>PayStory</title>
 		<!-------- CSS : Custom -------->
-		<link href="<c:url value='/main/css/detailViewCalendar.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/calendarBase.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/calendarTypeB.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/detailViewList.css' />" rel="stylesheet" type="text/css">
 		
 		<!-------- CSS : Bootstrap -------->
 		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/bootstrap/css/sb-admin-2.css' />" rel="stylesheet">
-		<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" rel="stylesheet" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 		
-		<!-------- JS : Custom -------->
+		<!-------- JS : Custom ------>
 		<script src="<c:url value='/main/js/jquery-3.6.0.min.js' />"></script>
-		<script src="<c:url value='/main/js/detailViewCalendar.js' />" type="text/javascript"></script>
-		
-		<!-------- JS : Bootstrap -------->
+		<script src="<c:url value='/main/js/accountBook/detailViewCalendar.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/detailViewList.js' />" type="text/javascript"></script>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -27,69 +29,64 @@
 	
 			<!-- Content Wrapper -->
 			<div id="content-wrapper" class="d-flex flex-column">
-	
-				<!-- Top Menu Bar  -->
-				<jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />
-	
 				<!-- Main Content -->
-				<div class="d-flex">
-					<!-- 달력, 차트 -->
-					<article class="w-30">
-						<!-- 달력 -->
-						<section id="calendarSection">
-							<div id="calendarBox">
-								<div class="card shadow mb-4 mr-4 ml-4">
+				<div id="content">
+					<!-- Top Menu Bar  -->
+					<jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />
+					
+					<div class="container-fluid">
+						<div class="row">
+							<!-- 달력, 차트 -->
+							<div class="col-lg-12 col-xl-4">
+								<!-- 달력 -->
+								<div class="card shadow mb-4">
 									<!-- Card Header -->
-									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-										<h6 class="m-0 font-weight-bold text-primary">{가계부 타이틀}</h6>
+									<div class="card-header p-3">
+										<div id="calendarBtnBox" class="d-flex justify-content-between mr-3 ml-3">
+											<div id="prevNextBox" class="d-flex justify-content-between align-items-center">
+												<i id="prevMonthBtn" class="fas fa-angle-left fa-2x m-1"></i>
+												<h6 id="yearMonth" class="font-weight-bold text-primary m-0 mr-3 ml-3"></h6>
+												<i id="nextMonthBtn" class="fas fa-angle-right fa-2x m-1"></i>
+											</div>
+											<div id="otherBtnBox" class="d-flex align-items-center">
+												<i id="todayBtn" class="far fa-calendar fa-2x"></i>
+											</div>
+										</div>
 									</div>
 									<!-- Card Body -->
-									<div id="calendarBtnBox" class="d-flex justify-content-between mt-1 mr-3 ml-3">
-										<div id="prevNextBox" class="d-flex justify-content-between align-items-center">
-											<i id="prevMonthBtn" class="fas fa-angle-left fa-2x m-1"></i>
-											<span id="yearMonth" class="text-lg font-weight-bold mr-3 ml-3"></span>
-											<i id="nextMonthBtn" class="fas fa-angle-right fa-2x m-1"></i>
-										</div>
-										<div id="otherBtnBox" class="d-flex flex-column align-items-end">
-											<div>
-												<i id="selectDayAddDataBtn" class="fas fa-plus fa-2x m-1"></i>
-												<i id="todayBtn" class="far fa-calendar fa-2x m-1"></i>
+									<div id="calendarBox" class="card-body">
+										<div class="table m-0 mt-2">
+											<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+												<div class="row">
+													<div class="col-sm-12">
+														<table class="table mb-0">
+															<thead class="daySel">
+																<tr class="text-center">
+																	<th style="width: 14%;">SUN</th>
+																	<th style="width: 14%;">MON</th>
+																	<th style="width: 14%;">TUE</th>
+																	<th style="width: 14%;">WED</th>
+																	<th style="width: 14%;">THU</th>
+																	<th style="width: 14%;">FRI</th>
+																	<th style="width: 14%;">SAT</th>
+																</tr>
+															</thead>
+															<tbody class="dateSel">
+																<!-- js -->
+															</tbody>
+														</table>
+													</div>
+												</div>
 											</div>
-											<div>
-												<i class="far fa-circle" style="color: blue;"> : 수입</i>&nbsp;
-												<i class="far fa-circle" style="color: red;"> : 지출</i>
-											</div>
 										</div>
-									</div>
-									<div id="dateBox" class="m-2">
-										<div class="daySel mb-2">
-											<div>일</div>
-											<div>월</div>
-											<div>화</div>
-											<div>수</div>
-											<div>목</div>
-											<div>금</div>
-											<div>토</div>
-										</div>
-										<div class="dateSel"></div>
 									</div>
 								</div>
-							</div>
-						</section>
-						
-						<!-- 차트 : 일별 통계 -->
-						<section id="chartSection">
-							<!-- Pie Chart -->
-							<div id="chartBox">
-								<!--
-									DB에서 해당 유저의 해당 월의 데이터 가져오기
-									태그별 분류 및 합계 계산
-									태그별 아이콘 및 명칭 생성
-								 -->
-								<div class="card shadow mb-4 ml-4">
+								
+								<!-- 차트 : 일일 통계 -->
+								<div class="card shadow mb-4">
 									<!-- Card Header -->
-									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-										<h6 class="m-0 font-weight-bold text-primary">월별 통계</h6>
+									<div class="card-header p-3">
+										<h6 class="m-0 font-weight-bold text-primary">일일 통계</h6>
 									</div>
 									<!-- Card Body -->
 									<div class="card-body">
@@ -113,15 +110,21 @@
 									</div>
 								</div>
 							</div>
-						</section>
-					</article>
-					
-					<!-- 상세 조회 -->
-					<article class="w-70">
-						<section>
 							
-						</section>
-					</article>
+							<!-- 일일 상세 내역 -->
+							<div class="col-lg-12 col-xl-8">
+								<div class="card shadow mb-4">
+									<!-- Card Header -->
+									<div class="card-header p-3">
+										<h6 class="m-0 font-weight-bold text-primary">{년월일}</h6>
+									</div>
+									<div id="detailViewBox" class="card-body d-flex flex-column align-items-center">
+										<!-- ajax -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -134,6 +137,6 @@
 		<script src="<c:url value='/bootstrap/vendor/chart.js/Chart.min.js' />"></script>
 		
 		<!-------- JS : Custom -------->
-		<script src="<c:url value='/main/js/pieChart.js' />"></script>
+		<script src="<c:url value='/main/js/accountBook/homePieChart.js' />"></script>
 	</body>
 </html>
