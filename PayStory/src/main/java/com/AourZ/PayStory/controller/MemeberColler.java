@@ -30,5 +30,9 @@ public class MemeberColler {
 	public String chatbotP() {
 		return "chatbot/chatbot";
 	}
+	@RequestMapping("/modalT")
+	public String modalT() {
+		return "chatbot/modal";
+	}
 	
 }

@@ -32,7 +32,7 @@
 					'height':'100%'
 				});
 			}
-			render.readAsDataURL(f);		
+			render.readAsDataURL(f);
 		});
 	});
 	

@@ -8,6 +8,7 @@
 	// $.ajax()를 별도의 함수로 분리해서 호출
 	callAjax(); //매시지 입력하지 않고 호출해서 빈값 전송 -> open event -> 웰컴 메시지 출력
 	
+
 	/////////////////////////////////////////////////////////
 	// 음성으로 질문하기
 	
@@ -79,9 +80,67 @@
             .catch(err => {
                 console.log('The following error occurred: ' + err)
             })
-    }        
+    }
+    
+        
 	
+	// chatbot 아이콘 눌렀을 때 파일 업로드
+	$("#uploadFile").on('change',function(e){
+		event.preventDefault();
+		
+		// 파일 이름 표시
+		let fileName = $(this).val();
+	  	$(".input-file-button").text(event.preventDefault());
+	  	
+	  	// 이미지 영역에 미리보기
+	  	let file = e.target.files;
+	  	let fileArr = Array.prototype.slice.call(file);
+	  	
+	  	fileArr.forEach(function(f){
+			if(!f.type.match('image.*')) {
+				alert("이미지 파일만 가능합니다.");
+				return;
+			}
+			
+			let render = new FileReader();
+			render.onload = function(e){
+				$('#chatBox').append('<div class="msgBox send"><span id="in"><span><img src="' + 
+										e.target.result + '" width="250px" height="250px">' +
+										'</span></span></div><br>');
+				
+			}
+			
+			render.readAsDataURL(f);
+			
+		});
+	});
+	/*$(document).on('click', '.removeItem' ,function(e){
+	}*/
+	$(document).on('click', '.msgBox img', function(e){
+    	$(".modal_chatbotImg").fadeIn();
+    	$('.modal_chatbotContent').html('<span><img src="' + 
+							 $(this).attr("src") + '" width="250px" height="250px"></span><br>');
+	});
 	
+	$(".modal_chatbotContent").on("click", function(){
+	    $(this).parents(".modal_chatbotImg").fadeOut();
+	});
+	
+	//chatBox 보이기 숨기기
+	//보이기
+	function div_show() {
+		document.getElementById("rightSide").style.display = "block";
+	}
+	
+	//숨기기
+	function div_hide() {
+		document.getElementById("rightSide").style.display = "none";
+	}
+	$(document).on('click', '.nav_icons span', function(e){
+		if($("#rightSide").style.display = "block"){
+			
+		}
+	});
 	// (2) 파일 업로드 기능
     // 서버에 업로드
     function fileUpload(blob, clipName){	    
@@ -119,7 +178,7 @@
 	
 	// 챗봇에게 질문하고 응답받기 - 텍스트 응답
 	// message 입력하고 전송 버튼 눌렀을 때
-	$('#chatForm').on('submit', function(event){
+	$('#chatForm_chat').on('submit', function(event){
 		event.preventDefault();
 		
 		// 메시지 입력하지 않고 [전송] 버튼 누른 경우 (웰컴 메시지 출력되지 않도록)
@@ -216,6 +275,7 @@
             }
        });
 	}
+	
 });
 
 
