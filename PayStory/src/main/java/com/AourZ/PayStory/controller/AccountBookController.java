@@ -17,16 +17,16 @@ public class AccountBookController {
 		return "accountBook/detailView";
 	}
 	
-	/* 달력 B */
-	@RequestMapping("/calendarBig")
-	public String calendarBig() {
-		return "accountBook/calendarBig";
+	/* 달력 A */
+	@RequestMapping("/calendarTypeA")
+	public String calendarTypeA() {
+		return "accountBook/calendarTypeA";
 	}
 
-	/* 달력 S */
-	@RequestMapping("/calendarSmall")
-	public String calendarSmall() {
-		return "accountBook/calendarSmall";
+	/* 달력 B */
+	@RequestMapping("/calendarTypeB")
+	public String calendarTypeB() {
+		return "accountBook/calendarTypeB";
 	}
 
 	@RequestMapping("/accountBook/add")
