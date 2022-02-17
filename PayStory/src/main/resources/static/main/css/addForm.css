@@ -6,9 +6,21 @@ input:focus,
 input:active {outline: none;}
 textarea {resize: none;}
 
+/* 파일 업로드  */
+input[type="file"] {
+	cursor: pointer;
+}
+
+/* 날짜 입력란 */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+	width: 50%;
+    background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) 95% 50% no-repeat;
+	cursor: pointer;
+}
+
 /* 영수증 이미지 영역 */
 .imgArea {
-	max-height: 540px;
+	max-height: 540px; 
 	cursor: pointer;
 }
 .form-row > .col,
@@ -37,7 +49,7 @@ textarea {resize: none;}
 .showItem:hover,
 .showItem:active {
 	border: none;
-	background: none;	
+	background: none;
 }
 
 .card-body {
@@ -46,7 +58,7 @@ textarea {resize: none;}
 
 /* 아이템 추가/ 삭제 버튼 */
 .fa-plus-circle {font-size: 2rem;}
-#itemWrap > .form-group{margin-bottom: 0;}
+#itemWrap > .form-group {margin-bottom: 0;}
 .fa-minus-circle {
 	position: absolute;
     bottom: 10%;
@@ -54,10 +66,34 @@ textarea {resize: none;}
     font-size: 1.5rem;
 }
 
+/* 금액 input */
+.expenditureItemAmount {text-align: right;}
 
+/* 추가 버튼 */
+/* #addItem {width: 60px;} */
+
+/* 삭제 버튼 */
+/* .removeItem {
+    width: 70%;
+    padding: 0;
+    position: absolute;
+    bottom: 10%;
+    left: 20%;
+}*/
+ 
 /* 반응형: 가로 960px 이하 */
 @media (max-width: 990px) {
 	/* 영수증 이미지 영역을 제일 위로 */
 	.imgArea {order: 1;}
 	.formArea {order: 2;}
+}
+
+/* 반응형: 가로 585px 이하 */
+@media (max-width: 585px) {
+	input[type="datetime-local"]::-webkit-calendar-picker-indicator {width: 30%;}
+}
+
+/* 반응형: 가로 380px 이하 */
+@media (max-width: 380px) {
+	input[type="datetime-local"]::-webkit-calendar-picker-indicator {width: 5%;}
 }
