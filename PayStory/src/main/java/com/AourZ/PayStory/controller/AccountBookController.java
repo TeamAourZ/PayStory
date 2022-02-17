@@ -28,7 +28,8 @@ public class AccountBookController {
 	public String calendarSmall() {
 		return "accountBook/calendarSmall";
 	}
-
+	
+	/* 지출,수입 내역 추가 form */
 	@RequestMapping("/accountBook/add")
 	public String addForm() {
 		return "accountBook/addForm";

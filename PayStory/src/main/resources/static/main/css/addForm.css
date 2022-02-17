@@ -69,18 +69,6 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 /* 금액 input */
 .expenditureItemAmount {text-align: right;}
 
-/* 추가 버튼 */
-/* #addItem {width: 60px;} */
-
-/* 삭제 버튼 */
-/* .removeItem {
-    width: 70%;
-    padding: 0;
-    position: absolute;
-    bottom: 10%;
-    left: 20%;
-}*/
- 
 /* 반응형: 가로 960px 이하 */
 @media (max-width: 990px) {
 	/* 영수증 이미지 영역을 제일 위로 */
