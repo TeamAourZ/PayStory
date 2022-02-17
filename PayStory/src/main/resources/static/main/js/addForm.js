@@ -9,6 +9,46 @@
 		if(e.keyCode == 13) e.preventDefault();
 	});
 	
+	/***** 영수증 이미지 영역 *****/
+	// 파일 업로드 OK
+	$("#uploadReceipt").on('change',function(e){
+		// 파일 이름 표시
+		let fileName = $(this).val();
+	  	$(".custom-file-label").text(fileName.substring(12));
+	  	
+	  	// 이미지 영역에 미리보기
+	  	let file = e.target.files;
+	  	let fileArr = Array.prototype.slice.call(file);
+	  	
+	  	fileArr.forEach(function(f){
+			if(!f.type.match('image.*')) {
+				alert("이미지 파일만 가능합니다.");
+				return;
+			}
+			
+			let render = new FileReader();
+			render.onload = function(e){
+				$('#receiptImg').attr('src', e.target.result);
+				$('#receiptImg').css({
+					'width':'100%',
+					'height':'95%'
+				});
+			}
+			render.readAsDataURL(f);		
+		});
+	});
+	
+	// 반응형 CSS 설정 OK
+	$(window).resize(function(){
+		if($(window).width() <= 990) {
+			$('#receiptImg').addClass('hidden');
+			$('.tooltipContent').addClass('hidden');
+		}else {
+			$('#receiptImg').removeClass('hidden');
+			$('.tooltipContent').removeClass('hidden');
+		}
+	});
+	
 	/******** 아이템 영역  ********/
 	// 아이템 보기 버튼 클릭 - css 적용 OK
 	$('.showItem').on('click', function(){
@@ -122,14 +162,5 @@
 			// 100자 넘으면 알림창 뜨도록 
 			alert('글자수는 100자까지 입력 가능합니다.'); 
 		} 
-	});
-	
-	/***** 영수증 이미지 영역 : 반응형 CSS 적용 *****/
-	$(window).resize(function(){
-		if($(window).width() <= 990) {
-			$('#receiptImg').addClass('hidden');
-		}else {
-			$('#receiptImg').removeClass('hidden');
-		}
 	});
 });

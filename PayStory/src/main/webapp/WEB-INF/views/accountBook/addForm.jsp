@@ -152,9 +152,10 @@
 										</div>
 									</div>
 									<!-- 이미지 영역 -->
-									<div class="imgArea col-lg-4 border rounded text-center mb-3">
+									<div id="imgArea" class="col-lg-4 border rounded text-center mb-3">
 										<i class="fa fa-image"></i>
 										<span class="imgtext">영수증 이미지 미리보기</span>
+										<div class="tooltipContent"><p>클릭하여 이미지 크게 보기</p></div>
 										<img id="receiptImg" />
 									</div>
 								</div>
@@ -219,6 +220,8 @@
         <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
+    
+    <!-- 영수증 이미지 Modal-->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
