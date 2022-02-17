@@ -91,9 +91,12 @@
 		let currentItem = $(this).parent().parent();
 		
 		// 삭제 전에 합계 금액에서 빼기 OK
-		let totalAmount = parseInt(withoutComma($('#expenditureTotalAmount').val()));
-		let thisItemAmount = parseInt(withoutComma($(this).parent().prev().find('.expenditureItemAmount').val()));
-		$('#expenditureTotalAmount').val(withComma(totalAmount-thisItemAmount));
+		let thisItemAmount = $(this).parent().prev().find('.expenditureItemAmount').val();
+		if(thisItemAmount != ''){
+			let totalAmount = parseInt(withoutComma($('#expenditureTotalAmount').val()));
+			let currentAmount = totalAmount - parseInt(withoutComma(thisItemAmount));
+			$('#expenditureTotalAmount').val(withComma(currentAmount));
+		}
 		
 		// 맨 위의 아이템이면
 		if(currentItem.hasClass('default')){
