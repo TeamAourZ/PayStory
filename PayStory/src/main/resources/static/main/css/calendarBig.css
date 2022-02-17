@@ -1,35 +1,18 @@
 @charset "UTF-8";
 
-.daySel {
-    width: 100%;
+.dateSelB {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-gap: 15px;
 }
-.daySel div:first-child, .daySel div:last-child {
-    background: #ffb500;
-}
-.daySel div {
-    color: white;
-    font-size: 13pt;
-    border-radius: 15px;
-    background: #2768fa;
-    text-align: center;
-}
-
-.dateSel {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-gap: 15px;
-}
-.dateSel div.infoBox {
+.dateSelB div.infoBox {
     min-height: 90px;
     font-size: 13pt;
     font-weight: bold;
     border-radius: 5px;
     border: 1px solid #b5b1b1;
 }
-.dateSel div.infoBox div {
+.dateSelB div.infoBox div {
 	cursor: pointer;
 }
 
@@ -39,7 +22,7 @@
 
 .today {
 	color: rgba(0, 0, 0, 1);
-	background: rgba(0, 255, 64, 0.51);
+	background: rgba(0, 255, 100, 0.51);
 }
 
 .incomeCount {
