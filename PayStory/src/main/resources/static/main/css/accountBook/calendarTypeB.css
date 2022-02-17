@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+.daySel tr th:first-child div, .daySel tr th:last-child div {
+    background: #ffb500;
+}
+.daySel div {
+    color: white;
+    font-size: 11pt;
+    border-radius: 15px;
+    background: #2768fa;
+    text-align: center;
+}
+
+.dateSel div.infoBox {
+    font-size: 11pt;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+.dateSel div.infoBox div {
+	cursor: pointer;
+}
+
+.date {
+	width: 20px;
+}
+
+.today {
+	color: rgba(0, 0, 0, 1);
+	background: rgba(0, 255, 64, 0.51);
+}
+
+.incomeCount {
+	min-width: 21px;
+	border: 1px solid #2768fa;
+	font-size: 9pt;
+}
+
+.expenditureCount {
+	min-width: 21px;
+	border: 1px solid #ffb500;
+	font-size: 9pt;
+}
