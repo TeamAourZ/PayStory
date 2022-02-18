@@ -71,7 +71,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                		<a class="small" href="#">비밀번호 찾기</a>
+                                		<a class="small" href="<c:url value='/member/findPwView'/>">비밀번호 찾기</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="<c:url value='/member/registerView'/>">계정이 없으신가요?&nbsp;&nbsp;회원가입으로 가기</a>
