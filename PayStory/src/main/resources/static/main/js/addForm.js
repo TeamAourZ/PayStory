@@ -39,7 +39,7 @@
 					'data-target' : '#receiptModal'
 				});
 			}
-			render.readAsDataURL(f);		
+			render.readAsDataURL(f);
 		});
 	});
 	

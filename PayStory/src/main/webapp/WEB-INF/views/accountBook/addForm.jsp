@@ -66,12 +66,12 @@
 											<label class="custom-file-label shadow-none" for="uploadReceipt">파일 선택</label>
 										</div>
 										<!-- 날짜 -->
-										<div class="form-group"> 
+										<div class="form-group">
 											<label for="date">날짜</label>
 											<input type="datetime-local" id="date" name="expenditureDate" class="form-control shadow-none" required>
 										</div>
 										<!-- 태그 -->
-										<div class="form-group"> 
+										<div class="form-group">
 											<label for="tags">태그</label>
 											<select id="tags" name="tagNo" class="form-control form-control-sm shadow-none" required>
 												<option selected disabled value="">태그를 선택해주세요.</option>
