@@ -17,18 +17,19 @@ public class AccountBookController {
 		return "accountBook/detailView";
 	}
 	
+	/* 달력 A */
+	@RequestMapping("/calendarTypeA")
+	public String calendarTypeA() {
+		return "accountBook/calendarTypeA";
+	}
+
 	/* 달력 B */
-	@RequestMapping("/calendarBig")
-	public String calendarBig() {
-		return "accountBook/calendarBig";
+	@RequestMapping("/calendarTypeB")
+	public String calendarTypeB() {
+		return "accountBook/calendarTypeB";
 	}
-
-	/* 달력 S */
-	@RequestMapping("/calendarSmall")
-	public String calendarSmall() {
-		return "accountBook/calendarSmall";
-	}
-
+	
+	/* 지출,수입 내역 추가 form */
 	@RequestMapping("/accountBook/add")
 	public String addForm() {
 		return "accountBook/addForm";

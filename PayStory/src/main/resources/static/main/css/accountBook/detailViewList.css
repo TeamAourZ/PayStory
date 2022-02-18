@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+#detailViewBox i {
+	color: var(--gray-dark);
+    cursor: pointer;
+}
+
+#detailViewBox div {
+	/* 임시 */border: 1px solid black;
+}
+
+.side {
+	min-width: 25px;
+}

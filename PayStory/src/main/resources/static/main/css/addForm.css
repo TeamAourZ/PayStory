@@ -6,16 +6,115 @@ input:focus,
 input:active {outline: none;}
 textarea {resize: none;}
 
+/* 파일 업로드  */
+input[type="file"] {
+	cursor: pointer;
+}
+
+/* 날짜 입력란 */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+	width: 50%;
+    background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) 95% 50% no-repeat;
+	cursor: pointer;
+}
+
 /* 영수증 이미지 영역 */
+#imgArea {max-height: 560px;}
+
 .form-row > .col,
 .form-row > [class*="col-"] {padding: 5px;}
 
+.fa-image.hidden {display: none;}
+
+#receiptImg.hidden {display: none;}
+
+.tooltipContent {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 7%;
+	background-color: #858796;
+    color: white;
+    text-align: center;
+    opacity: 0.8;
+    border-radius: 3px;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.tooltipContent p {margin: 0;}
+
+#receiptImgModal {width: 100%;}
+
+/* 영수증 이미지 있을 때 */
+.hasImage {cursor: pointer;}
+
+.hasImage:hover .tooltipContent {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hasImage:hover .tooltipContent.hidden {display: none;}
+
+/* 아이템 리스트 */
+.accordion > .card > .card-header {
+	height: 2.5rem;
+    padding: 0;
+}
+
+.fa-angle-down {
+	font-size: 1.8rem;
+    color: #858796;
+    transition: all ease 1s;
+}
+
+.fa-angle-down.open {
+    transform: rotate(180deg);
+    transition: all ease 1s;
+}
+
+.showItem:focus,
+.showItem:hover,
+.showItem:active {
+	border: none;
+	background: none;
+}
+
+.card-body {
+    padding: 1.25rem 1.25rem 0.5rem;
+}
+
 /* 아이템 추가/ 삭제 버튼 */
 .fa-plus-circle {font-size: 2rem;}
-#itemWrap > .form-group{margin-bottom: 0;}
+
+#itemWrap > .form-group {margin-bottom: 0;}
+
 .fa-minus-circle {
 	position: absolute;
     bottom: 10%;
     left: 20%;
     font-size: 1.5rem;
+}
+
+/* 금액 input */
+.expenditureItemAmount {text-align: right;}
+
+/* 반응형: 가로 960px 이하 */
+@media (max-width: 990px) {
+	/* 영수증 이미지 영역을 제일 위로 */
+	.imgArea {order: 1;}
+	.formArea {order: 2;}
+}
+
+/* 반응형: 가로 585px 이하 */
+@media (max-width: 585px) {
+	input[type="datetime-local"]::-webkit-calendar-picker-indicator {width: 30%;}
+}
+
+/* 반응형: 가로 380px 이하 */
+@media (max-width: 380px) {
+	input[type="datetime-local"]::-webkit-calendar-picker-indicator {width: 5%;}
 }

@@ -1,18 +1,29 @@
 @charset "UTF-8";
 
-
+body
+{
+	-ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
 .container_chatbot
 {
     position: relative;
     
-    width: 100%;
-    height: calc(100vh - 40px);
+    width: 30%;
+    height: calc(100vh - 100px);
     background-color: #fff;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,0.06),0 2px 5px rgba(0,0,0,0.06);
     display: flex;
     padding: 0;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
-
+.container_chatbot::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
 .container_chatbot .leftSide
 {
     position: relative;
@@ -93,6 +104,15 @@
 	justify-content: space-between;
     align-items: center;
 }
+.nav_icons input
+{
+	cursor: pointer;
+    font-size: 1em;
+    color: #51585c;
+    border: none;
+    outline: none;
+    text-align: right;
+}
 .search_chat
 {
     position: relative;
@@ -136,6 +156,11 @@
     position: relative;
     height: calc(100% - 110px); /* 60 + 50 px*/
     overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.chatlist::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 .chatlist .block
 {
@@ -249,6 +274,11 @@
     height: calc(100% - 120px); /* 60 + 60 = 120px */
     padding: 50px;
     overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+#chatBox::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 
 
@@ -263,9 +293,9 @@
 {
     position: relative;
     right: 0;
-    text-align: right;
+    
     max-width: 65%;
-    padding: 12px;
+    padding: 8px;
     background: #0d6efd;
     border-radius: 10px;
     font-size: 0.9em;
@@ -290,13 +320,17 @@
 .send
 {
     justify-content: flex-end;
-    color: white;
+    color: #555;
     font-weight: bold;
+}
+.msgBox.send img
+{
+	cursor: pointer;
 }
 .receive
 {
     justify-content: flex-start;
-    color: white;
+    color: #555;
     font-weight: bold;
 }
 .receive span
@@ -315,6 +349,7 @@
     height: 20px;
     background: linear-gradient(225deg, #ced4da, #ced4da, transparent 60%, transparent);
 }
+
 .chatbox_input
 {
 	position: relative;
@@ -326,19 +361,45 @@
     justify-content: space-between;
     align-items: center;
 }
-#chatForm
+#chatForm_file
+{
+	position: relative;
+    width: 100%;
+    height: 60px;
+    background: #f0f0f0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 10%;
+}
+#chatForm_file label
+{
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+#chatForm_file i
+{
+	cursor: pointer;
+    font-size: 1.8em;
+    color: #51585c;
+}
+#chatForm_chat
 {
     position: relative;
     width: 100%;
     height: 60px;
     background: #f0f0f0;
-    padding: 15px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex: 90%;
+    flex: 80%;
+    margin-bottom: 0;
 }
-#chatForm2
+
+#chatForm_voice
 {
     position: relative;
     width: 100%;
@@ -352,13 +413,13 @@
     flex: 10%;
     text-align: right;
 }
-#chatForm i
+#chatForm_chat i
 {
     cursor: pointer;
     font-size: 1.8em;
     color: #51585c;
 }
-#chatForm2 button
+#chatForm_voice button
 {
     cursor: pointer;
     font-size: 1.8em;
@@ -367,26 +428,27 @@
     outline: none;
     text-align: right;
 }
-#chatForm i:nth-child(1)
+#chatForm_file i:nth-child(1)
 {
     margin-right: 10px;
 }
-#chatForm2 button:nth-child(1)
+
+#chatForm_voice button:nth-child(1)
 {
     margin-right: 10px;
 }
-#chatForm input
+#chatForm_chat input
 {
     position: relative;
     width: 90%;
-    margin-left: 10px;
+    
     padding: 10px;
     border: none;
     outline: none;
     border-radius: 30px;
     font-size: 1em;
 }
-#chatForm span
+#chatForm_chat span
 {
 	font-size: 1.8em;
 }
@@ -396,4 +458,18 @@
 	cursor: pointer;
     font-size: 2.3em;
     color: #51585c;
+}
+/* 모달 */
+.modal_chatbotImg{ 
+  position:absolute; width:100%; height:100%; background: rgba(0,0,0,0.8); top:0; left:0; display:none;
+}
+
+.modal_chatbotContent{
+  width:400px; height:400px;
+  background:#fff; border-radius:10px;
+  position:relative; top:50%; left:50%;
+  margin-top:-200px; margin-left:-200px;
+  text-align:center;
+  box-sizing:border-box; padding:74px 0;
+  line-height:23px; cursor:pointer;
 }

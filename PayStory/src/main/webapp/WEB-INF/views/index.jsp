@@ -15,13 +15,19 @@
 	<div id="wrap">
 		<header>
 			<div class="headerBox">
-				<%-- <div class="nullBox"><img src="<c:url value='main/images/null.png'/>" id="nullImg"></div> --%>
+				<div class="nullBox"><img src="<c:url value='main/images/null.png'/>" id="nullImg"></div> 
 				<div class="logoBox"><a href="<c:url value='/index'/>"><img src="<c:url value='main/images/indexlogo.png'/>" id="logoImg"></a></div>	
 				<nav>
 					<div class="userBox">
 						<ul>
-							<li><a href="<c:url value='/login'/>">로그인</a></li>
-							<li><a href="<c:url value='/register'/>">회원가입</a></li>
+							<c:if test="${empty login}">
+							<li><a href="<c:url value='/member/loginView'/>">로그인</a></li>
+							<li><a href="<c:url value='/member/registerView'/>">회원가입</a></li>
+							</c:if>
+							 <c:if test="${not empty login}">
+							 ${login.memberName} 해윙~	
+							<li><a href="${path}/member/logout">로그아웃</a></li>
+							</c:if>
 						</ul>
 					</div>
 				</nav>
