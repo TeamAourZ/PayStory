@@ -3,11 +3,12 @@ package com.AourZ.PayStory.service;
 
 import javax.inject.Inject;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.AourZ.PayStory.DAO.MemberDAO;
+import com.AourZ.PayStory.dao.MemberDAO;
 import com.AourZ.PayStory.mail.IMailSender;
 import com.AourZ.PayStory.mail.TempKey;
 import com.AourZ.PayStory.model.LoginVO;
@@ -57,6 +58,31 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO login(LoginVO loginVO)throws Exception{
 		return memberDAO.login(loginVO);
+	}
+	
+	@Override
+	public int findPwCheck(MemberVO memberVO)throws Exception{
+		return memberDAO.findPwCheck(memberVO);
+	}
+    
+    @Override
+	public void findPw(String memberEmail,String memberName)throws Exception{
+		String memberKey = new TempKey().getKey(6,false);
+		String memberPwd = BCrypt.hashpw(memberKey,BCrypt.gensalt());
+		 memberDAO.findPw(memberEmail,memberName,memberPwd);
+		 MailUtils sendMail = new MailUtils(mailSender);
+			sendMail.setSubject("[PayStory 임시 비밀번호 입니다.]"); //메일제목
+			sendMail.setText(
+					"<h1>임시비밀번호 발급</h1>" +
+							"<br/>"+memberName+"님 "+
+							"<br/>비밀번호 찾기를 통한 임시 비밀번호입니다."+
+							"<br/>임시비밀번호 :   <h2>"+memberKey+"</h2>"+
+							"<br/>로그인 후 비밀번호 변경을 해주세요."+
+							"<a href='http://localhost:8080/member/loginView"+
+							">로그인 페이지</a>");
+			sendMail.setFrom("paystory.aourz@gmail.com", "PayStory");
+			sendMail.setTo(memberEmail);
+			sendMail.send();
 	}
 	
 

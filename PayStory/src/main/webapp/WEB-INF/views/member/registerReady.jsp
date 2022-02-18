@@ -31,7 +31,9 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">이메일인증해주세요(구현중)</h1>
+                                <h1 class="h4 text-gray-900 mb-4">가입하신 메일을 확인해주세요.<br>메일인증을 하셔야 로그인이 가능합니다.</h1>
+                                <button type="button" class="btn btn-primary" onclick="location.href='/member/loginView'">로그인페이지</button>
+	 							<button type="button" class="btn btn-primary" onclick="location.href='/index'">메인페이지</button>
                             </div>
                     </div>
                 </div>
