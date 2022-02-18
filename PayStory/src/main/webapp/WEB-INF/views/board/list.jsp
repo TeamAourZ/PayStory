@@ -37,12 +37,15 @@
         									<tr>
         											<td><c:out value="${list.board_idx}" /></td>
 									        		<td><c:out value="${list.board_title}" /></td>
+									        		<td><c:out value="${list.board_content}" /></td>
 									        		<td><c:out value="${list.board_writer}" /></td>
 									        		<td><c:out value="${list.board_regdate}" /></td>
+									        		<td><c:out value="${list.board_updatedate}" /></td>
 											</tr>
 									</c:forEach>
                                     </tbody>
                                 </table>
+                                <a href="/board/create" class="btn btn-primary" >등록</a>
                             </div>
                         </div>
                     </div>

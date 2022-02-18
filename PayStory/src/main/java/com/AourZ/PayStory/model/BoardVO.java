@@ -1,4 +1,4 @@
-package com.spring.web.vo;
+package com.AourZ.PayStory.model;
 
 import org.springframework.stereotype.Component;
 
