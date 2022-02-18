@@ -56,4 +56,28 @@
 					WHERE memberEmail = #{memberEmail}) > 0]]>
 	</update>
 	
+	<!-- 비밀번호 찾기 -->
+	<update id="findPw" >
+		update member set memberPwd = #{memberPwd} where memberEmail = #{memberEmail} and memberName = #{memberName}
+	</update>
+
+	<select id="findPwCheck" resultType="int">
+		select count(*) from member where memberEmail = #{memberEmail} and memberName = #{memberName}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
