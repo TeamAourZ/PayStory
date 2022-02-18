@@ -24,19 +24,27 @@
     
 	<script type="text/javascript">
 		var bDisplay = true;
-		function doDisplay(){
-			var ctrDisplay = document.getElementById("rightSide");
-			var ctrCont = document.getElementById("container_chatbot");
-			if(ctrDisplay.style.display=='none'){
+		function doChatplay(){
+			var ctrChat = document.getElementById("rightSide");
+			if(ctrChat.style.display=='none'){
 				$("#container_chatbot").css({
 					"width": "100%"
 				});
-				ctrDisplay.style.display = 'block';
+				ctrChat.style.display = 'block';
 			}else{
 				$("#container_chatbot").css({
 					"width": "30%"
 				});
-				ctrDisplay.style.display = 'none';
+				ctrChat.style.display = 'none';
+			}
+		}
+		function doSearchplay(){
+			var ctrSearch = document.getElementById("search_chat");
+			if(ctrSearch.style.display=='none'){
+				ctrSearch.style.display = 'block';
+				
+			}else{
+				ctrSearch.style.display = 'none';
 				
 			}
 		}
@@ -73,11 +81,11 @@
 				                </div>
 				                <ul class="nav_icons">
 				                    <li>
-				                        <i class="fa-solid fa-magnifying-glass"></i>
+				                    	<span><input type="button" class="delinput" value="&#xf002" onclick="doSearchplay();"></span>
 				                    </li>
 				                    
 				                    <li>
-				                        <span><input type="button" class="delinput" value="&#xf27a" onclick="doDisplay();"></span>
+				                        <span><input type="button" class="delinput" value="&#xf27a" onclick="doChatplay();"></span>
 				                        <!-- <span><input type="button" class="delinput" value="&#xf4b3" onclick="div_hide();"></span> -->
 				                    </li>
 				                    <li>
@@ -86,7 +94,7 @@
 				                </ul>
 				            </div>
 				            <!-- search -->
-				            <div class="search_chat">
+				            <div id="search_chat" class="search_chat" style="display:none;">
 				                <div>
 				                    <input type="text" placeholder="질문을 입력해주세요.">
 				                    <i class="fa-solid fa-magnifying-glass"></i>

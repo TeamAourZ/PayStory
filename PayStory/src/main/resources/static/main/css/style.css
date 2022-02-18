@@ -156,6 +156,11 @@ body::-webkit-scrollbar {
     position: relative;
     height: calc(100% - 110px); /* 60 + 50 px*/
     overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.chatlist::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 .chatlist .block
 {
