@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberMapper">
+	<resultMap type="com.AourZ.PayStory.model.MemberVO" id="MemberVOResultMap">
+		<result property="memberNo" column="memberNo" />
+		<result property="memberName" column="memberName" />
+		<result property="memberEmail" column="memberEmail" />
+		<result property="memberPwd" column="memberPwd" />
+		<result property="memberImage" column="memberImage" />
+	</resultMap>	
+	
+	<!-- 회원가입 -->
+	<insert id="register" parameterType="com.AourZ.PayStory.model.MemberVO">
+		INSERT INTO member(
+			memberNo,
+			memberName,
+			memberEmail,
+			memberPwd
+			) VALUES(
+			#{memberNo},
+			#{memberName},
+			#{memberEmail},
+			#{memberPwd}
+			)
+	</insert>	
+	
+	<!-- 닉네임 중복 -->
+	<select id="nameCnt" parameterType="com.AourZ.PayStory.model.MemberVO" resultType="java.lang.Integer">
+		<![CDATA[
+			select
+				count(*)
+			from
+				member
+			where
+				memberName = #{memberName}
+		]]>	
+	</select> 
+	
+	<!-- 로그인 -->
+	<select id="login" resultMap="MemberVOResultMap">
+		select * from member where memberEmail = #{memberEmail}
+	</select>
+	
+	<!-- 이메일 인증 -->
+	<insert id="createAuthKey">
+		INSERT INTO member_auth VALUES(#{memberEmail}, #{authKey})
+	</insert>
+
+	<update id="memberAuth">
+		<![CDATA[UPDATE member SET memberAuth = 1 
+					WHERE (SELECT COUNT(*) 
+					FROM member_auth 
+					WHERE memberEmail = #{memberEmail}) > 0]]>
+	</update>
+	
+</mapper>
