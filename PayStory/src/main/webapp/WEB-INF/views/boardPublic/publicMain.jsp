@@ -24,7 +24,7 @@
         rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/main/css/publicAccount.css">
+    <link rel="stylesheet" type="text/css" href="/main/css/publicMain.css">
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -46,6 +46,11 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
+                   
+                    <div class="publicBox shadow">
+                    <div class="card-header">
+                   	<center><h5>참여중인 공유가계부</h5></center>
+                   	</div>
                    	<div class="publicAccountBox" style="display:inline-block;">
                     	<span class="ellipsis">가계부 제목</span>
                     	<div class="box" style="background: #BDBDBD;">
@@ -78,13 +83,29 @@
 	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
 						</div>
                     </div>
-                   	
-                    <!-- Content Row -->
-					
-                    <!-- Content Row -->
-
-                    <!-- Content Row -->
-
+                    
+                    <!--박스 추가 버튼-->
+                    
+                    <div class="publicAccountBox" style="display:inline-block;">
+                    	<span class="ellipsisplus1">임시</span>
+                    	<div class="plusbox1" style="background: #BDBDBD;">
+                    		<a href="test"><button type="button" id="mainPlusBtn" onclick="goPublicCreate()"><i class="fa-solid fa-plus fa plusimage"></i></button></a>
+						</div>
+                    	<span class="ellipsisplus2">임시</span>
+                    	<div class="plusbox2" style="background: #BDBDBD; display:inline-block;">
+						</div>
+                    	<div class="plusbox2" style="background: #BDBDBD; display:inline-block;">
+						</div>
+                    	<div class="plusbox2" style="background: #BDBDBD; display:inline-block;">
+						</div>
+                    </div>
+                    
+                    <!--박스 추가 버튼-->
+                    
+                    
+                   	</div>
+                  
+                
                 </div>
                 <!-- /.container-fluid -->
 
@@ -92,13 +113,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
+            
             <!-- End of Footer -->
 
         </div>
