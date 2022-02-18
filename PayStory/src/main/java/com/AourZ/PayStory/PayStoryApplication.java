@@ -6,9 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-//@ComponentScan(basePackageClasses = MemeberColler.class)
-//@ComponentScan(basePackageClasses = AccountBookController.class)
-//@MapperScan()
 @ComponentScan(basePackages = { "com.AourZ.PayStory" })
 @MapperScan(basePackages = { "com.AourZ.PayStory" })
 public class PayStoryApplication {

@@ -5,11 +5,10 @@
 	cursor: pointer;
 }
 
-#homePostBox {
+#homeForumBox {
 	/* 임시 */border: 1px solid black;
-	gap: 10px;
 }
 
-#homePostBox div {
+#homeForumBox div {
 	/* 임시 */border: 1px solid black;
 }

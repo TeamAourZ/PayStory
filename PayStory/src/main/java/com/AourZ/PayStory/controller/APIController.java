@@ -21,9 +21,7 @@ public class APIController {
 	@Autowired
 	private ChatbotService chatbotService;
 	
-	
-	
-	
+
 	// 챗봇
 	@RequestMapping("/chatbotForm")
 	public String chatbotForm() {
