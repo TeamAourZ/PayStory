@@ -15,7 +15,7 @@
 	<name>PayStory</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -53,6 +53,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency> 
+			<groupId>taglibs</groupId> 
+			<artifactId>standard</artifactId> 
+			<version>1.1.2</version> 
+			<scope>compile</scope> 
+		</dependency>
+		
 		<!-- JSP 뷰 사용하기 위한 의존성 추가  -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -74,6 +82,50 @@
 		    <artifactId>json</artifactId>
 	    	<version>20211205</version>
 		</dependency>
+		<!-- 회원가입 관련에서 추가 한것들 -->
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>javax.inject</groupId>
+		    <artifactId>javax.inject</artifactId>
+		    <version>1</version>
+		</dependency>
+		
+		<dependency> 
+			<groupId>org.mindrot</groupId> 
+			<artifactId>jbcrypt</artifactId> 
+			<version>0.3m</version> 
+		</dependency>
+		
+		<dependency> 
+			<groupId>org.mindrot</groupId>
+    		<artifactId>jbcrypt</artifactId>
+    		<version>0.4</version>	
+    	</dependency>
+    	
+    	<dependency> 
+    		<groupId>org.codehaus.jackson</groupId> 
+    		<artifactId>jackson-mapper-asl</artifactId> 
+    		<version>1.8.5</version> 
+    	</dependency>		
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		
+		<dependency> 
+			<groupId>com.sun.mail</groupId> 
+			<artifactId>javax.mail</artifactId> 
+			<version>1.5.6</version> 
+		</dependency>
+
+
+		
 	</dependencies>
 
 	<build>

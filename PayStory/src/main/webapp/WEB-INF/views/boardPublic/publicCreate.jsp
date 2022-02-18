@@ -20,9 +20,11 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+        
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/main/css/publicCreate.css">
+    <script src="https://kit.fontawesome.com/7031b090f1.js" crossorigin="anonymous"></script>
    
 </head>
 <body id="page-top">
@@ -45,22 +47,23 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div id="createBox">
-                   	<h5>공유가계부 만들기</h5>
-                   
+                    <div class="createBox shadow">
+                    <div class="card-header">
+                   	<center><h5>공유가계부를 만들어보세요</h5></center>
+                   	</div>
                         <form id="createPublicForm" name="createPublicForm">
                            	<input id="title" type="text" name="title" class="inputbox" placeholder="제목" size="50">
                             <input id="budget" type="text" name="budget" class="inputbox" placeholder="예산(원)" size="50">
                             <input id="email1" type="text" name="email1" class="inputbox plusbox" placeholder="초대할 이메일주소" size="50">
                             
-                            <button type="button" id="plusbtn" class="plusbtn plusbox"><img class="plusImage" src="https://download.seaicons.com/icons/custom-icon-design/mono-general-1/512/add-icon.png" alt="" ></button>
+                            <button type="button" id="plusbtn" class="plusbtn plusbox btn1"><i class="fa-solid fa-plus fa plusImage"></i></button>
                             <div class="clearboth"></div>
                             <div class="choice">
                             <button type="submit" id="submitbtn1" class="btn1">생성</button>
                             <button type="reset" id="resetbtn1" class="btn1">취소</button>
-                            <i class="fa-solid fa-plus"></i>
+                            
                             </div>
-                       	 	</form>
+                       	 </form>
                         </div>
                
 
@@ -73,13 +76,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
+           
             <!-- End of Footer -->
 
         </div>
@@ -133,7 +130,7 @@
     
     <!-- <script src="https://naver.github.io/egjs-infinitegrid/release/latest/dist/infinitegrid.min.js" crossorigin="anonymous"></script> -->
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script type="text/javascript" src="script.js"></script>
+    <script src="/main/js/createPublicCheck.js"></script>
     <script type="text/javascript">
     var emailSize = 1;
     
@@ -150,8 +147,8 @@
     $('#plusbtn').on('click', function(){
     	emailSize+=1;
     	$('#plusbtn').before("<input id='email"+emailSize+"' type='text' name='email"+emailSize+"' class='inputbox plusbox' placeholder='초대할 이메일주소' size='50'>");
-    	$('#plusbtn').before("<button type='button' id='delbtn"+emailSize+"' class='delbtn delbox'><img class='delImage' src='https://download.seaicons.com/icons/custom-icon-design/mono-general-1/512/delete-icon.png' alt='' onclick='delEmail("+emailSize+")'></button>");
-    	
+    	$('#plusbtn').before("<button type='button' id='delbtn"+emailSize+"' class='delbtn delbox btn1' onclick='delEmail("+emailSize+")'><i class='fa-solid fa-xmark delImage'></i></button>");
+    	/* $('#plusbtn').before("<button type='button' id='delbtn"+emailSize+"' class='delbtn delbox'><i class=`fa-solid fa-plus fa delImage` onclick='delEmail("+emailSize+")'></i></button>"); */
 	});
 
 	function delEmail(index) {

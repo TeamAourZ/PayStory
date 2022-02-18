@@ -19,8 +19,37 @@
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
     <!-- Chatbot CSS -->
-    <script src="https://kit.fontawesome.com/7031b090f1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/main/css/style.css">
+    <link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+    
+	<script type="text/javascript">
+		var bDisplay = true;
+		function doChatplay(){
+			var ctrChat = document.getElementById("rightSide");
+			if(ctrChat.style.display=='none'){
+				$("#container_chatbot").css({
+					"width": "100%"
+				});
+				ctrChat.style.display = 'block';
+			}else{
+				$("#container_chatbot").css({
+					"width": "30%"
+				});
+				ctrChat.style.display = 'none';
+			}
+		}
+		function doSearchplay(){
+			var ctrSearch = document.getElementById("search_chat");
+			if(ctrSearch.style.display=='none'){
+				ctrSearch.style.display = 'block';
+				
+			}else{
+				ctrSearch.style.display = 'none';
+				
+			}
+		}
+	</script>
+    
 </head>
 
 <body id="page-top">
@@ -43,7 +72,7 @@
                 <div class="container-fluid">
                 
 					<!-- Chatbot row -->
-                    <div class="container_chatbot">
+                    <div id="container_chatbot" class="container_chatbot">
 				        <div class="leftSide">
 				            <!-- header -->
 				            <div class="header">
@@ -52,10 +81,12 @@
 				                </div>
 				                <ul class="nav_icons">
 				                    <li>
-				                        <i class="fa-solid fa-magnifying-glass"></i>
+				                    	<span><input type="button" class="delinput" value="&#xf002" onclick="doSearchplay();"></span>
 				                    </li>
+				                    
 				                    <li>
-				                        <i class="fa-solid fa-message"></i>
+				                        <span><input type="button" class="delinput" value="&#xf27a" onclick="doChatplay();"></span>
+				                        <!-- <span><input type="button" class="delinput" value="&#xf4b3" onclick="div_hide();"></span> -->
 				                    </li>
 				                    <li>
 				                        <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -63,7 +94,7 @@
 				                </ul>
 				            </div>
 				            <!-- search -->
-				            <div class="search_chat">
+				            <div id="search_chat" class="search_chat" style="display:none;">
 				                <div>
 				                    <input type="text" placeholder="질문을 입력해주세요.">
 				                    <i class="fa-solid fa-magnifying-glass"></i>
@@ -73,11 +104,11 @@
 				            <div class="chatlist">
 				                <div class="block active">
 				                    <div class="imgbox">
-				                        <img src="images/ma.jpg" class="cover">
+				                        <img src="images/logo.png" class="cover">
 				                    </div>
 				                    <div class="details">
 				                        <div class="listHead">
-				                            <h4>마동석</h4>
+				                            <h4>PayStory 챗봇</h4>
 				                            <p class="time">10:56</p>
 				                        </div>
 				                        <div class="message_p">
@@ -99,11 +130,25 @@
 				                            <b>1</b>
 				                        </div>
 				                    </div>
+				                </div><div class="block unread">
+				                    <div class="imgbox">
+				                        <img src="images/ma.jpg" class="cover">
+				                    </div>
+				                    <div class="details">
+				                        <div class="listHead">
+				                            <h4>마동석</h4>
+				                            <p class="time">10:56</p>
+				                        </div>
+				                        <div class="message_p">
+				                            <p>Hello~?</p>
+				                            <b>1</b>
+				                        </div>
+				                    </div>
 				                </div>
 				            </div>
 				        </div>
 			
-				        <div class="rightSide">
+				        <div id="rightSide" class="rightSide"  style="display:none;">
 				            <div class="header">
 				                <div class="imgText">
 				                    <div class="userimg">
@@ -123,19 +168,26 @@
 				            
 				            <!-- chatbox -->
 				            <div id="chatBox">
-				                
+				            
 				            </div>
 				            <!-- chat input -->
 				            <div class="chatbox_input">
-				            	<form id = "chatForm">
-					                <i class="fa-regular fa-face-grin"></i>
-					                <i class="fa-solid fa-folder-plus"></i>
+			            		<form id="chatForm_file" enctype="multipart/form-data">
+			            			<i class="fa-regular fa-face-grin"></i>
+			            			<label class="input-file-button"  for="uploadFile">
+		            					<i class="fa-solid fa-folder-plus"></i>
+			            			</label>
+									<input type="file" id="uploadFile"  name="uploadFile" style="display:none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadFile">
+									<!-- <input type="submit" value="결과 확인"> -->
+
+								</form>
+				            	<form id = "chatForm_chat">
 					                
 					                <input type="text" id="message" name="message" size="30" placeholder="질문을 입력하세요">	
 					                <span><input type="submit" class="delinput" value="&#xf090"></span>
 					                
 				                </form>
-				                <form id= "chatForm2">
+				                <form id= "chatForm_voice">
 				                	<button id="record" type="button"><i class="fa-solid fa-microphone"></i></button>
 					                <button id="stop" type="button"><i class="fa-solid fa-stop"></i></button>
 					                <div id="sound-clips"></div>
@@ -144,7 +196,15 @@
 									<audio preload="auto" controls></audio>
 								</div>
 				            </div>
+				            <!-- 이미지 모달 창 -->
 				            
+					            <div class="modal_chatbotImg" name="modal_chatbotImg">
+								  <div class="modal_chatbotContent" name="modal_chatbotContent">
+								  	<form id="modal_formBox">
+								  	</form>
+								  </div>
+								</div>
+							
 				        </div>
 				        
 				    </div>	<!-- Chatbot container row end -->
@@ -176,5 +236,8 @@
     <!-- Chatbot JS-->
     <script src="/main/js/jquery-3.6.0.min.js"></script>
     <script src="/main/js/chatbot.js"></script>
+    <script src="https://kit.fontawesome.com/7031b090f1.js" crossorigin="anonymous"></script>
+    
+
 </body>
 </html>
