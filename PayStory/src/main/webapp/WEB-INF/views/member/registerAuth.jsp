@@ -31,7 +31,9 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">구현중</h1>
+                            	<h1 class="h4 text-gray-900 mb-4">${memberName}님 PayStroy<br>회원가입 해주셔서 감사합니다!</h1>
+                                <h2 class="h4 text-gray-900 mb-4">${memberEmail}</h2>
+                                <h2 class="h4 text-gray-900 mb-4">으로 메일을 보냈습니다.<br>메일 확인 후 인증버튼을 눌러주세요.</h2>
                             </div>
                     </div>
                 </div>

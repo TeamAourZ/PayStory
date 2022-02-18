@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.DAO;
+package com.AourZ.PayStory.dao;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +48,20 @@ public class MemberDAOImpl implements MemberDAO {
 
 		sqlsession.update("memberMapper.memberAuth", memberEmail);
 	}
+	
+	@Override
+	public int findPwCheck(MemberVO memberVO)throws Exception{
+	return sqlsession.selectOne("memberMapper.findPwCheck", memberVO);	
+	}
 
+
+	@Override
+	public int findPw(String memberEmail,String memberName,String memberPwd)throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("memberEmail", memberEmail);
+		map.put("memberName", memberName);
+		map.put("memberPwd", memberPwd);
+		return sqlsession.update("memberMapper.findPw", map);
+	}
 
 }

@@ -156,6 +156,30 @@ public class MemberController {
 		return "/index";
 	}
 	
+	// ****************** 비밀번호 찾기 ******************
+	@RequestMapping(value="/findPwView" , method=RequestMethod.GET)
+	public String findPwView() throws Exception{
+		return"/member/findPwView";
+	}
+		
+	@RequestMapping(value="/findPw", method=RequestMethod.POST)
+	public String findPw(MemberVO memberVO,Model model) throws Exception{
+		logger.info("memberPwd"+memberVO.getMemberName());
+		
+		if(memberService.findPwCheck(memberVO) == 0) {
+			logger.info("memberPWCheck");
+			model.addAttribute("msg", "아이디와 이메일를 확인해주세요");
+			
+			return "/member/findPwView";
+		}else {
+	
+		memberService.findPw(memberVO.getMemberEmail(),memberVO.getMemberName());
+		model.addAttribute("member", memberVO.getMemberEmail());
+		
+		return"/member/findPw";
+		}
+	}
+	
 	//로그아웃
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
