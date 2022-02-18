@@ -21,16 +21,25 @@
     <!-- Chatbot CSS -->
     <link rel="stylesheet" type="text/css" href="/main/css/style.css">
     <link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
-    <script type="text/javascript">
-	//보이기
-	function div_show() {
-		document.getElementById("rightSide").style.display = "block";
-	}
-	 
-	//숨기기
-	function div_hide() {
-		document.getElementById("rightSide").style.display = "none";
-	}
+    
+	<script type="text/javascript">
+		var bDisplay = true;
+		function doDisplay(){
+			var ctrDisplay = document.getElementById("rightSide");
+			var ctrCont = document.getElementById("container_chatbot");
+			if(ctrDisplay.style.display=='none'){
+				$("#container_chatbot").css({
+					"width": "100%"
+				});
+				ctrDisplay.style.display = 'block';
+			}else{
+				$("#container_chatbot").css({
+					"width": "30%"
+				});
+				ctrDisplay.style.display = 'none';
+				
+			}
+		}
 	</script>
     
 </head>
@@ -55,7 +64,7 @@
                 <div class="container-fluid">
                 
 					<!-- Chatbot row -->
-                    <div class="container_chatbot">
+                    <div id="container_chatbot" class="container_chatbot">
 				        <div class="leftSide">
 				            <!-- header -->
 				            <div class="header">
@@ -68,8 +77,8 @@
 				                    </li>
 				                    
 				                    <li>
-				                        <span><input type="button" class="delinput" value="&#xf27a" onclick="div_show();"></span>
-				                        <span><input type="button" class="delinput" value="&#xf4b3" onclick="div_hide();"></span>
+				                        <span><input type="button" class="delinput" value="&#xf27a" onclick="doDisplay();"></span>
+				                        <!-- <span><input type="button" class="delinput" value="&#xf4b3" onclick="div_hide();"></span> -->
 				                    </li>
 				                    <li>
 				                        <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -131,7 +140,7 @@
 				            </div>
 				        </div>
 			
-				        <div id="rightSide" class="rightSide">
+				        <div id="rightSide" class="rightSide"  style="display:none;">
 				            <div class="header">
 				                <div class="imgText">
 				                    <div class="userimg">

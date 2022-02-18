@@ -126,21 +126,6 @@
 	    $(this).parents(".modal_chatbotImg").fadeOut();
 	});
 	
-	//chatBox 보이기 숨기기
-	//보이기
-	function div_show() {
-		document.getElementById("rightSide").style.display = "block";
-	}
-	
-	//숨기기
-	function div_hide() {
-		document.getElementById("rightSide").style.display = "none";
-	}
-	$(document).on('click', '.nav_icons span', function(e){
-		if($("#rightSide").style.display = "block"){
-			
-		}
-	});
 	// (2) 파일 업로드 기능
     // 서버에 업로드
     function fileUpload(blob, clipName){	    
