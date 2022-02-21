@@ -2,7 +2,6 @@
 
 #calendarBtnBox i {
 	color: var(--gray);
-    cursor: pointer;
 }
 
 #yearMonth {
@@ -11,4 +10,33 @@
 
 #otherBtnBox {
 	gap: 5px;
+}
+
+.detailBox {
+	font-size: 9pt;
+	color: black;
+	margin-left: 2.75em;
+}
+
+.incomeItemListBox, .expenditureItemListBox {
+	background: var(--light);
+	border-radius: 10px;
+	border: 1px solid var(--dark);
+	z-index: 10;
+}
+.incomeItemListBox i, .expenditureItemListBox i {
+	top: 10%;
+	right: 2%;
+}
+
+.non-cursor {
+	cursor: default;
+}
+
+.pointer-cursor {
+    cursor: pointer;
+}
+
+.help-cursor {
+	cursor: help;
 }

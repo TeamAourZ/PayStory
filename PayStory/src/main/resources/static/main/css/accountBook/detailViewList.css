@@ -2,13 +2,32 @@
 
 #detailViewBox i {
 	color: var(--gray-dark);
-    cursor: pointer;
 }
 
-#detailViewBox div {
-	/* 임시 */border: 1px solid black;
+.incomeData {
+	border-radius: 5px;
+	border: 1px solid #2768fa;
+}
+
+.expenditureData {
+	border-radius: 5px;
+	border: 1px solid #ffb500;
 }
 
 .side {
 	min-width: 25px;
+}
+
+.card .card-header .btn:after {
+	content: "\f106";
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+}
+
+.card .card-header .collapsed:after {
+  content: "\f107";
+}
+
+.pointer-cursor {
+    cursor: pointer;
 }
