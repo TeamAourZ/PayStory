@@ -44,12 +44,12 @@
 									<div class="card-header p-3">
 										<div id="calendarBtnBox" class="d-flex justify-content-between mr-3 ml-3">
 											<div id="prevNextBox" class="d-flex justify-content-between align-items-center">
-												<i id="prevMonthBtn" class="fas fa-angle-left fa-2x m-1"></i>
+												<i id="prevMonthBtn" class="fas fa-angle-left fa-lg pointer-cursor"></i>
 												<h6 id="yearMonth" class="font-weight-bold text-primary m-0 mr-3 ml-3"></h6>
-												<i id="nextMonthBtn" class="fas fa-angle-right fa-2x m-1"></i>
+												<i id="nextMonthBtn" class="fas fa-angle-right fa-lg pointer-cursor"></i>
 											</div>
 											<div id="otherBtnBox" class="d-flex align-items-center">
-												<i id="todayBtn" class="far fa-calendar fa-2x"></i>
+												<i id="todayBtn" class="far fa-calendar fa-lg pointer-cursor"></i>
 											</div>
 										</div>
 									</div>
@@ -115,8 +115,13 @@
 							<div class="col-lg-12 col-xl-8">
 								<div class="card shadow mb-4">
 									<!-- Card Header -->
-									<div class="card-header p-3">
+									<div class="card-header d-flex justify-content-between p-3">
 										<h6 class="m-0 font-weight-bold text-primary">{년월일}</h6>
+										<i class="fas fa-user-friends fa-lg pointer-cursor"></i>
+										<!-- 
+											jstl
+											소유자, 참여자 표시
+										 -->
 									</div>
 									<div id="detailViewBox" class="card-body d-flex flex-column align-items-center">
 										<!-- ajax -->

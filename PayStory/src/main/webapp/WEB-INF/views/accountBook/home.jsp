@@ -10,6 +10,7 @@
 		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/accountBook/calendarBase.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/homeForum.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/homeChart.css' />" rel="stylesheet" type="text/css">
 		
 		<!-------- CSS : Bootstrap -------->
 		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -45,6 +46,17 @@
 									</div>
 									<!-- Card Body -->
 									<div class="card-body">
+										<div class="d-flex justify-content-between">
+											<div id="homeChartMainTagBox" class="d-flex">
+												<div class="">수입</div>
+												<div class="">지출</div>
+											</div>
+											<i class="fas fa-info-circle pointer-cursor"></i>
+											<!-- 
+												jstl
+												예산, 총 수입, 총 지출 금액 표시
+											 -->
+										</div>
 										<div class="chart-pie pt-4 pb-2">
 											<canvas id="myPieChart"></canvas>
 										</div>
@@ -73,12 +85,12 @@
 									</div>
 									<!-- Card Body -->
 									<div class="card-body">
-										<div id="homeForumBox" class="d-flex flex-column mb-1"> <!-- mb-1 : 임시 -->
-											<div id="homeCategoryBox" class="d-flex">
+										<div id="homeForumBox" class="d-flex flex-column">
+											<div id="homeCategoryBox" class="d-flex mb-2">
 												<div class="">최신글</div>
 												<div class="">공지사항</div>
 											</div>
-											<div id="homePostBox">
+											<div id="homePostBox" class="d-flex flex-column">
 												<!-- ajax -->
 											</div>
 										</div>
@@ -90,25 +102,30 @@
 							<div class="col-lg-12 col-xl-8">
 								<div class="card shadow mb-4">
 									<!-- Card Header -->
-									<div class="card-header p-3">
+									<div class="card-header d-flex justify-content-between p-3">
 										<h6 class="m-0 font-weight-bold text-primary">{가계부 타이틀}</h6>
+										<i class="fas fa-user-friends fa-lg pointer-cursor"></i>
+										<!-- 
+											jstl
+											소유자, 참여자 표시
+										 -->
 									</div>
 									<!-- Card Body -->
 									<div id="calendarBox" class="card-body">
 										<div id="calendarBtnBox" class="d-flex justify-content-between mr-3 ml-3">
 											<div id="prevNextBox" class="d-flex justify-content-between align-items-center">
-												<i id="prevMonthBtn" class="fas fa-angle-left fa-2x m-1"></i>
+												<i id="prevMonthBtn" class="fas fa-angle-left fa-2x pointer-cursor"></i>
 												<span id="yearMonth" class="text-lg font-weight-bold mr-3 ml-3"></span>
-												<i id="nextMonthBtn" class="fas fa-angle-right fa-2x m-1"></i>
+												<i id="nextMonthBtn" class="fas fa-angle-right fa-2x pointer-cursor"></i>
 											</div>
 											<div id="otherBtnBox" class="d-flex flex-column align-items-end">
 												<div>
-													<i id="selectDayAddDataBtn" class="fas fa-plus fa-2x m-1"></i>
-													<i id="todayBtn" class="far fa-calendar fa-2x m-1"></i>
+													<i id="selectDayAddDataBtn" class="fas fa-plus fa-2x pointer-cursor"></i>&nbsp;&nbsp;
+													<i id="todayBtn" class="far fa-calendar fa-2x pointer-cursor"></i>
 												</div>
 												<div>
-													<i class="far fa-circle" style="color: #2768fa;"> : 수입</i>&nbsp;
-													<i class="far fa-circle" style="color: #ffb500;"> : 지출</i>
+													<i class="far fa-circle non-cursor" style="color: #2768fa;"> : 수입</i>&nbsp;
+													<i class="far fa-circle non-cursor" style="color: #ffb500;"> : 지출</i>
 												</div>
 											</div>
 										</div>
