@@ -1,0 +1,118 @@
+@charset "UTF-8";
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+/* .imageBox {
+	width: 290px;
+	height: 290px; 
+	border-radius: 70%;
+	overflow: hidden;
+	margin-bottom: 20px;
+	margin: 0 auto;
+	border:1px solid #eaeaea;
+}
+
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display:block; 
+} */
+
+.imageBox {
+	max-width:400px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+ul {font-size:0;}
+
+ul > li {
+	display:inline-block;
+	vertical-align:top;	
+}
+
+ul > li > a {
+	display:block;
+	width:auto;
+	text-decoration:none;
+	margin:5px;
+}
+
+ul > li > a .screen {
+	position:relative;
+	overflow:hidden;
+	width: 290px;
+	height: 290px; 
+	border-radius: 70%;
+	overflow: hidden;
+	margin-bottom: 20px;
+	margin: 0 auto;
+	border:2px solid #eaeaea;
+}
+
+ul > li > a .screen .imageTextTop {
+	position:absolute;
+	bottom:150%;
+	left:64px;
+	z-index:2;
+	color:#fff;
+	font-size:20px;
+	transition:all .35s;
+}
+
+ul > li > a .screen .imageTextBottom {
+	position: absolute;
+	top:150%;
+	left:83px;
+	z-index:2;
+	color:#fff;
+	font-size:20px;
+	transition:all .35s;
+}
+
+ul > li > a .screen .profile {
+	width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display:block; 
+}
+
+ul > li > a .screen img {
+	width: 100%;
+}
+
+ul > li > a:hover .imageTextTop {
+	bottom:52%;
+}
+
+ul > li > a:hover .imageTextBottom {
+	top:52%;
+}
+
+ul > li > a .screen::after {
+	content:'';
+	display:block;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,.5);
+	z-index:1;
+	opacity:0;
+	transition:all .35s;
+}
+
+ul > li > a:hover .screen::after {
+	opacity:1;
+} 
+
+
+
+
+
+
+

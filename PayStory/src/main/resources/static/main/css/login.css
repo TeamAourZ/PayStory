@@ -122,7 +122,6 @@ background: linear-gradient(287deg, rgba(255,255,255,1) 0%, rgba(243,244,244,1) 
 
 .login-input-container .login-input-wrap input{
     background: none;
-   
     border: none;
     line-height: 45px;
     padding-left:10px;
@@ -143,7 +142,6 @@ background: linear-gradient(287deg, rgba(255,255,255,1) 0%, rgba(243,244,244,1) 
     color:white;
     border: 0;
     border-radius: 4px;
-
     background: rgb(105,163,255);
 background: linear-gradient(162deg, rgba(105,163,255,1) 0%, rgba(43,125,254,1) 50%, rgba(43,125,254,1) 100%);
 }
