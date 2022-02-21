@@ -12,7 +12,7 @@ $(function() {
 	if ((1183 < getWidth() && getWidth() < 1643) || (getWidth() < 620)) {
 		$('table').eq(0).addClass('table-responsive');
 	}
-	
+
 	makeCalendarTypeB(nowYear, nowMonth);
 	checkToday();
 
@@ -74,6 +74,7 @@ $(function() {
 	$(document).on('click', '.infoBox', function(e) {
 		e.stopImmediatePropagation();
 
+		/* 날짜별 border 및 class 설정 */
 		for (let i = 0; i < $('.infoBox').length; i++) {
 			//console.log($('.infoBox').eq(i)[0].classList[1]);
 			if ($('.infoBox').eq(i)[0].classList[1] !== "border") {
@@ -82,11 +83,12 @@ $(function() {
 			}
 		}
 
+		/* 선택된 날짜 border 및 class 설정 */
 		if ($(this)[0].classList[1] !== "border") {
 			$(this).css('border', '1px solid black');
 			$(this).children('div.dateBox').children('div.date').addClass('selected');
 		}
-	})
+	});
 });
 
 /* 페이지 크기 측정 */
@@ -94,7 +96,7 @@ function getWidth() {
 	return $(this).width();
 }
 
-/* 달력 TypeC */
+/* 달력 TypeB */
 function makeCalendarTypeB(year, month) {
 	/*연도, 월 표시*/
 	$('#yearMonth').text(`${year}년 ${month + 1}월`);
@@ -113,8 +115,6 @@ function makeCalendarTypeB(year, month) {
 	for (let i = 1; i <= lastDate; i++) {
 		let dateClass = `${year}-${(month + 1) < 10 ? `0${month + 1}` : `${month + 1}`}-${i < 10 ? `0${i}` : `${i}`}`;
 		let text = ""; // 공휴일 명칭
-
-		let trSize = $('.dateSel').children('tr').length; // 주차 번호
 
 		$('.dateSel').append(`
 			<td class="p-0 pt-1 pb-1">
@@ -156,14 +156,14 @@ function makeCalendarTypeB(year, month) {
 		$('.dateSel').append('</tr>');
 	}
 
-	/* 요일별 색상 지정 - 토, 일 */
+	/* 요일별 색상 지정 */
 	$('.date').each(function(index) {
 		let day = new Date(year, month, index + 1);
 		day = day.getDay();
 
 		if (day == 6 || day == 0) { // 토요일, 일요일
 			$(this).css('color', '#ffb500');
-		} else {
+		} else { // 월요일 ~ 금요일
 			$(this).css('color', '#2768fa');
 		}
 	});

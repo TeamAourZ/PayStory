@@ -109,7 +109,79 @@ $(function() {
 			$(this).css('border', '1px solid black');
 			$(this).children('div.dateBox').children('div.date').addClass('selected');
 		}
-	})
+		
+		$('.viewOn').addClass('d-none');
+		$('.viewOn').removeClass('viewOn');
+	});
+
+	/* 달력 수입 / 지출 태그 */
+	/* 수입 - 마우스 오버 */
+	/*$(document).on('mouseover', '.incomeCount', function() {
+		let day = new Date(nowYear, nowMonth, 1);
+		day = day.getDay();
+		let idx = $(this).parent().parent().parent('div.infoBox').index() - day;
+
+		$('.incomeItemListBox').eq(idx).removeClass('d-none');
+	});*/
+	/* 수입 - 마우스 아웃 */
+	/*$(document).on('mouseout', '.incomeCount', function() {
+		let day = new Date(nowYear, nowMonth, 1);
+		day = day.getDay();
+		let idx = $(this).parent().parent().parent('div.infoBox').index() - day;
+
+		$('.incomeItemListBox').eq(idx).addClass('d-none');
+	});*/
+	/* 지출 - 마우스 오버 */
+	/*$(document).on('mouseover', '.expenditureCount', function() {
+		let day = new Date(nowYear, nowMonth, 1);
+		day = day.getDay();
+		let idx = $(this).parent().parent().parent('div.infoBox').index() - day;
+
+		$('.expenditureItemListBox').eq(idx).removeClass('d-none');
+	});*/
+	/* 지출 - 마우스 아웃 */
+	/*$(document).on('mouseout', '.expenditureCount', function() {
+		let day = new Date(nowYear, nowMonth, 1);
+		day = day.getDay();
+		let idx = $(this).parent().parent().parent('div.infoBox').index() - day;
+
+		$('.expenditureItemListBox').eq(idx).addClass('d-none');
+	});*/
+
+	/* 달력 수입 / 지출 태그 */
+	/* 수입 */
+	$(document).on('click', '.incomeCount', function(e) {
+		e.stopImmediatePropagation();
+
+		let idx = getDayNum($(this));
+
+		$('.incomeItemListBox').eq(idx).toggleClass('d-none');
+		$('.incomeItemListBox').eq(idx).addClass('viewOn');
+		$('.detailBox').eq(idx).css('margin-top', '-4.2em');
+
+		resetDisplay($('.incomeItemListBox'), idx, true);
+		resetDisplay($('.expenditureItemListBox'), idx, false);
+	});
+	/* 지출 */
+	$(document).on('click', '.expenditureCount', function(e) {
+		e.stopImmediatePropagation();
+
+		let idx = getDayNum($(this));
+
+		$('.expenditureItemListBox').eq(idx).toggleClass('d-none');
+		$('.expenditureItemListBox').eq(idx).addClass('viewOn');
+		$('.detailBox').eq(idx).css('margin-top', '-2.2em');
+
+		resetDisplay($('.incomeItemListBox'), idx, false);
+		resetDisplay($('.expenditureItemListBox'), idx, true);
+	});
+
+	/* detailBox - 수입 상세 태그 / 지출 상세 태그 닫기 */
+	$(document).on('click', '.detailBoxClose', function(e) {
+		e.stopImmediatePropagation();
+
+		$(this).parent().parent().parent().parent().parent().addClass('d-none');
+	});
 });
 
 /* 페이지 로드 : 달력 */
@@ -123,7 +195,7 @@ function loadAjax(jspName) {
 			if (getWidth() < 620) {
 				$('table').eq(0).addClass('table-responsive');
 			}
-			
+
 			if (isType == "A") {
 				makeCalendarTypeA(nowYear, nowMonth);
 			} else {
@@ -140,6 +212,38 @@ function loadAjax(jspName) {
 /* 페이지 크기 측정 */
 function getWidth() {
 	return $(this).width();
+}
+
+/* 날짜 index */
+function getDayNum(obj) {
+	let day = new Date(nowYear, nowMonth, 1);
+	day = day.getDay();
+	let idx;
+
+	if (isType == "A") {
+		idx = obj.parent().parent().parent('div.infoBox').index() - day;
+		console.log(obj.parent().parent().parent('div.infoBox').index());
+		console.log($('.infoBox').index());
+		console.log("day : " + day);
+		console.log("idx : " + idx);
+	} else {
+		idx = obj.parent().parent().parent('td.tdDate').index() - day;
+		console.log(obj.parent().parent().parent('td.tdDate').index());
+		console.log("day : " + day);
+		console.log("idx : " + idx);
+	}
+
+	return idx;
+}
+
+/* detailBox - 수입 상세 태그 / 지출 상세 태그 가리기 */
+function resetDisplay(obj, idx, check) {
+	for (let i = 0; i < obj.length; i++) {
+		if (idx != i || check == false) {
+			obj.eq(i).addClass('d-none');
+			obj.eq(i).removeClass('viewOn')
+		}
+	}
 }
 
 /* 달력 TypeA */
@@ -169,17 +273,23 @@ function makeCalendarTypeA(year, month) {
 				</div>
 				<div class="countBox mr-1 mb-1 ml-1 align-items-center text-center">
 					<div class="row pl-3 mb-1">
-						<div class="col-2 incomeCount rounded-circle p-0">11</div>
+						<div class="col-2 incomeCount help-cursor rounded-circle p-0">11</div>
 						<div class="col-md-9 incomeValue text-left text-truncate mr-1 ml-1 p-0">123,123,113</div>
 					</div>
 					<div class="row pl-3">
-						<div class="col-2 expenditureCount rounded-circle p-0">21</div>
+						<div class="col-2 expenditureCount help-cursor rounded-circle p-0">21</div>
 						<div class="col-md-9 expenditureValue text-left text-truncate mr-1 ml-1 p-0">-123,123,113</div>
 					</div>
+				</div>
+				<div class="detailBox">
+					
 				</div>
 			</div>
 		`);
 	}
+
+	/* detailBox 내용 */
+	makeDetailInfo()
 
 	/* 남은 날 공란 */
 	for (let i = 6; i > lastDay; i--) {
@@ -194,16 +304,7 @@ function makeCalendarTypeA(year, month) {
 	}
 
 	/* 요일별 색상 지정 - 토, 일 */
-	$('.date').each(function(index) {
-		let day = new Date(year, month, index + 1);
-		day = day.getDay();
-
-		if (day == 6 || day == 0) { // 토요일, 일요일
-			$(this).css('color', '#ffb500');
-		} else {
-			$(this).css('color', '#2768fa');
-		}
-	});
+	dayColor(year, month);
 }
 
 /* 달력 TypeB */
@@ -226,18 +327,19 @@ function makeCalendarTypeB(year, month) {
 		let dateClass = `${year}-${(month + 1) < 10 ? `0${month + 1}` : `${month + 1}`}-${i < 10 ? `0${i}` : `${i}`}`;
 		let text = ""; // 공휴일 명칭
 
-		let trSize = $('.dateSel').children('tr').length; // 주차 번호
-
 		$('.dateSel').append(`
-			<td class="p-0 pt-1 pb-1">
+			<td class="tdDate p-0 pt-1 pb-1">
 				<div class="infoBox d-flex flex-column">
 					<div class="dateBox d-flex align-items-center text-center">
 						<div class="date ${dateClass} rounded-circle m-1">${i}</div>
 						<div class="text-xs text-truncate">${text}</div>
 					</div>
 					<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
-						<div class="incomeCount rounded-circle p-0">11</div>
-						<div class="expenditureCount rounded-circle p-0">21</div>
+						<div class="incomeCount help-cursor rounded-circle p-0">11</div>
+						<div class="expenditureCount help-cursor rounded-circle p-0">21</div>
+					</div>
+					<div class="detailBox">
+						
 					</div>
 				</div>
 			</td>
@@ -252,6 +354,9 @@ function makeCalendarTypeB(year, month) {
 			`);
 		}
 	}
+
+	/* detailBox 내용 */
+	makeDetailInfo()
 
 	/* 남은 날 공란 */
 	for (let i = 6; i > lastDay; i--) {
@@ -269,6 +374,11 @@ function makeCalendarTypeB(year, month) {
 	}
 
 	/* 요일별 색상 지정 - 토, 일 */
+	dayColor(year, month);
+}
+
+/* 요일별 색상 지정 - 토, 일 */
+function dayColor(year, month) {
 	$('.date').each(function(index) {
 		let day = new Date(year, month, index + 1);
 		day = day.getDay();
@@ -279,6 +389,92 @@ function makeCalendarTypeB(year, month) {
 			$(this).css('color', '#2768fa');
 		}
 	});
+}
+
+/* detailBox 내용 */
+function makeDetailInfo() {
+	/* 임시 */
+
+	/*
+		table-responsive
+		row m-0
+	*/
+
+
+	for (let i = 0; i < $('.infoBox').length; i++) {
+		if ($('.infoBox').eq(i)[0].classList[1] != "border") {
+			$('.infoBox').eq(i).children('div.detailBox').append(`
+				<div class="incomeItemListBox position-absolute d-none">
+					<div class="table table-responsive-sm mb-0">
+						<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+							<div class="row m-0">
+								<div class="col-sm-12">
+									<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
+									<table class="table mb-0">
+										<thead class="titleName">
+											<tr class="text-center">
+												<th>구분</th>
+												<th>건수</th>
+												<th>금액</th>
+											</tr>
+										</thead>
+										<tbody class="incomeItem">
+											
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="expenditureItemListBox position-absolute d-none">
+					<div class="table mb-0">
+						<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+							<div class="row m-0">
+								<div class="col-sm-12">
+									<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
+									<table class="table mb-0">
+										<thead class="titleName">
+											<tr class="text-center">
+												<th>구분</th>
+												<th>건수</th>
+												<th>금액</th>
+											</tr>
+										</thead>
+										<tbody class="expenditureItem">
+											
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			`)
+
+			/* 일자별 상세 태그 내용 : 임시 - 데이터에 맞게 추가해야 함*/
+			/* 수입 */
+			/*for (let i = 0; i < 7; i++) {
+				$('.infoBox').eq(i).children('div.detailBox').children('.incomeItem').append(`
+					<tr>
+						<td>{@@@@}</td>
+						<td>{123}</td>
+						<td>{123,123,123}</td>
+					</tr>
+				`);
+			}*/
+			/* 지출 */
+			/*for (let i = 0; i < 7; i++) {
+				$('.infoBox').eq(i).children('div.detailBox').children('.expenditureItem').append(`
+					<tr>
+						<td>{@@@@}</td>
+						<td>{123}</td>
+						<td>{123,123,123}</td>
+					</tr>
+				`);
+			}*/
+		}
+	}
 }
 
 /* 오늘 날짜 표시 */
