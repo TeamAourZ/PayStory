@@ -8,18 +8,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BoardController {
     
-    
-    @RequestMapping(value = "/board/list", method = RequestMethod.GET)
+    @RequestMapping("/board/list")
     public String list(Model model) {
-        
         return "/board/list";
-        
-        
-        
     }
-    @RequestMapping(value = "/board/create", method = RequestMethod.GET)
+    
+    @RequestMapping("/board/create")
     public String create(Model model) {
-        
         return "/board/create";
     }
 }

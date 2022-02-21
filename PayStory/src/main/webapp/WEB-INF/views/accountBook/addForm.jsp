@@ -19,7 +19,7 @@
     <!-- CSS : Main -->
     <link href="<c:url value='/main/css/addForm.css'/>" rel="stylesheet">
     
-     <!-- JS : Bootstrap -->
+    <!-- JS : Bootstrap -->
     <script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js'/>"></script>
     <script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
     <script src="<c:url value='/bootstrap/vendor/jquery-easing/jquery.easing.min.js'/>"></script>

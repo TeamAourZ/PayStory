@@ -1,6 +1,6 @@
 package com.AourZ.PayStory.model;
 
-public class PublicAccountVO {
+public class ShareAccountBookVO {
 	private String shareAccountBookDate;
 	private String owner;
 	private String participant;
