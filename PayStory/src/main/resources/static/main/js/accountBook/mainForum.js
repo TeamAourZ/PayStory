@@ -1,5 +1,5 @@
 /**
- * homeForum.js
+ * mainForum.js
  */
 
 $(function() {

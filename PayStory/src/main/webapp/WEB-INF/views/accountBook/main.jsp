@@ -9,18 +9,23 @@
 		<title>PayStory</title>
 		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/accountBook/calendarBase.css' />" rel="stylesheet" type="text/css">
-		<link href="<c:url value='/main/css/accountBook/homeForum.css' />" rel="stylesheet" type="text/css">
-		<link href="<c:url value='/main/css/accountBook/homeChart.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/mainForum.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/mainChart.css' />" rel="stylesheet" type="text/css">
 		
 		<!-------- CSS : Bootstrap -------->
 		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/bootstrap/css/sb-admin-2.css' />" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 		
+		<!-------- JS : Bootstrap -------->
+		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
+		
 		<!-------- JS : Custom ------>
-		<script src="<c:url value='/main/js/jquery-3.6.0.min.js' />"></script>
-		<script src="<c:url value='/main/js/accountBook/homeCalendar.js' />" type="text/javascript"></script>
-		<script src="<c:url value='/main/js/accountBook/homeForum.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/mainCalendar.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/mainCalendarAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/calendarEtc.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/mainCalendarDetailBox.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/mainForum.js' />" type="text/javascript"></script>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -141,14 +146,13 @@
 			</div>
 		</div>
 		
-		<!-------- JS : Bootstrap, Custom -------->
-		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
+		<!-------- JS : Bootstrap -------->
 		<script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js' />"></script>
 		<script src="<c:url value='/bootstrap/vendor/jquery-easing/jquery.easing.min.js' />"></script>
 		<script src="<c:url value='/bootstrap/js/sb-admin-2.min.js' />"></script>
 		<script src="<c:url value='/bootstrap/vendor/chart.js/Chart.min.js' />"></script>
 		
 		<!-------- JS : Custom -------->
-		<script src="<c:url value='/main/js/accountBook/homePieChart.js' />"></script>
+		<script src="<c:url value='/main/js/accountBook/mainPieChart.js' />"></script>
 	</body>
 </html>
