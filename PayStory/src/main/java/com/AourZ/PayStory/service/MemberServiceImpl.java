@@ -71,7 +71,7 @@ public class MemberServiceImpl implements MemberService {
 		String memberPwd = BCrypt.hashpw(memberKey,BCrypt.gensalt());
 		 memberDAO.findPw(memberEmail,memberName,memberPwd);
 		 MailUtils sendMail = new MailUtils(mailSender);
-			sendMail.setSubject("[PayStory 임시 비밀번호 입니다.]"); //메일제목
+			sendMail.setSubject("[PayStory 임시 비밀번호 입니다.]"); 
 			sendMail.setText(
 					"<h1>임시비밀번호 발급</h1>" +
 							"<br/>"+memberName+"님 "+
@@ -84,6 +84,20 @@ public class MemberServiceImpl implements MemberService {
 			sendMail.setTo(memberEmail);
 			sendMail.send();
 	}
+    
+    @Override
+	public void infoUpdate(MemberVO memberVO)throws Exception{
+		memberDAO.infoUpdate(memberVO);
+	}
+
+    @Override
+	public String pwCheck(String memberEmail)throws Exception{
+		return memberDAO.pwCheck(memberEmail);
+	}
 	
+	@Override
+	public void pwUpdate(String memberEmail, String hashedPw)throws Exception{
+		memberDAO.pwUpdate(memberEmail, hashedPw);
+	}
 
 }	

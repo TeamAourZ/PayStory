@@ -29,7 +29,8 @@
     border-radius: 5px;
     border: 1px solid #b5b1b1;
 }
-.dateSel div.infoBox div {
+
+.dateBox {
 	cursor: pointer;
 }
 
@@ -51,6 +52,7 @@
 .incomeValue {
 	color: #2768fa;
 	font-size: 9pt;
+	cursor: pointer;
 }
 
 .expenditureCount {
@@ -62,4 +64,5 @@
 .expenditureValue {
 	color: #ffb500;
 	font-size: 9pt;
+	cursor: pointer;
 }
