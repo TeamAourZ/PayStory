@@ -4,7 +4,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/accountBook/calendarTypeB.css' />" rel="stylesheet" type="text/css">
+		
+		<!-------- JS : Custom ------>
+		<script src="<c:url value='/main/js/accountBook/calendarTypeB.js' />" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="table m-0 mt-2">
