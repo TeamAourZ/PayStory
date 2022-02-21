@@ -29,17 +29,51 @@
 				
 			},
 			error: function(err){
-				console.log(err)
+				console.log(err);
 			}
 		});
 	});
 	
 	/* Submit */
-	$('#expenditureForm').on('submit', function(){
-		let formDate = new formData
+	$('#expenditureForm').on('submit', function(e){
+		e.preventDefault();
+		let formData = new FormData($(this)[0]);
+		consoel.log(formData);
+		
+		$.ajax({
+			type:"post",	
+			enctype: 'multipart/form-data',
+			url: "/", 	
+			data: formData, 
+			processData: false,
+    		contentType: false,
+			success: function(result) {
+				
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
 	});
 	
-	$('#incomeForm').on('submit', function(){
+	$('#incomeForm').on('submit', function(e){
+		e.preventDefault();
+		let formData = new FormData($(this)[0]);
+		consoel.log(formData);
 		
+		$.ajax({
+			type:"post",	
+			enctype: 'multipart/form-data',
+			url: "/", 	
+			data: formData, 
+			processData: false,
+    		contentType: false,
+			success: function(result) {
+				
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
 	});
 });
