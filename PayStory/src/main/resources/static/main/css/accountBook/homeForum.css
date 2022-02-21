@@ -2,13 +2,15 @@
 
 #homeCategoryBox {
 	gap: 10px;
-	cursor: pointer;
 }
-
-#homeForumBox {
-	/* 임시 */border: 1px solid black;
+#homeCategoryBox div {
+	cursor: pointer;
 }
 
 #homeForumBox div {
 	/* 임시 */border: 1px solid black;
+}
+
+#homePostBox {
+	gap: 10px;
 }

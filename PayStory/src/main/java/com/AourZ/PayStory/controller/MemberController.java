@@ -28,7 +28,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.AourZ.PayStory.model.LoginVO;
 import com.AourZ.PayStory.model.MemberVO;
-import com.AourZ.PayStory.service.MemberService;
+import com.AourZ.PayStory.service.IMemberService;
 
 
 
@@ -39,7 +39,7 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Inject 
-	private MemberService memberService;
+	private IMemberService memberService;
 	
 	
 	//  ****************** 회원가입 ****************** 
@@ -61,7 +61,7 @@ public class MemberController {
 		 }
 		 
 		 String memberNo = rNum;
-		
+		 
 		memberVO.setMemberPwd(hashedPw);
 		memberVO.setMemberNo(memberNo);
 		memberService.register(memberVO);
@@ -150,9 +150,9 @@ public class MemberController {
 			model.addAttribute("Auth", memberVO.getMemberAuth());
 			return "/member/registerReady";
 		}
-		
+		// model.addAttribute로 member라는 key에 memberVO의 데이터를 담았다.
 		model.addAttribute("member", memberVO);
-		
+		httpSession.setAttribute("sid", memberVO.getMemberNo()); // 2022.02.20 강성우추가... 세션으로 'sid'에 'memberNo'값 저장
 		return "/index";
 	}
 	
@@ -187,5 +187,52 @@ public class MemberController {
 		return "redirect:/index";
 	}
 	
+	// ****************** 프로필수정 ******************
+	@RequestMapping(value="/infoView", method=RequestMethod.GET)
+	public String infoView() throws Exception{
+		return"/member/memberInfoView";
+	}
 	
+	// 회원정보 수정로직
+	@RequestMapping(value="/infoUpdate", method=RequestMethod.POST)
+	public String infoUpdate(HttpServletRequest request,HttpSession session,MemberVO memberVO,Model model,RedirectAttributes rttr)throws Exception{
+		memberService.infoUpdate(memberVO); 
+		session.invalidate();
+		rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다.");
+		return"/member/memberInfoView";
+	}
+	
+	// 비밀번호 수정로직
+	@RequestMapping(value="/pwUpdateView", method=RequestMethod.GET)
+	public String pwUpdateView() throws Exception{
+		return "/member/pwUpdateView";
+	}
+
+	@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)
+	@ResponseBody
+	public int pwCheck(MemberVO memberVO) throws Exception{
+		String memberPwd = memberService.pwCheck(memberVO.getMemberEmail());
+		if( memberVO == null || !BCrypt.checkpw(memberVO.getMemberPwd(), memberPwd)) {
+			return 0;
+		}
+		return 1;
+	}
+	
+	@RequestMapping(value="/pwUpdate" , method=RequestMethod.POST)
+	public String pwUpdate(String getMemberEmail,String memberPwd1,RedirectAttributes rttr,HttpSession session)throws Exception{
+		String hashedPw = BCrypt.hashpw(memberPwd1, BCrypt.gensalt());
+		memberService.pwUpdate(getMemberEmail, hashedPw);
+		session.invalidate();
+		rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다. 다시 로그인해주세요.");
+		
+		return "redirect:/member/loginView";
+	}
 }
+	
+	
+	
+	
+	
+	
+	
+	

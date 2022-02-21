@@ -4,8 +4,6 @@ pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
-<%@include file="../includes/header.jsp"%>
-
 <div class="row" style="margin-bottom:20px; margin-left:1px;">
 <div class="col-lg-12">
 <h1 class="page-header">등록 페이지</h1>
@@ -56,5 +54,3 @@ pageEncoding="UTF-8"%>
 </div>
 </div>
 </div>
-
-<%@include file="../includes/footer.jsp"%>

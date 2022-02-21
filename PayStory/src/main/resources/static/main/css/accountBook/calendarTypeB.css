@@ -17,7 +17,7 @@
     border-radius: 5px;
     border: 1px solid white;
 }
-.dateSel div.infoBox div {
+.dateBox {
 	cursor: pointer;
 }
 
