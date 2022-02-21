@@ -74,10 +74,10 @@
 		e.preventDefault();
 		// 내용
 		let itemHTML = '<div class="col-7">'+
-				   '<input type="text" class="expenditureItem form-control form-control-sm shadow-none" required>'+'</div>';
+				   '<input type="text" class="expenditureItem form-control form-control-sm shadow-none">'+'</div>';
 		// 금액
 		let priceHTML = '<div class="col-4">'+
-					  '<input type="text" class="expenditureItemAmount form-control form-control-sm shadow-none" required>'+'</div>';
+					  '<input type="text" class="expenditureItemAmount form-control form-control-sm shadow-none">'+'</div>';
 		// 삭제 버튼
 		let removeHTML = '<div class="col-1"><button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button></div>';
 		

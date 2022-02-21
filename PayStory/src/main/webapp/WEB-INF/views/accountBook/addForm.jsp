@@ -11,14 +11,23 @@
     <meta name="author" content="AourZ">
     <title>[가계부] 수입 | 지출 내역 추가</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-    <!-- Custom styles for this template-->
-    <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
-    <link href="/main/css/addForm.css" rel="stylesheet">
+    <!-- CSS : Bootstrap -->
+    <link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="<c:url value='/bootstrap/css/sb-admin-2.css'/>" rel="stylesheet">
+    
+    <!-- CSS : Main -->
+    <link href="<c:url value='/main/css/addForm.css'/>" rel="stylesheet">
+    
+     <!-- JS : Bootstrap -->
+    <script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js'/>"></script>
+    <script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
+    <script src="<c:url value='/bootstrap/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
+    <script src="<c:url value='/bootstrap/js/sb-admin-2.min.js'/>"></script>
+    
+    <!-- JS : Main -->
+    <script src="<c:url value='/main/js/addForm.js'/>"></script>
+    <script src="<c:url value='/main/js/ajax/OCRAjax.js'/>"></script>
 </head>
 
 <body id="page-top">
@@ -65,6 +74,8 @@
 											<input type="file" id="uploadReceipt" name="expenditureImage" class="custom-file-input shadow-none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadReceipt">
 											<label class="custom-file-label shadow-none" for="uploadReceipt">파일 선택</label>
 										</div>
+										<!-- 주소 : hidden -->
+										<input type="hidden" id="address" name="expenditureAddress" >
 										<!-- 날짜 -->
 										<div class="form-group">
 											<label for="date">날짜</label>
@@ -110,11 +121,11 @@
 															<div class="item default form-group form-row">
 																<div class="col-7">
 																	<label for="expenditureItem">내용</label>
-																	<input type="text" name="expenditureItemName" class="expenditureItem form-control form-control-sm shadow-none" required>
+																	<input type="text" name="expenditureItemName" class="expenditureItem form-control form-control-sm shadow-none">
 																</div>
 																<div class="col-4">
 																	<label for="expenditureItemAmount">금액</label>
-																	<input type="text" name="expenditureItemPrice" class="expenditureItemAmount form-control form-control-sm shadow-none" required>
+																	<input type="text" name="expenditureItemPrice" class="expenditureItemAmount form-control form-control-sm shadow-none">
 																</div>
 																<div class="col-1">
 																	<button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button>
@@ -231,18 +242,5 @@
 
     <!-- Logout Modal-->
     <jsp:include page="/WEB-INF/views/layout/logoutModal.jsp" flush="true"/>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
-    <script src="/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/bootstrap/js/sb-admin-2.min.js"></script>
-    
-    <!-- Page level scripts -->
-    <script src="/main/js/addForm.js"></script>
 </body>
 </html>

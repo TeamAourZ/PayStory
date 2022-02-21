@@ -2,6 +2,7 @@ package com.AourZ.PayStory.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class AccountBookController {
@@ -33,5 +34,12 @@ public class AccountBookController {
 	@RequestMapping("/accountBook/add")
 	public String addForm() {
 		return "accountBook/addForm";
+	}
+	
+	/* 지출 항목 추가 */
+	@ResponseBody
+	@RequestMapping("/accountBook/expenditure")
+	public String addExpenditure() {
+		return "";
 	}
 }
