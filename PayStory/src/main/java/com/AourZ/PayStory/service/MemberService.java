@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.AourZ.PayStory.dao.MemberDAO;
+import com.AourZ.PayStory.dao.IMemberDAO;
 import com.AourZ.PayStory.mail.IMailSender;
 import com.AourZ.PayStory.mail.TempKey;
 import com.AourZ.PayStory.model.LoginVO;
@@ -16,10 +16,10 @@ import com.AourZ.PayStory.model.MailUtils;
 import com.AourZ.PayStory.model.MemberVO;
 
 @Service
-public class MemberServiceImpl implements MemberService {
+public class MemberService implements IMemberService {
 	
 	@Inject 
-	private MemberDAO memberDAO;
+	private IMemberDAO memberDAO;
 	@Autowired
 	private IMailSender mailSender;
 	

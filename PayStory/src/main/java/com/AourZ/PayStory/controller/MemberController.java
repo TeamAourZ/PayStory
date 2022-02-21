@@ -28,7 +28,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.AourZ.PayStory.model.LoginVO;
 import com.AourZ.PayStory.model.MemberVO;
-import com.AourZ.PayStory.service.MemberService;
+import com.AourZ.PayStory.service.IMemberService;
 
 
 
@@ -39,7 +39,7 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Inject 
-	private MemberService memberService;
+	private IMemberService memberService;
 	
 	
 	//  ****************** 회원가입 ****************** 

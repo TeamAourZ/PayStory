@@ -12,7 +12,7 @@ import com.AourZ.PayStory.model.LoginVO;
 import com.AourZ.PayStory.model.MemberVO;
 
 @Repository
-public class MemberDAOImpl implements MemberDAO {
+public class MemberDAO implements IMemberDAO {
 	
 	@Inject
 	private SqlSession sqlsession;

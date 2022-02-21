@@ -5,15 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.AourZ.PayStory.dao.IBoardDao;
-import com.AourZ.PayStory.dao.MemberDAO;
-import com.AourZ.PayStory.dao.MemberDAOImpl;
-
 @SpringBootApplication
 @ComponentScan(basePackages = { "com.AourZ.PayStory" })
-@MapperScan(basePackageClasses = IBoardDao.class )
-@MapperScan(basePackageClasses = MemberDAO.class )
-@MapperScan(basePackageClasses = MemberDAOImpl.class )
+@MapperScan(basePackages = { "com.AourZ.PayStory" })
 public class PayStoryApplication {
 
 	public static void main(String[] args) {
