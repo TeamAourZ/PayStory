@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.controller;
+package com.AourZ.PayStory;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

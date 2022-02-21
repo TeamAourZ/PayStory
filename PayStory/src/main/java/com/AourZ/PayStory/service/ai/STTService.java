@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.service;
+package com.AourZ.PayStory.service.ai;
 
 import java.io.BufferedReader;
 import java.io.File;
