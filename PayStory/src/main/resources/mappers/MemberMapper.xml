@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- <mapper namespace="memberMapper"> -->
- <mapper namespace="com.AourZ.PayStory.dao.MemberDAO">
+ <mapper namespace="com.AourZ.PayStory.dao.IMemberDAO">
 	<resultMap type="com.AourZ.PayStory.model.MemberVO" id="MemberVOResultMap">
 		<result property="memberNo" column="memberNo" />
 		<result property="memberName" column="memberName" />
