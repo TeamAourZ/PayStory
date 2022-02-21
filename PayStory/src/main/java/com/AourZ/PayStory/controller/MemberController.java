@@ -61,7 +61,7 @@ public class MemberController {
 		 }
 		 
 		 String memberNo = rNum;
-		
+		 
 		memberVO.setMemberPwd(hashedPw);
 		memberVO.setMemberNo(memberNo);
 		memberService.register(memberVO);
@@ -152,7 +152,7 @@ public class MemberController {
 		}
 		
 		model.addAttribute("member", memberVO);
-		
+		httpSession.setAttribute("sid", memberVO.getMemberNo()); // 2022.02.20 강성우추가... 세션으로 'sid'에 'memberNo'값 저장
 		return "/index";
 	}
 	
