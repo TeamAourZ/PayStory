@@ -5,7 +5,6 @@ public class PublicAccountVO {
 	private String owner;
 	private String participant;
 	private String accountBookNo;
-	private int prdStock;
 	
 	public String getShareAccountBookDate() {
 		return shareAccountBookDate;
@@ -30,12 +29,6 @@ public class PublicAccountVO {
 	}
 	public void setAccountBookNo(String accountBookNo) {
 		this.accountBookNo = accountBookNo;
-	}
-	public int getPrdStock() {
-		return prdStock;
-	}
-	public void setPrdStock(int prdStock) {
-		this.prdStock = prdStock;
 	}
 	
 	
