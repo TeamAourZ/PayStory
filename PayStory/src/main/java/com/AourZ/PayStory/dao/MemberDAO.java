@@ -16,8 +16,7 @@ public class MemberDAO implements IMemberDAO {
 	
 	@Inject
 	private SqlSession sqlsession;
-	
-	
+		
 	@Override
 	public void register(MemberVO memberVO) throws Exception{
 		sqlsession.insert("com.AourZ.PayStory.dao.IMemberDAO.register", memberVO);	

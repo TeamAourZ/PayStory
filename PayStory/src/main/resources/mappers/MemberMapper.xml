@@ -78,16 +78,5 @@
 	<update id="pwUpdate">
 		update member set memberPwd = #{memberPwd} where memberEmail = #{memberEmail}
 	</update>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 </mapper>
