@@ -13,7 +13,7 @@ $(function() {
 		$('table').eq(0).addClass('table-responsive');
 	}
 
-	makeCalendarTypeB(nowYear, nowMonth);
+	makeCalendar(nowYear, nowMonth);
 	checkToday();
 
 	/* 페이지 크기 변화 감지 */
@@ -39,7 +39,7 @@ $(function() {
 			nowMonth += 12;
 		}
 
-		makeCalendarTypeB(nowYear, nowMonth);
+		makeCalendar(nowYear, nowMonth);
 		checkToday();
 	});
 
@@ -53,7 +53,7 @@ $(function() {
 			nowMonth -= 12;
 		}
 
-		makeCalendarTypeB(nowYear, nowMonth);
+		makeCalendar(nowYear, nowMonth);
 		checkToday();
 	});
 
@@ -66,7 +66,7 @@ $(function() {
 		nowYear = date.getFullYear();
 		nowMonth = date.getMonth();
 
-		makeCalendarTypeB(nowYear, nowMonth);
+		makeCalendar(nowYear, nowMonth);
 		checkToday();
 	});
 
@@ -91,13 +91,8 @@ $(function() {
 	});
 });
 
-/* 페이지 크기 측정 */
-function getWidth() {
-	return $(this).width();
-}
-
-/* 달력 TypeB */
-function makeCalendarTypeB(year, month) {
+/* 달력 */
+function makeCalendar(year, month) {
 	/*연도, 월 표시*/
 	$('#yearMonth').text(`${year}년 ${month + 1}월`);
 
@@ -156,26 +151,6 @@ function makeCalendarTypeB(year, month) {
 		$('.dateSel').append('</tr>');
 	}
 
-	/* 요일별 색상 지정 */
-	$('.date').each(function(index) {
-		let day = new Date(year, month, index + 1);
-		day = day.getDay();
-
-		if (day == 6 || day == 0) { // 토요일, 일요일
-			$(this).css('color', '#ffb500');
-		} else { // 월요일 ~ 금요일
-			$(this).css('color', '#2768fa');
-		}
-	});
-}
-
-/* 오늘 날짜 표시 */
-function checkToday() {
-	$('.date').each(function() {
-		if ($(this).text() == date.getDate() && nowYear == date.getFullYear() && nowMonth == date.getMonth()) {
-			$(this).addClass('today');
-			$(this).parent('div.dateBox').parent('div.infoBox').css('border', '1px solid black');
-			$(this).addClass('selected');
-		}
-	})
+	/* 요일별 색상 지정 - 토, 일 */
+	dayColor(year, month);
 }
