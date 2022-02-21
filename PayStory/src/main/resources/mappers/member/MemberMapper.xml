@@ -3,7 +3,8 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="memberMapper">
+<!-- <mapper namespace="memberMapper"> -->
+ <mapper namespace="com.AourZ.PayStory.dao.MemberDAO">
 	<resultMap type="com.AourZ.PayStory.model.MemberVO" id="MemberVOResultMap">
 		<result property="memberNo" column="memberNo" />
 		<result property="memberName" column="memberName" />
@@ -27,7 +28,7 @@
 			)
 	</insert>	
 	
-	<!-- 닉네임 중복 -->
+	<!-- 닉네임중복 -->
 	<select id="nameCnt" parameterType="com.AourZ.PayStory.model.MemberVO" resultType="java.lang.Integer">
 		<![CDATA[
 			select
@@ -44,7 +45,7 @@
 		select * from member where memberEmail = #{memberEmail}
 	</select>
 	
-	<!-- 이메일 인증 -->
+	<!-- 이메일인증 -->
 	<insert id="createAuthKey">
 		INSERT INTO member_auth VALUES(#{memberEmail}, #{authKey})
 	</insert>
@@ -56,7 +57,7 @@
 					WHERE memberEmail = #{memberEmail}) > 0]]>
 	</update>
 	
-	<!-- 비밀번호 찾기 -->
+	<!-- 비밀번호찾기 -->
 	<update id="findPw" >
 		update member set memberPwd = #{memberPwd} where memberEmail = #{memberEmail} and memberName = #{memberName}
 	</update>
@@ -65,9 +66,18 @@
 		select count(*) from member where memberEmail = #{memberEmail} and memberName = #{memberName}
 	</select>
 	
+	<!-- 프로필수정 -->
+	<update id="infoUpdate">
+		update member set memberName = #{memberName}
+	</update>
 	
+	<select id="pwCheck" resultType="String">
+		select memberPwd from member where memberEmail = #{memberEmail}
+	</select>
 	
-	
+	<update id="pwUpdate">
+		update member set memberPwd = #{memberPwd} where memberEmail = #{memberEmail}
+	</update>
 	
 	
 	
