@@ -9,7 +9,7 @@ public class AccountBookController {
 	/* 대시보드 홈 */
 	@RequestMapping("/accountBook/main")
 	public String home() {
-		return "accountBook/home";
+		return "accountBook/main";
 	}
 	
 	/* 대시보드 조회 */
