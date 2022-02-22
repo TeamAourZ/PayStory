@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.AourZ.PayStory.model.ExpenditureItemVO;
+import com.AourZ.PayStory.model.ExpenditureVO;
 import com.AourZ.PayStory.model.IncomeVO;
 import com.AourZ.PayStory.service.AccountBookService;
 
@@ -47,7 +49,7 @@ public class AccountBookController {
 	/* 수입 항목 추가 */
 	@ResponseBody
 	@RequestMapping("/accountBook/income")
-	public int addincome(@RequestParam("incomeDate") String date,
+	public int addIncome(@RequestParam("incomeDate") String date,
 						 @RequestParam("incomeSource") String source,
 						 @RequestParam("incomeAmount") int amount,
 						 @RequestParam("incomeMemo") String memo,
@@ -68,6 +70,21 @@ public class AccountBookController {
 		return incomeNo;
 	}
 	
+	/* 지출 항목 추가 */
+	@ResponseBody
+	@RequestMapping("/accountBook/expenditure")
+	public int addExpenditure() {
+				
+		ExpenditureVO evo = new ExpenditureVO();
+		
+		service.insertExpenditure(evo);
+		
+		int expenditureNo = evo.getExpendituerNo();
+		
+		ExpenditureItemVO eivo = new ExpenditureItemVO();
+		
+		return expenditureNo;
+	}
 	
 	/****** 공유 가계부  ******/
 	

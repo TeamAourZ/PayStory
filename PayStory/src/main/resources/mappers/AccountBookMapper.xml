@@ -11,4 +11,20 @@
 		VALUES
 			(#{incomeDate}, #{incomeSource}, #{incomeMemo}, #{incomeAmount}, #{tagNo})
 	</insert>
+
+	<!-- 지출 내역 추가 -->
+	<insert id="insertExpenditure" parameterType="com.AourZ.PayStory.model.ExpenditureVO" useGeneratedKeys="true" keyProperty="expenditureNo">
+		INSERT INTO expenditure 
+			(expenditureDate, expenditureSource, expenditureMemo, expenditureAmount, expenditureAddress, tagNo) 
+		VALUES
+			(#{expenditureDate}, #{expenditureSource}, #{expenditureMemo}, #{expenditureAmount}, #{expenditureAddress}, #{tagNo})
+	</insert>
+
+	<!-- 지출 아이템 추가 -->
+	<insert id="insertExpenditureItem" parameterType="com.AourZ.PayStory.model.ExpenditureItemVO">
+		INSERT INTO expenditureItem
+			(expenditureItemName, expenditureItemPrice, expenditureNo) 
+		VALUES
+			(#{expenditureItemName}, #{expenditureItemPrice}, #{expenditureNo})
+	</insert>
 </mapper>

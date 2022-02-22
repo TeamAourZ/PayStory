@@ -209,14 +209,27 @@
 			processData: false,
     		contentType: false,
 			success: function(result) {
-				let source = result.expenditureSource;
-				let amount = result.expenditureAmount;
-				let date = result.expenditureDate;
-				let address = result.expenditureAddress;
+				let source = result.source;
+				
+				// 총 금액 : 숫자만 -> 콤마
+				let totalAmount = result.totalAmount;
+				totalAmount = withComma(totalAmount.replace(/[^0-9]/g, ''));
+				
+				/*let amount = result.amount;
+				let item = result.item;*/
+				
+				// 날짜 : 포멧 변경 (yyyy-MM-ddThh:mm)
+				let date = result.date;
+				date = date.replace(/\//gi, '-');
+				date = date.replace(' ', 'T');
+				date = date.replace(/\s/gi, '');
+				date = date.slice(0, 16);
+				
+				let address = result.address;
 				
 				$('#expenditureSource').val(source);
-				$('#expenditureTotalAmount').val(amount);
-				$('#date').val(date);
+				$('#expenditureTotalAmount').val(totalAmount);
+				$('#expenditureDate').val(date);
 				$('#address').val(address);
 				
 			},
@@ -226,28 +239,7 @@
 		});
 	});
 	
-	/* Submit */
-	$('#expenditureForm').on('submit', function(e){
-		e.preventDefault();
-		let formData = new FormData($(this)[0]);
-		consoel.log(formData);
-		
-		$.ajax({
-			type:"post",	
-			enctype: 'multipart/form-data',
-			url: "/", 	
-			data: formData, 
-			processData: false,
-    		contentType: false,
-			success: function(result) {
-				
-			},
-			error: function(err){
-				console.log(err);
-			}
-		});
-	});
-	
+	/* Submit - 수입 */
 	$('#incomeForm').on('submit', function(e){
 		e.preventDefault();
 		
@@ -268,7 +260,6 @@
 				"tagNo": tagNo
 			},
 			success: function(result) {
-				console.log(result)
 				if(result != 0){
 					alert("수입내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
 					location.href = "/accountBook/main";
@@ -280,4 +271,25 @@
 		});
 	});
 	
+	/* Submit - 지출 */
+	$('#expenditureForm').on('submit', function(e){
+		e.preventDefault();
+		let formData = $(this).serialize();
+		console.log(formData);
+				
+		$.ajax({
+			type:"post",	
+			enctype: 'multipart/form-data',
+			url: "/accountBook/expenditure", 	
+			data: formData, 
+			processData: false,
+    		contentType: false,
+			success: function(result) {
+				
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+	});
 });

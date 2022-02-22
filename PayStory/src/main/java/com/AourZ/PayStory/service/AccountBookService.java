@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.AourZ.PayStory.dao.IAccountBookDAO;
+import com.AourZ.PayStory.model.ExpenditureItemVO;
 import com.AourZ.PayStory.model.ExpenditureVO;
 import com.AourZ.PayStory.model.IncomeVO;
 
@@ -22,6 +23,11 @@ public class AccountBookService implements IAccountBookDAO {
 	@Override
 	public void insertExpenditure(ExpenditureVO expenditureVO) {
 		dao.insertExpenditure(expenditureVO);
+	}
+
+	@Override
+	public void insertExpenditureItem(ExpenditureItemVO expenditureItemVO) {
+		dao.insertExpenditureItem(expenditureItemVO);
 	}
 
 }
