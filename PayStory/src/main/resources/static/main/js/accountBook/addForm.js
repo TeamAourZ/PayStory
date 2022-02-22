@@ -9,6 +9,7 @@
 		if(e.keyCode == 13) e.preventDefault();
 	});
 	
+	
 	/***** 영수증 이미지 영역 *****/
 	// 파일 업로드 OK
 	$("#uploadReceipt").on('change',function(e){
@@ -130,11 +131,22 @@
 	}
 	// 금액 콤마 해제
 	function withoutComma(num) {
-		return num.toString().replace(",", '');
+		return num.toString().replace(/,/g, '');
 	}
 	
-	// 금액 입력란 keyup 이벤트
+	// 지출 : 금액 입력란 keyup 이벤트 OK
 	$(document).on('keyup', '.expenditureItemAmount', function(){
+		// 숫자만 입력
+		$(this).val($(this).val().replace(/[^0-9]/g, ''));
+		
+		// 콤마
+		let amount = $(this).val() || '0';
+		let amountWithComma = withComma(parseInt(amount));
+		$(this).val(amountWithComma);
+	});
+	
+	// 수입 : 금액 입력란 keyup 이벤트 OK
+	$('#incomeAmount').on('keyup', function(){
 		// 숫자만 입력
 		$(this).val($(this).val().replace(/[^0-9]/g, ''));
 		
@@ -180,4 +192,92 @@
 			alert('글자수는 100자까지 입력 가능합니다.'); 
 		} 
 	});
+	
+	
+	/******** Ajax ********/
+	
+	/* OCR */
+	$('#uploadReceipt').on('change', function(){
+		const formData = new FormData();
+  		formData.append("expenditureImage", $(this)[0].files[0]);
+  		
+		$.ajax({
+			type:"post",	
+			enctype: 'multipart/form-data',
+			url: "/OCR", 	
+			data: formData, 
+			processData: false,
+    		contentType: false,
+			success: function(result) {
+				let source = result.expenditureSource;
+				let amount = result.expenditureAmount;
+				let date = result.expenditureDate;
+				let address = result.expenditureAddress;
+				
+				$('#expenditureSource').val(source);
+				$('#expenditureTotalAmount').val(amount);
+				$('#date').val(date);
+				$('#address').val(address);
+				
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+	});
+	
+	/* Submit */
+	$('#expenditureForm').on('submit', function(e){
+		e.preventDefault();
+		let formData = new FormData($(this)[0]);
+		consoel.log(formData);
+		
+		$.ajax({
+			type:"post",	
+			enctype: 'multipart/form-data',
+			url: "/", 	
+			data: formData, 
+			processData: false,
+    		contentType: false,
+			success: function(result) {
+				
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+	});
+	
+	$('#incomeForm').on('submit', function(e){
+		e.preventDefault();
+		
+		let date = $('#incomeDate').val();
+		let tagNo = $('#incomeTags option:selected').val();
+		let source = $('#incomeSource').val();
+		let amount = parseInt(withoutComma($('#incomeAmount').val()));
+		let memo = $('#incomeMemo').val() || "";
+		
+		$.ajax({
+			type:"post",	
+			url: "income", 	
+			data: {
+				"incomeDate" : date,
+				"incomeSource": source,
+				"incomeAmount": amount,
+				"incomeMemo": memo,
+				"tagNo": tagNo
+			},
+			success: function(result) {
+				console.log(result)
+				if(result != 0){
+					alert("수입내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
+					location.href = "/accountBook/main";
+				}
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+	});
+	
 });
