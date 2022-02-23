@@ -1,13 +1,17 @@
 package com.AourZ.PayStory.model;
 
 public class AccountBookVO {
+	// accountBook Table
 	private int accountBookNo;				// 가계부 번호
 	private String accountBookTitle;		// 가계부 제목
 	private String accountBookDescribe;	// 가계부 설명
 	private String accountBookDate;		// 가계부 구분 날짜 (년-월)
 	private boolean isShared;					// 가계부 구분자 (일반 / 공유)
-	private int budget;							// 가계부 예산
 	private String memberNo;					// 가계부 소유자
+	
+	// accountBookBudget Table
+	private String budgetDate;	// 예산 대상 월 (년-월)
+	private int budget;				// 예산
 
 	public int getAccountBookNo() {
 		return accountBookNo;
@@ -25,16 +29,20 @@ public class AccountBookVO {
 		return accountBookDate;
 	}
 
-	public boolean isShared() {
+	public boolean getIsShared() {
 		return isShared;
-	}
-
-	public int getBudget() {
-		return budget;
 	}
 
 	public String getMemberNo() {
 		return memberNo;
+	}
+
+	public String getBudgetDate() {
+		return budgetDate;
+	}
+
+	public int getBudget() {
+		return budget;
 	}
 
 	public void setAccountBookNo(int accountBookNo) {
@@ -53,16 +61,20 @@ public class AccountBookVO {
 		this.accountBookDate = accountBookDate;
 	}
 
-	public void setShared(boolean isShared) {
+	public void setIsShared(boolean isShared) {
 		this.isShared = isShared;
-	}
-
-	public void setBudget(int budget) {
-		this.budget = budget;
 	}
 
 	public void setMemberNo(String memberNo) {
 		this.memberNo = memberNo;
+	}
+
+	public void setBudgetDate(String budgetDate) {
+		this.budgetDate = budgetDate;
+	}
+
+	public void setBudget(int budget) {
+		this.budget = budget;
 	}
 
 }
