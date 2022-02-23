@@ -160,7 +160,7 @@ public class AIController {
 		file.transferTo(file1);
 
 		Map<String, String> result = ocrService.clovaOCRService(filePathName);
-		// System.out.println(result);
+		System.out.println(result);
 		return result;
 	}
 }
