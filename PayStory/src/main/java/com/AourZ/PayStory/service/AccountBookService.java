@@ -1,5 +1,7 @@
 package com.AourZ.PayStory.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,18 +18,17 @@ public class AccountBookService implements IAccountBookDAO {
 	IAccountBookDAO dao;
 
 	@Override
-	public void insertIncome(IncomeVO incomeVO) {
-		dao.insertIncome(incomeVO);
+	public void insertIncome(IncomeVO vo) {
+		dao.insertIncome(vo);
 	}
 
 	@Override
-	public void insertExpenditure(ExpenditureVO expenditureVO) {
-		dao.insertExpenditure(expenditureVO);
+	public void insertExpenditure(ExpenditureVO vo) {
+		dao.insertExpenditure(vo);
 	}
 
 	@Override
-	public void insertExpenditureItem(ExpenditureItemVO expenditureItemVO) {
-		dao.insertExpenditureItem(expenditureItemVO);
+	public void insertExpenditureItem(ArrayList<ExpenditureItemVO> list) {
+		dao.insertExpenditureItem(list);
 	}
-
 }
