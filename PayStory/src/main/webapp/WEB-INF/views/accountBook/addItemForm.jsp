@@ -17,17 +17,7 @@
     <link href="<c:url value='/bootstrap/css/sb-admin-2.css'/>" rel="stylesheet">
     
     <!-- CSS : Main -->
-    <link href="<c:url value='/main/css/addForm.css'/>" rel="stylesheet">
-    
-    <!-- JS : Bootstrap -->
-    <script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js'/>"></script>
-    <script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
-    <script src="<c:url value='/bootstrap/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
-    <script src="<c:url value='/bootstrap/js/sb-admin-2.min.js'/>"></script>
-    
-    <!-- JS : Main -->
-    <script src="<c:url value='/main/js/addForm.js'/>"></script>
-    <script src="<c:url value='/main/js/ajax/OCRAjax.js'/>"></script>
+    <link href="<c:url value='/main/css/accountBook/addItemForm.css'/>" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -78,23 +68,23 @@
 										<input type="hidden" id="address" name="expenditureAddress" >
 										<!-- 날짜 -->
 										<div class="form-group">
-											<label for="date">날짜</label>
-											<input type="datetime-local" id="date" name="expenditureDate" class="form-control shadow-none" required>
+											<label for="expenditureDate">날짜</label>
+											<input type="datetime-local" id="expenditureDate" name="expenditureDate" class="form-control shadow-none" required>
 										</div>
 										<!-- 태그 -->
 										<div class="form-group">
-											<label for="tags">태그</label>
-											<select id="tags" name="tagNo" class="form-control form-control-sm shadow-none" required>
+											<label for="expenditureTags">태그</label>
+											<select id="expenditureTags" name="tagNo" class="form-control form-control-sm shadow-none" required>
 												<option selected disabled value="">태그를 선택해주세요.</option>
-												<option value="5">식품</option>
-												<option value="6">용품</option>
-												<option value="7">외식</option>
-												<option value="8">주거/통신</option>
-												<option value="9">교육/문화/미용/건강</option>
-												<option value="10">교통/차량</option>
-												<option value="11">경조사/용돈 등 사회생활</option>
-												<option value="12">저축/보험</option>
-												<option value="13">기타</option>
+												<option value="t01">식품</option>
+												<option value="t02">용품</option>
+												<option value="t03">외식</option>
+												<option value="t04">주거/통신</option>
+												<option value="t05">교육/문화/미용/건강</option>
+												<option value="t06">교통/차량</option>
+												<option value="t07">경조사/용돈 등 사회생활</option>
+												<option value="t08">저축/보험</option>
+												<option value="t99">기타</option>
 											</select>
 										</div>
 										<!-- 상호명 -->
@@ -182,19 +172,19 @@
 							<form id="incomeForm" class="my-4">
 								<!-- 날짜 -->
 								<div class="form-group"> 
-									<label for="date">날짜</label>
-									<input type="datetime-local" id="date" name="incomeDate" class="form-control shadow-none" required>
+									<label for="incomeDate">날짜</label>
+									<input type="datetime-local" id="incomeDate" name="incomeDate" class="form-control shadow-none" required>
 								</div>
 								<!-- 태그 -->
 								<div class="form-group"> 
-									<label for="tags">태그</label>
-									<select id="tags" name="tagNo" class="form-control" required>
+									<label for="incomeTags">태그</label>
+									<select id="incomeTags" name="tagNo" class="form-control" required>
 										<option selected disabled value="">태그를 선택해주세요.</option>
-										<option value="1">급여</option>
-										<option value="2">보너스</option>
-										<option value="3">사업소득</option>
-										<option value="4">금융소득</option>
-										<option value="13">기타</option>
+										<option value="t51">급여</option>
+										<option value="t52">보너스</option>
+										<option value="t53">사업소득</option>
+										<option value="t54">금융소득</option>
+										<option value="t99">기타</option>
 									</select>
 								</div>
 								<!-- 수입원 -->
@@ -242,5 +232,14 @@
 
     <!-- Logout Modal-->
     <jsp:include page="/WEB-INF/views/layout/logoutModal.jsp" flush="true"/>
+    
+    <!-- JS : Bootstrap -->
+    <script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js'/>"></script>
+    <script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
+    <script src="<c:url value='/bootstrap/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
+    <script src="<c:url value='/bootstrap/js/sb-admin-2.min.js'/>"></script>
+    
+    <!-- JS : Main -->
+    <script src="<c:url value='/main/js/accountBook/addItemForm.js'/>"></script>
 </body>
 </html>
