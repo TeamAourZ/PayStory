@@ -209,6 +209,9 @@
 			processData: false,
     		contentType: false,
 			success: function(result) {
+				/* 임시 - template ocr */
+				/**** result에서 원하는 값 추출 ****/
+				// 사용처 
 				let source = result.source;
 				
 				// 총 금액 : 숫자만 -> 콤마
@@ -217,18 +220,33 @@
 				
 				// 날짜 : 포멧 변경 (yyyy-MM-ddThh:mm)
 				let date = result.date;
+				date = date.replace('22', '2022');
 				date = date.replace(/\//gi, '-');
 				date = date.replace(' ', 'T');
 				date = date.replace(/\s/gi, '');
 				date = date.slice(0, 16);
 				
-				let address = result.address;
+				// 주소
+				let address = result.address.slice(4).replace(/\n/g, "");
 				
+				// 아이템 name
+				let item = result.item;
+				
+				// 아이템 price
+				let amount = result.amount.replace(/[^0-9]/g, '');
+				
+				// 상세 항목 보이게
+				if(item){
+					$('.showItem').trigger('click');
+				}
+				
+				// 값 입력
 				$('#expenditureSource').val(source);
 				$('#expenditureTotalAmount').val(totalAmount);
 				$('#expenditureDate').val(date);
 				$('#address').val(address);
-				
+				$('.expenditureItem').val(item);
+				$('.expenditureItemAmount').val(amount);
 			},
 			error: function(err){
 				console.log(err);
