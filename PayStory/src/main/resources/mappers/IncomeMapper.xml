@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.AourZ.PayStory.dao.IIncomeDAO">
+  		<resultMap  id="incomeResult" type="com.AourZ.PayStory.model.IncomeVO">
+  			<result property="incomeNo" column="incomeNo" />
+  			<result property="incomeDate" column="incomeDate" />
+  			<result property="incomeSource" column="incomeSource" />
+  			<result property="incomeMemo" column="incomeMemo" />
+  			<result property="incomeAmount" column="incomeAmount" />
+  			<result property="tagNo" column="tagNo" />
+  			<result property="memberNo" column="memberNo" />
+  			<result property="editNo" column="editNo" />
+  			<result property="accountBookNo" column="accountBookNo" />
+  		</resultMap> 
+  
+  		<!-- 전체 상품 조회 -->
+  		<select id="listAllIncome" resultMap="incomeResult">
+  			SELECT * FROM income ORDER BY incomeNo
+  		</select>  
+  		
+  		
+  		<!-- 날짜별 조회  -->
+  		<select id="detailViewProduct" parameterType="string" 
+  														  resultType="com.AourZ.PayStory.model.IncomeVO">
+  			SELECT * FROM income WHERE incomeNo=#{incomeNo}  		
+  		</select>
+  		
+  		
+  		<!-- 수입 검색  -->
+  		<select id="incomeSearch" resultMap="incomeResult" parameterType="hashmap">
+  			SELECT * FROM income WHERE
+  			<choose>
+  				<when test="type != null and type.equals('incomeDate')">
+  					incomeDate LIKE CONCAT('%', #{keyword}, '%')
+  				</when>
+  				<when test="type != null and type.equals('incomeSource')">
+  					incomeSource LIKE CONCAT('%', #{keyword}, '%')
+  				</when> 				
+  			</choose>
+  		</select>
+  </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
