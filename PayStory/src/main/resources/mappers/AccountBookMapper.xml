@@ -22,7 +22,7 @@
 
 	<!-- 지출 아이템 추가 -->
 	<insert id="insertExpenditureItem" parameterType="list">
-		INSERT INTO expenditureItem
+		INSERT INTO expenditure_item
 			(expenditureItemName, expenditureItemPrice, expenditureNo) 
 		VALUES
 			<foreach collection="list" item="item" separator=",">
