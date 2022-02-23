@@ -17,7 +17,7 @@
     <link href="<c:url value='/bootstrap/css/sb-admin-2.css'/>" rel="stylesheet">
     
     <!-- CSS : Main -->
-    <link href="<c:url value='/main/css/accountBook/addForm.css'/>" rel="stylesheet">
+    <link href="<c:url value='/main/css/accountBook/addItemForm.css'/>" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -240,6 +240,6 @@
     <script src="<c:url value='/bootstrap/js/sb-admin-2.min.js'/>"></script>
     
     <!-- JS : Main -->
-    <script src="<c:url value='/main/js/accountBook/addForm.js'/>"></script>
+    <script src="<c:url value='/main/js/accountBook/addItemForm.js'/>"></script>
 </body>
 </html>

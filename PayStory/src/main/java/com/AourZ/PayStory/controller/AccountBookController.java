@@ -42,8 +42,8 @@ public class AccountBookController {
 	
 	/* 지출,수입 내역 추가 form */
 	@RequestMapping("/accountBook/add")
-	public String addForm() {
-		return "accountBook/addForm";
+	public String addItemForm() {
+		return "accountBook/addItemForm";
 	}
 	
 	/* 수입 항목 추가 */

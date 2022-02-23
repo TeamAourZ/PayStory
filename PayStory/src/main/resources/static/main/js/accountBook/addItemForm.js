@@ -215,9 +215,6 @@
 				let totalAmount = result.totalAmount;
 				totalAmount = withComma(totalAmount.replace(/[^0-9]/g, ''));
 				
-				/*let amount = result.amount;
-				let item = result.item;*/
-				
 				// 날짜 : 포멧 변경 (yyyy-MM-ddThh:mm)
 				let date = result.date;
 				date = date.replace(/\//gi, '-');
