@@ -42,12 +42,12 @@
 		              			<!-- 제목 -->
 			              		<div class="form-group col-8">
 			              			<label>제목</label>
-			              			<input class="form-control shadow-none" name="title">
+			              			<input class="title form-control shadow-none" name="title">
 			              		</div>
 			              		<!-- 카테고리 -->
 			              		<div class="form-group col-4">
 				              		<label>카테고리</label>
-				              		<select id="incomeTags" name="tagNo" class="form-control shadow-none" required>
+				              		<select id="boardCategoryNo" name="boardCategoryNo" class="form-control shadow-none" required>
 										<option selected disabled value="">카테고리를 선택해주세요.</option>
 										<option value="1">질문</option>
 										<option value="2">정보공유</option>
@@ -73,11 +73,11 @@
 			              	<!-- 내용 -->
 		              		<div class="form-group">
 			              		<label>내용</label>
-			              		<textarea class="form-control shadow-none" rows="10" name="content"></textarea>
+			              		<textarea class="content form-control shadow-none" rows="10" name="content"></textarea>
 			              	</div>
 			              	<div class="d-flex align-items-center justify-content-center mt-3">
 								<button type="submit" class="btn btn-primary w-25 mr-3 shadow-none">등록</button>
-								<button type="reset" class="btn btn-primary w-25 shadow-none">취소</button>
+								<button type="button" class="btn btn-primary w-25 shadow-none">취소</button>
 							</div>
 	              		</form>
 					</div>

@@ -7,7 +7,36 @@
 		if(e.keyCode == 13) e.preventDefault();
 	});
 	
-	$(".uploadResult").on("click", "button", function(e){
+	/* Submit - 게시글 */
+	$('#newBoardForm').on('submit', function(e){
+		e.preventDefault();
+		
+		const formData = new FormData();
+		formData.append('boardTitle',  $('.title').val());
+		formData.append('boardCategoryNo',  $('#categoryNo option:selected').val());
+		formData.append('boardFile',  $('#uploadFile')[0].files[0] || null);
+		formData.append('boardContents',  $('.content').val());
+
+		$.ajax({
+			type:"post",
+			enctype: 'multipart/form-data',	
+			url: "/board/create", 	
+			data: formData, 
+			processData: false,
+    		contentType: false,
+			success: function(result) {
+				if(result != 0){
+					alert("게시글을 정상적으로 등록했습니다.\n게시판 목록 페이지로 이동합니다.");
+					location.href = "/board/listAll";
+				}
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+	});
+	
+	/*$(".uploadResult").on("click", "button", function(e){
 		
 		console.log("delete file");
 		
@@ -30,9 +59,9 @@
 			}
 		});
 
-	});		
+	});*/		
 
-	function showUploadResult(uploadResultArr) {
+	/*function showUploadResult(uploadResultArr) {
 		
 		if (!uploadResultArr || uploadResultArr.length == 0) {return;}
 		
@@ -67,10 +96,10 @@
 		});
 		
 		uploadUL.append(str);
-	}	
+	}*/	
 	
 	// 업로드 파일 확장자 필터링
-	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");  //정규식
+	/*var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");  //정규식
 	var maxSize = 5242880;  //5MB
 	
 	function checkExtension(fileName, fileSize) {
@@ -84,9 +113,9 @@
 			return false;
 		}
 		return true;
-	}		
+	}*/
 		
-	var formObj = $("#newBoardForm");
+	/*var formObj = $("#newBoardForm");
 	$("button[type='submit']").on("click", function(e) {
 		e.preventDefault();
 		console.log("submit clicked");
@@ -103,18 +132,18 @@
 	    });
 	    formObj.append(str).submit();
 
-	});	
+	});*/	
 
-	var csrfHeaderName = "${_csrf.headerName}";
-	var csrfTokenValue = "${_csrf.token}";
+	/*var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";*/
 	
 	$("#uploadFile").change(function(e){
 		// 파일 이름 표시
-		/*let fileName = $(this).val();
+		let fileName = $(this).val();
 		console.log(fileName)
-	  	$(".custom-file-label").text(fileName.substring(12));*/
+	  	$(".custom-file-label").text(fileName.substring(12));
 		
-		var formData = new FormData();  //폼 태그에 대응되는 객체
+		/*var formData = new FormData();  //폼 태그에 대응되는 객체
 		var inputFile = $("input[name='uploadFile']");
 		var files = inputFile[0].files;
 		
@@ -140,6 +169,6 @@
 				console.log(result); 
 				showUploadResult(result);
 			}
-		});
+		});*/
 	});	
 });

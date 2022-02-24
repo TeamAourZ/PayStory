@@ -27,4 +27,8 @@ public class BoardService implements IBoardService{
 	public BoardVO boardView(int boardNo) {
 		return dao.boardView(boardNo);
 	}
+
+	public int createBoard(BoardVO vo) {
+		return dao.createBoard(vo);
+	}
 }

@@ -9,4 +9,5 @@ public interface IBoardDAO extends IBoardService {
 	public ArrayList<BoardVO> getList();
 	public ArrayList<BoardVO> getCategory(String ctgNo);
 	public BoardVO boardView(int boardNo);
+	public int createBoard(BoardVO vo);
 }

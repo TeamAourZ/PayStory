@@ -8,26 +8,27 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.AourZ.PayStory.model.AccountBookVO;
 import com.AourZ.PayStory.model.ExpenditureItemVO;
 import com.AourZ.PayStory.model.ExpenditureVO;
 import com.AourZ.PayStory.model.IncomeVO;
-import com.AourZ.PayStory.service.AccountBookService;
-
-import com.AourZ.PayStory.model.AccountBookVO;
 import com.AourZ.PayStory.model.ShareAccountBookVO;
 import com.AourZ.PayStory.model.ShareBudgetVO;
+import com.AourZ.PayStory.service.AccountBookService;
 import com.AourZ.PayStory.service.AccountCreateService;
 
 @Controller
 public class AccountBookController {
 	@Autowired
 	AccountBookService service;
+
+	@Autowired
+	AccountCreateService createService;
 	
 	/* 대시보드 홈 */
 	@RequestMapping("/accountBook/main")
@@ -159,11 +160,11 @@ public class AccountBookController {
 			// 가계부 데이터 등록(공유가계부 전용)
 			accountBook.setShared(true);
 			accountBook.setMemberNo((String) httpSession.getAttribute("owner"));
-			service.createAccountBook(accountBook);
+			createService.createAccountBook(accountBook);
 			
 			// 예산 등록(공유가계부 전용)
 			ShareBudget.setOwner((String) httpSession.getAttribute("owner"));
-			service.createShareBudget(ShareBudget);
+			createService.createShareBudget(ShareBudget);
 			
 			// 공유가계부 데이터 등록(공유가계부 전용)
 			shareAccountBook.setOwner((String) httpSession.getAttribute("owner"));
@@ -175,7 +176,7 @@ public class AccountBookController {
 					continue;
 				}
 				shareAccountBook.setParticipant(participant);
-				service.createShareAccountBook(shareAccountBook);
+				createService.createShareAccountBook(shareAccountBook);
 			}
     
 		return "redirect:../main";

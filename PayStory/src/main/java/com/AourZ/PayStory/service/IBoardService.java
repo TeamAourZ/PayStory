@@ -11,4 +11,5 @@ public interface IBoardService {
 	public ArrayList<BoardVO> getList();
 	public ArrayList<BoardVO> getCategoryList(String ctgNo);
 	public BoardVO boardView(int boardNo);
+	public int createBoard(BoardVO vo);
 }

@@ -37,4 +37,12 @@
 	<select id="boardView" parameterType="int" resultType="com.AourZ.PayStory.model.BoardVO">
 		SELECT * FROM board WHERE boardNo = #{boardNo}
 	</select>
+
+	<!-- 게시글 작성 -->
+	<insert id="createBoard" parameterType="com.AourZ.PayStory.model.BoardVO" useGeneratedKeys="true" keyProperty="expenditureNo" >
+		INSERT INTO board 
+			(boardTitle, boardContents, boardFile, boardCategoryNo, memberNo) 
+		VALUES
+			(#{boardTitle}, #{boardContents}, #{boardFile}, #{boardCategoryNo}, #{memberNo})
+	</insert>
 </mapper>

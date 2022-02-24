@@ -51,7 +51,7 @@
 							  <a class="nav-link" data-ctgNo="ctgInfo">정보공유</a>
 							  <a class="nav-link" data-ctgNo="ctgFree">자유게시판</a>
 							</nav>
-                        	<a href="<c:url value='/board/create'/>" class="btn btn-primary" >글쓰기</a>	
+                        	<a href="<c:url value='/board/write'/>" class="btn btn-primary" >글쓰기</a>	
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" style="overflow: hidden;">
