@@ -205,7 +205,7 @@
 			type:"post",	
 			enctype: 'multipart/form-data',
 			url: "/OCR", 	
-			data: formData, 
+			data: formData,
 			processData: false,
     		contentType: false,
 			success: function(result) {

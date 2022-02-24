@@ -51,4 +51,14 @@ public class BoardController {
     	model.addAttribute("board", board);
     	return "/board/view";
     }
+    
+    @RequestMapping("/board/boardView")
+    public String boardView(Model model) {
+        return "/board/boardView";
+    }
+    
+    @RequestMapping("/board/boardUpdateForm")
+    public String boardUpdateForm(Model model) {
+        return "/board/list";
+    }
 }

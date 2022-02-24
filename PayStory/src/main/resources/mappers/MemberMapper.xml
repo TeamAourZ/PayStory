@@ -78,5 +78,10 @@
 	<update id="pwUpdate">
 		update member set memberPwd = #{memberPwd} where memberEmail = #{memberEmail}
 	</update>
-
+	
+	<!-- 프로필사진 -->
+	<update id="updateImg">
+		update member set memberImage = #{memberImage} where memberEmail = #{memberEmail}
+	</update>
+	
 </mapper>

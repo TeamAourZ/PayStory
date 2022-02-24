@@ -65,4 +65,5 @@ public class ExpenditureVO {
 	public void setAccountBookNo(int accountBookNo) {
 		this.accountBookNo = accountBookNo;
 	}
+	
 }
