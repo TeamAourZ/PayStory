@@ -1,7 +1,3 @@
-/**
- * mainCalendar.js
- */
-
 const date = new Date();
 
 var nowYear = date.getFullYear();
@@ -13,11 +9,10 @@ $(function() {
 	/* 달력 로딩 */
 	if (getWidth() >= 1374) {
 		isType = "A";
-		loadAjax("calendarTypeA");
 	} else {
 		isType = "B";
-		loadAjax("calendarTypeB");
 	}
+	mainCalendarAjax(isType, nowYear, nowMonth);
 
 	/* 페이지 크기 변화 감지 */
 	$(window).resize(function() {
@@ -25,10 +20,10 @@ $(function() {
 
 		if (width >= 1374 && isType == "B") {
 			isType = "A";
-			loadAjax("calendarTypeA");
+			mainCalendarAjax(isType, nowYear, nowMonth);
 		} else if (width < 1374 && isType == "A") {
 			isType = "B";
-			loadAjax("calendarTypeB");
+			mainCalendarAjax(isType, nowYear, nowMonth);
 		} else if (width >= 620 && isType == "B") {
 			$('table').eq(0).removeClass('table-responsive');
 		} else if (width < 620 && isType == "B") {
@@ -45,13 +40,7 @@ $(function() {
 			nowYear--;
 			nowMonth += 12;
 		}
-
-		if (isType == "A") {
-			makeCalendarTypeA(nowYear, nowMonth);
-		} else {
-			makeCalendarTypeB(nowYear, nowMonth);
-		}
-		checkToday();
+		mainCalendarAjax(isType, nowYear, nowMonth);
 	});
 
 	/* 다음 버튼 클릭 */
@@ -64,12 +53,7 @@ $(function() {
 			nowMonth -= 12;
 		}
 
-		if (isType == "A") {
-			makeCalendarTypeA(nowYear, nowMonth);
-		} else {
-			makeCalendarTypeB(nowYear, nowMonth);
-		}
-		checkToday();
+		mainCalendarAjax(isType, nowYear, nowMonth);
 	});
 
 	/* today 버튼 클릭 */
@@ -81,12 +65,7 @@ $(function() {
 		nowYear = date.getFullYear();
 		nowMonth = date.getMonth();
 
-		if (isType == "A") {
-			makeCalendarTypeA(nowYear, nowMonth);
-		} else {
-			makeCalendarTypeB(nowYear, nowMonth);
-		}
-		checkToday();
+		mainCalendarAjax(isType, nowYear, nowMonth);
 	});
 
 	/* 달력 클릭 이벤트 */
@@ -113,40 +92,6 @@ $(function() {
 		$('.viewOn').addClass('d-none');
 		$('.viewOn').removeClass('viewOn');
 	});
-
-	/* 달력 수입 / 지출 태그 */
-	/* 수입 - 마우스 오버 */
-	/*$(document).on('mouseover', '.incomeCount', function() {
-		let day = new Date(nowYear, nowMonth, 1);
-		day = day.getDay();
-		let idx = $(this).parent().parent().parent('div.infoBox').index() - day;
-
-		$('.incomeItemListBox').eq(idx).removeClass('d-none');
-	});*/
-	/* 수입 - 마우스 아웃 */
-	/*$(document).on('mouseout', '.incomeCount', function() {
-		let day = new Date(nowYear, nowMonth, 1);
-		day = day.getDay();
-		let idx = $(this).parent().parent().parent('div.infoBox').index() - day;
-
-		$('.incomeItemListBox').eq(idx).addClass('d-none');
-	});*/
-	/* 지출 - 마우스 오버 */
-	/*$(document).on('mouseover', '.expenditureCount', function() {
-		let day = new Date(nowYear, nowMonth, 1);
-		day = day.getDay();
-		let idx = $(this).parent().parent().parent('div.infoBox').index() - day;
-
-		$('.expenditureItemListBox').eq(idx).removeClass('d-none');
-	});*/
-	/* 지출 - 마우스 아웃 */
-	/*$(document).on('mouseout', '.expenditureCount', function() {
-		let day = new Date(nowYear, nowMonth, 1);
-		day = day.getDay();
-		let idx = $(this).parent().parent().parent('div.infoBox').index() - day;
-
-		$('.expenditureItemListBox').eq(idx).addClass('d-none');
-	});*/
 
 	/* 달력 수입 / 지출 태그 */
 	/* 수입 */
@@ -181,5 +126,10 @@ $(function() {
 		e.stopImmediatePropagation();
 
 		$(this).parent().parent().parent().parent().parent().addClass('d-none');
+	});
+	
+	/* budgetStatusBox - 당월 예산, 남은 예산, 총 수입금, 총 지출금 */
+	$('.budgetStatusBoxToggle').on('click', function() {
+		$('#budgetStatusBox').toggleClass('d-none');
 	});
 });

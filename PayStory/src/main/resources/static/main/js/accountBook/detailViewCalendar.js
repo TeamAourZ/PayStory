@@ -1,7 +1,3 @@
-/**
- * detailViewCalendar.js
- */
-
 const date = new Date();
 
 var nowYear = date.getFullYear();

@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +11,7 @@
 		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/accountBook/calendarBase.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/calendarTypeB.css' />" rel="stylesheet" type="text/css">
-		<link href="<c:url value='/main/css/accountBook/detailViewList.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/detailView.css' />" rel="stylesheet" type="text/css">
 		
 		<!-------- CSS : Bootstrap -------->
 		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -22,8 +23,8 @@
 		
 		<!-------- JS : Custom ------>
 		<script src="<c:url value='/main/js/accountBook/detailViewCalendar.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/chartAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/accountBook/calendarEtc.js' />" type="text/javascript"></script>
-		<script src="<c:url value='/main/js/accountBook/detailViewList.js' />" type="text/javascript"></script>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -75,7 +76,7 @@
 																</tr>
 															</thead>
 															<tbody class="dateSel">
-																<!-- js -->
+																<!-- ajax -->
 															</tbody>
 														</table>
 													</div>
@@ -89,26 +90,47 @@
 								<div class="card shadow mb-4">
 									<!-- Card Header -->
 									<div class="card-header p-3">
+										<input type="hidden" id="chartType" value="d">
 										<h6 class="m-0 font-weight-bold text-primary">일일 통계</h6>
 									</div>
 									<!-- Card Body -->
 									<div class="card-body">
-										<div class="chart-pie pt-4 pb-2">
-											<canvas id="myPieChart"></canvas>
+										<div class="d-flex justify-content-between">
+											<div id="chartMainTagBox" class="d-flex">
+												<div id="chartTab1">수입</div>
+												<div id="chartTab2">지출</div>
+											</div>
+											<div id="budgetStatusBox" class="d-none">
+												<div class="row">
+													<div class="col-6">당월 예산 :&nbsp;</div>
+													<div class="col-6">
+														<fmt:formatNumber value="${budget}" pattern="#,###" />
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-6">남은 예산 :&nbsp;</div>
+													<div class="col-6">
+														<c:set var="remainingBudget" value="${budget + incomeTotalAmount - expenditureTotalAmount}" />
+														<fmt:formatNumber value="${remainingBudget}" pattern="#,###" />
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-6">총 수입금 :&nbsp;</div>
+													<div class="col-6">
+														<fmt:formatNumber value="${incomeTotalAmount}" pattern="#,###" />
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-6">총 지출금 :&nbsp;</div>
+													<div class="col-6">
+														<fmt:formatNumber value="${expenditureTotalAmount}" pattern="#,###" />
+													</div>
+												</div>
+											</div>
+											<i class="budgetStatusBoxToggle fas fa-info-circle pointer-cursor"></i>
 										</div>
-										<div class="mt-4 text-center small">
-											<span class="mr-2">
-												<i class="fas fa-circle text-primary"></i>
-												Direct
-											</span>
-											<span class="mr-2">
-												<i class="fas fa-circle text-success"></i>
-												Social
-											</span>
-											<span class="mr-2">
-												<i class="fas fa-circle text-info"></i>
-												Referral
-											</span>
+										<div id="chartBox">
+											<!-- ajax -->
 										</div>
 									</div>
 								</div>
@@ -126,7 +148,7 @@
 											소유자, 참여자 표시
 										 -->
 									</div>
-									<div id="detailViewBox" class="card-body d-flex flex-column align-items-center">
+									<div id="detailViewListBox" class="card-body d-flex flex-column align-items-center">
 										<!-- ajax -->
 									</div>
 								</div>
@@ -144,6 +166,6 @@
 		<script src="<c:url value='/bootstrap/vendor/chart.js/Chart.min.js' />"></script>
 		
 		<!-------- JS : Custom -------->
-		<script src="<c:url value='/main/js/accountBook/detailViewPieChart.js' />"></script>
+		<script src="<c:url value='/main/js/accountBook/chart.js' />"></script>
 	</body>
 </html>

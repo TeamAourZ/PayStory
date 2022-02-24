@@ -1,7 +1,3 @@
-/**
- * calendarEtc.js
- */
-
 /* 페이지 크기 측정 */
 function getWidth() {
 	return $(this).width();
@@ -30,4 +26,43 @@ function checkToday() {
 			$(this).addClass('selected');
 		}
 	})
+}
+
+/*
+
+
+날짜 index 확인 필
+
+
+*/
+/* 날짜 index */
+function getDayNum(obj) {
+	let day = new Date(nowYear, nowMonth, 1);
+	day = day.getDay();
+	let idx;
+
+	if (isType == "A") {
+		idx = obj.parent().parent().parent('div.infoBox').index() - day;
+		console.log(obj.parent().parent().parent('div.infoBox').index());
+		console.log($('.infoBox').index());
+		console.log("day : " + day);
+		console.log("idx : " + idx);
+	} else {
+		idx = obj.parent().parent().parent('td.tdDate').index() - day;
+		console.log(obj.parent().parent().parent('td.tdDate').index());
+		console.log("day : " + day);
+		console.log("idx : " + idx);
+	}
+
+	return idx;
+}
+
+/* detailBox - 수입 상세 태그 / 지출 상세 태그 가리기 */
+function resetDisplay(obj, idx, check) {
+	for (let i = 0; i < obj.length; i++) {
+		if (idx != i || check == false) {
+			obj.eq(i).addClass('d-none');
+			obj.eq(i).removeClass('viewOn')
+		}
+	}
 }
