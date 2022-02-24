@@ -3,11 +3,11 @@ package com.AourZ.PayStory.model;
 public class ExpenditureVO {
 	private int expenditureNo;
 	private String expenditureDate;
-	private String expenditureImage;	
-	private String expenditureSource;	// 가맹점
-	private String expenditureMemo;		
-	private String expenditureAddress;	// 사용처
-	private int expenditureAmount;		// 지출 금액
+	private String expenditureImage;
+	private String expenditureSource;
+	private String expenditureMemo;
+	private String expenditureAddress;
+	private int expenditureAmount;
 	private String tagNo;
 	private int accountBookNo;
 	

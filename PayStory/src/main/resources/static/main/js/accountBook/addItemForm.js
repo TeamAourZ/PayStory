@@ -215,8 +215,7 @@
 				let source = result.source;
 				
 				// 총 금액 : 숫자만 -> 콤마
-				let totalAmount = result.totalAmount;
-				totalAmount = withComma(totalAmount.replace(/[^0-9]/g, ''));
+				let totalAmount = withComma(result.totalAmount.replace(/[^0-9]/g, ''));
 				
 				// 날짜 : 포멧 변경 (yyyy-MM-ddThh:mm)
 				let date = result.date;
@@ -232,8 +231,8 @@
 				// 아이템 name
 				let item = result.item;
 				
-				// 아이템 price
-				let amount = result.amount.replace(/[^0-9]/g, '');
+				// 아이템 price : 숫자만 -> 콤마
+				let amount = withComma(result.amount.replace(/[^0-9]/g, ''));
 				
 				// 상세 항목 보이게
 				if(item){
@@ -257,6 +256,9 @@
 	/* Submit - 수입 */
 	$('#incomeForm').on('submit', function(e){
 		e.preventDefault();
+		
+		const formData = new FormData();
+  		formData.append("expenditureImage", $(this)[0].files[0]);
 		
 		let date = $('#incomeDate').val();
 		let tagNo = $('#incomeTags option:selected').val();
@@ -289,9 +291,30 @@
 	/* Submit - 지출 */
 	$('#expenditureForm').on('submit', function(e){
 		e.preventDefault();
-		let formData = $(this).serialize();
-		console.log(formData);
-				
+		
+		// item 정보를 담은 array
+		let itemNameArray = [];
+		$('.expenditureItem').each(function(i){
+			let name = $(this).val();
+			itemNameArray[i] = name;
+		});
+		let itemPriceArray = []; 
+		$('.expenditureItemAmount').each(function(i){
+			let price = parseInt(withoutComma($(this).val()));
+			itemPriceArray[i] = price;
+		});
+		
+		const formData = new FormData();
+  		formData.append("expenditureDate", $('#expenditureDate').val());
+  		formData.append("expenditureImage", $('#uploadReceipt')[0].files[0] || null);
+  		formData.append("expenditureSource", $('#expenditureSource').val());
+  		formData.append("expenditureMemo", $('#expenditureMemo').val() || "");
+  		formData.append("expenditureAddress", $('#address').val() || "");
+  		formData.append("expenditureAmount", parseInt(withoutComma($('#expenditureTotalAmount').val())));
+  		formData.append("tagNo", $('#expenditureTags option:selected').val());
+  		formData.append("expenditureItemName", itemNameArray);
+  		formData.append("expenditureItemPrice", itemPriceArray);
+			
 		$.ajax({
 			type:"post",	
 			enctype: 'multipart/form-data',
@@ -300,7 +323,10 @@
 			processData: false,
     		contentType: false,
 			success: function(result) {
-			
+				if(result != 0){
+					alert("지출내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
+					location.href = "/accountBook/main";
+				}
 			},
 			error: function(err){
 				console.log(err);
