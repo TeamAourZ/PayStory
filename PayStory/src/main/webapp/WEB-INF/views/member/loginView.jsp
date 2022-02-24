@@ -10,16 +10,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>로그인</title>
-    <!-- Custom fonts for this template-->
+    <!-------- CSS-------->
     <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-    <!-- Custom styles for this template-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="<c:url value='/main/css/join.css'/>" rel="stylesheet" type="text/css">
-    <script src="<c:url value='/main/js/jquery-3.6.0.min.js'/>"></script>
-    <%-- <script src="<c:url value='/main/js/login.js'/>"></script> --%>
+    <link href="<c:url value='/main/css/member/join.css'/>" rel="stylesheet" type="text/css">
+
 </head>
 <body class="bg-gradient-primary">
     <div class="container">
@@ -59,13 +55,10 @@
 		                                </button> -->
 		                                <input class="btn btn-primary btn-user btn-block" type="submit" value="로그인"> 
                                         <hr>
-                                        <a href="<c:url value='/'/>" class="btn btn-google btn-user btn-block">
-                                             Login with Google
+                                        <a href="/oauth2/authorization/google" class="btn btn-google btn-user btn-block">
+                                              Google 으로 로그인
                                         </a>
-                                        <a href="<c:url value='/'/>" class="btn btn-facebook btn-user btn-block">
-                                             Login with Facebook
-                                        </a>
-                                        <a href="<c:url value='/'/>" class="btn btn-naver btn-user btn-block">
+                                        <a href="/oauth2/authorization/naver" class="btn btn-naver btn-user btn-block">
                                              Login with NAVER
                                         </a>
                                     </form>

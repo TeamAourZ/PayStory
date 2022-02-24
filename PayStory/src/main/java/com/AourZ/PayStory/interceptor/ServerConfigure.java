@@ -21,5 +21,6 @@ public class ServerConfigure implements WebMvcConfigurer{
 	public IMailSender mailSender() {
 		return new MailSender();
 	}
+	
 
 }
