@@ -150,4 +150,5 @@ public class AccountBookController {
 	public String moveRegisterParticipant() {
 		return "boardPublic/publicRegisterParticipant";
 	}
+	
 }

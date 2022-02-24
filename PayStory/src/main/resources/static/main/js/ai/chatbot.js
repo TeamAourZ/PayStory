@@ -163,6 +163,7 @@
 	
 	// 챗봇에게 질문하고 응답받기 - 텍스트 응답
 	// message 입력하고 전송 버튼 눌렀을 때
+	
 	$('#chatForm_chat').on('submit', function(event){
 		event.preventDefault();
 		
@@ -260,6 +261,76 @@
             }
        });
 	}
+	
+	/***** 금액 입력 EVENT *****/
+	// 금액 천단위 콤마 생성
+	function withComma(num){
+		return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
+	// 금액 콤마 해제
+	function withoutComma(num) {
+		return num.toString().replace(/,/g, '');
+	}
+	
+	/* OCR */
+	$('#uploadFile').on('change', function(){
+		const formData = new FormData();
+  		formData.append("expenditureImage", $(this)[0].files[0]);
+  		
+		$.ajax({
+			type:"post",	
+			enctype: 'multipart/form-data',
+			url: "/OCR", 	
+			data: formData,
+			processData: false,
+    		contentType: false,
+			success: function(result) {
+				/* 임시 - template ocr */
+				/**** result에서 원하는 값 추출 ****/
+				// 사용처 
+				let source = result.source;
+				
+				// 총 금액 : 숫자만 -> 콤마
+				let totalAmount = result.totalAmount;
+				totalAmount = withComma(totalAmount.replace(/[^0-9]/g, ''));
+				
+				// 날짜 : 포멧 변경 (yyyy-MM-ddThh:mm)
+				let date = result.date;
+				date = date.replace('22', '2022');
+				date = date.replace(/\//gi, '-');
+				date = date.replace(' ', 'T');
+				date = date.replace(/\s/gi, '');
+				date = date.slice(0, 16);
+				
+				// 주소
+				let address = result.address.slice(4).replace(/\n/g, "");
+				
+				// 아이템 name
+				let item = result.item;
+				
+				// 아이템 price
+				let amount = result.amount.replace(/[^0-9]/g, '');
+				
+				// 상세 항목 보이게
+				if(item){
+					$('.showItem').trigger('click');
+				}
+				console.log(source);
+				// 값 입력
+				$('#chatBox').append('<div class="msgBox receive"><span id="in"><span>PayStory 챗봇' + '<br><br>' + 
+												'<span> 가맹점:'+ source + '</span><br>'+
+												'<span> 지출금액:'+ amount + '</span><br>'+
+												'<span> 사용날짜:'+ date + '</span><br>'+
+												'<span> 사용처:'+ address + '</span><br>'+
+												'<span> 상품명:'+ item + '</span><br>'+
+												'<span> 총 지출금액:'+ totalAmount + '</span><br></span></span></div><br>');
+				
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+	});
 	
 });
 

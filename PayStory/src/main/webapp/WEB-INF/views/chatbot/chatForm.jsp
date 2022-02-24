@@ -19,9 +19,9 @@
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
     <!-- Chatbot CSS -->
-    <link rel="stylesheet" type="text/css" href="/main/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/main/css/ai/chatbot.css">
     <link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
-    
+    <script src="/main/js/ai/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 		var bDisplay = true;
 		function doChatplay(){
@@ -45,11 +45,9 @@
 				
 			}else{
 				ctrSearch.style.display = 'none';
-				
 			}
 		}
 	</script>
-    
 </head>
 
 <body id="page-top">
@@ -100,6 +98,7 @@
 				                    <i class="fa-solid fa-magnifying-glass"></i>
 				                </div>
 				            </div>
+				            
 				            <!-- chat list -->
 				            <div class="chatlist">
 				                <div class="block active">
@@ -112,7 +111,7 @@
 				                            <p class="time">10:56</p>
 				                        </div>
 				                        <div class="message_p">
-				                            <p>어떻게 지내? aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</p>
+				                            <p>어떻게 지내? aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
 				                        </div>
 				                    </div>
 				                </div>
@@ -147,7 +146,7 @@
 				                </div>
 				            </div>
 				        </div>
-			
+
 				        <div id="rightSide" class="rightSide"  style="display:none;">
 				            <div class="header">
 				                <div class="imgText">
@@ -167,8 +166,8 @@
 				            </div>
 				            
 				            <!-- chatbox -->
-				            <div id="chatBox">
-				            
+				            <div id="chatBox" type="text" name="expenditureImage" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadReceipt">
+				            	<hr>데이트<hr>
 				            </div>
 				            <!-- chat input -->
 				            <div class="chatbox_input">
@@ -181,7 +180,7 @@
 									<!-- <input type="submit" value="결과 확인"> -->
 
 								</form>
-				            	<form id = "chatForm_chat">
+				            	<form id = "chatForm_chat" >
 					                
 					                <input type="text" id="message" name="message" size="30" placeholder="질문을 입력하세요">	
 					                <span><input type="submit" class="delinput" value="&#xf090"></span>
@@ -204,9 +203,7 @@
 								  	</form>
 								  </div>
 								</div>
-							
 				        </div>
-				        
 				    </div>	<!-- Chatbot container row end -->
                 </div>	<!-- container-fluid end -->
 			</div>	<!-- Content end -->
@@ -234,10 +231,9 @@
     <script src="/bootstrap/js/sb-admin-2.min.js"></script>
     
     <!-- Chatbot JS-->
-    <script src="/main/js/jquery-3.6.0.min.js"></script>
-    <script src="/main/js/chatbot.js"></script>
+    
+    <script src="/main/js/ai/chatbot.js"></script>
     <script src="https://kit.fontawesome.com/7031b090f1.js" crossorigin="anonymous"></script>
     
-
 </body>
 </html>
