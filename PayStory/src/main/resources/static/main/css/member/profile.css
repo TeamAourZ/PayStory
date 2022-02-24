@@ -110,9 +110,56 @@ ul > li > a:hover .screen::after {
 	opacity:1;
 } 
 
+.btn-block {
+	width:90%;
+	margin: 0 auto;
+	max-width: 83%;
+}
 
+.btn-info {
+	background-color:#ffb500; 
+	border-color:#ffb500;
+	max-width: 100%;
+} 
 
+.btn-default {
+	background-color:#fff; 
+	border-color:#fff;
+	max-width: 100%;
+}
 
+.btn-default:hover {
+	background-color:#c0c0c0; 
+	border-color:#c0c0c0;
+}
 
+.btn-info:hover {
+	background-color:#eaa400; 
+	border-color:#eaa400;
+}
 
+input {
+	margin: 0 auto;
+	max-width:83%;
+}
 
+label {
+	display: inline-block;
+    margin-bottom: 0.5rem;
+    margin-left: 47px;
+}
+
+.btn-icon-split {
+	margin-left: 236px;
+    margin-bottom: -72px
+}
+
+#memberName {
+	margin-right: 202px;
+	max-width:51%;
+}
+
+#imgC {
+	max-width: 100%;
+    margin-top: 16px;
+}

@@ -28,7 +28,7 @@ public class LoginInterceptor implements HandlerInterceptor{
         if (memberVO != null) {
             logger.info("new login success");
             httpSession.setAttribute(LOGIN, memberVO);
-            response.sendRedirect("/");
+            response.sendRedirect("/accountBook/main");
         }
     }
     

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.AourZ.PayStory.model.ExpenditureItemVO;
+import com.AourZ.PayStory.model.ExpenditureVO;
 import com.AourZ.PayStory.service.ai.ChatbotService;
 import com.AourZ.PayStory.service.ai.OCRService;
 import com.AourZ.PayStory.service.ai.STTService;
@@ -29,11 +31,6 @@ public class AIController {
 	@Autowired
 	private OCRService ocrService;
 
-	// 챗봇 Form
-	@RequestMapping("/chatbotForm")
-	public String chatbotForm() {
-		return "chatForm";
-	}
 
 	// Speech To Text!!
 	@RequestMapping("/clovaSTT")
@@ -160,7 +157,8 @@ public class AIController {
 		file.transferTo(file1);
 
 		Map<String, String> result = ocrService.clovaOCRService(filePathName);
-		// System.out.println(result);
+		System.out.println(result);
 		return result;
 	}
+	
 }

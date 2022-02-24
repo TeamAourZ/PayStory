@@ -45,7 +45,6 @@ public class MemberDAO implements IMemberDAO {
 	
 	@Override
 	public void memberAuth(String memberEmail) throws Exception{
-
 		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.memberAuth", memberEmail);
 	}
 	
@@ -53,7 +52,6 @@ public class MemberDAO implements IMemberDAO {
 	public int findPwCheck(MemberVO memberVO)throws Exception{
 	return sqlsession.selectOne("com.AourZ.PayStory.dao.IMemberDAO.findPwCheck", memberVO);	
 	}
-
 
 	@Override
 	public int findPw(String memberEmail,String memberName,String memberPwd)throws Exception{
@@ -67,9 +65,8 @@ public class MemberDAO implements IMemberDAO {
 	@Override
 	public void infoUpdate(MemberVO memberVO)throws Exception{
 		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("memberName", memberVO.getMemberName());
-		
-	sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.infoUpdate", map);
+		map.put("memberName", memberVO.getMemberName());	
+		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.infoUpdate", map);
 	}
 	
 	@Override
@@ -82,9 +79,15 @@ public class MemberDAO implements IMemberDAO {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("memberEmail", memberEmail);
 		map.put("memberPwd", hashedPw);
-		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.pwUpdate", map);
-		
+		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.pwUpdate", map);	
 	}
 	
+	@Override
+	public void updateImg(String memberImage, String memberEmail) throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("memberImage", memberImage);
+		map.put("memberEmail", memberEmail);
+		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.updateImg", map);
+	}
 
 }
