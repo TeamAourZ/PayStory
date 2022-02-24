@@ -257,9 +257,6 @@
 	$('#incomeForm').on('submit', function(e){
 		e.preventDefault();
 		
-		const formData = new FormData();
-  		formData.append("expenditureImage", $(this)[0].files[0]);
-		
 		let date = $('#incomeDate').val();
 		let tagNo = $('#incomeTags option:selected').val();
 		let source = $('#incomeSource').val();

@@ -12,7 +12,7 @@ import com.AourZ.PayStory.model.ExpenditureVO;
 import com.AourZ.PayStory.model.IncomeVO;
 
 @Service
-public class AccountBookService implements IAccountBookDAO {
+public class AccountBookService implements IAccountBookService {
 	@Autowired
 	@Qualifier("IAccountBookDAO")
 	IAccountBookDAO dao;
