@@ -1,6 +1,7 @@
 package com.AourZ.PayStory.model;
 
 public class AccountBookVO {
+	
 	private String accountBookNo;
 	private String accountBookTitle;
 	private String accountBookDescribe;
@@ -51,6 +52,9 @@ public class AccountBookVO {
 	public void setMemberNo(String memberNo) {
 		this.memberNo = memberNo;
 	}
+	
+	
+	
 			
 	
 }

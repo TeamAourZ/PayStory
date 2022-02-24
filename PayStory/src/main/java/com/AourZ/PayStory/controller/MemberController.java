@@ -151,9 +151,9 @@ public class MemberController {
 		}
 		// model.addAttribute로 member라는 key에 memberVO의 데이터를 담았다.
 		model.addAttribute("member", memberVO);
-		httpSession.setAttribute("sid", memberVO.getMemberNo()); // 2022.02.20 강성우추가... 세션으로 'sid'에 'memberNo'값 저장
+		httpSession.setAttribute("owner", memberVO.getMemberNo()); // 2022.02.20 강성우추가... 세션으로 'sid'에 'memberNo'값 저장
 		return "/accountBook/home";
-	}	
+	}
 	
 	// ****************** 비밀번호 찾기 ******************
 	@RequestMapping(value="/findPwView" , method=RequestMethod.GET)
