@@ -4,6 +4,8 @@ public class EditorVO {
 	private String editDate;		// 수정 날짜
 	private String memberNo;		// 수정자
 	private int accountBookNo;	// 가계부 번호
+	private int incomeNo;			// 수입 내역 번호
+	private int expenditureNo;	// 지출 내역 번호
 
 	public String getEditDate() {
 		return editDate;
@@ -17,6 +19,14 @@ public class EditorVO {
 		return accountBookNo;
 	}
 
+	public int getIncomeNo() {
+		return incomeNo;
+	}
+
+	public int getExpenditureNo() {
+		return expenditureNo;
+	}
+
 	public void setEditDate(String editDate) {
 		this.editDate = editDate;
 	}
@@ -27,6 +37,14 @@ public class EditorVO {
 
 	public void setAccountBookNo(int accountBookNo) {
 		this.accountBookNo = accountBookNo;
+	}
+
+	public void setIncomeNo(int incomeNo) {
+		this.incomeNo = incomeNo;
+	}
+
+	public void setExpenditureNo(int expenditureNo) {
+		this.expenditureNo = expenditureNo;
 	}
 
 }

@@ -1,32 +1,41 @@
 package com.AourZ.PayStory.model;
 
 public class TagTotalVO {
-	private String tagNo;	// 태그 번호
-	private int tagCount;	// 태그별 건수
-	private int tagSum;		// 태그별 합계
+	private String date;	// 날짜 (년 / 년-월 / 년-월-일)
+	private String tag;	// 태그 번호 / 이름
+	private int count;		// 총 건수
+	private int sum;		// 총 금액
 
-	public String getTagNo() {
-		return tagNo;
+	public String getDate() {
+		return date;
 	}
 
-	public int getTagCount() {
-		return tagCount;
+	public String getTag() {
+		return tag;
 	}
 
-	public int getTagSum() {
-		return tagSum;
+	public int getCount() {
+		return count;
 	}
 
-	public void setTagNo(String tagNo) {
-		this.tagNo = tagNo;
+	public int getSum() {
+		return sum;
 	}
 
-	public void setTagCount(int tagCount) {
-		this.tagCount = tagCount;
+	public void setDate(String date) {
+		this.date = date;
 	}
 
-	public void setTagSum(int tagSum) {
-		this.tagSum = tagSum;
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public void setSum(int sum) {
+		this.sum = sum;
 	}
 
 }

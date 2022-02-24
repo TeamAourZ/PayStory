@@ -7,6 +7,7 @@ public class MemberVO {
 	private String memberPwd;		// 회원 패스워드
 	private String memberImage;	// 회원 프로필 이미지
 	private int memberAuth;			// 회원 인증 유무
+	private String memberJoinDate;	// 회원 가입 날짜
 
 	public String getMemberNo() {
 		return memberNo;
@@ -32,6 +33,10 @@ public class MemberVO {
 		return memberAuth;
 	}
 
+	public String getMemberJoinDate() {
+		return memberJoinDate;
+	}
+
 	public void setMemberNo(String memberNo) {
 		this.memberNo = memberNo;
 	}
@@ -54,6 +59,10 @@ public class MemberVO {
 
 	public void setMemberAuth(int memberAuth) {
 		this.memberAuth = memberAuth;
+	}
+
+	public void setMemberJoinDate(String memberJoinDate) {
+		this.memberJoinDate = memberJoinDate;
 	}
 
 }
