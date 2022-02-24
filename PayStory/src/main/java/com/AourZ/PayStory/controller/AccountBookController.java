@@ -79,7 +79,7 @@ public class AccountBookController {
 		
 		service.insertExpenditure(evo);
 		
-		int expenditureNo = evo.getExpendituerNo();
+		int expenditureNo = evo.getExpenditureNo();
 		
 		ExpenditureItemVO eivo = new ExpenditureItemVO();
 		
@@ -105,4 +105,5 @@ public class AccountBookController {
 	public String moveRegisterParticipant() {
 		return "boardPublic/publicRegisterParticipant";
 	}
+	
 }

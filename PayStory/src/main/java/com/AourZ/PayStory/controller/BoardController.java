@@ -17,4 +17,14 @@ public class BoardController {
     public String create(Model model) {
         return "/board/create";
     }
+    
+    @RequestMapping("/board/boardView")
+    public String boardView(Model model) {
+        return "/board/boardView";
+    }
+    
+    @RequestMapping("/board/boardUpdateForm")
+    public String boardUpdateForm(Model model) {
+        return "/board/list";
+    }
 }

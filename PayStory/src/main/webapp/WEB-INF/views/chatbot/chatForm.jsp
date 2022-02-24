@@ -166,7 +166,7 @@
 				            </div>
 				            
 				            <!-- chatbox -->
-				            <div id="chatBox">
+				            <div id="chatBox" type="text" name="expenditureImage" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadReceipt">
 				            	<hr>데이트<hr>
 				            </div>
 				            <!-- chat input -->
@@ -180,7 +180,7 @@
 									<!-- <input type="submit" value="결과 확인"> -->
 
 								</form>
-				            	<form id = "chatForm_chat">
+				            	<form id = "chatForm_chat" >
 					                
 					                <input type="text" id="message" name="message" size="30" placeholder="질문을 입력하세요">	
 					                <span><input type="submit" class="delinput" value="&#xf090"></span>

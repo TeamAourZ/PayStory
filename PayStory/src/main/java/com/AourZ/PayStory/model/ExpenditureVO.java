@@ -1,21 +1,21 @@
 package com.AourZ.PayStory.model;
 
 public class ExpenditureVO {
-	private int expendituerNo;
+	private int expenditureNo;
 	private String expenditureDate;
-	private String expenditureImage;
-	private String expenditureSource;
-	private String expendituerMemo;
-	private String expenditureAddress;
-	private int expenditureAmount;
+	private String expenditureImage;	
+	private String expenditureSource;	// 가맹점
+	private String expenditureMemo;		
+	private String expenditureAddress;	// 사용처
+	private int expenditureAmount;		// 지출 금액
 	private String tagNo;
 	private int accountBookNo;
 	
-	public int getExpendituerNo() {
-		return expendituerNo;
+	public int getExpenditureNo() {
+		return expenditureNo;
 	}
-	public void setExpendituerNo(int expendituerNo) {
-		this.expendituerNo = expendituerNo;
+	public void setExpenditureNo(int expenditureNo) {
+		this.expenditureNo = expenditureNo;
 	}
 	public String getExpenditureDate() {
 		return expenditureDate;
@@ -35,11 +35,11 @@ public class ExpenditureVO {
 	public void setExpenditureSource(String expenditureSource) {
 		this.expenditureSource = expenditureSource;
 	}
-	public String getExpendituerMemo() {
-		return expendituerMemo;
+	public String getExpenditureMemo() {
+		return expenditureMemo;
 	}
-	public void setExpendituerMemo(String expendituerMemo) {
-		this.expendituerMemo = expendituerMemo;
+	public void setExpenditureMemo(String expenditureMemo) {
+		this.expenditureMemo = expenditureMemo;
 	}
 	public String getExpenditureAddress() {
 		return expenditureAddress;
@@ -65,4 +65,5 @@ public class ExpenditureVO {
 	public void setAccountBookNo(int accountBookNo) {
 		this.accountBookNo = accountBookNo;
 	}
+	
 }
