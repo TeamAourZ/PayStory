@@ -52,7 +52,7 @@
 
             <!-- Nav Item - 게시판 -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<c:url value='/board/listAll'/>">
                     <i class="far fa-clipboard"></i>
                     <span>게시판</span>
                 </a>

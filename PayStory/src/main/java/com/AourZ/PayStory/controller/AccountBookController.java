@@ -78,7 +78,7 @@ public class AccountBookController {
 	
 	/* 지출 항목 추가 */
 	@ResponseBody
-	@RequestMapping("/accountBook/expenditure")
+	@RequestMapping("/accountBook/expenditure/")
 	public int addExpenditure(@RequestParam("expenditureDate") String date,
 							  @RequestParam(value="expenditureImage", required = false) MultipartFile file,
 							  @RequestParam("expenditureSource") String source,
@@ -100,7 +100,7 @@ public class AccountBookController {
 			String filePathName = uploadPath + originalFileName;
 			// String uploadFileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("accountBookNo")+"_"+originalFileName;
 			// String filePathName = uploadPath + uploadFileName;
-			File file1 = new File(filePathName);
+			File file1 = new File(filePathName);	
 
 			file.transferTo(file1);
 		}

@@ -8,12 +8,11 @@ public class BoardVO {
 	private int boardNo;
 	private String boardTitle;
 	private String boardDate;
-	private String boardViews;
+	private int boardViews;
 	private String boardContents;
 	private String boardFile;
 	private String memberNo;
 	private String boardCategoryNo;
-	
 	
 	public int getBoardNo() {
 		return boardNo;
@@ -33,10 +32,10 @@ public class BoardVO {
 	public void setBoardDate(String boardDate) {
 		this.boardDate = boardDate;
 	}
-	public String getBoardViews() {
+	public int getBoardViews() {
 		return boardViews;
 	}
-	public void setBoardViews(String boardViews) {
+	public void setBoardViews(int boardViews) {
 		this.boardViews = boardViews;
 	}
 	public String getBoardContents() {
@@ -63,5 +62,4 @@ public class BoardVO {
 	public void setBoardCategoryNo(String boardCategoryNo) {
 		this.boardCategoryNo = boardCategoryNo;
 	}
-
 }
