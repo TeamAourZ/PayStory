@@ -83,7 +83,7 @@
 				FROM income
 				WHERE accountBookNo = #{accountBookNo}
 				GROUP BY fDate, tagNo
-				HAVING fDate LIKE #{date + "%"}
+				HAVING fDate LIKE CONCAT(#{date}, '%')
 				ORDER BY fDate ASC
 			</when>
 			<when test="select.equals('date')">
@@ -125,7 +125,7 @@
 				FROM expenditure
 				WHERE accountBookNo = #{accountBookNo}
 				GROUP BY fDate, tagNo
-				HAVING fDate LIKE #{date + "%"}
+				HAVING fDate LIKE CONCAT(#{date}, '%')
 				ORDER BY fDate ASC
 			</when>
 			<when test="select.equals('date')">
@@ -143,7 +143,7 @@
 				FROM expenditure
 				WHERE accountBookNo = #{accountBookNo}
 				GROUP BY fDate
-				HAVING fDate LIKE #{date + "%"}
+				HAVING fDate LIKE CONCAT(#{date}, '%')
 				ORDER BY fDate ASC
 			</when>
 		</choose>

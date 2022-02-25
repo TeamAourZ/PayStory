@@ -50,10 +50,10 @@ public class AccountBookController {
 		// 가계부 정보 가져오기
 		AccountBookVO accountBookInfo = accountBookService.getMyAccountBook(signInMemberNo, false);
 
-		String accountBookTitle = accountBookInfo.getAccountBookTitle(); // 가계부 타이틀
+//		String accountBookTitle = accountBookInfo.getAccountBookTitle(); // 가계부 타이틀
 		boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분 - 내 가계부
 
-		model.addAttribute("accountBookTitle", accountBookTitle);
+//		model.addAttribute("accountBookTitle", accountBookTitle);
 		model.addAttribute("isShared", isShared);
 
 		// 가계부 번호 session에 저장

@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +75,7 @@
 				            <!-- header -->
 				            <div class="header">
 				                <div class="userimg">
-				                    <img src="images/user.jpg" class="cover">
+				                    <img src="<c:url value='/images/user.jpg' />" class="cover">
 				                </div>
 				                <ul class="nav_icons">
 				                    <li>
@@ -103,7 +103,7 @@
 				            <div class="chatlist">
 				                <div class="block active">
 				                    <div class="imgbox">
-				                        <img src="images/logo.png" class="cover">
+				                        <img src="<c:url value='/images/logo.png' />" class="cover">
 				                    </div>
 				                    <div class="details">
 				                        <div class="listHead">
@@ -117,7 +117,7 @@
 				                </div>
 				                <div class="block unread">
 				                    <div class="imgbox">
-				                        <img src="images/jang.jpg" class="cover">
+				                        <img src="<c:url value='/images/jang.jpg' />" class="cover">
 				                    </div>
 				                    <div class="details">
 				                        <div class="listHead">
@@ -131,7 +131,7 @@
 				                    </div>
 				                </div><div class="block unread">
 				                    <div class="imgbox">
-				                        <img src="images/ma.jpg" class="cover">
+				                        <img src="<c:url value='/images/ma.jpg' />" class="cover">
 				                    </div>
 				                    <div class="details">
 				                        <div class="listHead">
@@ -151,7 +151,7 @@
 				            <div class="header">
 				                <div class="imgText">
 				                    <div class="userimg">
-				                        <img src="images/user.jpg" class="cover">
+				                        <img src="<c:url value='/images/user.jpg' />" class="cover">
 				                    </div>
 				                    <h4>정유성<br><span>online</span></h4>
 				                </div>
