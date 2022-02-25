@@ -29,7 +29,21 @@
 				<form action="/member/updateImg" method="post"
 					enctype="multipart/form-data">
 					<div class="imageBox">
-						<ul>
+						<ul class="m-img">
+							<li class="li-img">
+								<a class="a-img">
+									<div class="screen" onclick="onclick=document.all.file.click()">
+										<div class="imageTextTop">프로필 이미지 수정</div>
+										<div class="imageTextBottom">클릭해주세요</div>
+										<img class="profile" src="/images/${login.memberImage}">
+									</div> 
+									<input type="file" name="file" style="display: none" class="input-css">
+									<input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}" class="input-css">
+									<button type="submit" class="btn btn-primary btn-block" id="imgC">사진변경</button>
+								</a>
+							</li>
+						</ul>
+						<%-- <ul>
 							<li><a>
 									<div class="screen" onclick="onclick=document.all.file.click()">
 										<div class="imageTextTop">프로필 이미지 수정</div>
@@ -40,19 +54,20 @@
 									<input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}">
 									<button type="submit" class="btn btn-primary btn-block" id="imgC">사진변경</button>
 							</a></li>
-						</ul>
+						</ul> --%>
 					</div>
 				</form>
 				<form id="infoView" action="/member/infoUpdate" method="POST"
 					class="form-signup form-user panel-body" autocomplete="off">
 					<input type="hidden" id="memberNameCheck" name="memberNameCheck"
-						value="N" />
+						value="N" class="input-css"/>
 					<fieldset>
 						
-						<!-- 이메일, 닉네임 -->
+						<!-- 이메일, 닉네임 --><!-- class="form-control -->
 						<div class="form-group">
-							<label class="control-label" for="fullName">이메일</label> <input
-								type="text" name="memberEmail" class="form-control input-sm"
+							<label class="control-label" for="fullName">이메일</label> 
+							<input
+								type="text" name="memberEmail" class="input-css"
 								value="${login.memberEmail}" id="memberEmail" readonly>
 						</div>
 						<div class="form-group">
@@ -62,7 +77,7 @@
 								<span class="icon text-white-30"> <i class="fas fa-check"></i>
 							</span> <span class="text">중복체크</span>
 							</a> <input type="text" name="memberName"
-								class="form-control input-sm" placeholder="닉네임"
+								class="input-css" placeholder="닉네임"
 								value="${login.memberName}" id="memberName">
 						</div>
 					</fieldset>
