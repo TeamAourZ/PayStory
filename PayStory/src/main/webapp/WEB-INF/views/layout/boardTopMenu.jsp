@@ -5,6 +5,7 @@
 <html>
 <head><style>.text-gray-600 {font-size: 15px;width: 54px;}</style></head>
 	<body>
+		<jsp:include page="/WEB-INF/views/layout/profileModal.jsp" flush="true"/>
 	    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 		   
 		   <!-- Sidebar Toggle (Topbar) -->
@@ -68,7 +69,7 @@
 		</nav>
 		
 		<!-------- User Menu -------->
-		<%-- <jsp:include page="/WEB-INF/views/layout/logoutModal.jsp" flush="true"/>
-		<jsp:include page="/WEB-INF/views/layout/profileModal.jsp" flush="true"/> --%>
+		<jsp:include page="/WEB-INF/views/layout/logoutModal.jsp" flush="true"/>
+		<%-- <jsp:include page="/WEB-INF/views/layout/profileModal.jsp" flush="true"/> --%>
 	</body>
 </html>
