@@ -51,7 +51,7 @@
 						                name="memberPwd2" id="memberPwd2" placeholder="새 비밀번호 확인">
 						        </div>
 						         <button type="button" id="pwUpdate" name="pwUpdate" class="btn btn-primary">비밀번호 변경</button> 
-						         <a href="<c:url value='/accountBook/mainTest'/>" class="btn btn-default">취소</a>
+						         <a href="<c:url value='/accountBook/main'/>" class="btn btn-default">취소</a>
 						    </form>    
 						</div>
 					</div>
