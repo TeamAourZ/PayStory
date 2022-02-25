@@ -24,7 +24,7 @@ public class AccountBookVO {
 		return accountBookDate;
 	}
 
-	public boolean isShared() {
+	public boolean getIsShared() {
 		return isShared;
 	}
 
@@ -48,7 +48,7 @@ public class AccountBookVO {
 		this.accountBookDate = accountBookDate;
 	}
 
-	public void setShared(boolean isShared) {
+	public void setIsShared(boolean isShared) {
 		this.isShared = isShared;
 	}
 
