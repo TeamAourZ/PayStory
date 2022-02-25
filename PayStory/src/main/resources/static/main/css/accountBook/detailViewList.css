@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-#detailViewBox i {
-	color: var(--gray-dark);
-}
-
 .incomeData {
 	border-radius: 5px;
 	border: 1px solid #2768fa;
