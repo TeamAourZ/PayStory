@@ -2,7 +2,6 @@ package com.AourZ.PayStory.controller;
 
 import java.io.File;
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
@@ -18,23 +17,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.AourZ.PayStory.model.AccountBookVO;
-import com.AourZ.PayStory.model.ExpenditureItemVO;
-import com.AourZ.PayStory.model.ExpenditureVO;
-import com.AourZ.PayStory.model.IncomeVO;
-import com.AourZ.PayStory.model.ShareAccountBookVO;
-import com.AourZ.PayStory.model.ShareBudgetVO;
-import com.AourZ.PayStory.service.AccountBookService;
-import com.AourZ.PayStory.service.AccountCreateService;
-
 import com.AourZ.PayStory.model.AccountBookBudgetVO;
 import com.AourZ.PayStory.model.AccountBookVO;
 import com.AourZ.PayStory.model.BoardVO;
 import com.AourZ.PayStory.model.DateVO;
+import com.AourZ.PayStory.model.ExpenditureItemVO;
+import com.AourZ.PayStory.model.ExpenditureVO;
+import com.AourZ.PayStory.model.IncomeVO;
 import com.AourZ.PayStory.model.MainBoardVO;
 import com.AourZ.PayStory.model.MemberVO;
+import com.AourZ.PayStory.model.ShareAccountBookVO;
+import com.AourZ.PayStory.model.ShareBudgetVO;
 import com.AourZ.PayStory.model.TagTotalVO;
 import com.AourZ.PayStory.service.AccountBookService;
+import com.AourZ.PayStory.service.AccountCreateService;
 
 @Controller
 public class AccountBookController {
@@ -443,7 +439,7 @@ public class AccountBookController {
 		vo.setIncomeMemo(memo);
 		vo.setTagNo(tagNo);
 		
-		service.insertIncome(vo);
+		accountBookService.insertIncome(vo);
 		
 		int incomeNo = vo.getIncomeNo();
 		
@@ -488,7 +484,7 @@ public class AccountBookController {
 		vo.setExpenditureAmount(totalAmount);
 		vo.setTagNo(tagNo);
 		
-		service.insertExpenditure(vo);
+		accountBookService.insertExpenditure(vo);
 		int expenditureNo = vo.getExpenditureNo();
 		
 		if(expenditureNo != 0) {
@@ -500,7 +496,7 @@ public class AccountBookController {
 				vo2.setExpenditureItemPrice(priceArray[i]);
 				expenditureItemList.add(vo2);
 			}
-			service.insertExpenditureItem(expenditureItemList);
+			accountBookService.insertExpenditureItem(expenditureItemList);
 		}
 		return expenditureNo;
 	}
@@ -525,7 +521,7 @@ public class AccountBookController {
 			ShareBudgetVO ShareBudget,HttpSession httpSession) {
 		
 			// 가계부 데이터 등록(공유가계부 전용)
-			accountBook.setShared(true);
+			accountBook.setIsShared(true);
 			accountBook.setMemberNo((String) httpSession.getAttribute("owner"));
 			createService.createAccountBook(accountBook);
 			
