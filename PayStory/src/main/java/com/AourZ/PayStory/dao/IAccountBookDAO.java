@@ -11,7 +11,8 @@ import com.AourZ.PayStory.model.ShareAccountBookVO;
 import com.AourZ.PayStory.model.TagTotalVO;
 
 public interface IAccountBookDAO {
-	AccountBookVO getMyAccountBook(HashMap<String, Object> map);					// 가계부 조회
+	AccountBookVO getMyAccountBook(HashMap<String, Object> map);					// 내 가계부 조회
+	AccountBookVO getShareAccountBook(int accountBookNo);								// 공유 가계부 조회
 	AccountBookBudgetVO getAccountBookBudget(HashMap<String, Object> map);	// 가계부 예산 조회
 	ArrayList<ShareAccountBookVO> getShareMemberList(int accountBookNo);			// 공유 가계부 소유자, 참여자 조회
 	MemberVO getMemberInfo(String memberNo);													// 회원 정보 조회

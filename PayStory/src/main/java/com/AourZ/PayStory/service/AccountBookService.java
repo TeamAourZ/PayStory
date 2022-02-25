@@ -17,7 +17,7 @@ import com.AourZ.PayStory.model.TagTotalVO;
 @Service
 public class AccountBookService implements IAccountBookService {
 	@Autowired
-	IAccountBookDAO dao;
+	private IAccountBookDAO dao;
 
 	@Override
 	public AccountBookVO getMyAccountBook(String memberNo, boolean isShared) {
@@ -27,6 +27,11 @@ public class AccountBookService implements IAccountBookService {
 		map.put("isShared", isShared);
 
 		return dao.getMyAccountBook(map);
+	}
+
+	@Override
+	public AccountBookVO getShareAccountBook(int accountBookNo) {
+		return dao.getShareAccountBook(accountBookNo);
 	}
 
 	@Override
@@ -43,7 +48,7 @@ public class AccountBookService implements IAccountBookService {
 	public ArrayList<ShareAccountBookVO> getShareMemberList(int accountBookNo) {
 		return dao.getShareMemberList(accountBookNo);
 	}
-	
+
 	@Override
 	public MemberVO getMemberInfo(String memberNo) {
 		return dao.getMemberInfo(memberNo);
@@ -57,7 +62,7 @@ public class AccountBookService implements IAccountBookService {
 		map.put("select", select);
 		map.put("group", group);
 		map.put("date", date);
-		
+
 		return dao.getIncomeList(map);
 	}
 
@@ -69,7 +74,7 @@ public class AccountBookService implements IAccountBookService {
 		map.put("select", select);
 		map.put("group", group);
 		map.put("date", date);
-		
+
 		return dao.getExpenditureList(map);
 	}
 
@@ -84,7 +89,7 @@ public class AccountBookService implements IAccountBookService {
 
 		map.put("allCheck", allCheck);
 		map.put("boardCategoryNo", boardCategoryNo);
-		
+
 		return dao.getBoardList(map);
 	}
 

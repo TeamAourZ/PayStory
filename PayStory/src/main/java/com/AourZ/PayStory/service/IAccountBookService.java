@@ -10,7 +10,8 @@ import com.AourZ.PayStory.model.ShareAccountBookVO;
 import com.AourZ.PayStory.model.TagTotalVO;
 
 public interface IAccountBookService {
-	AccountBookVO getMyAccountBook(String memberNo, boolean isShared);			// 가계부 조회
+	AccountBookVO getMyAccountBook(String memberNo, boolean isShared);			// 내 가계부 조회
+	AccountBookVO getShareAccountBook(int accountBookNo);								// 공유 가계부 조회
 	AccountBookBudgetVO getAccountBookBudget(int accountBookNo, String date);	// 가계부 예산 조회
 	ArrayList<ShareAccountBookVO> getShareMemberList(int accountBookNo);			// 공유 가계부 소유자, 참여자 조회
 	MemberVO getMemberInfo(String memberNo);													// 회원 정보 조회

@@ -30,11 +30,18 @@
 		<result property="boardCategoryNo" column="boardCategoryNo"></result>
 	</resultMap>
 	
-	<!-- 가계부 조회 -->
+	<!-- 내 가계부 조회 -->
 	<select id="getMyAccountBook" parameterType="HashMap" resultType="com.AourZ.PayStory.model.AccountBookVO">
 		SELECT *
 		FROM account_book
 		WHERE memberNo = #{memberNo} AND isShared = #{isShared}
+	</select>
+	
+	<!-- 공유 가계부 조회 -->
+	<select id="getShareAccountBook" parameterType="int" resultType="com.AourZ.PayStory.model.AccountBookVO">
+		SELECT *
+		FROM account_book
+		WHERE accountBookNo = #{accountBookNo}
 	</select>
 	
 	<!-- 가계부 예산 조회 -->
@@ -76,14 +83,7 @@
 				FROM income
 				WHERE accountBookNo = #{accountBookNo}
 				GROUP BY fDate, tagNo
-				<choose>
-					<when test="group.equals('day')">
-						HAVING DATE_FORMAT(fDate, '%Y-%m') = #{date}
-					</when>
-					<otherwise>
-						HAVING fDate = #{date}
-					</otherwise>
-				</choose>
+				HAVING fDate LIKE #{date + "%"}
 				ORDER BY fDate ASC
 			</when>
 			<when test="select.equals('date')">
@@ -101,14 +101,7 @@
 				FROM income
 				WHERE accountBookNo = #{accountBookNo}
 				GROUP BY fDate
-				<choose>
-					<when test="group.equals('day')">
-						HAVING DATE_FORMAT(fDate, '%Y-%m') = #{date}
-					</when>
-					<otherwise>
-						HAVING fDate = #{date}
-					</otherwise>
-				</choose>
+				HAVING fDate LIKE CONCAT(#{date}, '%')
 				ORDER BY fDate ASC
 			</when>
 		</choose>
@@ -132,14 +125,7 @@
 				FROM expenditure
 				WHERE accountBookNo = #{accountBookNo}
 				GROUP BY fDate, tagNo
-				<choose>
-					<when test="group.equals('day')">
-						HAVING DATE_FORMAT(fDate, '%Y-%m') = #{date}
-					</when>
-					<otherwise>
-						HAVING fDate = #{date}
-					</otherwise>
-				</choose>
+				HAVING fDate LIKE #{date + "%"}
 				ORDER BY fDate ASC
 			</when>
 			<when test="select.equals('date')">
@@ -157,14 +143,7 @@
 				FROM expenditure
 				WHERE accountBookNo = #{accountBookNo}
 				GROUP BY fDate
-				<choose>
-					<when test="group.equals('day')">
-						HAVING DATE_FORMAT(fDate, '%Y-%m') = #{date}
-					</when>
-					<otherwise>
-						HAVING fDate = #{date}
-					</otherwise>
-				</choose>
+				HAVING fDate LIKE #{date + "%"}
 				ORDER BY fDate ASC
 			</when>
 		</choose>
