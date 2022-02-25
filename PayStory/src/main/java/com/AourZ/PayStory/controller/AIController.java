@@ -29,12 +29,6 @@ public class AIController {
 	@Autowired
 	private OCRService ocrService;
 
-	// 챗봇 Form
-	@RequestMapping("/chatbotForm")
-	public String chatbotForm() {
-		return "chatForm";
-	}
-
 	// Speech To Text!!
 	@RequestMapping("/clovaSTT")
 	public String clovaSTT(@RequestParam("uploadFile") MultipartFile file) {
@@ -160,7 +154,8 @@ public class AIController {
 		file.transferTo(file1);
 
 		Map<String, String> result = ocrService.clovaOCRService(filePathName);
-		// System.out.println(result);
+		System.out.println(result);
 		return result;
 	}
+
 }

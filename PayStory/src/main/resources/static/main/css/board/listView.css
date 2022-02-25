@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/* 게시판 listView.css */
+
+.boardCategory a {
+	padding: 0.5rem 0.5rem;
+	border-right: 1px solid #f8f9fc;
+    color: #5a5c69;
+    cursor: pointer;
+}
+
+.boardCategory a.active {
+	font-size: 1.3rem;
+    padding: 0.2rem;
+    color: #4e73df;
+}
+
+.boardList {cursor: pointer}
+.boardList:hover {color: #4e73df}

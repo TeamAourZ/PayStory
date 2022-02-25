@@ -9,14 +9,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.AourZ.PayStory.model.ExpenditureVO;
 
 @Service
 public class OCRService {
@@ -76,8 +80,8 @@ public class OCRService {
 				response.append(inputLine);
 			}
 			br.close();
-
-			//System.out.println(response);
+			
+			System.out.println(response);
 			result = jsonToMap(response.toString());
 		} catch (Exception e) {
 			System.out.println(e);
@@ -148,5 +152,39 @@ public class OCRService {
 		}
 		
 		return resultMap;
+	}
+	
+	public ArrayList<ExpenditureVO> jsonToVoList(String jsonResultStr) {
+		ArrayList<ExpenditureVO> ocrList = new ArrayList<ExpenditureVO>();
+		
+		try {
+			JSONObject jsonObj = new JSONObject(jsonResultStr);
+			JSONArray imageArray = (JSONArray) jsonObj.get("images");
+			
+			if(imageArray != null) {
+				JSONObject tempObj = (JSONObject) imageArray.get(0);
+				JSONArray fieldArray = (JSONArray) tempObj.get("fields");
+				
+				if(fieldArray != null) {
+					for(int i=0; i<fieldArray.length(); i++) {
+						tempObj = (JSONObject) fieldArray.get(i);
+						String resultValue = (String) tempObj.get("inferText");
+						
+						ExpenditureVO vo = new ExpenditureVO();
+						vo.setExpenditureSource(resultValue);
+						
+						ocrList.add(vo);
+						
+					}
+				}
+			}else {
+				ExpenditureVO vo = new ExpenditureVO();
+				vo.setExpenditureSource("없음");
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ocrList;
 	}
 }

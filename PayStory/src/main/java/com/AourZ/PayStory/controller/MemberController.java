@@ -151,9 +151,9 @@ public class MemberController {
 		}
 		// model.addAttribute로 member라는 key에 memberVO의 데이터를 담았다.
 		model.addAttribute("member", memberVO);
-		httpSession.setAttribute("sid", memberVO.getMemberNo()); // 2022.02.20 강성우추가... 세션으로 'sid'에 'memberNo'값 저장
-		return "/accountBook/home";
-	}	
+		httpSession.setAttribute("memberNo", memberVO.getMemberNo()); // 2022.02.20 강성우추가... 세션으로 'sid'에 'memberNo'값 저장
+		return "/accountBook/main";
+	}
 	
 	// ****************** 비밀번호 찾기 ******************
 	@RequestMapping(value="/findPwView" , method=RequestMethod.GET)
@@ -195,7 +195,7 @@ public class MemberController {
 		memberService.infoUpdate(memberVO); 
 		session.setAttribute("login", memberVO);
 		rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다.");
-		return"/accountBook/home";
+		return"/accountBook/main";
 	}
 	
 	// 비밀번호 수정로직
@@ -233,7 +233,7 @@ public class MemberController {
 		memberVO.setMemberImage(memberImage);
 		session.setAttribute("login", memberVO);
 					
-		return "/accountBook/home";
+		return "/accountBook/main";
 	}
 	
 }

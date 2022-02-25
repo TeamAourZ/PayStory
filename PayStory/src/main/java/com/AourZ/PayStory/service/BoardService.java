@@ -1,6 +1,6 @@
 package com.AourZ.PayStory.service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +16,19 @@ public class BoardService implements IBoardService{
 	private IBoardDAO dao;
 
 	@Override
-	public List<BoardVO> getList(BoardVO searchVO) {
-		 return dao.getList(searchVO);
-	}}
+	public ArrayList<BoardVO> getList() {
+		 return dao.getList();
+	}
+
+	public ArrayList<BoardVO> getCategoryList(String ctgNo) {
+		return dao.getCategory(ctgNo);
+	}
+
+	public BoardVO boardView(int boardNo) {
+		return dao.boardView(boardNo);
+	}
+
+	public int createBoard(BoardVO vo) {
+		return dao.createBoard(vo);
+	}
+}

@@ -1,8 +1,0 @@
-@charset "UTF-8";
-
-#homeChartMainTagBox {
-	gap: 10px;
-}
-#homeChartMainTagBox div {
-	cursor: pointer;
-}
