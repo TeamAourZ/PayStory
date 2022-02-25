@@ -99,5 +99,10 @@ public class MemberService implements IMemberService {
 	public void pwUpdate(String memberEmail, String hashedPw)throws Exception{
 		memberDAO.pwUpdate(memberEmail, hashedPw);
 	}
+	
+	@Override
+	public void updateImg(String memberImage, String memberEmail)throws Exception{
+		memberDAO.updateImg(memberImage, memberEmail);
+	}
 
 }	

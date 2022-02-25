@@ -1,7 +1,3 @@
-/**
- * detailViewCalendar.js
- */
-
 const date = new Date();
 
 var nowYear = date.getFullYear();
@@ -13,8 +9,9 @@ $(function() {
 		$('table').eq(0).addClass('table-responsive');
 	}
 
-	makeCalendarTypeB(nowYear, nowMonth);
-	checkToday();
+	calendarAjax("C", nowYear, nowMonth); // 가계부
+	chartAjax(nowYear, nowMonth); // 차트
+	detailViewListAjax(); // 상세 내역
 
 	/* 페이지 크기 변화 감지 */
 	$(window).resize(function() {
@@ -39,8 +36,7 @@ $(function() {
 			nowMonth += 12;
 		}
 
-		makeCalendarTypeB(nowYear, nowMonth);
-		checkToday();
+		calendarAjax("C", nowYear, nowMonth); // 가계부
 	});
 
 	/* 다음 버튼 클릭 */
@@ -53,8 +49,7 @@ $(function() {
 			nowMonth -= 12;
 		}
 
-		makeCalendarTypeB(nowYear, nowMonth);
-		checkToday();
+		calendarAjax("C", nowYear, nowMonth); // 가계부
 	});
 
 	/* today 버튼 클릭 */
@@ -66,8 +61,7 @@ $(function() {
 		nowYear = date.getFullYear();
 		nowMonth = date.getMonth();
 
-		makeCalendarTypeB(nowYear, nowMonth);
-		checkToday();
+		calendarAjax("C", nowYear, nowMonth); // 가계부
 	});
 
 	/* 달력 클릭 이벤트 */
@@ -90,92 +84,3 @@ $(function() {
 		}
 	});
 });
-
-/* 페이지 크기 측정 */
-function getWidth() {
-	return $(this).width();
-}
-
-/* 달력 TypeB */
-function makeCalendarTypeB(year, month) {
-	/*연도, 월 표시*/
-	$('#yearMonth').text(`${year}년 ${month + 1}월`);
-
-	const firstDay = new Date(year, month, 1).getDay(); // 이번달 첫째 날의 요일
-	const lastDate = new Date(year, month + 1, 0).getDate(); // 이번달 마지막 날 (다음달의 0번째 일은 이번달의 마지막날과 같다.)
-	const lastDay = new Date(year, month + 1, 0).getDay(); // 이번달 마지막 날의 요일
-
-	/* 첫째 날 전까지 공란 */
-	$('.dateSel').append('<tr>');
-	for (let i = 0; i < firstDay; i++) {
-		$('.dateSel').append('<td></td>');
-	}
-
-	/* 날짜 채우기 */
-	for (let i = 1; i <= lastDate; i++) {
-		let dateClass = `${year}-${(month + 1) < 10 ? `0${month + 1}` : `${month + 1}`}-${i < 10 ? `0${i}` : `${i}`}`;
-		let text = ""; // 공휴일 명칭
-
-		$('.dateSel').append(`
-			<td class="p-0 pt-1 pb-1">
-				<div class="infoBox d-flex flex-column">
-					<div class="dateBox d-flex align-items-center text-center">
-						<div class="date ${dateClass} rounded-circle m-1">${i}</div>
-						<div class="text-xs text-truncate">${text}</div>
-					</div>
-					<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
-						<div class="incomeCount rounded-circle p-0">11</div>
-						<div class="expenditureCount rounded-circle p-0">21</div>
-					</div>
-				</div>
-			</td>
-		`);
-
-		let tdSize = $('.dateSel').children('td').length; // 해당 주차에 생성된 일
-
-		if (tdSize % 7 == 0) {
-			$('.dateSel').append(`
-				</tr>
-				<tr>
-			`);
-		}
-	}
-
-	/* 남은 날 공란 */
-	for (let i = 6; i > lastDay; i--) {
-		$('.dateSel').append('<td></td>');
-	}
-	$('.dateSel').append('</tr>');
-
-	/* 달력 크기 맞추기 */
-	if ($('.dateSel').children('td').length == 35) {
-		$('.dateSel').append('<tr>');
-		for (let i = 0; i < 7; i++) {
-			$('.dateSel').append('<td></td>');
-		}
-		$('.dateSel').append('</tr>');
-	}
-
-	/* 요일별 색상 지정 */
-	$('.date').each(function(index) {
-		let day = new Date(year, month, index + 1);
-		day = day.getDay();
-
-		if (day == 6 || day == 0) { // 토요일, 일요일
-			$(this).css('color', '#ffb500');
-		} else { // 월요일 ~ 금요일
-			$(this).css('color', '#2768fa');
-		}
-	});
-}
-
-/* 오늘 날짜 표시 */
-function checkToday() {
-	$('.date').each(function() {
-		if ($(this).text() == date.getDate() && nowYear == date.getFullYear() && nowMonth == date.getMonth()) {
-			$(this).addClass('today');
-			$(this).parent('div.dateBox').parent('div.infoBox').css('border', '1px solid black');
-			$(this).addClass('selected');
-		}
-	})
-}
