@@ -10,7 +10,7 @@
 		<title>PayStory</title>
 		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/accountBook/calendarBase.css' />" rel="stylesheet" type="text/css">
-		<link href="<c:url value='/main/css/accountBook/calendarTypeB.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/chart.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/detailView.css' />" rel="stylesheet" type="text/css">
 		
 		<!-------- CSS : Bootstrap -------->
@@ -22,9 +22,11 @@
 		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
 		
 		<!-------- JS : Custom ------>
-		<script src="<c:url value='/main/js/accountBook/detailViewCalendar.js' />" type="text/javascript"></script>
-		<script src="<c:url value='/main/js/accountBook/chartAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/accountBook/calendarEtc.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/detailViewCalendar.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/calendarAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/chartAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/detailViewListAjax.js' />" type="text/javascript"></script>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -142,11 +144,12 @@
 									<!-- Card Header -->
 									<div class="card-header d-flex justify-content-between p-3">
 										<h6 class="m-0 font-weight-bold text-primary">{년월일}</h6>
-										<i class="fas fa-user-friends fa-lg pointer-cursor"></i>
-										<!-- 
-											jstl
-											소유자, 참여자 표시
-										 -->
+										<c:if test="${isShared eq true}">
+											<i class="fas fa-user-friends fa-lg pointer-cursor"></i>
+											<!-- 
+												소유자, 참여자 표시
+											 -->
+										</c:if>
 									</div>
 									<div id="detailViewListBox" class="card-body d-flex flex-column align-items-center">
 										<!-- ajax -->
@@ -163,9 +166,5 @@
 		<script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js' />"></script>
 		<script src="<c:url value='/bootstrap/vendor/jquery-easing/jquery.easing.min.js' />"></script>
 		<script src="<c:url value='/bootstrap/js/sb-admin-2.min.js' />"></script>
-		<script src="<c:url value='/bootstrap/vendor/chart.js/Chart.min.js' />"></script>
-		
-		<!-------- JS : Custom -------->
-		<script src="<c:url value='/main/js/accountBook/chart.js' />"></script>
 	</body>
 </html>

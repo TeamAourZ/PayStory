@@ -29,7 +29,7 @@
 								<c:forEach begin="0" end="${(firstDay - 1) + (lastDate - 1)}" step="1" varStatus="dateStatus">
 									<tr>
 										<!-- 첫째 날 전까지 공란 -->
-										<c:when test="${dateStatus le (firstDay - 1)}">
+										<c:when test="${dateStatus.index le (firstDay - 1)}">
 											<td></td>
 										</c:when>
 										<!-- 날짜 채우기 -->

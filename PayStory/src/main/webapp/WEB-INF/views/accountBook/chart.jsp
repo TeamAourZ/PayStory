@@ -6,12 +6,10 @@
 	<head>
 	</head>
 	<body>
-		
-		
-		
-		
-		
-		
+		<!--
+			jstl 변환 필
+			태그 별 색상
+		 -->
 		<div class="chart-pie pt-4 pb-2">
 			<canvas id="myPieChart"></canvas>
 		</div>
@@ -30,8 +28,10 @@
 			</span>
 		</div>
 		
-		
-		
-		
+		<!-------- JS : Bootstrap -------->
+		<script src="<c:url value='/bootstrap/vendor/chart.js/Chart.min.js' />"></script>
+	
+		<!-------- JS : Custom -------->
+		<script src="<c:url value='/main/js/accountBook/chart.js' />"></script>
 	</body>
 </html>

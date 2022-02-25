@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
-#mainCategoryBox {
+#categoryBox {
 	gap: 10px;
 }
-#mainCategoryBox div {
+#categoryBox div {
 	cursor: pointer;
 }
 
-#mainPostBox {
+#PostBox {
 	gap: 10px;
 }

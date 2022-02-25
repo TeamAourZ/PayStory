@@ -28,7 +28,7 @@
 								<c:forEach begin="0" end="${(firstDay - 1) + (lastDate - 1)}" step="1" varStatus="dateStatus">
 									<tr>
 										<!-- 첫째 날 전까지 공란 -->
-										<c:when test="${dateStatus le (firstDay - 1)}">
+										<c:when test="${dateStatus.index le (firstDay - 1)}">
 											<td></td>
 										</c:when>
 										<!-- 날짜 채우기 -->
@@ -44,11 +44,11 @@
 												<!-- 일별 건수 -->
 												<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
 													<!-- 수입 -->
-													<c:when test="${incomeList[index].count nq 0}">
+													<c:when test="${incomeList[index].count ne 0}">
 														<div class="incomeCount help-cursor rounded-circle p-0">${incomeList[index].count}</div>
 													</c:when>
 													<!-- 지출 -->
-													<c:when test="${expenditureList[index].count nq 0}">
+													<c:when test="${expenditureList[index].count ne 0}">
 														<div class="expenditureCount help-cursor rounded-circle p-0">${expenditureList[index].count}</div>
 													</c:when>
 												</div>
@@ -64,7 +64,7 @@
 								</c:forEach>
 								<!-- 달력 크기 맞추기 -->
 								<c:set var="length" value="${(firstDay - 1) + (lastDate - 1) + (lastDay - 1)}" />
-								<c:if test="${length le 35}">
+								<c:if test="${length eq 35}">
 									<c:forEach begin="1" end="7" step="1">
 										<td></td>
 									</c:forEach>

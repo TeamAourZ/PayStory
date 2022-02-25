@@ -12,7 +12,10 @@ $(function() {
 	} else {
 		isType = "B";
 	}
-	mainCalendarAjax(isType, nowYear, nowMonth);
+
+	calendarAjax(isType, nowYear, nowMonth); // 달력
+	mainBoardAjax(); // 게시판
+	chartAjax(nowYear, nowMonth); // 차트
 
 	/* 페이지 크기 변화 감지 */
 	$(window).resize(function() {
@@ -20,10 +23,10 @@ $(function() {
 
 		if (width >= 1374 && isType == "B") {
 			isType = "A";
-			mainCalendarAjax(isType, nowYear, nowMonth);
+			calendarAjax(isType, nowYear, nowMonth); // 달력
 		} else if (width < 1374 && isType == "A") {
 			isType = "B";
-			mainCalendarAjax(isType, nowYear, nowMonth);
+			calendarAjax(isType, nowYear, nowMonth); // 달력
 		} else if (width >= 620 && isType == "B") {
 			$('table').eq(0).removeClass('table-responsive');
 		} else if (width < 620 && isType == "B") {
@@ -40,7 +43,7 @@ $(function() {
 			nowYear--;
 			nowMonth += 12;
 		}
-		mainCalendarAjax(isType, nowYear, nowMonth);
+		calendarAjax(isType, nowYear, nowMonth); // 달력
 	});
 
 	/* 다음 버튼 클릭 */
@@ -53,7 +56,7 @@ $(function() {
 			nowMonth -= 12;
 		}
 
-		mainCalendarAjax(isType, nowYear, nowMonth);
+		calendarAjax(isType, nowYear, nowMonth); // 달력
 	});
 
 	/* today 버튼 클릭 */
@@ -65,7 +68,7 @@ $(function() {
 		nowYear = date.getFullYear();
 		nowMonth = date.getMonth();
 
-		mainCalendarAjax(isType, nowYear, nowMonth);
+		calendarAjax(isType, nowYear, nowMonth); // 달력
 	});
 
 	/* 달력 클릭 이벤트 */
@@ -127,7 +130,7 @@ $(function() {
 
 		$(this).parent().parent().parent().parent().parent().addClass('d-none');
 	});
-	
+
 	/* budgetStatusBox - 당월 예산, 남은 예산, 총 수입금, 총 지출금 */
 	$('.budgetStatusBoxToggle').on('click', function() {
 		$('#budgetStatusBox').toggleClass('d-none');
