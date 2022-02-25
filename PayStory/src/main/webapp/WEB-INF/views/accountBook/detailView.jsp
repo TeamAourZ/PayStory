@@ -7,7 +7,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>PayStory</title>
+		<title>PayStory 가계부 - 상세 조회</title>
 		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/accountBook/calendarBase.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/chart.css' />" rel="stylesheet" type="text/css">
