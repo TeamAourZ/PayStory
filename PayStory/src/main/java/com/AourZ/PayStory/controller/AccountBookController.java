@@ -522,15 +522,15 @@ public class AccountBookController {
 		
 			// 가계부 데이터 등록(공유가계부 전용)
 			accountBook.setIsShared(true);
-			accountBook.setMemberNo((String) httpSession.getAttribute("owner"));
+			accountBook.setMemberNo((String) httpSession.getAttribute("memberNo"));
 			createService.createAccountBook(accountBook);
 			
 			// 예산 등록(공유가계부 전용)
-			ShareBudget.setOwner((String) httpSession.getAttribute("owner"));
+			ShareBudget.setOwner((String) httpSession.getAttribute("memberNo"));
 			createService.createShareBudget(ShareBudget);
 			
 			// 공유가계부 데이터 등록(공유가계부 전용)
-			shareAccountBook.setOwner((String) httpSession.getAttribute("owner"));
+			shareAccountBook.setOwner((String) httpSession.getAttribute("memberNo"));
 			String participant = "";
 			
 			for (int i = 0; i < shareAccountBook.getParticipant_list().length; i++) {
