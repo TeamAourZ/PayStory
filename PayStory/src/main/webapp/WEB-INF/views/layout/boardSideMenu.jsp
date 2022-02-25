@@ -41,7 +41,7 @@
 
             <!-- Nav Item - 수입 | 지출 내역 추가 -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<c:url value='/accountBook/add'/>">
                     <i class="fas fa-plus-circle"></i>
                     <span>수입 | 지출 내역 추가</span>
                 </a>
@@ -52,7 +52,7 @@
 
             <!-- Nav Item - 게시판 -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<c:url value='/board/listAll'/>">
                     <i class="far fa-clipboard"></i>
                     <span>게시판</span>
                 </a>

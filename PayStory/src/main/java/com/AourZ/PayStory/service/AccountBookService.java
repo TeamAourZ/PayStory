@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.AourZ.PayStory.dao.IAccountBookDAO;
@@ -13,10 +14,14 @@ import com.AourZ.PayStory.model.BoardVO;
 import com.AourZ.PayStory.model.MemberVO;
 import com.AourZ.PayStory.model.ShareAccountBookVO;
 import com.AourZ.PayStory.model.TagTotalVO;
+import com.AourZ.PayStory.model.ExpenditureItemVO;
+import com.AourZ.PayStory.model.ExpenditureVO;
+import com.AourZ.PayStory.model.IncomeVO;
 
 @Service
 public class AccountBookService implements IAccountBookService {
 	@Autowired
+  @Qualifier("IAccountBookDAO")
 	private IAccountBookDAO dao;
 
 	@Override
@@ -96,6 +101,21 @@ public class AccountBookService implements IAccountBookService {
 	@Override
 	public String getBoardCategoryName(String boardCategoryNo) {
 		return dao.getBoardCategoryName(boardCategoryNo);
+	}
+  
+	@Override
+	public void insertIncome(IncomeVO vo) {
+		dao.insertIncome(vo);
+	}
+
+	@Override
+	public void insertExpenditure(ExpenditureVO vo) {
+		dao.insertExpenditure(vo);
+	}
+
+	@Override
+	public void insertExpenditureItem(ArrayList<ExpenditureItemVO> list) {
+		dao.insertExpenditureItem(list);
 	}
 
 }

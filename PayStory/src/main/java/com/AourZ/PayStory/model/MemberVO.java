@@ -64,5 +64,4 @@ public class MemberVO {
 	public void setMemberJoinDate(String memberJoinDate) {
 		this.memberJoinDate = memberJoinDate;
 	}
-
 }

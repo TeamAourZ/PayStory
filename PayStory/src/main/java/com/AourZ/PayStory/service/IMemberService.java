@@ -13,4 +13,5 @@ public interface IMemberService {
 	public void infoUpdate(MemberVO memberVO)throws Exception;
 	public String pwCheck(String memberEmail)throws Exception;	
 	public void pwUpdate(String memberEmail, String hashedPw)throws Exception;
+	public void updateImg(String memberImage, String memberEmail)throws Exception;
 }

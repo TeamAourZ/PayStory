@@ -178,4 +178,30 @@
 		FROM board_category
 		WHERE boardCategoryNo = #{boardCategoryNo}
 	</select>
+  
+	<!-- 수입 내역 추가 -->
+	<insert id="insertIncome" parameterType="com.AourZ.PayStory.model.IncomeVO" useGeneratedKeys="true" keyProperty="incomeNo">
+		INSERT INTO income 
+			(incomeDate, incomeSource, incomeMemo, incomeAmount, tagNo) 
+		VALUES
+			(#{incomeDate}, #{incomeSource}, #{incomeMemo}, #{incomeAmount}, #{tagNo})
+	</insert>
+
+	<!-- 지출 내역 추가 -->
+	<insert id="insertExpenditure" parameterType="map" useGeneratedKeys="true" keyProperty="expenditureNo">
+		INSERT INTO expenditure 
+			(expenditureDate, expenditureImage, expenditureSource, expenditureMemo, expenditureAmount, expenditureAddress, tagNo) 
+		VALUES
+			(#{expenditureDate}, #{expenditureImage}, #{expenditureSource}, #{expenditureMemo}, #{expenditureAmount}, #{expenditureAddress}, #{tagNo})
+	</insert>
+
+	<!-- 지출 아이템 추가 -->
+	<insert id="insertExpenditureItem" parameterType="list">
+		INSERT INTO expenditure_item
+			(expenditureItemName, expenditureItemPrice, expenditureNo) 
+		VALUES
+			<foreach collection="list" item="item" separator=",">
+				(#{item.expenditureItemName}, #{item.expenditureItemPrice}, #{item.expenditureNo})
+			</foreach>
+	</insert>
 </mapper>

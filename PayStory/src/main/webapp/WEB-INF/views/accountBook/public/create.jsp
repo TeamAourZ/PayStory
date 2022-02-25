@@ -6,8 +6,6 @@
 <style>
 .grid-item { width: 200px; }
 .grid-item--width2 { width: 400px; }
-
-
 </style>
 <head>
     <meta charset="utf-8">
@@ -22,9 +20,12 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+        
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/main/css/publicAccount.css">
+    <link rel="stylesheet" type="text/css" href="/main/css/accountBook/public/publicCreate.css">
+    <script src="https://kit.fontawesome.com/7031b090f1.js" crossorigin="anonymous"></script>
+    
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -46,42 +47,25 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                   	<div class="publicAccountBox" style="display:inline-block;">
-                    	<span class="ellipsis">가계부 제목</span>
-                    	<div class="box" style="background: #BDBDBD;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264"  alt="">
-						</div>
-                    	<span class="ellipsis">닉네임</span>
-                    	<div class="box2" style="background: #BDBDBD; display:inline-block;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
-						</div>
-                    	<div class="box2" style="background: #BDBDBD; display:inline-block;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
-						</div>
-                    	<div class="box2" style="background: #BDBDBD; display:inline-block;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
-						</div>
-                    </div>
-                   	<div class="publicAccountBox" style="display:inline-block;">
-                    	<span class="ellipsis">가계부 제목</span>
-                    	<div class="box" style="background: #BDBDBD;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264"  alt="">
-						</div>
-                    	<span class="ellipsis">닉네임</span>
-                    	<div class="box2" style="background: #BDBDBD; display:inline-block;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
-						</div>
-                    	<div class="box2" style="background: #BDBDBD; display:inline-block;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
-						</div>
-                    	<div class="box2" style="background: #BDBDBD; display:inline-block;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
-						</div>
-                    </div>
-                   	
-                    <!-- Content Row -->
-					
-                    <!-- Content Row -->
+                    <div class="createBox shadow">
+                    <div class="card-header">
+                   	<center><h5>공유가계부를 만들어보세요</h5></center>
+                   	</div>
+                        <form id="createPublicForm" name="createPublicForm" action="<c:url value='/accountBook/public/create/do'/>">
+                           	<input id="accountBookTitle" type="text" name="accountBookTitle" class="inputbox" placeholder="제목" size="50">
+                            <input id="budgetAmount" type="text" name="budgetAmount" class="inputbox" placeholder="예산(원)" size="50">
+                            <input id="participant_list[0]" type="text" name="participant_list[0]" class="inputbox plusbox" placeholder="초대할 이메일주소" size="50">
+
+                            <button type="button" id="plusbtn" class="plusbtn plusbox btn1"><i class="fa-solid fa-plus fa plusImage"></i></button>
+                            
+                            <div class="clearboth"></div>
+                            <div class="choice">
+                            <button type="submit" id="submitbtn1" class="btn1">생성</button>
+                            <button type="reset" id="resetbtn1" class="btn1">취소</button>
+                            </div>
+                       	 </form>
+                        </div>
+               
 
                     <!-- Content Row -->
 
@@ -92,13 +76,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
+           
             <!-- End of Footer -->
 
         </div>
@@ -152,13 +130,46 @@
     
     <!-- <script src="https://naver.github.io/egjs-infinitegrid/release/latest/dist/infinitegrid.min.js" crossorigin="anonymous"></script> -->
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    
+    <script src="/main/js/createPublicCheck.js"></script>
+    <script src="/main/js/createPublicAccount.js"></script>
     <script type="text/javascript">
+    var emailIndex = 0;
+    /* var emailList = ['email1']; */
+    
     $('.grid').masonry({
    	  // options
    	  itemSelector: '.grid-item',
    	  columnWidth: 200
    	});
+    
+   /*  function addEmail() {
+		alert("test");	
+	} */
+    
+    $('#plusbtn').on('click', function(){
+    	emailIndex+=1;
+    	$('#listSize').val(emailIndex);
+    	
+    	$('#plusbtn').before("<input id='participant_list["+emailIndex+"]' type='text' name='participant_list["+emailIndex+"]' class='inputbox plusbox' placeholder='초대할 이메일주소' size='50'>");
+    	$('#plusbtn').before("<button type='button' id='delbtn"+emailIndex+"' class='delbtn delbox btn1' onclick='delEmail("+emailIndex+")'><i class='fa-solid fa-xmark delImage'></i></button>");
+    	
+    	/* emailList.push('email'+emailIndex); */
+	});
+
+	function delEmail(index) {
+		$("#participant_list\\["+index+"\\]").remove();
+		$("#delbtn"+index).remove();
+		
+	/* 	if(emailIndex > index && $("#participant_list\\["+emailIndex+"\\]")!=NULL){
+			$("#participant_list\\["+index+"\\]")=$("#participant_list\\["+emailIndex+"\\]");
+			$("#participant_list\\["+emailIndex+"\\]").remove();
+			$("#delbtn"+emailIndex).remove();
+		} */
+			
+	}
+	
+	
     </script>
+    
 </body>
 </html>

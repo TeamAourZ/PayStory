@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.AourZ.PayStory.dao.IShareAccountDAO">
+
+	<resultMap id="createAccountBook"
+		type="com.AourZ.PayStory.model.AccountBookVO">
+		<result property="accountBookNo" column="accountBookNo" />
+		<result property="accountBookTitle" column="accountBookTitle" />
+		<result property="accountBookDescribe"
+			column="accountBookDescribe" />
+		<result property="accountBookDate" column="accountBookDate" />
+		<result property="isShared" column="isShared" />
+		<result property="budget" column="budget" />
+		<result property="memberNo" column="memberNo" />
+	</resultMap>
+
+
+	<resultMap id="createShareAccountBook"
+		type="com.AourZ.PayStory.model.ShareAccountBookVO">
+		<result property="participant" column="shareAccountBookDate" />
+		<result
+			property="shareAccountBookVOList.get().getParticipant()"
+			column="owner" />
+		<result property="owner" column="participant" />
+	</resultMap>
+
+	<!-- 공유가계부 메인화면 조회 -->
+
+
+
+	<!-- 공유가계부 전용 데이터 등록 -->
+	<insert id="createAccountBook"
+		parameterType="com.AourZ.PayStory.model.AccountBookVO">
+		INSERT INTO account_book (accountBookTitle, memberNo,
+		isShared)
+		VALUES (#{accountBookTitle}, #{memberNo}, #{isShared})
+	</insert>
+
+	<insert id="createShareAccountBook"
+		parameterType="com.AourZ.PayStory.model.ShareAccountBookVO">
+		INSERT
+		INTO share_account_book
+		(
+		owner,
+		participant,
+		accountBookNo
+		)
+		VALUES
+		(
+		#{owner},
+		(SELECT memberNo FROM member WHERE memberEmail=#{participant}),
+		(SELECT MAX(accountBookNo) FROM account_book WHERE memberNo =#{owner})
+		)
+	</insert>
+
+	<insert id="createShareBudget"
+		parameterType="com.AourZ.PayStory.model.ShareBudgetVO">
+		INSERT INTO account_book_budget 
+		(
+		budgetDate,
+		budgetAmount, 
+		accountBookNo
+		)
+		VALUES 
+		(
+		(SELECT DATE_FORMAT(now(),'%Y-%m-%d')),
+		#{budgetAmount},
+		(SELECT MAX(accountBookNo) FROM account_book WHERE memberNo =#{owner})
+		)
+	</insert>
+
+
+	<!-- <select id="" resultMap="createAccountBook" resultType=""></select> -->
+
+
+</mapper>

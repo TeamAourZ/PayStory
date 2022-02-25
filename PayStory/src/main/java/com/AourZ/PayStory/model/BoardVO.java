@@ -9,7 +9,7 @@ public class BoardVO {
 	private String boardFile;				// 게시글 첨부 파일
 	private String memberNo;				// 게시글 게시자
 	private String boardCategoryNo;	// 게시글 카테고리
-
+  
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -73,5 +73,4 @@ public class BoardVO {
 	public void setBoardCategoryNo(String boardCategoryNo) {
 		this.boardCategoryNo = boardCategoryNo;
 	}
-
 }

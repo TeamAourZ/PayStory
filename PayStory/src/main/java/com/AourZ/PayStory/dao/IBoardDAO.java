@@ -1,12 +1,13 @@
 package com.AourZ.PayStory.dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.AourZ.PayStory.model.BoardVO;
 import com.AourZ.PayStory.service.IBoardService;
 
 public interface IBoardDAO extends IBoardService {
-	
-	public List<BoardVO> getList(BoardVO searchVO);
-
+	public ArrayList<BoardVO> getList();
+	public ArrayList<BoardVO> getCategory(String ctgNo);
+	public BoardVO boardView(int boardNo);
+	public int createBoard(BoardVO vo);
 }

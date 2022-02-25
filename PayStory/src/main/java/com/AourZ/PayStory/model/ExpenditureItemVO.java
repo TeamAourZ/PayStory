@@ -28,5 +28,4 @@ public class ExpenditureItemVO {
 	public void setExpenditureNo(int expenditureNo) {
 		this.expenditureNo = expenditureNo;
 	}
-
 }

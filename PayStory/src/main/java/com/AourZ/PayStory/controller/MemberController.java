@@ -23,14 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.AourZ.PayStory.model.FileUtils;
 import com.AourZ.PayStory.model.LoginVO;
 import com.AourZ.PayStory.model.MemberVO;
 import com.AourZ.PayStory.service.IMemberService;
-
-
 
 @Controller
 @RequestMapping("/member")
@@ -40,7 +40,6 @@ public class MemberController {
 	
 	@Inject 
 	private IMemberService memberService;
-	
 	
 	//  ****************** 회원가입 ****************** 
 	@RequestMapping(value="/registerView",method= RequestMethod.GET)
@@ -152,8 +151,8 @@ public class MemberController {
 		}
 		// model.addAttribute로 member라는 key에 memberVO의 데이터를 담았다.
 		model.addAttribute("member", memberVO);
-		httpSession.setAttribute("sid", memberVO.getMemberNo()); // 2022.02.20 강성우추가... 세션으로 'sid'에 'memberNo'값 저장
-		return "/index";
+		httpSession.setAttribute("owner", memberVO.getMemberNo()); // 2022.02.20 강성우추가... 세션으로 'sid'에 'memberNo'값 저장
+		return "/accountBook/home";
 	}
 	
 	// ****************** 비밀번호 찾기 ******************
@@ -188,18 +187,15 @@ public class MemberController {
 	}
 	
 	// ****************** 프로필수정 ******************
-	@RequestMapping(value="/infoView", method=RequestMethod.GET)
-	public String infoView() throws Exception{
-		return"/member/memberInfoView";
-	}
-	
+
 	// 회원정보 수정로직
 	@RequestMapping(value="/infoUpdate", method=RequestMethod.POST)
 	public String infoUpdate(HttpServletRequest request,HttpSession session,MemberVO memberVO,Model model,RedirectAttributes rttr)throws Exception{
+				
 		memberService.infoUpdate(memberVO); 
-		session.invalidate();
+		session.setAttribute("login", memberVO);
 		rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다.");
-		return"/member/memberInfoView";
+		return"/accountBook/home";
 	}
 	
 	// 비밀번호 수정로직
@@ -208,7 +204,7 @@ public class MemberController {
 		return "/member/pwUpdateView";
 	}
 
-	@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)
+	@RequestMapping(value="/pwCheck", method=RequestMethod.POST)
 	@ResponseBody
 	public int pwCheck(MemberVO memberVO) throws Exception{
 		String memberPwd = memberService.pwCheck(memberVO.getMemberEmail());
@@ -219,14 +215,27 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/pwUpdate" , method=RequestMethod.POST)
-	public String pwUpdate(String getMemberEmail,String memberPwd1,RedirectAttributes rttr,HttpSession session)throws Exception{
+	public String pwUpdate(String memberEmail,String memberPwd1,RedirectAttributes rttr,HttpSession session)throws Exception{
 		String hashedPw = BCrypt.hashpw(memberPwd1, BCrypt.gensalt());
-		memberService.pwUpdate(getMemberEmail, hashedPw);
+		memberService.pwUpdate(memberEmail, hashedPw);
 		session.invalidate();
 		rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다. 다시 로그인해주세요.");
 		
 		return "redirect:/member/loginView";
 	}
+	
+	// 프로필사진
+	@RequestMapping(value="/updateImg", method=RequestMethod.POST)
+	public String updateImg(MultipartHttpServletRequest mpRequest, HttpSession session , String memberEmail)throws Exception {	
+		String memberImage = FileUtils.updateImg(mpRequest); 
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");		
+		memberService.updateImg(memberImage, memberEmail);		
+		memberVO.setMemberImage(memberImage);
+		session.setAttribute("login", memberVO);
+					
+		return "/accountBook/home";
+	}
+	
 }
 	
 	
