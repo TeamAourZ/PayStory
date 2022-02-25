@@ -1,5 +1,5 @@
 /* 페이지 로드 - 차트 */
-function chartAjax() {
+function chartAjax(year, month) {
 	let chartType = $('#chartType').val();
 	
 	let chartTab = "";
@@ -14,6 +14,8 @@ function chartAjax() {
 		type: 'post',
 		url: "/accountBook/chart",
 		data: {
+			"year": year,
+			"month": month,
 			"chartType": chartType,
 			"chartTab": chartTab
 		},

@@ -1,5 +1,5 @@
 /* 페이지 로드 - 달력 */
-function mainCalendarAjax(calendarType, year, month) {
+function calendarAjax(calendarType, year, month) {
 	let firstDay = new Date(year, month, 1).getDay(); // 달의 시작 요일 번호
 	let lastDate = new Date(year, month + 1, 0).getDate(); // 달의 마지막 날
 	let lastDay = new Date(year, month + 1, 0).getDay(); // 달의 마지막 요일 번호
