@@ -36,8 +36,6 @@ $(function() {
 
 	/* 이전 버튼 클릭 */
 	$('#prevMonthBtn').on('click', () => {
-		$('.dateSel').children().remove();
-
 		nowMonth--;
 		if (nowMonth === -1) { // 0월이 되면 이전 연도 12월로 변경
 			nowYear--;
@@ -48,8 +46,6 @@ $(function() {
 
 	/* 다음 버튼 클릭 */
 	$('#nextMonthBtn').on('click', () => {
-		$('.dateSel').children().remove();
-
 		nowMonth++;
 		if (nowMonth === 12) { // 13월이 되면 다음 연도 1월로 변경
 			nowYear++;
@@ -61,8 +57,6 @@ $(function() {
 
 	/* today 버튼 클릭 */
 	$('#todayBtn').on('click', () => {
-		$('.dateSel').children().remove();
-
 		const date = new Date();
 
 		nowYear = date.getFullYear();
@@ -74,6 +68,12 @@ $(function() {
 	/* 달력 클릭 이벤트 */
 	$(document).on('click', '.infoBox', function(e) {
 		e.stopImmediatePropagation();
+		
+/*		$(this).each(function() {
+			if ($(this)[0].classList[1] != "border") {
+				
+			}
+		});*/
 
 		for (let i = 0; i < $('.infoBox').length; i++) {
 			//console.log($('.infoBox').eq(i)[0].classList[1]);
@@ -134,5 +134,29 @@ $(function() {
 	/* budgetStatusBox - 당월 예산, 남은 예산, 총 수입금, 총 지출금 */
 	$('.budgetStatusBoxToggle').on('click', function() {
 		$('#budgetStatusBox').toggleClass('d-none');
+	});
+
+	/* 차트 태그 선택 */
+	$('.chartTab').on('click', function(selectIndex) {
+		$('.chartTab').each(function(index) {
+			if (selectIndex != index) {
+				$(this).removeClass('selected');
+			}
+		});
+		$(this).addClass('selected');
+
+		chartAjax(nowYear, nowMonth); // 차트
+	});
+
+	/* 카테고리 선택 */
+	$('.boardCategory').on('click', function(selectIndex) {
+		$('.boardCategory').each(function(index) {
+			if (selectIndex != index) {
+				$(this).removeClass('selected');
+			}
+		});
+		$(this).addClass('selected');
+
+		mainBoardAjax(); // 게시판
 	});
 });

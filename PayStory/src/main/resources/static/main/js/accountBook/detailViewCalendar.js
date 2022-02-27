@@ -28,8 +28,6 @@ $(function() {
 
 	/* 이전 버튼 클릭 */
 	$('#prevMonthBtn').on('click', () => {
-		$('.dateSel').children().remove();
-
 		nowMonth--;
 		if (nowMonth === -1) { // 0월이 되면 이전 연도 12월로 변경
 			nowYear--;
@@ -41,8 +39,6 @@ $(function() {
 
 	/* 다음 버튼 클릭 */
 	$('#nextMonthBtn').on('click', () => {
-		$('.dateSel').children().remove();
-
 		nowMonth++;
 		if (nowMonth === 12) { // 13월이 되면 다음 연도 1월로 변경
 			nowYear++;
@@ -54,8 +50,6 @@ $(function() {
 
 	/* today 버튼 클릭 */
 	$('#todayBtn').on('click', () => {
-		$('.dateSel').children().remove();
-
 		const date = new Date();
 
 		nowYear = date.getFullYear();
@@ -83,4 +77,6 @@ $(function() {
 			$(this).children('div.dateBox').children('div.date').addClass('selected');
 		}
 	});
+
+
 });

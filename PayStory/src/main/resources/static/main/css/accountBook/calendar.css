@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+/* 공통 */
+#calendarBtnBox i {
+	color: var(--gray);
+}
+
+#yearMonth {
+	color: rgba(0, 0, 0, 0.9);
+}
+
+#otherBtnBox {
+	gap: 5px;
+}
+
+.today {
+	color: rgba(0, 0, 0, 1);
+	background: rgba(0, 255, 64, 0.51);
+}
+
+.incomeCount {
+	min-width: 21px;
+	border: 1px solid #2768fa;
+	font-size: 9pt;
+}
+
+.incomeValue {
+	color: #2768fa;
+	font-size: 9pt;
+}
+
+.expenditureCount {
+	min-width: 21px;
+	border: 1px solid #ffb500;
+	font-size: 9pt;
+}
+
+.expenditureValue {
+	color: #ffb500;
+	font-size: 9pt;
+}
+
+.detailBox {
+	font-size: 9pt;
+	color: black;
+	margin-left: 2.75em;
+}
+
+.incomeItemListBox, .expenditureItemListBox {
+	background: var(--light);
+	border-radius: 10px;
+	border: 1px solid var(--dark);
+	z-index: 10;
+}
+.incomeItemListBox i, .expenditureItemListBox i {
+	top: 10%;
+	right: 2%;
+}
+
+.default-cursor {
+	cursor: default;
+}
+
+.pointer-cursor {
+    cursor: pointer;
+}
+
+.help-cursor {
+	cursor: help;
+}
+
+
+/* 달력 A */
+.daySel.typeA {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 15px;
+}
+.daySel.typeA div:first-child, .daySel.typeA div:last-child {
+    background: #ffb500;
+}
+.daySel.typeA div {
+    color: white;
+    font-size: 13pt;
+    border-radius: 15px;
+    background: #2768fa;
+    text-align: center;
+}
+
+.dateSel.typeA {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 15px;
+}
+.dateSel.typeA div.infoBox {
+    min-height: 90px;
+    font-size: 13pt;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid #b5b1b1;
+}
+
+.date.typeA {
+	width: 24px;
+}
+
+
+/* 달력 B */
+.daySel.typeB tr th:first-child div, .daySel.typeB tr th:last-child div {
+    background: #ffb500;
+}
+.daySel.typeB div {
+    color: white;
+    font-size: 11pt;
+    border-radius: 15px;
+    background: #2768fa;
+    text-align: center;
+}
+
+.dateSel.typeB div.infoBox {
+    font-size: 11pt;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.date.typeB {
+	width: 20px;
+}
+
+
+/* 달력 C */
