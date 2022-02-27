@@ -6,16 +6,21 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.AourZ.PayStory.model.LoginVO;
 import com.AourZ.PayStory.model.MemberVO;
+import com.AourZ.PayStory.service.AccountBookService;
 
 @Repository
 public class MemberDAO implements IMemberDAO {
 	
 	@Inject
 	private SqlSession sqlsession;
+	
+	@Autowired
+	private AccountBookService accountBookService;
 		
 	@Override
 	public void register(MemberVO memberVO) throws Exception{
@@ -46,6 +51,12 @@ public class MemberDAO implements IMemberDAO {
 	@Override
 	public void memberAuth(String memberEmail) throws Exception{
 		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.memberAuth", memberEmail);
+		
+		// 회원 번호 조회
+		String memberNo = accountBookService.selectMemberNo(memberEmail);
+		
+		// 일반 가계부 생성
+		accountBookService.createMyAccountBook(memberNo);
 	}
 	
 	@Override
