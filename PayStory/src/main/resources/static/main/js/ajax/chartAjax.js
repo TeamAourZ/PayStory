@@ -15,7 +15,7 @@ function chartAjax(year, month) {
 		url: "/accountBook/chart",
 		data: {
 			"year": year,
-			"month": month,
+			"month": month + 1,
 			"chartType": chartType,
 			"chartTab": chartTab
 		},

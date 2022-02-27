@@ -8,10 +8,13 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>PayStory</title>
+		
 		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/accountBook/calendarBase.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/calendar.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/chart.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/detailView.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/detailViewList.css' />" rel="stylesheet" type="text/css">
 		
 		<!-------- CSS : Bootstrap -------->
 		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -60,31 +63,8 @@
 										</div>
 									</div>
 									<!-- Card Body -->
-									<div id="calendarBox" class="card-body">
-										<div class="table m-0 mt-2">
-											<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-												<div class="row">
-													<div class="col-sm-12">
-														<table class="table mb-0">
-															<thead class="daySel">
-																<tr class="text-center">
-																	<th style="width: 14%;">SUN</th>
-																	<th style="width: 14%;">MON</th>
-																	<th style="width: 14%;">TUE</th>
-																	<th style="width: 14%;">WED</th>
-																	<th style="width: 14%;">THU</th>
-																	<th style="width: 14%;">FRI</th>
-																	<th style="width: 14%;">SAT</th>
-																</tr>
-															</thead>
-															<tbody class="dateSel">
-																<!-- ajax -->
-															</tbody>
-														</table>
-													</div>
-												</div>
-											</div>
-										</div>
+									<div id="calendarDateBox" class="card-body">
+										<!-- ajax -->
 									</div>
 								</div>
 								
@@ -98,7 +78,7 @@
 									<!-- Card Body -->
 									<div class="card-body">
 										<div class="d-flex justify-content-between">
-											<div id="chartMainTagBox" class="d-flex">
+											<div id="chartMainTagBox" class="d-flex pointer-cursor">
 												<div id="chartTab1">수입</div>
 												<div id="chartTab2">지출</div>
 											</div>

@@ -8,10 +8,12 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>PayStory</title>
+		
 		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/accountBook/calendarBase.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/chart.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/mainBoard.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/calendar.css' />" rel="stylesheet" type="text/css">
 		
 		<!-------- CSS : Bootstrap -------->
 		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -55,8 +57,8 @@
 									<div class="card-body">
 										<div class="d-flex justify-content-between">
 											<div id="chartMainTagBox" class="d-flex">
-												<div id="chartTab1">수입</div>
-												<div id="chartTab2">지출</div>
+												<div id="chartTab1" class="chartTab selected">수입</div>
+												<div id="chartTab2" class="chartTab">지출</div>
 											</div>
 											<div id="budgetStatusBox" class="d-none">
 												<div class="row">
@@ -101,9 +103,9 @@
 									</div>
 									<!-- Card Body -->
 									<div class="card-body">
-										<div id="categoryBox" class="d-flex mb-2">
-											<div id="boardTab1">전체</div>
-											<div id="boardTab2">공지사항</div>
+										<div id="categoryBox" class="d-flex mb-2 pointer-cursor">
+											<div id="boardTab1" class="boardCategory selected">전체</div>
+											<div id="boardTab2" class="boardCategory">공지사항</div>
 										</div>
 										<div id="postBox" class="d-flex flex-column">
 											<!-- ajax -->

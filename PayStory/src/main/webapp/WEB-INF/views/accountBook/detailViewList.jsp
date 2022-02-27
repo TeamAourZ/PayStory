@@ -5,10 +5,6 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<!-------- CSS : Custom -------->
-		<link href="<c:url value='/main/css/accountBook/detailViewList.css' />" rel="stylesheet" type="text/css">
-	</head>
 	<body>
 		<c:choose>
 			<c:when test="${empty dataList}">
