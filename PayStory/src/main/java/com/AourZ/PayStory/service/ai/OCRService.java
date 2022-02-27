@@ -24,7 +24,7 @@ import com.AourZ.PayStory.model.ExpenditureVO;
 
 @Service
 public class OCRService {
-	@Value("${ai.ocr.secretKey}")
+	@Value("${ai.ocr.secret-key}")
 	private String KEY;
 	@Value("${ai.ocr.url}")
 	private String URL;
