@@ -9,6 +9,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.tagext.TryCatchFinally;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,58 +47,62 @@ public class AccountBookController {
 
 	/* 대시보드 메인 - 일반 가계부 */
 	@RequestMapping("/accountBook/myMain")
-	public String myMain(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-		// session 정보 가져오기
-		HttpSession session = request.getSession();
-		String signInMemberNo = (String) session.getAttribute("memberNo"); // 회원 번호
+	public String myMain(HttpServletRequest request, HttpServletResponse response, Model model) {
+		try {
+			// session 정보 가져오기
+			HttpSession session = request.getSession();
+			String signInMemberNo = (String) session.getAttribute("memberNo"); // 회원 번호
 
-		// 로그인 정보 확인
-		if (signInMemberNo == null) {
+			// 로그인 정보 확인
+			if (signInMemberNo == null) {
 
-			response.setContentType("text/html; charset=UTF-8");
+				response.setContentType("text/html; charset=UTF-8");
 
-			PrintWriter out = response.getWriter();
+				PrintWriter out = response.getWriter();
 
-			out.println("<script>alert('로그인 정보가 정확하지 않습니다.'); location.href='/index';</script>");
+				out.println("<script>alert('로그인 정보가 정확하지 않습니다.'); location.href='/index';</script>");
 
-			out.flush();
+				out.flush();
+			}
+
+			// 가계부 정보 가져오기
+			AccountBookVO accountBookInfo = accountBookService.selectMyAccountBook(signInMemberNo, false);
+
+			int accountBookNo = accountBookInfo.getAccountBookNo(); // 가계부 번호
+			String accountBookTitle = accountBookInfo.getAccountBookTitle(); // 가계부 타이틀
+			boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분 - 내 가계부
+
+			model.addAttribute("accountBookTitle", accountBookTitle);
+			model.addAttribute("isShared", isShared);
+
+			// session 업데이트 (가계부 번호 추가)
+			session.setAttribute("accountBookNo", accountBookNo);
+
+			// 현재 년-월 (시스템 시간 기준)
+			String date = methodList.nowDate();
+
+			// 예산
+			AccountBookBudgetVO budget = accountBookService.selectAccountBookBudget(accountBookNo, date);
+			if (budget != null) {
+				model.addAttribute("budget", budget.getBudgetAmount());
+			}
+
+			// 총 수입 (당월 총 건수, 총 금액)
+			ArrayList<TagTotalVO> income = methodList.selectTagTotalList("income", accountBookNo, "date", "month", date);
+			if (income != null && income.size() > 0) {
+				model.addAttribute("incomeTotalAmount", income.get(0).getSum());
+			}
+
+			// 총 지출 (당월 총 건수, 총 금액)
+			ArrayList<TagTotalVO> expenditure = methodList.selectTagTotalList("expenditure", accountBookNo, "date", "month",
+					date);
+			if (expenditure != null && expenditure.size() > 0) {
+				model.addAttribute("expenditureTotalAmount", expenditure.get(0).getSum());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
-		// 가계부 정보 가져오기
-		AccountBookVO accountBookInfo = accountBookService.selectMyAccountBook(signInMemberNo, false);
-
-		int accountBookNo = accountBookInfo.getAccountBookNo(); // 가계부 번호
-		String accountBookTitle = accountBookInfo.getAccountBookTitle(); // 가계부 타이틀
-		boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분 - 내 가계부
-
-		model.addAttribute("accountBookTitle", accountBookTitle);
-		model.addAttribute("isShared", isShared);
-
-		// session 업데이트 (가계부 번호 추가)
-		session.setAttribute("accountBookNo", accountBookNo);
-
-		// 현재 년-월 (시스템 시간 기준)
-		String date = methodList.nowDate();
-
-		// 예산
-		AccountBookBudgetVO budget = accountBookService.selectAccountBookBudget(accountBookNo, date);
-		if (budget != null) {
-			model.addAttribute("budget", budget.getBudgetAmount());
-		}
-
-		// 총 수입 (당월 총 건수, 총 금액)
-		ArrayList<TagTotalVO> income = methodList.selectTagTotalList("income", accountBookNo, "date", "month", date);
-		if (income != null && income.size() > 0) {
-			model.addAttribute("incomeTotalAmount", income.get(0).getSum());
-		}
-
-		// 총 지출 (당월 총 건수, 총 금액)
-		ArrayList<TagTotalVO> expenditure = methodList.selectTagTotalList("expenditure", accountBookNo, "date", "month",
-				date);
-		if (expenditure != null && expenditure.size() > 0) {
-			model.addAttribute("expenditureTotalAmount", expenditure.get(0).getSum());
-		}
-
 		return "accountBook/main";
 	}
 
