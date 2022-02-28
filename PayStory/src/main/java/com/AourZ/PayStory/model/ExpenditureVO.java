@@ -1,15 +1,27 @@
 package com.AourZ.PayStory.model;
 
+import java.util.ArrayList;
+
 public class ExpenditureVO {
 	private int expenditureNo;			// 지출 내역 번호
 	private String expenditureDate;		// 지출 내역 등록 날짜
 	private String expenditureImage;	// 영수증 이미지
 	private String expenditureSource;	// 지출원
-	private String expenditureMemo;	// 해당 지출건 메모
+	private String expenditureMemo;		// 해당 지출건 메모
 	private String expenditureAddress;	// 지출원 주소
 	private int expenditureAmount;		// 지출 금액
-	private String tagNo;					// 지출 태그
+	private String tagNo;				// 지출 태그
 	private int accountBookNo;			// 지출 내역 소유 가계부 번호
+	
+	private ArrayList<ExpenditureItemVO> itemList;	// 아이템 리스트
+
+	public ArrayList<ExpenditureItemVO> getItemList() {
+		return itemList;
+	}
+
+	public void setItemList(ArrayList<ExpenditureItemVO> itemList) {
+		this.itemList = itemList;
+	}
 
 	public int getExpenditureNo() {
 		return expenditureNo;
