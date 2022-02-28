@@ -1,4 +1,4 @@
-/* 페이지 로드 - 차트 */
+/* 페이지 로드 - 일별 상세 내역 조회 */
 function detailViewListAjax() {
 	$.ajax({
 		type: 'post',

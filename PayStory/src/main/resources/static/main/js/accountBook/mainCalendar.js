@@ -36,8 +36,6 @@ $(function() {
 
 	/* 이전 버튼 클릭 */
 	$('#prevMonthBtn').on('click', () => {
-		$('.dateSel').children().remove();
-
 		nowMonth--;
 		if (nowMonth === -1) { // 0월이 되면 이전 연도 12월로 변경
 			nowYear--;
@@ -48,8 +46,6 @@ $(function() {
 
 	/* 다음 버튼 클릭 */
 	$('#nextMonthBtn').on('click', () => {
-		$('.dateSel').children().remove();
-
 		nowMonth++;
 		if (nowMonth === 12) { // 13월이 되면 다음 연도 1월로 변경
 			nowYear++;
@@ -61,8 +57,6 @@ $(function() {
 
 	/* today 버튼 클릭 */
 	$('#todayBtn').on('click', () => {
-		$('.dateSel').children().remove();
-
 		const date = new Date();
 
 		nowYear = date.getFullYear();
@@ -75,22 +69,15 @@ $(function() {
 	$(document).on('click', '.infoBox', function(e) {
 		e.stopImmediatePropagation();
 
-		for (let i = 0; i < $('.infoBox').length; i++) {
-			//console.log($('.infoBox').eq(i)[0].classList[1]);
-			if ($('.infoBox').eq(i)[0].classList[1] !== "border") {
-				if (isType == "A") {
-					$('.infoBox').eq(i).css('border', '1px solid #b5b1b1');
-				} else {
-					$('.infoBox').eq(i).css('border', '1px solid white');
-				}
-				$('.infoBox').eq(i).children('div.dateBox').children('div.date').removeClass('selected');
+		$('.infoBox').each(function() {
+			if ($(this).hasClass('border-color-black')) {
+				$(this).removeClass('border-color-black');
+				$(this).children('div.dateBox').children('div.date').removeClass('selected');
 			}
-		}
+		});
 
-		if ($(this)[0].classList[1] !== "border") {
-			$(this).css('border', '1px solid black');
-			$(this).children('div.dateBox').children('div.date').addClass('selected');
-		}
+		$(this).addClass('border-color-black');
+		$(this).children('div.dateBox').children('div.date').addClass('selected');
 
 		$('.viewOn').addClass('d-none');
 		$('.viewOn').removeClass('viewOn');
@@ -101,27 +88,47 @@ $(function() {
 	$(document).on('click', '.incomeCount', function(e) {
 		e.stopImmediatePropagation();
 
-		let idx = getDayNum($(this));
+		$('.tagIncomeListBox').each(function() {
+			if ($(this).hasClass('viewOn')) {
+				$(this).toggleClass('viewOn');
+				$(this).toggleClass('d-none');
+			}
+		});
 
-		$('.incomeItemListBox').eq(idx).toggleClass('d-none');
-		$('.incomeItemListBox').eq(idx).addClass('viewOn');
-		$('.detailBox').eq(idx).css('margin-top', '-4.2em');
+		let selectCount;
 
-		resetDisplay($('.incomeItemListBox'), idx, true);
-		resetDisplay($('.expenditureItemListBox'), idx, false);
+		if (isType == "A") {
+			selectCount = $(this).parent().parent().next().children('div:first-child');
+		} else {
+			selectCount = $(this).parent().next().children('div:first-child');
+		}
+
+		selectCount.toggleClass('viewOn');
+		selectCount.toggleClass('d-none');
+		selectCount.parent('div.detailBox').css('margin-top', '-4.2em');
 	});
 	/* 지출 */
 	$(document).on('click', '.expenditureCount', function(e) {
 		e.stopImmediatePropagation();
 
-		let idx = getDayNum($(this));
+		$('.tagExpenditureListBox').each(function() {
+			if ($(this).hasClass('viewOn')) {
+				$(this).toggleClass('viewOn');
+				$(this).toggleClass('d-none');
+			}
+		});
 
-		$('.expenditureItemListBox').eq(idx).toggleClass('d-none');
-		$('.expenditureItemListBox').eq(idx).addClass('viewOn');
-		$('.detailBox').eq(idx).css('margin-top', '-2.2em');
+		let selectCount;
 
-		resetDisplay($('.incomeItemListBox'), idx, false);
-		resetDisplay($('.expenditureItemListBox'), idx, true);
+		if (isType == "A") {
+			selectCount = $(this).parent().parent().next().children('div:last-child');
+		} else {
+			selectCount = $(this).parent().next().children('div:last-child');
+		}
+
+		selectCount.toggleClass('viewOn');
+		selectCount.toggleClass('d-none');
+		selectCount.parent('div.detailBox').css('margin-top', '-2.2em');
 	});
 
 	/* detailBox - 수입 상세 태그 / 지출 상세 태그 닫기 */
@@ -134,5 +141,29 @@ $(function() {
 	/* budgetStatusBox - 당월 예산, 남은 예산, 총 수입금, 총 지출금 */
 	$('.budgetStatusBoxToggle').on('click', function() {
 		$('#budgetStatusBox').toggleClass('d-none');
+	});
+
+	/* 차트 태그 선택 */
+	$('.chartTab').on('click', function(selectIndex) {
+		$('.chartTab').each(function(index) {
+			if (selectIndex != index) {
+				$(this).removeClass('selected');
+			}
+		});
+		$(this).addClass('selected');
+
+		chartAjax(nowYear, nowMonth); // 차트
+	});
+
+	/* 카테고리 선택 */
+	$('.boardCategory').on('click', function(selectIndex) {
+		$('.boardCategory').each(function(index) {
+			if (selectIndex != index) {
+				$(this).removeClass('selected');
+			}
+		});
+		$(this).addClass('selected');
+
+		mainBoardAjax(); // 게시판
 	});
 });

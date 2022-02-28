@@ -4,17 +4,13 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<!-------- CSS : Custom -------->
-		<link href="<c:url value='/main/css/accountBook/calendarTypeB.css' />" rel="stylesheet" type="text/css">
-	</head>
 	<body>
 		<div class="table m-0 mt-2">
 			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 				<div class="row">
 					<div class="col-sm-12">
 						<table class="table mb-0">
-							<thead class="daySel">
+							<thead class="daySel typeB">
 								<tr class="text-center">
 									<th style="width: 14%;">SUN</th>
 									<th style="width: 14%;">MON</th>
@@ -25,118 +21,253 @@
 									<th style="width: 14%;">SAT</th>
 								</tr>
 							</thead>
-							<tbody class="dateSel">
-								<c:forEach begin="0" end="${(firstDay - 1) + (lastDate - 1)}" step="1" varStatus="dateStatus">
+							<tbody class="dateSel typeB">
+								<%-- 당월 날짜 index --%>
+								<c:set var="dateIndex" value="0" />
+								
+								<%-- 날짜 생성 --%>
+								<c:forEach begin="0" end="${week}" step="1" varStatus="weekStatus">
 									<tr>
-										<!-- 첫째 날 전까지 공란 -->
-										<c:when test="${dateStatus.index le (firstDay - 1)}">
-											<td></td>
-										</c:when>
-										<!-- 날짜 채우기 -->
-										<c:otherwise>
-											<c:set var="index" value="${dateStatus.index - (firstDay - 1)}" />
-											
-											<td class="tdDate p-0 pt-1 pb-1">
-												<!-- 날짜, 휴무일 명칭(임시) -->
-												<div class="dateBox d-flex align-items-center text-center">
-													<div class="date ${dateList[index].date} rounded-circle m-1">${dateList[index].day}</div>
-													<div class="text-xs text-truncate">${dateList[index].holidayName}</div>
-												</div>
-												<!-- 일별 건수 -->
-												<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
-													<!-- 수입 -->
-													<c:when test="${incomeList[index].count nq 0}">
-														<div class="incomeCount help-cursor rounded-circle p-0">${incomeList[index].count}</div>
-													</c:when>
-													<!-- 지출 -->
-													<c:when test="${expenditureList[index].count nq 0}">
-														<div class="expenditureCount help-cursor rounded-circle p-0">${expenditureList[index].count}</div>
-													</c:when>
-												</div>
-												<!-- 일별 상세 - 태그별 건수, 총 금액 -->
-												<div class="detailBox">
-													<!-- 수입 -->
-													<c:when test="${incomeList[dateStatus.index].count nq 0}">
-														<div class="incomeItemListBox position-absolute d-none">
-															<div class="table table-responsive mb-0">
-																<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-																	<div class="row">
-																		<div class="col-sm-12">
-																			<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
-																			<table class="table mb-0">
-																				<thead class="titleName">
-																					<tr class="text-center">
-																						<th>구분</th>
-																						<th>건수</th>
-																						<th>금액</th>
-																					</tr>
-																				</thead>
-																				<tbody class="incomeItem">
-																					<c:forEach var="incomeItem" items="${incomeItemList}">
-																						<tr>
-																							<td>${incomeItem.name}</td>
-																							<td><fmt:formatNumber value="${incomeItem.count}" pattern="#,###" /></td>
-																							<td class="incomeValue"><fmt:formatNumber value="${incomeItem.sum}" pattern="#,###" /></td>
-																						</tr>
-																					</c:forEach>
-																				</tbody>
-																			</table>
-																		</div>
-																	</div>
-																</div>
+										<c:choose>
+											<%-- 첫째 주 --%>
+											<c:when test="${weekStatus.index eq 0}">
+												<%-- 이전 달 날짜 생성 (빈 날짜 - 당월 시작 날짜 이전까지만) --%>
+												<c:if test="${firstDay ne 0}">
+													<c:forEach begin="0" end="${firstDay - 1}" step="1">
+														<td class="border-color-white"></td>
+													</c:forEach>
+												</c:if>
+												
+												<%-- 해당 주차의 첫째 주 날짜 생성 --%>
+												<c:forEach begin="0" end="${6 - firstDay}" step="1">
+													<td class="p-1 border-color-white">
+														<div class="infoBox border-color-default">
+															<%-- 날짜, 휴무일 명칭(임시) --%>
+															<div class="dateBox d-flex align-items-center text-center">
+																<div class="date ${dateList[dateIndex].date} rounded-circle m-1">${dateList[dateIndex].day}</div>
+																<div class="text-xs text-truncate">${dateList[dateIndex].holidayName}</div>
+															</div>
+															<%-- 일별 건수 --%>
+															<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
+																<%-- 수입 --%>
+																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																	<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
+																</c:if>
+																<%-- 지출 --%>
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																	<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
+																</c:if>
 															</div>
 														</div>
-													</c:when>
-													<!-- 지출 -->
-													<c:when test="${expenditureList[dateStatus.index].count nq 0}">
-														<div class="expenditureItemListBox position-absolute d-none">
-															<div class="table table-responsive mb-0">
-																<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-																	<div class="row">
-																		<div class="col-sm-12">
-																			<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
-																			<table class="table mb-0">
-																				<thead class="titleName">
-																					<tr class="text-center">
-																						<th>구분</th>
-																						<th>건수</th>
-																						<th>금액</th>
-																					</tr>
-																				</thead>
-																				<tbody class="expenditureItem">
-																					<c:forEach var="expenditureItem" items="${expenditureItemList}">
-																						<tr>
-																							<td>${expenditureItemList.name}</td>
-																							<td><fmt:formatNumber value="-${expenditureItemList.count}" pattern="#,###" /></td>
-																							<td class="expenditureValue"><fmt:formatNumber value="-${expenditureItemList.sum}" pattern="#,###" /></td>
-																						</tr>
-																					</c:forEach>
-																				</tbody>
-																			</table>
+													</td>
+													
+													<%-- 당월 날짜 index++ --%>
+													<c:set var="dateIndex" value="${dateIndex + 1}" />
+												</c:forEach>
+											</c:when>
+											<%-- 둘째 주부터 마지막 이전 주 --%>
+											<c:when test="${0 lt weekStatus.index && weekStatus.index lt week}">
+												<%-- 둘째 주부터 마지막 이전 주까지 날짜 생성 --%>
+												<c:forEach begin="0" end="6" step="1">
+													<td class="p-1 border-color-white">
+														<div class="infoBox border-color-default">
+															<%-- 날짜, 휴무일 명칭(임시) --%>
+															<div class="dateBox d-flex align-items-center text-center">
+																<div class="date ${dateList[dateIndex].date} rounded-circle m-1">${dateList[dateIndex].day}</div>
+																<div class="text-xs text-truncate">${dateList[dateIndex].holidayName}</div>
+															</div>
+															<%-- 일별 건수 --%>
+															<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
+																<%-- 수입 --%>
+																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																	<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
+																</c:if>
+																<%-- 지출 --%>
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																	<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
+																</c:if>
+															</div>
+															<%-- 일별 상세 - 태그별 건수, 총 금액 --%>
+															<div class="detailBox">
+																<%-- 수입 --%>
+																<c:if test="${dateIncomeList[dateStatus.index].count ne 0}">
+																	<div class="tagIncomeListBox position-absolute d-none">
+																		<div class="table table-responsive mb-0">
+																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+																				<div class="row">
+																					<div class="col-sm-12">
+																						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
+																						<table class="table mb-0">
+																							<thead class="titleName">
+																								<tr class="text-center">
+																									<th>구분</th>
+																									<th>건수</th>
+																									<th>금액</th>
+																								</tr>
+																							</thead>
+																							<tbody class="tagIncome">
+																								<c:forEach var="tagIncome" items="${tagIncomeList[dateStatus.index]}">
+																									<tr>
+																										<td>${tagIncome.tag}</td>
+																										<td><fmt:formatNumber value="${tagIncome.count}" pattern="#,###" /></td>
+																										<td class="incomeValue"><fmt:formatNumber value="${tagIncome.sum}" pattern="#,###" /></td>
+																									</tr>
+																								</c:forEach>
+																							</tbody>
+																						</table>
+																					</div>
+																				</div>
+																			</div>
 																		</div>
 																	</div>
-																</div>
+																</c:if>
+																<%-- 지출 --%>
+																<c:if test="${dateExpenditureList[dateStatus.index].count ne 0}">
+																	<div class="tagExpenditureListBox position-absolute d-none">
+																		<div class="table table-responsive mb-0">
+																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+																				<div class="row">
+																					<div class="col-sm-12">
+																						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
+																						<table class="table mb-0">
+																							<thead class="titleName">
+																								<tr class="text-center">
+																									<th>구분</th>
+																									<th>건수</th>
+																									<th>금액</th>
+																								</tr>
+																							</thead>
+																							<tbody class="tagExpenditure">
+																								<c:forEach var="tagExpenditure" items="${tagExpenditureList[dateStatus.index]}">
+																									<tr>
+																										<td>${tagExpenditure.tag}</td>
+																										<td><fmt:formatNumber value="-${tagExpenditure.count}" pattern="#,###" /></td>
+																										<td class="expenditureValue"><fmt:formatNumber value="-${tagExpenditure.sum}" pattern="#,###" /></td>
+																									</tr>
+																								</c:forEach>
+																							</tbody>
+																						</table>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</c:if>
 															</div>
 														</div>
-													</c:when>
-												</div>
-											</td>
-										</c:otherwise>
-										<!-- 남은 날 공란 -->
-										<c:if test="${dateStatus.index eq ((firstDay - 1) + (lastDate - 1))}">
-											<c:forEach begin="6" end="${lastDay - 1}" step="-1">
-												<td></td>
-											</c:forEach>
-										</c:if>
+													</td>
+													
+													<%-- 당월 날짜 index++ --%>
+													<c:set var="dateIndex" value="${dateIndex + 1}" />
+												</c:forEach>
+											</c:when>
+											<%-- 마지막 주 --%>
+											<c:when test="${weekStatus.index eq week}">
+												<%-- 당월 마지막 주 날짜 생성 --%>
+												<c:forEach begin="0" end="${lastDay}" step="1">
+													<td class="p-1 border-color-white">
+														<div class="infoBox border-color-default">
+															<%-- 날짜, 휴무일 명칭(임시) --%>
+															<div class="dateBox d-flex align-items-center text-center">
+																<div class="date ${dateList[dateIndex].date} rounded-circle m-1">${dateList[dateIndex].day}</div>
+																<div class="text-xs text-truncate">${dateList[dateIndex].holidayName}</div>
+															</div>
+															<%-- 일별 건수 --%>
+															<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
+																<%-- 수입 --%>
+																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																	<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
+																</c:if>
+																<%-- 지출 --%>
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																	<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
+																</c:if>
+															</div>
+															<%-- 일별 상세 - 태그별 건수, 총 금액 --%>
+															<div class="detailBox">
+																<%-- 수입 --%>
+																<c:if test="${dateIncomeList[dateStatus.index].count ne 0}">
+																	<div class="tagIncomeListBox position-absolute d-none">
+																		<div class="table table-responsive mb-0">
+																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+																				<div class="row">
+																					<div class="col-sm-12">
+																						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
+																						<table class="table mb-0">
+																							<thead class="titleName">
+																								<tr class="text-center">
+																									<th>구분</th>
+																									<th>건수</th>
+																									<th>금액</th>
+																								</tr>
+																							</thead>
+																							<tbody class="tagIncome">
+																								<c:forEach var="tagIncome" items="${tagIncomeList[dateStatus.index]}">
+																									<tr>
+																										<td>${tagIncome.tag}</td>
+																										<td><fmt:formatNumber value="${tagIncome.count}" pattern="#,###" /></td>
+																										<td class="incomeValue"><fmt:formatNumber value="${tagIncome.sum}" pattern="#,###" /></td>
+																									</tr>
+																								</c:forEach>
+																							</tbody>
+																						</table>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</c:if>
+																<%-- 지출 --%>
+																<c:if test="${dateExpenditureList[dateStatus.index].count ne 0}">
+																	<div class="tagExpenditureListBox position-absolute d-none">
+																		<div class="table table-responsive mb-0">
+																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+																				<div class="row">
+																					<div class="col-sm-12">
+																						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
+																						<table class="table mb-0">
+																							<thead class="titleName">
+																								<tr class="text-center">
+																									<th>구분</th>
+																									<th>건수</th>
+																									<th>금액</th>
+																								</tr>
+																							</thead>
+																							<tbody class="tagExpenditure">
+																								<c:forEach var="tagExpenditure" items="${tagExpenditureList[dateStatus.index]}">
+																									<tr>
+																										<td>${tagExpenditure.tag}</td>
+																										<td><fmt:formatNumber value="-${tagExpenditure.count}" pattern="#,###" /></td>
+																										<td class="expenditureValue"><fmt:formatNumber value="-${tagExpenditure.sum}" pattern="#,###" /></td>
+																									</tr>
+																								</c:forEach>
+																							</tbody>
+																						</table>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</c:if>
+															</div>
+														</div>
+													</td>
+													
+													<%-- 당월 날짜 index++ --%>
+													<c:set var="dateIndex" value="${dateIndex + 1}" />
+												</c:forEach>
+												
+												<%-- 다음 달 날짜 생성 (빈 날짜 - 마지막 주차의 빈 날짜 공간 만큼만) --%>
+												<c:if test="${lastDay ne 6}">
+													<c:set var="lastDay" value="${lastDay + 1}" />
+													<c:forEach begin="0" end="${6 - lastDay}" step="1">
+														<td class="border-color-white"></td>
+													</c:forEach>
+												</c:if>
+											</c:when>
+										</c:choose>
 									</tr>
 								</c:forEach>
-								<!-- 달력 크기 맞추기 -->
-								<c:set var="length" value="${(firstDay - 1) + (lastDate - 1) + (lastDay - 1)}" />
-								<c:if test="${length le 35}">
-									<c:forEach begin="1" end="7" step="1">
-										<td></td>
-									</c:forEach>
-								</c:if>
 							</tbody>
 						</table>
 					</div>

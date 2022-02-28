@@ -3,6 +3,7 @@
 #chartMainTagBox {
 	gap: 10px;
 }
-#chartMainTagBox div {
-	cursor: pointer;
+
+.pointer-cursor {
+    cursor: pointer;
 }
