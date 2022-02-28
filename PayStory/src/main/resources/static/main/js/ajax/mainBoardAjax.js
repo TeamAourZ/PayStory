@@ -2,9 +2,9 @@
 function mainBoardAjax() {
 	let boardTab = -1;
 	
-	if ($('#boardTab1').hasClass('select')) {
+	if ($('#boardTab1').hasClass('selected')) {
 		boardTab = 1;
-	} else if ($('#boardTab2').hasClass('select')) {
+	} else if ($('#boardTab2').hasClass('selected')) {
 		boardTab = 2;
 	}
 	

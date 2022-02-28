@@ -4,9 +4,9 @@ function chartAjax(year, month) {
 	
 	let chartTab = "";
 	
-	if ($('#chartTab1').hasClass('select')) {
+	if ($('#chartTab1').hasClass('selected')) {
 		chartTab = "income";
-	} else if ($('#chartTab2').hasClass('select')) {
+	} else if ($('#chartTab2').hasClass('selected')) {
 		chartTab = "expenditure";
 	}
 	
