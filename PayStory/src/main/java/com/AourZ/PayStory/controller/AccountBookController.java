@@ -449,55 +449,13 @@ public class AccountBookController {
 	/* 지출 항목 추가 */
 	@ResponseBody
 	@RequestMapping("/accountBook/expenditure/")
-	public int addExpenditure(@RequestParam("expenditureDate") String date,
-							  @RequestParam(value="expenditureImage", required = false) MultipartFile file,
-							  @RequestParam("expenditureSource") String source,
-							  @RequestParam("expenditureMemo") String memo,
-							  @RequestParam("expenditureAddress") String address,
-							  @RequestParam("expenditureAmount") int totalAmount,
-							  @RequestParam("tagNo") String tagNo,
-							  @RequestParam("expenditureItemName") String[] nameArray,
-							  @RequestParam("expenditureItemPrice") int[] priceArray,
+	public int addExpenditure(@RequestParam("expenditureItemName") String[] itemArray,
+							  @RequestParam("expenditureItemPrice") String[] priceArray,
+							  ExpenditureVO expenditureVO,
 							  HttpSession session) throws IOException {
+		accountBookService.insertExpenditure(expenditureVO);
+		int expenditureNo = expenditureVO.getExpenditureNo();
 		
-		// 파일 업로드 및 파일 이름 지정
-		String fileName = null;
-		if(file != null) {
-			String uploadPath = "C:/PayStory/PayStory/src/main/resources/static/file/receipt/";
-
-			String originalFileName = file.getOriginalFilename();
-			fileName = originalFileName;
-			String filePathName = uploadPath + originalFileName;
-			// String uploadFileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("accountBookNo")+"_"+originalFileName;
-			// String filePathName = uploadPath + uploadFileName;
-			File file1 = new File(filePathName);	
-
-			file.transferTo(file1);
-		}
-		
-		ExpenditureVO vo = new ExpenditureVO();
-		vo.setExpenditureDate(date);
-		vo.setExpenditureImage(fileName);
-		vo.setExpenditureSource(source);
-		vo.setExpenditureMemo(memo);
-		vo.setExpenditureAddress(address);
-		vo.setExpenditureAmount(totalAmount);
-		vo.setTagNo(tagNo);
-		
-		accountBookService.insertExpenditure(vo);
-		int expenditureNo = vo.getExpenditureNo();
-		
-		if(expenditureNo != 0) {
-			ArrayList<ExpenditureItemVO> expenditureItemList = new ArrayList<ExpenditureItemVO>();
-			for(int i=0; i<nameArray.length; i++) {
-				ExpenditureItemVO vo2 = new ExpenditureItemVO();
-				vo2.setExpenditureNo(expenditureNo);
-				vo2.setExpenditureItemName(nameArray[i]);
-				vo2.setExpenditureItemPrice(priceArray[i]);
-				expenditureItemList.add(vo2);
-			}
-			accountBookService.insertExpenditureItem(expenditureItemList);
-		}
 		return expenditureNo;
 	}
 

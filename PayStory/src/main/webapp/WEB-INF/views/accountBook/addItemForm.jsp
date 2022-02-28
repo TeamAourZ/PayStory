@@ -53,6 +53,7 @@
                     <!-- Form panels -->
 					<div class="tab-content p-4 bg-white rounded">
 						<div class="tab-pane fade in show active" id="expenditure" role="tabpanel">
+							<h1 class="h4 text-center">영수증을 등록하면 AI가 영수증 내용을 인식하고 자동으로 입렵합니다!</h1>
 							<!--지출 Form-->
 							<form id="expenditureForm" class="my-4">
 								<div class="form-row px-3"> 
@@ -109,7 +110,7 @@
 														<div id="itemWrap">
 															<!-- 아이템 -->
 															<div class="item default form-group form-row">
-																<div class="col-7">
+																<!-- <div class="col-7">
 																	<label for="expenditureItem">내용</label>
 																	<input type="text" name="expenditureItemName" class="expenditureItem form-control form-control-sm shadow-none">
 																</div>
@@ -119,8 +120,8 @@
 																</div>
 																<div class="col-1">
 																	<button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button>
-																	<!-- <input type="button" class="removeItem btn shadow-none p-0" value="삭제"> -->
-																</div>
+																	<input type="button" class="removeItem btn shadow-none p-0" value="삭제">
+																</div> -->
 															</div>
 														</div>
 														<!-- 아이템 추가 버튼 -->

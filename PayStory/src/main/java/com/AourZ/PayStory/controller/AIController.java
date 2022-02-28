@@ -153,7 +153,10 @@ public class AIController {
 		File file1 = new File(filePathName);
 
 		file.transferTo(file1);
-
+		
+		ExpenditureVO vo = new ExpenditureVO();
+		vo.setExpenditureImage(uploadFileName);
+		
 		ExpenditureVO result =  OCRService.clovaOCRService(filePathName);
 		
 		return result;
