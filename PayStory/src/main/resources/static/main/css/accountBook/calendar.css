@@ -42,19 +42,38 @@
 
 .detailBox {
 	font-size: 9pt;
-	color: black;
 	margin-left: 2.75em;
 }
+.detailBox th, .detailBox td {
+	padding: 0.5rem;
+}
 
-.incomeItemListBox, .expenditureItemListBox {
+.tagIncomeListBox, .tagExpenditureListBox {
 	background: var(--light);
 	border-radius: 10px;
 	border: 1px solid var(--dark);
 	z-index: 10;
 }
-.incomeItemListBox i, .expenditureItemListBox i {
-	top: 10%;
-	right: 2%;
+
+.detailBoxClose {
+	top: 4%;
+	right: 9%;
+}
+
+.border {
+	border-radius: 5px;
+}
+
+.border-color-default {
+	border: 1px solid #b5b1b1;
+}
+
+.border-color-black {
+	border: 1px solid black !important;
+}
+
+.border-color-white {
+	border: 1px solid white;
 }
 
 .default-cursor {
@@ -98,7 +117,6 @@
     font-size: 13pt;
     font-weight: bold;
     border-radius: 5px;
-    border: 1px solid #b5b1b1;
 }
 
 .date.typeA {
@@ -119,10 +137,13 @@
 }
 
 .dateSel.typeB div.infoBox {
+    min-height: 90px;
     font-size: 11pt;
     font-weight: bold;
     border-radius: 5px;
-    border: 1px solid white;
+}
+.dateSel td {
+	padding: 1px;
 }
 
 .date.typeB {

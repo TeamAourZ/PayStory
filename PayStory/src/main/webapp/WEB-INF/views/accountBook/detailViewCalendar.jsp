@@ -21,102 +21,108 @@
 								</tr>
 							</thead>
 							<tbody class="dateSel">
-								<!-- 당월 날짜 index -->
+								<%-- 당월 날짜 index --%>
 								<c:set var="dateIndex" value="0" />
 								
-								<!-- 날짜 생성 -->
+								<%-- 날짜 생성 --%>
 								<c:forEach begin="0" end="${week}" step="1" varStatus="weekStatus">
 									<tr>
 										<c:choose>
-											<c:when test="${weekStatus.index eq 0}"> <!-- 첫째 주 -->
-												<!-- 이전 달 날짜 생성 (빈 날짜 - 당월 시작 날짜 이전까지만) -->
+											<%-- 첫째 주 --%>
+											<c:when test="${weekStatus.index eq 0}">
+												<%-- 이전 달 날짜 생성 (빈 날짜 - 당월 시작 날짜 이전까지만) --%>
 												<c:if test="${firstDay ne 0}">
 													<c:forEach begin="0" end="${firstDay - 1}" step="1">
-														<td></td>
+														<td class="border-color-white"></td>
 													</c:forEach>
 												</c:if>
 												
-												<!-- 해당 주차의 첫째 주 날짜 생성 -->
+												<%-- 해당 주차의 첫째 주 날짜 생성 --%>
 												<c:forEach begin="0" end="${6 - firstDay}" step="1">
-													<td class="tdDate p-0 pt-1 pb-1">
-														<!-- 날짜, 휴무일 명칭(임시) -->
+													<td class="infoBox p-0 pt-1 pb-1 border-color-white">
+														<%-- 날짜, 휴무일 명칭(임시) --%>
 														<div class="dateBox d-flex align-items-center text-center">
 															<div class="date ${dateList[dateIndex].date} rounded-circle m-1">${dateList[dateIndex].day}</div>
 															<div class="text-xs text-truncate">${dateList[dateIndex].holidayName}</div>
 														</div>
-														<!-- 일별 건수 -->
+														<%-- 일별 건수 --%>
 														<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
-															<!-- 수입 -->
-															<c:if test="${incomeList[dateIndex].count ne 0}">
-																<div class="incomeCount help-cursor rounded-circle p-0">${incomeList[dateIndex].count}</div>
+															<%-- 수입 --%>
+															<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
 															</c:if>
-															<!-- 지출 -->
-															<c:if test="${expenditureList[dateIndex].count ne 0}">
-																<div class="expenditureCount help-cursor rounded-circle p-0">${expenditureList[dateIndex].count}</div>
+															<%-- 지출 --%>
+															<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
 															</c:if>
 														</div>
 													</td>
 													
-													<!-- 당월 날짜 index++ -->
+													<%-- 당월 날짜 index++ --%>
 													<c:set var="dateIndex" value="${dateIndex + 1}" />
 												</c:forEach>
 											</c:when>
-											<c:when test="${0 lt weekStatus.index && weekStatus.index lt week}"> <!-- 둘째 주부터 마지막 이전 주 -->
-												<!-- 둘째 주부터 마지막 이전 주까지 날짜 생성 -->
+											<%-- 둘째 주부터 마지막 이전 주 --%>
+											<c:when test="${0 lt weekStatus.index && weekStatus.index lt week}">
+												<%-- 둘째 주부터 마지막 이전 주까지 날짜 생성 --%>
 												<c:forEach begin="0" end="6" step="1">
-													<td class="tdDate p-0 pt-1 pb-1">
-														<!-- 날짜, 휴무일 명칭(임시) -->
+													<td class="infoBox p-0 pt-1 pb-1 border-color-white">
+														<%-- 날짜, 휴무일 명칭(임시) --%>
 														<div class="dateBox d-flex align-items-center text-center">
 															<div class="date ${dateList[dateIndex].date} rounded-circle m-1">${dateList[dateIndex].day}</div>
 															<div class="text-xs text-truncate">${dateList[dateIndex].holidayName}</div>
 														</div>
-														<!-- 일별 건수 -->
+														<%-- 일별 건수 --%>
 														<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
-															<!-- 수입 -->
-															<c:if test="${incomeList[dateIndex].count ne 0}">
-																<div class="incomeCount help-cursor rounded-circle p-0">${incomeList[dateIndex].count}</div>
+															<%-- 수입 --%>
+															<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
 															</c:if>
-															<!-- 지출 -->
-															<c:if test="${expenditureList[dateIndex].count ne 0}">
-																<div class="expenditureCount help-cursor rounded-circle p-0">${expenditureList[dateIndex].count}</div>
+															<%-- 지출 --%>
+															<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
 															</c:if>
 														</div>
 													</td>
 													
-													<!-- 당월 날짜 index++ -->
+													<%-- 당월 날짜 index++ --%>
 													<c:set var="dateIndex" value="${dateIndex + 1}" />
 												</c:forEach>
 											</c:when>
-											<c:when test="${weekStatus.index eq week}"> <!-- 마지막 주 -->
-												<!-- 당월 마지막 주 날짜 생성 -->
+											<%-- 마지막 주 --%>
+											<c:when test="${weekStatus.index eq week}">
+												<%-- 당월 마지막 주 날짜 생성 --%>
 												<c:forEach begin="0" end="${lastDay}" step="1">
-													<td class="tdDate p-0 pt-1 pb-1">
-														<!-- 날짜, 휴무일 명칭(임시) -->
+													<td class="infoBox p-0 pt-1 pb-1 border-color-white">
+														<%-- 날짜, 휴무일 명칭(임시) --%>
 														<div class="dateBox d-flex align-items-center text-center">
 															<div class="date ${dateList[dateIndex].date} rounded-circle m-1">${dateList[dateIndex].day}</div>
 															<div class="text-xs text-truncate">${dateList[dateIndex].holidayName}</div>
 														</div>
-														<!-- 일별 건수 -->
+														<%-- 일별 건수 --%>
 														<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
-															<!-- 수입 -->
-															<c:if test="${incomeList[dateIndex].count ne 0}">
-																<div class="incomeCount help-cursor rounded-circle p-0">${incomeList[dateIndex].count}</div>
+															<%-- 수입 --%>
+															<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
 															</c:if>
-															<!-- 지출 -->
-															<c:if test="${expenditureList[dateIndex].count ne 0}">
-																<div class="expenditureCount help-cursor rounded-circle p-0">${expenditureList[dateIndex].count}</div>
+															<%-- 지출 --%>
+															<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
 															</c:if>
 														</div>
 													</td>
 													
-													<!-- 당월 날짜 index++ -->
+													<%-- 당월 날짜 index++ --%>
 													<c:set var="dateIndex" value="${dateIndex + 1}" />
 												</c:forEach>
 												
-												<!-- 다음 달 날짜 생성 (빈 날짜 - 마지막 주차의 빈 날짜 공간 만큼만) -->
-												<c:forEach begin="0" end="${6 - lastDay}" step="1">
-													<td></td>
-												</c:forEach>
+												<%-- 다음 달 날짜 생성 (빈 날짜 - 마지막 주차의 빈 날짜 공간 만큼만) --%>
+												<c:if test="${lastDay ne 6}">
+													<c:set var="lastDay" value="${lastDay + 1}" />
+													<c:forEach begin="0" end="${6 - lastDay}" step="1">
+														<td class="border-color-white"></td>
+													</c:forEach>
+												</c:if>
 											</c:when>
 										</c:choose>
 									</tr>

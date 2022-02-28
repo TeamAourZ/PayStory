@@ -34,7 +34,7 @@ $(function() {
 			nowMonth += 12;
 		}
 
-		calendarAjax("C", nowYear, nowMonth); // 가계부
+		calendarAjax("C", nowYear, nowMonth); // 달력
 	});
 
 	/* 다음 버튼 클릭 */
@@ -45,7 +45,7 @@ $(function() {
 			nowMonth -= 12;
 		}
 
-		calendarAjax("C", nowYear, nowMonth); // 가계부
+		calendarAjax("C", nowYear, nowMonth); // 달력
 	});
 
 	/* today 버튼 클릭 */
@@ -55,28 +55,36 @@ $(function() {
 		nowYear = date.getFullYear();
 		nowMonth = date.getMonth();
 
-		calendarAjax("C", nowYear, nowMonth); // 가계부
+		calendarAjax("C", nowYear, nowMonth); // 달력
 	});
 
 	/* 달력 클릭 이벤트 */
 	$(document).on('click', '.infoBox', function(e) {
 		e.stopImmediatePropagation();
 
-		/* 날짜별 border 및 class 설정 */
-		for (let i = 0; i < $('.infoBox').length; i++) {
-			//console.log($('.infoBox').eq(i)[0].classList[1]);
-			if ($('.infoBox').eq(i)[0].classList[1] !== "border") {
-				$('.infoBox').eq(i).css('border', '1px solid white');
-				$('.infoBox').eq(i).children('div.dateBox').children('div.date').removeClass('selected');
+		$('.infoBox').each(function() {
+			if ($(this).hasClass('border-color-black')) {
+				$(this).removeClass('border-color-black');
+				$(this).children('div.dateBox').children('div.date').removeClass('selected');
 			}
-		}
+		});
 
-		/* 선택된 날짜 border 및 class 설정 */
-		if ($(this)[0].classList[1] !== "border") {
-			$(this).css('border', '1px solid black');
-			$(this).children('div.dateBox').children('div.date').addClass('selected');
-		}
+		$(this).addClass('border-color-black');
+		$(this).children('div.dateBox').children('div.date').addClass('selected');
+
+		$('.viewOn').addClass('d-none');
+		$('.viewOn').removeClass('viewOn');
 	});
 
+	/* 차트 태그 선택 */
+	$('.chartTab').on('click', function(selectIndex) {
+		$('.chartTab').each(function(index) {
+			if (selectIndex != index) {
+				$(this).removeClass('selected');
+			}
+		});
+		$(this).addClass('selected');
 
+		chartAjax(nowYear, nowMonth); // 차트
+	});
 });
