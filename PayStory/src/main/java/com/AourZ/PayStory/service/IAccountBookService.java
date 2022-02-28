@@ -21,11 +21,11 @@ public interface IAccountBookService {
 	MemberVO selectMemberInfo(String memberNo);													// 회원 정보 조회 1
 	String selectMemberNo(String memberEmail);														// 회원 정보 조회 2
 	
-	ArrayList<TagTotalVO> selectIncomeList(int accountBookNo, String select, String group, String date);			// 수입 총 건수, 총 금액
-	ArrayList<TagTotalVO> selectExpenditureList(int accountBookNo, String select, String group, String date);	// 지출 총 건수, 총 금액
-	String selectTagName(String tagNo);																									// 태그명 조회
+	ArrayList<TagTotalVO> selectIncomeList(int accountBookNo, String group1, String group2, String date);			// 수입 총 건수, 총 금액
+	ArrayList<TagTotalVO> selectExpenditureList(int accountBookNo, String group1, String group2, String date);	// 지출 총 건수, 총 금액
+	String selectTagName(String tagNo);																										// 태그명 조회
 	
-	ArrayList<BoardVO> selectBoardList(boolean allCheck, String boardCategoryNo);	// 게시판 게시글 리스트
+	ArrayList<BoardVO> selectBoardList(int boardTab, String boardCategoryNo);	// 게시판 게시글 리스트
 	String selectBoardCategoryName(String boardCategoryNo);								// 게시판 카테고리 이름
   
 	public void insertIncome(IncomeVO vo); // 수입 항목 추가

@@ -70,24 +70,24 @@ public class AccountBookService implements IAccountBookService {
 	}
 
 	@Override
-	public ArrayList<TagTotalVO> selectIncomeList(int accountBookNo, String select, String group, String date) {
+	public ArrayList<TagTotalVO> selectIncomeList(int accountBookNo, String group1, String group2, String date) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		map.put("accountBookNo", accountBookNo);
-		map.put("select", select);
-		map.put("group", group);
+		map.put("group1", group1);
+		map.put("group2", group2);
 		map.put("date", date);
 
 		return dao.selectIncomeList(map);
 	}
 
 	@Override
-	public ArrayList<TagTotalVO> selectExpenditureList(int accountBookNo, String select, String group, String date) {
+	public ArrayList<TagTotalVO> selectExpenditureList(int accountBookNo, String group1, String group2, String date) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		map.put("accountBookNo", accountBookNo);
-		map.put("select", select);
-		map.put("group", group);
+		map.put("group1", group1);
+		map.put("group2", group2);
 		map.put("date", date);
 
 		return dao.selectExpenditureList(map);
@@ -99,10 +99,10 @@ public class AccountBookService implements IAccountBookService {
 	}
 
 	@Override
-	public ArrayList<BoardVO> selectBoardList(boolean allCheck, String boardCategoryNo) {
+	public ArrayList<BoardVO> selectBoardList(int boardTab, String boardCategoryNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
-		map.put("allCheck", allCheck);
+		map.put("boardTab", boardTab);
 		map.put("boardCategoryNo", boardCategoryNo);
 
 		return dao.selectBoardList(map);
