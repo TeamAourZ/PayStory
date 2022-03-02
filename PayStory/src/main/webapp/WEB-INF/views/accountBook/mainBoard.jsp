@@ -3,8 +3,6 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-	</head>
 	<body>
 		<c:choose>
 			<c:when test="${empty postList}">

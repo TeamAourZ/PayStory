@@ -5,10 +5,6 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<!-------- CSS : Custom -------->
-		<link href="<c:url value='/main/css/accountBook/detailViewList.css' />" rel="stylesheet" type="text/css">
-	</head>
 	<body>
 		<c:choose>
 			<c:when test="${empty dataList}">
@@ -16,7 +12,7 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="data" items="${dataList}" varStatus="dataStatus">
-					<!-- 수입 / 지출 내역 -->
+					<%-- 수입 / 지출 내역 --%>
 					<div class="row dataBox w-100 pt-2 pb-2 mt-2">
 						<c:choose>
 							<c:when test="${data.mainTag eq 'income'}">
@@ -30,11 +26,11 @@
 								</script>
 							</c:otherwise>
 						</c:choose>
-						<!-- 태그 -->
+						<%-- 태그 --%>
 						<div class="col-2 align-self-center">
 							<div class="rounded-circle text-center p-0">${data.tagName}</div>
 						</div>
-						<!-- 내용 1 -->
+						<%-- 내용 1 --%>
 						<div class="col-8">
 							<div class="d-flex mb-2">
 								<div class="dataSource">${data.source}</div>
@@ -72,7 +68,7 @@
 								</c:if>
 							</div>
 						</div>
-						<!-- 내용 2 -->
+						<%-- 내용 2 --%>
 						<div class="col-2 d-flex flex-column">
 							<div class="text-right">
 								<i class="dataEdit far fa-edit fa-lg pointer-cursor"></i>
@@ -80,9 +76,9 @@
 							</div>
 							<div>
 								{예금 변동 내역}
-								<!-- 
+								<%-- 
 									연산 고안 필요
-								 -->
+								 --%>
 							</div>
 						</div>
 					</div>
