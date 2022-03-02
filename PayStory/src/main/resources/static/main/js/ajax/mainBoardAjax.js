@@ -15,7 +15,7 @@ function mainBoardAjax() {
 			"boardTab": boardTab,
 		},
 		success: function(result) {
-			$('#postBox').html(result);
+			$('#boardBox').html(result);
 		},
 		error: function() {
 			console.log("error");

@@ -21,7 +21,7 @@
 									<th style="width: 14%;">SAT</th>
 								</tr>
 							</thead>
-							<tbody class="dateSel typeB">
+							<tbody class="dateSel">
 								<%-- 당월 날짜 index --%>
 								<c:set var="dateIndex" value="0" />
 								
@@ -34,7 +34,9 @@
 												<%-- 이전 달 날짜 생성 (빈 날짜 - 당월 시작 날짜 이전까지만) --%>
 												<c:if test="${firstDay ne 0}">
 													<c:forEach begin="0" end="${firstDay - 1}" step="1">
-														<td class="border-color-white"></td>
+														<td class="p-1 border-color-white">
+															<div class="emptyBox border"></div>
+														</td>
 													</c:forEach>
 												</c:if>
 												
@@ -90,15 +92,15 @@
 															<%-- 일별 상세 - 태그별 건수, 총 금액 --%>
 															<div class="detailBox">
 																<%-- 수입 --%>
-																<c:if test="${dateIncomeList[dateStatus.index].count ne 0}">
+																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
 																	<div class="tagIncomeListBox position-absolute d-none">
-																		<div class="table table-responsive mb-0">
+																		<div class="table mb-0">
 																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 																				<div class="row">
 																					<div class="col-sm-12">
 																						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 																						<table class="table mb-0">
-																							<thead class="titleName">
+																							<thead>
 																								<tr class="text-center">
 																									<th>구분</th>
 																									<th>건수</th>
@@ -106,8 +108,8 @@
 																								</tr>
 																							</thead>
 																							<tbody class="tagIncome">
-																								<c:forEach var="tagIncome" items="${tagIncomeList[dateStatus.index]}">
-																									<tr>
+																								<c:forEach var="tagIncome" items="${tagIncomeList[dateIndex]}">
+																									<tr class="text-center">
 																										<td>${tagIncome.tag}</td>
 																										<td><fmt:formatNumber value="${tagIncome.count}" pattern="#,###" /></td>
 																										<td class="incomeValue"><fmt:formatNumber value="${tagIncome.sum}" pattern="#,###" /></td>
@@ -122,15 +124,15 @@
 																	</div>
 																</c:if>
 																<%-- 지출 --%>
-																<c:if test="${dateExpenditureList[dateStatus.index].count ne 0}">
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
 																	<div class="tagExpenditureListBox position-absolute d-none">
-																		<div class="table table-responsive mb-0">
+																		<div class="table mb-0">
 																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 																				<div class="row">
 																					<div class="col-sm-12">
 																						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 																						<table class="table mb-0">
-																							<thead class="titleName">
+																							<thead>
 																								<tr class="text-center">
 																									<th>구분</th>
 																									<th>건수</th>
@@ -138,8 +140,8 @@
 																								</tr>
 																							</thead>
 																							<tbody class="tagExpenditure">
-																								<c:forEach var="tagExpenditure" items="${tagExpenditureList[dateStatus.index]}">
-																									<tr>
+																								<c:forEach var="tagExpenditure" items="${tagExpenditureList[dateIndex]}">
+																									<tr class="text-center">
 																										<td>${tagExpenditure.tag}</td>
 																										<td><fmt:formatNumber value="-${tagExpenditure.count}" pattern="#,###" /></td>
 																										<td class="expenditureValue"><fmt:formatNumber value="-${tagExpenditure.sum}" pattern="#,###" /></td>
@@ -186,15 +188,15 @@
 															<%-- 일별 상세 - 태그별 건수, 총 금액 --%>
 															<div class="detailBox">
 																<%-- 수입 --%>
-																<c:if test="${dateIncomeList[dateStatus.index].count ne 0}">
+																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
 																	<div class="tagIncomeListBox position-absolute d-none">
-																		<div class="table table-responsive mb-0">
+																		<div class="table mb-0">
 																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 																				<div class="row">
 																					<div class="col-sm-12">
 																						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 																						<table class="table mb-0">
-																							<thead class="titleName">
+																							<thead>
 																								<tr class="text-center">
 																									<th>구분</th>
 																									<th>건수</th>
@@ -202,8 +204,8 @@
 																								</tr>
 																							</thead>
 																							<tbody class="tagIncome">
-																								<c:forEach var="tagIncome" items="${tagIncomeList[dateStatus.index]}">
-																									<tr>
+																								<c:forEach var="tagIncome" items="${tagIncomeList[dateIndex]}">
+																									<tr class="text-center">
 																										<td>${tagIncome.tag}</td>
 																										<td><fmt:formatNumber value="${tagIncome.count}" pattern="#,###" /></td>
 																										<td class="incomeValue"><fmt:formatNumber value="${tagIncome.sum}" pattern="#,###" /></td>
@@ -218,15 +220,15 @@
 																	</div>
 																</c:if>
 																<%-- 지출 --%>
-																<c:if test="${dateExpenditureList[dateStatus.index].count ne 0}">
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
 																	<div class="tagExpenditureListBox position-absolute d-none">
-																		<div class="table table-responsive mb-0">
+																		<div class="table mb-0">
 																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 																				<div class="row">
 																					<div class="col-sm-12">
 																						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 																						<table class="table mb-0">
-																							<thead class="titleName">
+																							<thead>
 																								<tr class="text-center">
 																									<th>구분</th>
 																									<th>건수</th>
@@ -234,8 +236,8 @@
 																								</tr>
 																							</thead>
 																							<tbody class="tagExpenditure">
-																								<c:forEach var="tagExpenditure" items="${tagExpenditureList[dateStatus.index]}">
-																									<tr>
+																								<c:forEach var="tagExpenditure" items="${tagExpenditureList[dateIndex]}">
+																									<tr class="text-center">
 																										<td>${tagExpenditure.tag}</td>
 																										<td><fmt:formatNumber value="-${tagExpenditure.count}" pattern="#,###" /></td>
 																										<td class="expenditureValue"><fmt:formatNumber value="-${tagExpenditure.sum}" pattern="#,###" /></td>
@@ -261,7 +263,9 @@
 												<c:if test="${lastDay ne 6}">
 													<c:set var="lastDay" value="${lastDay + 1}" />
 													<c:forEach begin="0" end="${6 - lastDay}" step="1">
-														<td class="border-color-white"></td>
+														<td class="p-1 border-color-white">
+															<div class="emptyBox border"></div>
+														</td>
 													</c:forEach>
 												</c:if>
 											</c:when>
