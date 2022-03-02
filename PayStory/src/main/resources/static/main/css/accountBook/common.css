@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+.border {
+	border-radius: 5px;
+}
+
+.border-color-default {
+	border: 1px solid #b5b1b1;
+}
+
+.border-color-black {
+	border: 1px solid black !important;
+}
+
+.border-color-white {
+	border: 1px solid white !important;
+}
+
+.default-cursor {
+	cursor: default;
+}
+
+.pointer-cursor {
+    cursor: pointer;
+}
+
+.help-cursor {
+	cursor: help;
+}
