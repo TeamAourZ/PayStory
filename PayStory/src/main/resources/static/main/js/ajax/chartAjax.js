@@ -1,8 +1,10 @@
 /* 페이지 로드 - 차트 */
-function chartAjax(year, month) {
-	let chartType = $('#chartType').val();
+function chartAjax(year, month, day) {
+	let lastDate = new Date(year, month + 1, 0).getDate(); // 달의 마지막 날
 
-	let chartTab = "";
+	let chartType = $('#chartType').val(); // 차트 종류 (월별 : m / 일별 : d)
+
+	let chartTab = ""; // 선택된 차트
 
 	if ($('#chartTab1').hasClass('selected')) {
 		chartTab = "income";
@@ -16,6 +18,8 @@ function chartAjax(year, month) {
 		data: {
 			"year": year,
 			"month": month + 1,
+			"day": day,
+			"lastDate": lastDate,
 			"chartType": chartType,
 			"chartTab": chartTab
 		},
