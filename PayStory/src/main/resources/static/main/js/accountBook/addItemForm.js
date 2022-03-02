@@ -209,6 +209,7 @@
 			processData: false,
     		contentType: false,
 			success: function(result) {
+				console.log(result)
 				// 날짜 
 				let date = result.expenditureDate;
 				$('#expenditureDate').val(date);
@@ -229,8 +230,8 @@
 					$('.showItem').trigger('click');
 					for(let i=0; i<itemList.length; i++){
 						
-						// 아이템 개수만큼 상세항목란 추가
-						$('#addItem').trigger('click');
+						if(i > 0) $('#addItem').trigger('click'); // 이미 있는 1개 빼고 게수만큼 상세항목란 추가
+						
 						$('.expenditureItem').each(function(index){
 							if(index == i){
 								$('.expenditureItem').eq(index).val(itemList[i].expenditureItemName);
@@ -262,7 +263,7 @@
 		
 		$.ajax({
 			type:"post",	
-			url: "income", 	
+			url: "/accountBook/income", 	
 			data: {
 				"incomeDate" : date,
 				"incomeSource": source,
@@ -273,7 +274,7 @@
 			success: function(result) {
 				if(result != 0){
 					alert("수입내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
-					location.href = "/accountBook/main";
+					location.href = "/accountBook/myMain";
 				}
 			},
 			error: function(err){
@@ -284,6 +285,7 @@
 	
 	/* Submit - 지출 */
 	$('#expenditureForm').on('submit', function(e){
+		alert("등록 클릭")
 		e.preventDefault();
 		
 		// item 정보를 담은 array
@@ -299,17 +301,19 @@
 		});
 		
 		const formData = new FormData();
+  		formData.append("tagNo", $('#expenditureTags option:selected').val());
+  		formData.append("memo", $('#expenditureMemo').val() || "");
   		formData.append("expenditureItemPrice", itemPriceArray);
   		formData.append("expenditureItemName", itemNameArray);
 			
 		$.ajax({
-			type:"post",	
+			type:"post",
 			url: "/accountBook/expenditure", 	
-			data: formData, 
+			data: formData,
 			success: function(result) {
 				if(result != 0){
 					alert("지출내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
-					location.href = "/accountBook/main";
+					location.href = "/accountBook/myMain";
 				}
 			},
 			error: function(err){

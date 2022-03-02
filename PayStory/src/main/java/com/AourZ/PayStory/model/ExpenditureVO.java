@@ -13,7 +13,7 @@ public class ExpenditureVO {
 	private String tagNo;				// 지출 태그
 	private int accountBookNo;			// 지출 내역 소유 가계부 번호
 	
-	private ArrayList<ExpenditureItemVO> itemList;	// 아이템 리스트 (OCR에서 결과 보내기 용)
+	private ArrayList<ExpenditureItemVO> itemList;	// 아이템 리스트 (OCR 결과 보내기 용도)
 
 	public ArrayList<ExpenditureItemVO> getItemList() {
 		return itemList;

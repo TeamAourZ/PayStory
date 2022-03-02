@@ -110,7 +110,7 @@
 														<div id="itemWrap">
 															<!-- 아이템 -->
 															<div class="item default form-group form-row">
-																<!-- <div class="col-7">
+																<div class="col-7">
 																	<label for="expenditureItem">내용</label>
 																	<input type="text" name="expenditureItemName" class="expenditureItem form-control form-control-sm shadow-none">
 																</div>
@@ -121,7 +121,7 @@
 																<div class="col-1">
 																	<button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button>
 																	<input type="button" class="removeItem btn shadow-none p-0" value="삭제">
-																</div> -->
+																</div> 
 															</div>
 														</div>
 														<!-- 아이템 추가 버튼 -->

@@ -134,11 +134,12 @@ public class OCRService {
 			// 상호명
 			JSONObject nameObj = (JSONObject) storeObj.get("name");
 			JSONObject formattedNameObj = (JSONObject) nameObj.get("formatted");
-			JSONObject subNameObj = (JSONObject) storeObj.get("subName");
 			
 			String expeditureSource = "";		// 상호명
 			
-			if(subNameObj != null) {
+			// 서브 네임이 있으면
+			if(storeObj.has("subName")) {
+				JSONObject subNameObj = (JSONObject) storeObj.get("subName");
 				JSONObject formattedSubNameObj = (JSONObject) subNameObj.get("formatted");
 				expeditureSource = (String) formattedNameObj.getString("value") + " " + (String) formattedSubNameObj.getString("value") ;
 			}else {
@@ -195,23 +196,25 @@ public class OCRService {
 					ExpenditureItemVO itemVO = new ExpenditureItemVO();
 					JSONObject temp4Obj = (JSONObject) itemArray.get(i);
 					
-					// 아이템 이름 추출
-					JSONObject itemNameObj = (JSONObject) temp4Obj.get("name");
-					JSONObject formattedItemNameObj = (JSONObject) itemNameObj.get("formatted");
-					expenditureItemName = (String) formattedItemNameObj.getString("value");
-					
-					// 아이템 가격 추출
-					JSONObject priceObj = (JSONObject) temp4Obj.get("price");
-					JSONObject itemPriceObj = (JSONObject) priceObj.get("price");
-					JSONObject formattedPriceNameObj = (JSONObject) itemPriceObj.get("formatted");
-					expenditureItemPrice = Integer.parseInt((String) formattedPriceNameObj.get("value"));
-					
-					// expenditureItemVO에 저장 후 expenditureItemList에 담기
-					itemVO.setExpenditureItemName(expenditureItemName);
-					itemVO.setExpenditureItemPrice(expenditureItemPrice);
-					// System.out.println("상품 번호 "+ (i+1) +" =======================");
-					// System.out.println("내용:" + expenditureItemName + "금액:" + expenditureItemPrice );
-					expenditureItemList.add(itemVO);
+					if(temp4Obj.has("price")) {
+						// 아이템 이름 추출
+						JSONObject itemNameObj = (JSONObject) temp4Obj.get("name");
+						JSONObject formattedItemNameObj = (JSONObject) itemNameObj.get("formatted");
+						expenditureItemName = (String) formattedItemNameObj.getString("value");
+						
+						// 아이템 가격 추출
+						JSONObject priceObj = (JSONObject) temp4Obj.get("price");
+						JSONObject itemPriceObj = (JSONObject) priceObj.get("price");
+						JSONObject formattedPriceNameObj = (JSONObject) itemPriceObj.get("formatted");
+						expenditureItemPrice = Integer.parseInt((String) formattedPriceNameObj.get("value"));
+						
+						// expenditureItemVO에 저장 후 expenditureItemList에 담기
+						itemVO.setExpenditureItemName(expenditureItemName);
+						itemVO.setExpenditureItemPrice(expenditureItemPrice);
+						// System.out.println("상품 번호 "+ (i+1) +" =======================");
+						// System.out.println("내용:" + expenditureItemName + "금액:" + expenditureItemPrice );
+						expenditureItemList.add(itemVO);
+					}
 				}
 				// expenditureVO에 expenditureItemList 추가
 				expenditureVO.setItemList(expenditureItemList);

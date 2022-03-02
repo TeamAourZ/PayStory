@@ -1,6 +1,5 @@
 package com.AourZ.PayStory.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.AourZ.PayStory.model.AccountBookBudgetVO;
 import com.AourZ.PayStory.model.AccountBookVO;
@@ -448,13 +446,39 @@ public class AccountBookController {
 
 	/* 지출 항목 추가 */
 	@ResponseBody
-	@RequestMapping("/accountBook/expenditure/")
-	public int addExpenditure(@RequestParam("expenditureItemName") String[] itemArray,
-							  @RequestParam("expenditureItemPrice") String[] priceArray,
-							  ExpenditureVO expenditureVO,
-							  HttpSession session) throws IOException {
+	@RequestMapping("/accountBook/expenditure")
+	public int addExpenditure(
+			@RequestParam("expenditureItemName") String[] itemArray,
+			@RequestParam("expenditureItemPrice") int[] priceArray,
+			@RequestParam("tagNo") String tagNo,
+			@RequestParam("memo") String memo,
+			ExpenditureVO expenditureVO,
+			HttpSession session) throws IOException {
+		
+		// expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
+		System.out.println("====== VO 확인 ======");
+		System.out.println(expenditureVO.getExpenditureAddress());
+		System.out.println(expenditureVO.getExpenditureDate());
+		System.out.println(expenditureVO.getExpenditureImage());
+		System.out.println(expenditureVO.getExpenditureSource());
+		expenditureVO.setExpenditureMemo(memo);
+		expenditureVO.setTagNo(tagNo);
+		
 		accountBookService.insertExpenditure(expenditureVO);
 		int expenditureNo = expenditureVO.getExpenditureNo();
+		
+		if(expenditureNo != 0) {
+			ArrayList<ExpenditureItemVO> expenditureItemList = new ArrayList<ExpenditureItemVO>();
+			for(int i=0; i<itemArray.length; i++) {
+				ExpenditureItemVO ItemVO = new ExpenditureItemVO();
+				ItemVO.setExpenditureNo(expenditureNo);
+				ItemVO.setExpenditureItemName(itemArray[i]);
+				ItemVO.setExpenditureItemPrice(priceArray[i]);
+				expenditureItemList.add(ItemVO);
+			}
+			expenditureVO.setItemList(expenditureItemList);
+			accountBookService.insertExpenditureItem(expenditureItemList);
+		}
 		
 		return expenditureNo;
 	}
