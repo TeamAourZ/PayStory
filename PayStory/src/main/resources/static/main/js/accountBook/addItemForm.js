@@ -209,43 +209,41 @@
 			processData: false,
     		contentType: false,
 			success: function(result) {
-				/* 임시 - template ocr */
-				/**** result에서 원하는 값 추출 ****/
-				// 사용처 
-				let source = result.source;
-				
-				// 총 금액 : 숫자만 -> 콤마
-				let totalAmount = withComma(result.totalAmount.replace(/[^0-9]/g, ''));
-				
-				// 날짜 : 포멧 변경 (yyyy-MM-ddThh:mm)
-				let date = result.date;
-				date = date.replace('22', '2022');
-				date = date.replace(/\//gi, '-');
-				date = date.replace(' ', 'T');
-				date = date.replace(/\s/gi, '');
-				date = date.slice(0, 16);
-				
-				// 주소
-				let address = result.address.slice(4).replace(/\n/g, "");
-				
-				// 아이템 name
-				let item = result.item;
-				
-				// 아이템 price : 숫자만 -> 콤마
-				let amount = withComma(result.amount.replace(/[^0-9]/g, ''));
-				
-				// 상세 항목 보이게
-				if(item){
-					$('.showItem').trigger('click');
-				}
-				
-				// 값 입력
-				$('#expenditureSource').val(source);
-				$('#expenditureTotalAmount').val(totalAmount);
+				console.log(result)
+				// 날짜 
+				let date = result.expenditureDate;
 				$('#expenditureDate').val(date);
+				// 주소
+				let address = result.expenditureAddress;
 				$('#address').val(address);
-				$('.expenditureItem').val(item);
-				$('.expenditureItemAmount').val(amount);
+				// 사용처 
+				let source = result.expenditureSource;
+				$('#expenditureSource').val(source);
+				// 총 금액 : 콤마
+				let totalAmount = withComma(result.expenditureAmount);
+				$('#expenditureTotalAmount').val(totalAmount);
+				// 아이템 List
+				let itemList = result.itemList;
+				
+				if(itemList){
+					// 상세 항목란 보이게
+					$('.showItem').trigger('click');
+					for(let i=0; i<itemList.length; i++){
+						
+						if(i > 0) $('#addItem').trigger('click'); // 이미 있는 1개 빼고 게수만큼 상세항목란 추가
+						
+						$('.expenditureItem').each(function(index){
+							if(index == i){
+								$('.expenditureItem').eq(index).val(itemList[i].expenditureItemName);
+							}
+						});
+						$('.expenditureItemAmount').each(function(index){
+							if(index == i){
+								$('.expenditureItemAmount').eq(index).val(withComma(itemList[i].expenditureItemPrice));
+							}
+						});
+					}
+				}
 			},
 			error: function(err){
 				console.log(err);
@@ -265,7 +263,7 @@
 		
 		$.ajax({
 			type:"post",	
-			url: "income", 	
+			url: "/accountBook/income", 	
 			data: {
 				"incomeDate" : date,
 				"incomeSource": source,
@@ -276,7 +274,7 @@
 			success: function(result) {
 				if(result != 0){
 					alert("수입내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
-					location.href = "/accountBook/main";
+					location.href = "/accountBook/myMain";
 				}
 			},
 			error: function(err){
@@ -287,6 +285,7 @@
 	
 	/* Submit - 지출 */
 	$('#expenditureForm').on('submit', function(e){
+		alert("등록 클릭")
 		e.preventDefault();
 		
 		// item 정보를 담은 array
@@ -302,27 +301,19 @@
 		});
 		
 		const formData = new FormData();
-  		formData.append("expenditureDate", $('#expenditureDate').val());
-  		formData.append("expenditureImage", $('#uploadReceipt')[0].files[0] || null);
-  		formData.append("expenditureSource", $('#expenditureSource').val());
-  		formData.append("expenditureMemo", $('#expenditureMemo').val() || "");
-  		formData.append("expenditureAddress", $('#address').val() || "");
-  		formData.append("expenditureAmount", parseInt(withoutComma($('#expenditureTotalAmount').val())));
   		formData.append("tagNo", $('#expenditureTags option:selected').val());
-  		formData.append("expenditureItemName", itemNameArray);
+  		formData.append("memo", $('#expenditureMemo').val() || "");
   		formData.append("expenditureItemPrice", itemPriceArray);
+  		formData.append("expenditureItemName", itemNameArray);
 			
 		$.ajax({
-			type:"post",	
-			enctype: 'multipart/form-data',
+			type:"post",
 			url: "/accountBook/expenditure", 	
-			data: formData, 
-			processData: false,
-    		contentType: false,
+			data: formData,
 			success: function(result) {
 				if(result != 0){
 					alert("지출내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
-					location.href = "/accountBook/main";
+					location.href = "/accountBook/myMain";
 				}
 			},
 			error: function(err){

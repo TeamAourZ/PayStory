@@ -19,7 +19,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 }
 
 /* 영수증 이미지 영역 */
-#imgArea {max-height: 560px;}
+#imgArea {max-height: 680px;}
 
 .form-row > .col,
 .form-row > [class*="col-"] {padding: 5px;}

@@ -9,7 +9,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
-	    <title>비밀번호변경</title>
+	    <title>PayStory 비밀번호변경</title>
 	    <!-------- CSS-------->
 		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/bootstrap/css/sb-admin-2.css' />" rel="stylesheet">
