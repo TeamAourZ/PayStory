@@ -60,18 +60,15 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 .hasImage:hover .tooltipContent.hidden {display: none;}
 
 /* 아이템 리스트 */
-.accordion > .card > .card-header {
-	height: 2.5rem;
-    padding: 0;
-}
+.accordion > .card > .card-header {padding: 0;}
 
-.fa-angle-down {
+.fa-angle-up {
 	font-size: 1.8rem;
     color: #858796;
     transition: all ease 1s;
 }
 
-.fa-angle-down.open {
+.fa-angle-up.open {
     transform: rotate(180deg);
     transition: all ease 1s;
 }

@@ -97,14 +97,12 @@
 										<div class="accordion" id="itemAccordian">
 											<div class="card">
 												<div class="card-header" id="heading">
-													<h2 class="mb-0">
-														<button class="showItem btn btn-light btn-block text-left collapsed d-flex justify-content-between shadow-none py-2 px-3" type="button" data-toggle="collapse" data-target="#items" aria-expanded="false" aria-controls="items">
-														  상세 항목 
-														  <i class="fas fa-angle-down"></i>
-														</button>
-													</h2>
+													<button class="showItem btn btn-light btn-block text-left collapsed d-flex justify-content-between shadow-none py-2 px-3" type="button" data-toggle="collapse" data-target="#items" aria-expanded="false" aria-controls="items">
+													  상세 항목 
+													  <i class="fas fa-angle-up"></i>
+													</button>
 												</div>
-												<div id="items" class="collapse" aria-labelledby="heading" data-parent="#itemAccordian">
+												<div id="items" class="collapse show" aria-labelledby="heading" data-parent="#itemAccordian">
 													<div class="card-body">
 													  	<!-- 아이템 리스트 -->
 														<div id="itemWrap">
