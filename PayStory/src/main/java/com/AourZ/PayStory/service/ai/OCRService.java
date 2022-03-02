@@ -164,11 +164,32 @@ public class OCRService {
 			JSONObject paymentObj = (JSONObject) resultObj.get("paymentInfo");
 			
 			// 날짜
+			String year, month, day = "";
+			
 			JSONObject dateObj = (JSONObject) paymentObj.get("date");
 			JSONObject formattedDateObj = (JSONObject) dateObj.get("formatted");
-			String year = (String) formattedDateObj.getString("year");
-			String month = (String) formattedDateObj.getString("month");
-			String day = (String) formattedDateObj.getString("day");
+			year = (String) formattedDateObj.getString("year");
+			month = (String) formattedDateObj.getString("month");
+			day = (String) formattedDateObj.getString("day");
+			
+			if(year.equals("") || month.equals("") || day.equals("")) {
+				String dateText = (String) dateObj.getString("text");
+				String[] dateTextArray = dateText.split(" ")[0].split("-");
+				year = 20 + dateTextArray[0];
+				month = dateTextArray[1];
+				day = dateTextArray[2];
+				
+				// 시간 
+				JSONObject timeObj = (JSONObject) paymentObj.get("time");
+				JSONObject formattedTimeObj = (JSONObject) timeObj.get("formatted");
+				String hour = (String) formattedTimeObj.getString("hour");
+				String minute = (String) formattedTimeObj.getString("minute");
+				
+				// 프론트단에서 자동으로 보여주기 위해 (yyyy-MM-ddThh:mm) 포맷으로 저장
+				String expenditureDate = year + "-" + month + "-" + day + "T" + hour + ":" + minute;
+				// System.out.println("일시: " + expenditureDate);
+				expenditureVO.setExpenditureDate(expenditureDate);
+			}
 			
 			// 시간 
 			JSONObject timeObj = (JSONObject) paymentObj.get("time");
@@ -183,41 +204,43 @@ public class OCRService {
 			
 			/************ 아이템 추출 -> VO 저장 **************/
 			JSONArray subResultArray = (JSONArray) resultObj.get("subResults");
-			JSONObject temp3Obj = (JSONObject) subResultArray.get(0);
-			
-			JSONArray itemArray = (JSONArray) temp3Obj.get("items");
-			
-			String expenditureItemName = "";
-			int expenditureItemPrice;
-			
-			if(itemArray != null) {
-				ArrayList<ExpenditureItemVO> expenditureItemList = new ArrayList<ExpenditureItemVO>();
-				for(int i=0; i < itemArray.length(); i++) {
-					ExpenditureItemVO itemVO = new ExpenditureItemVO();
-					JSONObject temp4Obj = (JSONObject) itemArray.get(i);
-					
-					if(temp4Obj.has("price")) {
-						// 아이템 이름 추출
-						JSONObject itemNameObj = (JSONObject) temp4Obj.get("name");
-						JSONObject formattedItemNameObj = (JSONObject) itemNameObj.get("formatted");
-						expenditureItemName = (String) formattedItemNameObj.getString("value");
+			if(subResultArray.length() != 0) {
+				JSONObject temp3Obj = (JSONObject) subResultArray.get(0);
+				
+				JSONArray itemArray = (JSONArray) temp3Obj.get("items");
+				
+				String expenditureItemName = "";
+				int expenditureItemPrice;
+				
+				if(itemArray != null) {
+					ArrayList<ExpenditureItemVO> expenditureItemList = new ArrayList<ExpenditureItemVO>();
+					for(int i=0; i < itemArray.length(); i++) {
+						ExpenditureItemVO itemVO = new ExpenditureItemVO();
+						JSONObject temp4Obj = (JSONObject) itemArray.get(i);
 						
-						// 아이템 가격 추출
-						JSONObject priceObj = (JSONObject) temp4Obj.get("price");
-						JSONObject itemPriceObj = (JSONObject) priceObj.get("price");
-						JSONObject formattedPriceNameObj = (JSONObject) itemPriceObj.get("formatted");
-						expenditureItemPrice = Integer.parseInt((String) formattedPriceNameObj.get("value"));
-						
-						// expenditureItemVO에 저장 후 expenditureItemList에 담기
-						itemVO.setExpenditureItemName(expenditureItemName);
-						itemVO.setExpenditureItemPrice(expenditureItemPrice);
-						// System.out.println("상품 번호 "+ (i+1) +" =======================");
-						// System.out.println("내용:" + expenditureItemName + "금액:" + expenditureItemPrice );
-						expenditureItemList.add(itemVO);
+						if(temp4Obj.has("price")) {
+							// 아이템 이름 추출
+							JSONObject itemNameObj = (JSONObject) temp4Obj.get("name");
+							JSONObject formattedItemNameObj = (JSONObject) itemNameObj.get("formatted");
+							expenditureItemName = (String) formattedItemNameObj.getString("value");
+							
+							// 아이템 가격 추출
+							JSONObject priceObj = (JSONObject) temp4Obj.get("price");
+							JSONObject itemPriceObj = (JSONObject) priceObj.get("price");
+							JSONObject formattedPriceNameObj = (JSONObject) itemPriceObj.get("formatted");
+							expenditureItemPrice = Integer.parseInt((String) formattedPriceNameObj.get("value"));
+							
+							// expenditureItemVO에 저장 후 expenditureItemList에 담기
+							itemVO.setExpenditureItemName(expenditureItemName);
+							itemVO.setExpenditureItemPrice(expenditureItemPrice);
+							// System.out.println("상품 번호 "+ (i+1) +" =======================");
+							// System.out.println("내용:" + expenditureItemName + "금액:" + expenditureItemPrice );
+							expenditureItemList.add(itemVO);
+						}
 					}
+					// expenditureVO에 expenditureItemList 추가
+					expenditureVO.setItemList(expenditureItemList);
 				}
-				// expenditureVO에 expenditureItemList 추가
-				expenditureVO.setItemList(expenditureItemList);
 			}
 			
 			/************ 총 금액 추출 -> VO 저장 ************/

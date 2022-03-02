@@ -285,7 +285,6 @@
 	
 	/* Submit - 지출 */
 	$('#expenditureForm').on('submit', function(e){
-		alert("등록 클릭")
 		e.preventDefault();
 		
 		// item 정보를 담은 array
@@ -310,6 +309,8 @@
 			type:"post",
 			url: "/accountBook/expenditure", 	
 			data: formData,
+			processData: false,
+    		contentType: false,
 			success: function(result) {
 				if(result != 0){
 					alert("지출내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");

@@ -120,7 +120,6 @@
 																</div>
 																<div class="col-1">
 																	<button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button>
-																	<input type="button" class="removeItem btn shadow-none p-0" value="삭제">
 																</div> 
 															</div>
 														</div>
