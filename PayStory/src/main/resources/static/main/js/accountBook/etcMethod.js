@@ -24,8 +24,10 @@ function checkToday() {
 			$(this).parent('div.dateBox').parent('div.infoBox').addClass('border-color-black');
 			$(this).addClass('today');
 			$(this).addClass('selected');
+
+			return;
 		}
-	})
+	});
 }
 
 /* 대시보드 메인 - 달력 (A, B) 상세 박스 선택 */

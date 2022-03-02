@@ -42,7 +42,7 @@
 												<%-- 해당 주차의 첫째 주 날짜 생성 --%>
 												<c:forEach begin="0" end="${6 - firstDay}" step="1">
 													<td class="p-1 border-color-white">
-														<div class="infoBox border-color-default">
+														<div class="infoBox border-color-default pointer-cursor">
 															<%-- 날짜, 휴무일 명칭(임시) --%>
 															<div class="dateBox d-flex align-items-center text-center">
 																<div class="date ${dateList[dateIndex].date} rounded-circle m-1">${dateList[dateIndex].day}</div>
@@ -71,7 +71,7 @@
 												<%-- 둘째 주부터 마지막 이전 주까지 날짜 생성 --%>
 												<c:forEach begin="0" end="6" step="1">
 													<td class="p-1 border-color-white">
-														<div class="infoBox border-color-default">
+														<div class="infoBox border-color-default pointer-cursor">
 															<%-- 날짜, 휴무일 명칭(임시) --%>
 															<div class="dateBox d-flex align-items-center text-center">
 																<div class="date ${dateList[dateIndex].date} rounded-circle m-1">${dateList[dateIndex].day}</div>
@@ -100,7 +100,7 @@
 												<%-- 당월 마지막 주 날짜 생성 --%>
 												<c:forEach begin="0" end="${lastDay}" step="1">
 													<td class="p-1 border-color-white">
-														<div class="infoBox border-color-default">
+														<div class="infoBox border-color-default pointer-cursor">
 															<%-- 날짜, 휴무일 명칭(임시) --%>
 															<div class="dateBox d-flex align-items-center text-center">
 																<div class="date ${dateList[dateIndex].date} rounded-circle m-1">${dateList[dateIndex].day}</div>

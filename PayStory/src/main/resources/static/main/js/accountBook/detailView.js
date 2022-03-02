@@ -2,20 +2,16 @@ const date = new Date();
 
 var nowYear = date.getFullYear();
 var nowMonth = date.getMonth(); // 0~11까지
-
-var selectedDay;
+var nowDay = date.getDate(); // 오늘 날짜
 
 $(function() {
-	/* 오늘 날짜 */
-	selectedDay = $('.date.selected').text();
-
 	/* 달력 B 스크롤바 생성 */
 	if ((1183 < getWidth() && getWidth() < 1643) || (getWidth() < 620)) {
 		$('table').eq(0).addClass('table-responsive');
 	}
 
-	calendarAjax("C", nowYear, nowMonth); // 가계부
-	chartAjax(nowYear, nowMonth); // 차트
+	calendarAjax("C", nowYear, nowMonth); // 달력
+	chartAjax(nowYear, nowMonth, nowDay); // 차트
 	budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	detailViewListAjax(); // 상세 내역
 
@@ -40,8 +36,10 @@ $(function() {
 			nowMonth += 12;
 		}
 
+		nowDay = -1;
+
 		calendarAjax("C", nowYear, nowMonth); // 달력
-		chartAjax(nowYear, nowMonth); // 차트
+		chartAjax(nowYear, nowMonth, nowDay); // 차트
 		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	});
 
@@ -53,8 +51,10 @@ $(function() {
 			nowMonth -= 12;
 		}
 
+		nowDay = -1;
+
 		calendarAjax("C", nowYear, nowMonth); // 달력
-		chartAjax(nowYear, nowMonth); // 차트
+		chartAjax(nowYear, nowMonth, nowDay); // 차트
 		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	});
 
@@ -64,9 +64,10 @@ $(function() {
 
 		nowYear = date.getFullYear();
 		nowMonth = date.getMonth();
+		nowDay = date.getDate();
 
 		calendarAjax("C", nowYear, nowMonth); // 달력
-		chartAjax(nowYear, nowMonth); // 차트
+		chartAjax(nowYear, nowMonth, nowDay); // 차트
 		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	});
 
@@ -87,7 +88,9 @@ $(function() {
 		$('.viewOn').addClass('d-none');
 		$('.viewOn').removeClass('viewOn');
 
-		selectedDay = $('.date.selected').text();
+		nowDay = $('.date.selected').text();
+
+		chartAjax(nowYear, nowMonth, nowDay); // 차트
 	});
 
 	/* detailBox 닫기 - 월별 예산 현황 */
@@ -110,11 +113,11 @@ $(function() {
 
 		$('.chartTab').each(function() {
 			if ($(this).hasClass('selected')) {
-				$(this).removeClass('selected');
+				$(this).removeClass('font-weight-bold text-primary selected');
 			}
 		});
-		$(this).addClass('selected');
+		$(this).addClass('font-weight-bold text-primary selected');
 
-		chartAjax(nowYear, nowMonth); // 차트
+		chartAjax(nowYear, nowMonth, nowDay); // 차트
 	});
 });

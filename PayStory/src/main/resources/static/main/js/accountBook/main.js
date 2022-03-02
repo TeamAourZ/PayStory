@@ -2,15 +2,11 @@ const date = new Date();
 
 var nowYear = date.getFullYear();
 var nowMonth = date.getMonth(); // 0~11까지
-
-var selectedDay;
+var nowDay = date.getDate(); // 오늘 날짜
 
 var isType = ""; // 달력 타입
 
 $(function() {
-	/* 오늘 날짜 */
-	selectedDay = $('.date.selected').text();
-
 	/* 달력 로딩 */
 	if (getWidth() >= 1374) {
 		isType = "A";
@@ -19,9 +15,9 @@ $(function() {
 	}
 
 	calendarAjax(isType, nowYear, nowMonth); // 달력
-	mainBoardAjax(); // 게시판
-	chartAjax(nowYear, nowMonth); // 차트
+	chartAjax(nowYear, nowMonth, nowDay); // 차트
 	budgetStatusAjax(nowYear, nowMonth); // 예산 현황
+	mainBoardAjax(); // 게시판
 
 	/* 페이지 크기 변화 감지 */
 	$(window).resize(function() {
@@ -47,8 +43,11 @@ $(function() {
 			nowYear--;
 			nowMonth += 12;
 		}
+
+		nowDay = -1;
+
 		calendarAjax(isType, nowYear, nowMonth); // 달력
-		chartAjax(nowYear, nowMonth); // 차트
+		chartAjax(nowYear, nowMonth, nowDay); // 차트
 		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	});
 
@@ -60,8 +59,10 @@ $(function() {
 			nowMonth -= 12;
 		}
 
+		nowDay = -1;
+
 		calendarAjax(isType, nowYear, nowMonth); // 달력
-		chartAjax(nowYear, nowMonth); // 차트
+		chartAjax(nowYear, nowMonth, nowDay); // 차트
 		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	});
 
@@ -71,9 +72,10 @@ $(function() {
 
 		nowYear = date.getFullYear();
 		nowMonth = date.getMonth();
+		nowDay = date.getDate();
 
 		calendarAjax(isType, nowYear, nowMonth); // 달력
-		chartAjax(nowYear, nowMonth); // 차트
+		chartAjax(nowYear, nowMonth, nowDay); // 차트
 		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	});
 
@@ -94,7 +96,25 @@ $(function() {
 		$('.viewOn').addClass('d-none');
 		$('.viewOn').removeClass('viewOn');
 
-		selectedDay = $('.date.selected').text();
+		nowDay = $('.date.selected').text();
+	});
+
+	/* 달력 + 버튼 클릭 이벤트 */
+	$('#selectDayAddDataBtn').on('click', function() {
+		/*if (0 < nowDay && nowDay <= 31) {
+			let date = nowYear + "-" + (nowMonth + 1) + "-" + nowDay; // 년-월-일
+
+			location.href = "/accountBook/add/" + date; // 내역 입력 페이지 이동
+		} else {
+			alert("날짜를 선택해주세요.");
+		}*/
+		/*
+		
+		
+		addItemForm 수정 요청 또는 수정 허락 받아야 함
+		
+		
+		*/
 	});
 
 	/* 달력 수입 / 지출 태그 */
@@ -152,7 +172,7 @@ $(function() {
 		});
 		$(this).addClass('font-weight-bold text-primary selected');
 
-		chartAjax(nowYear, nowMonth); // 차트
+		chartAjax(nowYear, nowMonth, nowDay); // 차트
 	});
 
 	/* 카테고리 선택 */
