@@ -1,6 +1,5 @@
 package com.AourZ.PayStory.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import org.yaml.snakeyaml.util.ArrayUtils;
 
 import com.AourZ.PayStory.model.AccountBookBudgetVO;
 import com.AourZ.PayStory.model.AccountBookVO;
@@ -346,20 +345,12 @@ public class AccountBookController {
 	/* 수입 항목 추가 */
 	@ResponseBody
 	@RequestMapping("/accountBook/income")
-	public int addIncome(@RequestParam("incomeDate") String date, @RequestParam("incomeSource") String source,
-			@RequestParam("incomeAmount") int amount, @RequestParam("incomeMemo") String memo,
-			@RequestParam("tagNo") String tagNo) {
+	public int addIncome(IncomeVO incomeVO, HttpSession session) {
+		incomeVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
+		
+		accountBookService.insertIncome(incomeVO);
 
-		IncomeVO vo = new IncomeVO();
-		vo.setIncomeDate(date);
-		vo.setIncomeSource(source);
-		vo.setIncomeAmount(amount);
-		vo.setIncomeMemo(memo);
-		vo.setTagNo(tagNo);
-
-		accountBookService.insertIncome(vo);
-
-		int incomeNo = vo.getIncomeNo();
+		int incomeNo = incomeVO.getIncomeNo();
 
 		return incomeNo;
 	}
@@ -368,40 +359,36 @@ public class AccountBookController {
 	@ResponseBody
 	@RequestMapping("/accountBook/expenditure")
 	public int addExpenditure(
-			@RequestParam("expenditureItemName") String[] itemArray,
+			ExpenditureVO expenditureVO, 
 			@RequestParam("expenditureItemPrice") int[] priceArray,
-			@RequestParam("tagNo") String tagNo,
-			@RequestParam("memo") String memo,
-			ExpenditureVO expenditureVO,
-			HttpSession session) throws IOException {
-
-		System.out.println("====== VO 확인 ======");
-		System.out.println(expenditureVO.getExpenditureAddress());
-		System.out.println(expenditureVO.getExpenditureDate());
-		System.out.println(expenditureVO.getExpenditureImage());
-		System.out.println(expenditureVO.getExpenditureSource());
+			@RequestParam("expenditureItemName") String[] nameArray,
+			HttpSession session) {
+		
+		// session에서 accountBookNo, memberNo 가져오기
 		expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
-		expenditureVO.setExpenditureMemo(memo);
-		expenditureVO.setTagNo(tagNo);
-
+		String fileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("accountBookNo")+"_"+ expenditureVO.getExpenditureImage(); 
+		expenditureVO.setExpenditureImage(fileName);
+		
 		accountBookService.insertExpenditure(expenditureVO);
-		int expenditureNo = expenditureVO.getExpenditureNo();
-
-		if(expenditureNo != 0) {
-			ArrayList<ExpenditureItemVO> expenditureItemList = new ArrayList<ExpenditureItemVO>();
-			for(int i=0; i<itemArray.length; i++) {
-				ExpenditureItemVO ItemVO = new ExpenditureItemVO();
-				ItemVO.setExpenditureNo(expenditureNo);
-				ItemVO.setExpenditureItemName(itemArray[i]);
-				ItemVO.setExpenditureItemPrice(priceArray[i]);
-				expenditureItemList.add(ItemVO);
+		
+		int expenitureNo = expenditureVO.getExpenditureNo();
+		if(expenitureNo != 0) {
+			if(priceArray.length != 0 && nameArray.length != 0) {
+				ArrayList<ExpenditureItemVO> expenditureItemList = new ArrayList<ExpenditureItemVO>();
+				for(int i=0; i<priceArray.length; i++) {
+					ExpenditureItemVO ItemVO = new ExpenditureItemVO();
+					ItemVO.setExpenditureNo(expenitureNo);
+					ItemVO.setExpenditureItemName(nameArray[i]);
+					ItemVO.setExpenditureItemPrice(priceArray[i]);
+					expenditureItemList.add(ItemVO);
+				}
+				expenditureVO.setItemList(expenditureItemList);
+				accountBookService.insertExpenditureItem(expenditureItemList);
 			}
-			expenditureVO.setItemList(expenditureItemList);
-			accountBookService.insertExpenditureItem(expenditureItemList);
 		}
-
-		return expenditureNo;
+		return expenitureNo;
 	}
+	
 
 	/****** 공유 가계부 ******/
 

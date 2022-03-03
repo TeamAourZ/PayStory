@@ -155,10 +155,6 @@ public class AIController {
 
 		file.transferTo(file1);
 		
-		// image VO에 저장
-		ExpenditureVO vo = new ExpenditureVO();
-		vo.setExpenditureImage(uploadFileName);
-		
 		ExpenditureVO result =  OCRService.clovaOCRService(filePathName);
 		
 		return result;
