@@ -104,9 +104,9 @@
 			
 			let render = new FileReader();
 			render.onload = function(e){
-				$('#chatBox').append('<div class="msgBox send"><span id="in"><span><img src="' + 
+				$('#chatBox').append('<div class="msgBox send"><span id="in"><img src="' + 
 										e.target.result + '" width="250px" height="250px">' +
-										'</span></span></div><br>');
+										'</span></div><br>');
 				
 			}
 			
@@ -175,8 +175,8 @@
 		
 		/* chatBox에 보낸 메시지 추가 */
 		if($('#message').val() != ""){
-			$('#chatBox').append('<div class="msgBox send"><span id="in"><span>' + 
-												$('#message').val() + '</span></span></div><br>');
+			$('#chatBox').append('<div class="msgBox send"><span id="in">' + 
+												$('#message').val() + '</span></div><br>');
 		}
 		
 		callAjax(); // 입력된 값 전송
@@ -198,8 +198,8 @@
 				for(var b in bubbles){
 					if(bubbles[b].type == 'text'){ // 기본 답변인 경우
 						/* chatBox에 받은 메시지 추가 */
-							$('#chatBox').append('<div class="msgBox receive"><span id="in"><span>PayStory 챗봇</span><br><br><span>' + 
-															   bubbles[b].data.description +'</span></span></div><br><br>'); 
+							$('#chatBox').append('<div class="msgBox receive"><span id="in">PayStory 챗봇<br><br>' + 
+															   bubbles[b].data.description +'</span></div><br><br>'); 
 															   
 						// 챗봇으로 부터 받은 텍스트 답변을 음성으로 변환하기 위해 TTS 호출									   
 						callAjaxTTS(bubbles[b].data.description);		
@@ -317,13 +317,13 @@
 				}
 				console.log(source);
 				// 값 입력
-				$('#chatBox').append('<div class="msgBox receive"><span id="in"><span>PayStory 챗봇' + '<br><br>' + 
-												'<span> 가맹점:'+ source + '</span><br>'+
-												'<span> 지출금액:'+ amount + '</span><br>'+
-												'<span> 사용날짜:'+ date + '</span><br>'+
-												'<span> 사용처:'+ address + '</span><br>'+
-												'<span> 상품명:'+ item + '</span><br>'+
-												'<span> 총 지출금액:'+ totalAmount + '</span><br></span></span></div><br>');
+				$('#chatBox').append('<div class="msgBox receive"><span id="in">PayStory 챗봇' + '<br><br>' + 
+												' 가맹점:'+ source + '<br>'+
+												' 지출금액:'+ amount + '<br>'+
+												' 사용날짜:'+ date + '<br>'+
+												' 사용처:'+ address + '<br>'+
+												' 상품명:'+ item + '<br>'+
+												' 총 지출금액:'+ totalAmount + '<br></span></div><br>');
 				
 			},
 			error: function(err){
