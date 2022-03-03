@@ -29,7 +29,7 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-image"> <!-- login-image -->
+                            <div class="col-lg-6 d-none d-lg-block bg-image">
                             	<img src="<c:url value='/main/images/sideimgtest.png'/>">
                             </div>
                             <div class="col-lg-6">
@@ -46,25 +46,13 @@
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" name="memberPwd"
                                                 id="memberPwd" placeholder="비밀번호">
-                                        </div>                                                                
-                                        <%-- <a href="<c:url value='/'/>" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>  --%>
-                                        <!-- <button class="btn btn-primary btn-user btn-block" type="button" onclick="fnSubmit(); return false;">
-		                               	 Login
-		                                </button> -->
+                                        </div>
 		                                <input class="btn btn-primary btn-user btn-block" type="submit" value="로그인"> 
                                         <hr>
-                                        <a href="/oauth2/authorization/google" class="btn btn-google btn-user btn-block">
-                                              Google 으로 로그인
-                                        </a>
-                                        <a href="/oauth2/authorization/naver" class="btn btn-naver btn-user btn-block">
-                                             Login with NAVER
-                                        </a>
                                     </form>
-                                    <hr>
                                     <div class="text-center">
-                                		<a class="small" href="<c:url value='/member/findPwView'/>">비밀번호 찾기</a>
+                                		<a class="small" href="<c:url value='/member/findPwView'/>">비밀번호 찾기</a><br>
+                                		<a class="small" href="<c:url value='/index'/>">홈 화면으로 가기</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="<c:url value='/member/registerView'/>">계정이 없으신가요?&nbsp;&nbsp;회원가입으로 가기</a>
@@ -74,11 +62,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <!-- Bootstrap core JavaScript-->
