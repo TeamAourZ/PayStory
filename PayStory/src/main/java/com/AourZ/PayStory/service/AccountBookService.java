@@ -60,13 +60,13 @@ public class AccountBookService implements IAccountBookService {
 	}
 
 	@Override
-	public MemberVO selectMemberInfo(String memberNo) {
-		return dao.selectMemberInfo(memberNo);
-	}
+	public MemberVO selectMemberInfo(String condition, Object value) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 
-	@Override
-	public String selectMemberNo(String memberEmail) {
-		return dao.selectMemberNo(memberEmail);
+		map.put("condition", condition);
+		map.put("value", value);
+		
+		return dao.selectMemberInfo(map);
 	}
 
 	@Override

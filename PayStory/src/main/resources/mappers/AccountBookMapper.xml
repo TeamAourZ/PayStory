@@ -67,17 +67,17 @@
 	</select>
 	
 	<!-- 회원 정보 조회 -->
-	<select id="selectMemberInfo" parameterType="String" resultType="com.AourZ.PayStory.model.MemberVO">
+	<select id="selectMemberInfo" parameterType="HashMap" resultType="com.AourZ.PayStory.model.MemberVO">
 		SELECT *
 		FROM member
-		WHERE memberNo = #{memberNo}
-	</select>
-	
-	<!-- 회원 번호 조회 -->
-	<select id="selectMemberNo" parameterType="String" resultType="String">
-		SELECT memberNo
-		FROM member
-		WHERE memberEmail = #{memberEmail}
+		<choose>
+			<when test="condition.equals('memberEmail')">
+				WHERE memberEmail = #{value}
+			</when>
+			<otherwise> <!-- memberNo -->
+				WHERE memberNo = #{value}
+			</otherwise>
+		</choose>
 	</select>
 	
 	<!-- 수입 - 총 개수, 총 금액 조회 -->
