@@ -65,32 +65,23 @@ public class AccountBookService implements IAccountBookService {
 
 		map.put("condition", condition);
 		map.put("value", value);
-		
+
 		return dao.selectMemberInfo(map);
 	}
 
 	@Override
-	public ArrayList<TagTotalVO> selectIncomeList(int accountBookNo, String group1, String group2, String date) {
+	public ArrayList<TagTotalVO> selectAccountBookDataList(String condition, int accountBookNo, String group1,
+			String group2, String date, String dateForm) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
+		map.put("condition", condition);
 		map.put("accountBookNo", accountBookNo);
 		map.put("group1", group1);
 		map.put("group2", group2);
 		map.put("date", date);
+		map.put("dateForm", dateForm);
 
-		return dao.selectIncomeList(map);
-	}
-
-	@Override
-	public ArrayList<TagTotalVO> selectExpenditureList(int accountBookNo, String group1, String group2, String date) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-
-		map.put("accountBookNo", accountBookNo);
-		map.put("group1", group1);
-		map.put("group2", group2);
-		map.put("date", date);
-
-		return dao.selectExpenditureList(map);
+		return dao.selectAccountBookDataList(map);
 	}
 
 	@Override

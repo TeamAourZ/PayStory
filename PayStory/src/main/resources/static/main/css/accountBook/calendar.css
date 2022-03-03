@@ -43,25 +43,15 @@
 	padding: 0.5rem;
 }
 
-.tagIncomeListBox, .tagExpenditureListBox, #budgetStatusBox {
+.tagIncomeListBox, .tagExpenditureListBox {
 	background: var(--light);
 	border-radius: 10px;
 	border: 1px solid var(--dark);
 	z-index: 10;
 }
 .tagIncomeListBox th, .tagIncomeListBox td,
-.tagExpenditureListBox th, .tagExpenditureListBox td,
-#budgetStatusBox th, #budgetStatusBox td {
+.tagExpenditureListBox th, .tagExpenditureListBox td {
 	padding: 0.5rem !important;
-}
-
-#budgetStatusBox {
-	right: 10%;
-}
-
-.detailBoxClose {
-	top: 0%;
-	right: 8%;
 }
 
 
