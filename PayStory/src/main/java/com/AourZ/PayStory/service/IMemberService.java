@@ -1,5 +1,8 @@
 package com.AourZ.PayStory.service;
 
+import java.util.List;
+
+import com.AourZ.PayStory.model.BoardVO;
 import com.AourZ.PayStory.model.LoginVO;
 import com.AourZ.PayStory.model.MemberVO;
 
@@ -14,4 +17,16 @@ public interface IMemberService {
 	public String pwCheck(String memberEmail)throws Exception;	
 	public void pwUpdate(String memberEmail, String hashedPw)throws Exception;
 	public void updateImg(String memberImage, String memberEmail)throws Exception;
-}
+	public int emailCnt(String memberEmail)throws Exception;
+	public List<MemberVO> memberList();
+	public void memberSanction(String memberEmail, int sanctionTime)throws Exception;
+	public void memberSanctionCancel(String memberEmail)throws Exception;
+	public int memberRankCheck(String memberEmail)throws Exception;
+	public Object memberSanctionTime(String memberEmail)throws Exception;
+	public void insertNotice(int boardNo)throws Exception;
+	public void deleteNotice(int boardNo)throws Exception;
+	public void memberMaster(String memberEmail)throws Exception;
+	public void memberMasterCancel(String memberEmail)throws Exception;
+	// 공지사항
+	public List<BoardVO> boardList();
+}	

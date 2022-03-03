@@ -18,6 +18,7 @@
 	<!-------- JS-------->
 	<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
     <script src="<c:url value='/main/js/member/nameCnt.js'/>"></script>
+    <script src="<c:url value='/main/js/member/emailCnt.js'/>"></script>
     
 </head>
 <body class="bg-gradient-primary">
@@ -59,10 +60,22 @@
         								</a>
                                     </div>
                                 </div>
-                                <!-- 이메일 -->                           
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" name="memberEmail"
-                                        placeholder="이메일" id="memberEmail">
+                                <!-- 이메일 -->
+                                <div class="form-group row">                           
+                                <!-- div class="form-group"> -->
+                                	<div class="col-sm-6 mb-3 mb-sm-0">
+	                                    <input type="email" class="form-control form-control-user" name="memberEmail"
+	                                        placeholder="이메일" id="memberEmail">
+									</div>            
+                                   	<div class="col-sm-4 mb-3 mb-sm-0">
+                                    	<button class="btn btn-success btn-icon-split" type="button" id="emailCheck" onclick="fn_emailCheck();" value="N">
+                                    	
+           								<span class="icon text-white-30">
+            		  						<i class="fas fa-check"></i>
+           								</span>
+           				 				<span class="text">중복체크</span>
+        								</button>
+                                    </div>        
                                 </div>
                                 <!-- 비밀번호 -->
                                 <div class="form-group row">
@@ -75,28 +88,15 @@
                                             name="memberPwd2" placeholder="비밀번호 확인" id="memberPwd2">
                                     </div>
                                 </div>
-                               <%--  <a href="<c:url value='/login'/>" type="submit" class="btn btn-primary btn-user btn-block">
-                                    계정 등록하기!
-                                </a> --%>
-                                <!-- 버튼 -->
-                                <!-- <input type="submit" value="계정 등록하기!" class="btn btn-primary btn-user btn-block"> -->
+                              
                                 <button class="btn btn-primary btn-user btn-block" type="button" onclick="fnSubmit(); return false;">
                                 계정 등록하기
                                 </button>
-                                <hr>
-                                <a href="<c:url value='/'/>" class="btn btn-google btn-user btn-block">
-                                    <!-- <i class="fab fa-google fa-fw"></i> --> Google 회원가입하기
-                                </a>
-                                <a href="<c:url value='/'/>" class="btn btn-facebook btn-user btn-block">
-                                    <!-- <i class="fab fa-facebook-f fa-fw"></i> Register with --> Facebook 회원가입하기
-                                </a>
-                                <a href="<c:url value='/'/>" class="btn btn-naver btn-user btn-block">
-                                    <!-- <i class="fab fa-naver-f fa-fw"></i> --> NAVER 회원가입하기
-                                </a>
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="<c:url value='/member/loginView'/>">이미 계정이 있으신가요?&nbsp;&nbsp;로그인으로 가기</a>
+                                <a class="small" href="<c:url value='/member/loginView'/>">이미 계정이 있으신가요?&nbsp;&nbsp;로그인으로 가기</a><br>
+                                <a class="small" href="<c:url value='/index'/>">홈 화면으로 가기</a>
                             </div>
                         </div>
                     </div>
