@@ -203,7 +203,7 @@
 	</insert>
 
 	<!-- 지출 내역 추가 -->
-	<insert id="insertExpenditure" parameterType="map" useGeneratedKeys="true" keyProperty="expenditureNo">
+	<insert id="insertExpenditure" parameterType="com.AourZ.PayStory.model.ExpenditureVO" useGeneratedKeys="true" keyProperty="expenditureNo">
 		INSERT INTO expenditure 
 			(expenditureDate, expenditureImage, expenditureSource, expenditureMemo, expenditureAmount, expenditureAddress, tagNo) 
 		VALUES

@@ -7,9 +7,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Pay Story 가계부 - 수입/지출 내역 추가">
+    <meta name="description" content="PayStory 가계부 - 수입/지출 내역 추가">
     <meta name="author" content="AourZ">
-    <title>[가계부] 수입 | 지출 내역 추가</title>
+    <title>PayStory 가계부 - 수입 | 지출 내역 추가</title>
 
     <!-- CSS : Bootstrap -->
     <link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css">
@@ -53,6 +53,7 @@
                     <!-- Form panels -->
 					<div class="tab-content p-4 bg-white rounded">
 						<div class="tab-pane fade in show active" id="expenditure" role="tabpanel">
+							<h1 class="h4 text-center">영수증을 등록하면 AI가 영수증 내용을 인식하고 자동으로 입렵합니다!</h1>
 							<!--지출 Form-->
 							<form id="expenditureForm" class="my-4">
 								<div class="form-row px-3"> 
@@ -119,8 +120,8 @@
 																</div>
 																<div class="col-1">
 																	<button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button>
-																	<!-- <input type="button" class="removeItem btn shadow-none p-0" value="삭제"> -->
-																</div>
+																	<input type="button" class="removeItem btn shadow-none p-0" value="삭제">
+																</div> 
 															</div>
 														</div>
 														<!-- 아이템 추가 버튼 -->

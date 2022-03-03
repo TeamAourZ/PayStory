@@ -1,7 +1,7 @@
 package com.AourZ.PayStory.model;
 
 public class ExpenditureItemVO {
-	private String expenditureItemName;	// 지출 아이템 이름
+	private String expenditureItemName;		// 지출 아이템 이름
 	private int expenditureItemPrice;		// 지출 아이템 금액
 	private int expenditureNo;				// 지출 내역 번호
 
