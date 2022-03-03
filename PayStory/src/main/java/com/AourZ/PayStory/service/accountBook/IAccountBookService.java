@@ -1,16 +1,16 @@
-package com.AourZ.PayStory.service;
+package com.AourZ.PayStory.service.accountBook;
 
 import java.util.ArrayList;
 
-import com.AourZ.PayStory.model.AccountBookBudgetVO;
-import com.AourZ.PayStory.model.AccountBookVO;
-import com.AourZ.PayStory.model.BoardVO;
-import com.AourZ.PayStory.model.MemberVO;
-import com.AourZ.PayStory.model.ShareAccountBookVO;
-import com.AourZ.PayStory.model.TagTotalVO;
-import com.AourZ.PayStory.model.ExpenditureItemVO;
-import com.AourZ.PayStory.model.ExpenditureVO;
-import com.AourZ.PayStory.model.IncomeVO;
+import com.AourZ.PayStory.model.accountBook.AccountBookBudgetVO;
+import com.AourZ.PayStory.model.accountBook.AccountBookVO;
+import com.AourZ.PayStory.model.accountBook.ExpenditureItemVO;
+import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
+import com.AourZ.PayStory.model.accountBook.IncomeVO;
+import com.AourZ.PayStory.model.accountBook.ShareAccountBookVO;
+import com.AourZ.PayStory.model.accountBook.TagTotalVO;
+import com.AourZ.PayStory.model.board.BoardVO;
+import com.AourZ.PayStory.model.member.MemberVO;
 
 public interface IAccountBookService {
 	void createMyAccountBook(String memberNo);														// 일반 가계부 생성

@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.member;
 
 public class MemberVO {
 	private String memberNo;			// 회원 번호

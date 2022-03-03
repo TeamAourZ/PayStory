@@ -16,22 +16,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.yaml.snakeyaml.util.ArrayUtils;
 
-import com.AourZ.PayStory.model.AccountBookBudgetVO;
-import com.AourZ.PayStory.model.AccountBookVO;
-import com.AourZ.PayStory.model.BoardVO;
-import com.AourZ.PayStory.model.DateVO;
-import com.AourZ.PayStory.model.ExpenditureItemVO;
-import com.AourZ.PayStory.model.ExpenditureVO;
-import com.AourZ.PayStory.model.IncomeVO;
-import com.AourZ.PayStory.model.MainBoardVO;
-import com.AourZ.PayStory.model.MemberVO;
-import com.AourZ.PayStory.model.ShareAccountBookVO;
-import com.AourZ.PayStory.model.ShareBudgetVO;
-import com.AourZ.PayStory.model.TagTotalVO;
-import com.AourZ.PayStory.service.AccountBookService;
-import com.AourZ.PayStory.service.AccountCreateService;
+import com.AourZ.PayStory.model.accountBook.AccountBookBudgetVO;
+import com.AourZ.PayStory.model.accountBook.AccountBookVO;
+import com.AourZ.PayStory.model.accountBook.DateVO;
+import com.AourZ.PayStory.model.accountBook.ExpenditureItemVO;
+import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
+import com.AourZ.PayStory.model.accountBook.IncomeVO;
+import com.AourZ.PayStory.model.accountBook.MainBoardVO;
+import com.AourZ.PayStory.model.accountBook.ShareAccountBookVO;
+import com.AourZ.PayStory.model.accountBook.ShareBudgetVO;
+import com.AourZ.PayStory.model.accountBook.TagTotalVO;
+import com.AourZ.PayStory.model.board.BoardVO;
+import com.AourZ.PayStory.model.member.MemberVO;
+import com.AourZ.PayStory.service.accountBook.AccountBookService;
+import com.AourZ.PayStory.service.accountBook.AccountCreateService;
 
 @Controller
 public class AccountBookController {
@@ -162,46 +161,6 @@ public class AccountBookController {
 		}
     
 		return "accountBook/chart";
-	}
-
-	/* 대시보드 메인 - 예산 현황 */
-	@RequestMapping("/accountBook/budgetStatus")
-	public String budget(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
-		// map 정보 가져오기
-		int year = Integer.parseInt((String) param.get("year")); // 년
-		int month = Integer.parseInt((String) param.get("month")); // 월
-
-		model.addAttribute("year", year);
-		model.addAttribute("month", month);
-
-		// session 정보 가져오기
-		HttpSession session = request.getSession();
-		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
-
-		// DB SELECT 기준 설정
-		String monthText = methodList.zeroFill(month); // 월
-		String date = Integer.toString(year) + "-" + monthText; // 년-월
-
-		// 예산
-		AccountBookBudgetVO budget = accountBookService.selectAccountBookBudget(accountBookNo, date);
-		if (budget != null) {
-			model.addAttribute("budget", budget.getBudgetAmount());
-		}
-
-		// 총 수입 (당월 총 건수, 총 금액)
-		ArrayList<TagTotalVO> income = methodList.selectTagTotalList("income", accountBookNo, "date", "month", date);
-		if (income != null && income.size() > 0) {
-			model.addAttribute("incomeTotalAmount", income.get(0).getSum());
-		}
-
-		// 총 지출 (당월 총 건수, 총 금액)
-		ArrayList<TagTotalVO> expenditure = methodList.selectTagTotalList("expenditure", accountBookNo, "date", "month",
-				date);
-		if (expenditure != null && expenditure.size() > 0) {
-			model.addAttribute("expenditureTotalAmount", expenditure.get(0).getSum());
-		}
-
-		return "accountBook/budgetStatus";
 	}
 
 	/* 대시보드 메인 - 예산 현황 */

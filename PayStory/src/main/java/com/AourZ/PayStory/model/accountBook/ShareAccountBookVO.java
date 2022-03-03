@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.accountBook;
 
 public class ShareAccountBookVO {
 	private String owner;			// 소유자 (memberNo - 외래키)

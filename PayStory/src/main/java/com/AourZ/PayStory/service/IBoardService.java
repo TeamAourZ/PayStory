@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.AourZ.PayStory.model.BoardVO;
+import com.AourZ.PayStory.model.board.BoardVO;
 
 @Service
 public interface IBoardService {
