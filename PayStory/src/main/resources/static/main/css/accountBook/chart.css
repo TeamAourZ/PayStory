@@ -4,6 +4,6 @@
 	gap: 10px;
 }
 
-.pointer-cursor {
-    cursor: pointer;
+.chartTab.selected {
+	text-decoration: underline;
 }

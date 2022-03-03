@@ -10,8 +10,10 @@
 		<title>PayStory 가계부 - 상세 조회</title>
 		
 		<%-------- CSS : Custom --------%>
+		<link href="<c:url value='/main/css/accountBook/common.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/calendar.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/chart.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/color.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/detailView.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/detailViewList.css' />" rel="stylesheet" type="text/css">
 		
@@ -24,10 +26,11 @@
 		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
 		
 		<%-------- JS : Custom ------%>
-		<script src="<c:url value='/main/js/accountBook/calendarEtc.js' />" type="text/javascript"></script>
-		<script src="<c:url value='/main/js/accountBook/detailViewCalendar.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/etcMethod.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/detailView.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/calendarAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/chartAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/budgetStatusAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/detailViewListAjax.js' />" type="text/javascript"></script>
 	</head>
 	<body>
@@ -45,7 +48,7 @@
 					<div class="container-fluid">
 						<div class="row">
 							<%-- 달력, 차트 --%>
-							<div class="col-lg-12 col-xl-4">
+							<div class="col-lg-12 col-xl-5">
 								<%-- 달력 --%>
 								<div class="card shadow mb-4">
 									<%-- Card Header --%>
@@ -67,49 +70,24 @@
 									</div>
 								</div>
 								
-								<%-- 차트 : 일일 통계 --%>
+								<%-- 차트 : 일별 통계 --%>
 								<div class="card shadow mb-4">
 									<%-- Card Header --%>
 									<div class="card-header p-3">
-										<input type="hidden" id="chartType" value="d">
-										<h6 class="m-0 font-weight-bold text-primary">일일 통계</h6>
+										<div class="d-flex justify-content-between">
+											<div id="chartMainTagBox" class="d-flex">
+												<input type="hidden" id="chartType" value="d">
+												<h6 id="chartTab1"  class="chartTab m-0 pointer-cursor font-weight-bold text-primary selected">수입</h6>
+												<h6 id="chartTab2"  class="chartTab m-0 pointer-cursor">지출</h6>
+											</div>
+											<div id="budgetStatusBox" class="position-absolute d-none">
+												<%-- ajax --%>
+											</div>
+											<i class="budgetStatusBoxToggle fas fa-info-circle fa-lg pointer-cursor"></i>
+										</div>
 									</div>
 									<%-- Card Body --%>
 									<div class="card-body">
-										<div class="d-flex justify-content-between">
-											<div id="chartMainTagBox" class="d-flex">
-												<div id="chartTab1" class="pointer-cursor chartTab selected">수입</div>
-												<div id="chartTab2" class="pointer-cursor chartTab">지출</div>
-											</div>
-											<div id="budgetStatusBox" class="d-none">
-												<div class="row">
-													<div class="col-6">당월 예산 :&nbsp;</div>
-													<div class="col-6">
-														<fmt:formatNumber value="${budget}" pattern="#,###" />
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-6">남은 예산 :&nbsp;</div>
-													<div class="col-6">
-														<c:set var="remainingBudget" value="${budget + incomeTotalAmount - expenditureTotalAmount}" />
-														<fmt:formatNumber value="${remainingBudget}" pattern="#,###" />
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-6">총 수입금 :&nbsp;</div>
-													<div class="col-6">
-														<fmt:formatNumber value="${incomeTotalAmount}" pattern="#,###" />
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-6">총 지출금 :&nbsp;</div>
-													<div class="col-6">
-														<fmt:formatNumber value="${expenditureTotalAmount}" pattern="#,###" />
-													</div>
-												</div>
-											</div>
-											<i class="budgetStatusBoxToggle fas fa-info-circle pointer-cursor"></i>
-										</div>
 										<div id="chartBox">
 											<%-- ajax --%>
 										</div>
@@ -118,7 +96,7 @@
 							</div>
 							
 							<%-- 일일 상세 내역 --%>
-							<div class="col-lg-12 col-xl-8">
+							<div class="col-lg-12 col-xl-7">
 								<div class="card shadow mb-4">
 									<%-- Card Header --%>
 									<div class="card-header d-flex justify-content-between p-3">

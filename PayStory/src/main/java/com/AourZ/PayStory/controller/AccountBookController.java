@@ -8,14 +8,15 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.tagext.TryCatchFinally;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.yaml.snakeyaml.util.ArrayUtils;
 
 import com.AourZ.PayStory.model.AccountBookBudgetVO;
 import com.AourZ.PayStory.model.AccountBookVO;
@@ -46,14 +47,13 @@ public class AccountBookController {
 	/* 대시보드 메인 - 일반 가계부 */
 	@RequestMapping("/accountBook/myMain")
 	public String myMain(HttpServletRequest request, HttpServletResponse response, Model model) {
-		try {
-			// session 정보 가져오기
-			HttpSession session = request.getSession();
-			String signInMemberNo = (String) session.getAttribute("memberNo"); // 회원 번호
+		// session 정보 가져오기
+		HttpSession session = request.getSession();
+		String signInMemberNo = (String) session.getAttribute("memberNo"); // 회원 번호
 
+		try {
 			// 로그인 정보 확인
 			if (signInMemberNo == null) {
-
 				response.setContentType("text/html; charset=UTF-8");
 
 				PrintWriter out = response.getWriter();
@@ -61,46 +61,26 @@ public class AccountBookController {
 				out.println("<script>alert('로그인 정보가 정확하지 않습니다.'); location.href='/index';</script>");
 
 				out.flush();
+
+				return "index";
 			}
-
-			// 가계부 정보 가져오기
-			AccountBookVO accountBookInfo = accountBookService.selectMyAccountBook(signInMemberNo, false);
-
-			int accountBookNo = accountBookInfo.getAccountBookNo(); // 가계부 번호
-			String accountBookTitle = accountBookInfo.getAccountBookTitle(); // 가계부 타이틀
-			boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분 - 내 가계부
-
-			model.addAttribute("accountBookTitle", accountBookTitle);
-			model.addAttribute("isShared", isShared);
-
-			// session 업데이트 (가계부 번호 추가)
-			session.setAttribute("accountBookNo", accountBookNo);
-
-			// 현재 년-월 (시스템 시간 기준)
-			String date = methodList.nowDate();
-
-			// 예산
-			AccountBookBudgetVO budget = accountBookService.selectAccountBookBudget(accountBookNo, date);
-			if (budget != null) {
-				model.addAttribute("budget", budget.getBudgetAmount());
-			}
-
-			// 총 수입 (당월 총 건수, 총 금액)
-			ArrayList<TagTotalVO> income = methodList.selectTagTotalList("income", accountBookNo, "date", "month", date);
-			if (income != null && income.size() > 0) {
-				model.addAttribute("incomeTotalAmount", income.get(0).getSum());
-			}
-
-			// 총 지출 (당월 총 건수, 총 금액)
-			ArrayList<TagTotalVO> expenditure = methodList.selectTagTotalList("expenditure", accountBookNo, "date", "month",
-					date);
-			if (expenditure != null && expenditure.size() > 0) {
-				model.addAttribute("expenditureTotalAmount", expenditure.get(0).getSum());
-			}
-
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		// 가계부 정보 가져오기
+		AccountBookVO accountBookInfo = accountBookService.selectMyAccountBook(signInMemberNo, false);
+
+		int accountBookNo = accountBookInfo.getAccountBookNo(); // 가계부 번호
+		String accountBookTitle = accountBookInfo.getAccountBookTitle(); // 가계부 타이틀
+		boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분 - 내 가계부
+
+		model.addAttribute("accountBookTitle", accountBookTitle);
+		model.addAttribute("isShared", isShared);
+
+		// session 업데이트 (가계부 번호 추가)
+		session.setAttribute("accountBookNo", accountBookNo);
+
 		return "accountBook/main";
 	}
 
@@ -120,8 +100,87 @@ public class AccountBookController {
 		model.addAttribute("accountBookTitle", accountBookTitle);
 		model.addAttribute("isShared", isShared);
 
-		// 현재 년-월 (시스템 시간 기준)
-		String date = methodList.nowDate();
+		return "accountBook/main";
+	}
+
+	/* 대시보드 메인 - 차트 */
+	@RequestMapping("/accountBook/chart")
+	public String chart(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
+		// map 정보 가져오기
+		int year = Integer.parseInt((String) param.get("year")); // 년
+		int month = Integer.parseInt((String) param.get("month")); // 월
+		int day = -1;
+		int lastDate = Integer.parseInt((String) param.get("lastDate")); // 달의 마지막 날
+
+		if (param.get("day") != null && param.get("day") != "") {
+			day = Integer.parseInt((String) param.get("day")); // 일
+		}
+
+		model.addAttribute("year", year);
+		model.addAttribute("month", month);
+		model.addAttribute("day", day);
+
+		String chartType = (String) param.get("chartType"); // 월 : m, 일 : d
+		String chartTab = (String) param.get("chartTab"); // 수입 : income, 지출 : expenditure
+
+		model.addAttribute("chartType", chartType);
+
+		// session 정보 가져오기
+		HttpSession session = request.getSession();
+		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
+
+		// DB SELECT 기준 설정
+		String monthText = methodList.zeroFill(month); // 월
+		String date = Integer.toString(year) + "-" + monthText; // 년-월
+		String group1 = "tag"; // 날짜 기준, 태그 기준 설정
+		String group2 = ""; // 그룹 기준 - 년 / 월 / 일
+
+		if (chartType.equals("y")) {
+			date = Integer.toString(year);
+			group2 = "year";
+		} else if (chartType.equals("m")) {
+			group2 = "month";
+
+			// 당월 월별 태그별 총 건수, 총 금액
+			ArrayList<TagTotalVO> dataList = methodList.selectTagTotalList(chartTab, accountBookNo, group1, group2,
+					date);
+
+			for (int i = 0; i < dataList.size(); i++) {
+				dataList.get(i).setTag(methodList.replaceTag(dataList.get(i).getTag())); // 태그 번호 to 태그 이름
+			}
+
+			model.addAttribute("dataList", dataList);
+		} else if (chartType.equals("d")) {
+			group2 = "day";
+
+			// 당월 일별 태그별 총 건수, 총 금액)
+			ArrayList<TagTotalVO> tempList = methodList.selectTagTotalList(chartTab, accountBookNo, group1, group2,
+					date);
+			ArrayList<ArrayList<TagTotalVO>> dataList = methodList.createDetailDataList(tempList, lastDate);
+
+			model.addAttribute("dataList", dataList);
+		}
+    
+		return "accountBook/chart";
+	}
+
+	/* 대시보드 메인 - 예산 현황 */
+	@RequestMapping("/accountBook/budgetStatus")
+	public String budget(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
+		// map 정보 가져오기
+		int year = Integer.parseInt((String) param.get("year")); // 년
+		int month = Integer.parseInt((String) param.get("month")); // 월
+
+		model.addAttribute("year", year);
+		model.addAttribute("month", month);
+
+		// session 정보 가져오기
+		HttpSession session = request.getSession();
+		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
+
+		// DB SELECT 기준 설정
+		String monthText = methodList.zeroFill(month); // 월
+		String date = Integer.toString(year) + "-" + monthText; // 년-월
 
 		// 예산
 		AccountBookBudgetVO budget = accountBookService.selectAccountBookBudget(accountBookNo, date);
@@ -142,17 +201,18 @@ public class AccountBookController {
 			model.addAttribute("expenditureTotalAmount", expenditure.get(0).getSum());
 		}
 
-		return "accountBook/main";
+		return "accountBook/budgetStatus";
 	}
 
-	/* 대시보드 메인 - 차트 */
-	@RequestMapping("/accountBook/chart")
-	public String chart(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
+	/* 대시보드 메인 - 예산 현황 */
+	@RequestMapping("/accountBook/budgetStatus")
+	public String budget(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
 		// map 정보 가져오기
 		int year = Integer.parseInt((String) param.get("year")); // 년
 		int month = Integer.parseInt((String) param.get("month")); // 월
-		String chartType = (String) param.get("chartType"); // 월 : m, 일 : d
-		String chartTab = (String) param.get("chartTab"); // 수입 : income, 지출 : expenditure
+
+		model.addAttribute("year", year);
+		model.addAttribute("month", month);
 
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
@@ -161,27 +221,27 @@ public class AccountBookController {
 		// DB SELECT 기준 설정
 		String monthText = methodList.zeroFill(month); // 월
 		String date = Integer.toString(year) + "-" + monthText; // 년-월
-		String group1 = "tag"; // 날짜 기준, 태그 기준 설정
-		String group2 = ""; // 그룹 기준 - 년 / 월 / 일
 
-		if (chartType.equals("y")) {
-			date = Integer.toString(year);
-			group2 = "year";
-		} else if (chartType.equals("m")) {
-			group2 = "month";
-		} else if (chartType.equals("d")) {
-			group2 = "day";
+		// 예산
+		AccountBookBudgetVO budget = accountBookService.selectAccountBookBudget(accountBookNo, date);
+		if (budget != null) {
+			model.addAttribute("budget", budget.getBudgetAmount());
 		}
 
-		ArrayList<TagTotalVO> dataList = methodList.selectTagTotalList(chartTab, accountBookNo, group1, group2, date);
-
-		for (int i = 0; i < dataList.size(); i++) {
-			dataList.get(i).setTag(methodList.replaceTag(dataList.get(i).getTag())); // 태그 번호 to 태그 이름
+		// 총 수입 (당월 총 건수, 총 금액)
+		ArrayList<TagTotalVO> income = methodList.selectTagTotalList("income", accountBookNo, "date", "month", date);
+		if (income != null && income.size() > 0) {
+			model.addAttribute("incomeTotalAmount", income.get(0).getSum());
 		}
 
-		model.addAttribute("dataList", dataList);
+		// 총 지출 (당월 총 건수, 총 금액)
+		ArrayList<TagTotalVO> expenditure = methodList.selectTagTotalList("expenditure", accountBookNo, "date", "month",
+				date);
+		if (expenditure != null && expenditure.size() > 0) {
+			model.addAttribute("expenditureTotalAmount", expenditure.get(0).getSum());
+		}
 
-		return "accountBook/chart";
+		return "accountBook/budgetStatus";
 	}
 
 	/* 대시보드 메인 - 게시판 */
@@ -311,6 +371,22 @@ public class AccountBookController {
 		}
 	}
 
+	/* 수입 / 지출 입력 페이지 이동 */
+	@RequestMapping("/accountBook/add/{date}")
+	public String dateToAdd(@PathVariable("date") String date, Model model) {
+		String[] splitDate = date.split("-");
+
+		String year = splitDate[0];
+		String month = splitDate[1];
+		String day = splitDate[2];
+
+		model.addAttribute("year", year);
+		model.addAttribute("month", month);
+		model.addAttribute("day", day);
+
+		return "accountBook/addItemForm";
+	}
+
 	/* 대시보드 조회 */
 	@RequestMapping("/accountBook/detailView")
 	public String detailView(HttpServletRequest request, Model model) {
@@ -344,20 +420,12 @@ public class AccountBookController {
 	/* 수입 항목 추가 */
 	@ResponseBody
 	@RequestMapping("/accountBook/income")
-	public int addIncome(@RequestParam("incomeDate") String date, @RequestParam("incomeSource") String source,
-			@RequestParam("incomeAmount") int amount, @RequestParam("incomeMemo") String memo,
-			@RequestParam("tagNo") String tagNo) {
+	public int addIncome(IncomeVO incomeVO, HttpSession session) {
+		incomeVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
+		
+		accountBookService.insertIncome(incomeVO);
 
-		IncomeVO vo = new IncomeVO();
-		vo.setIncomeDate(date);
-		vo.setIncomeSource(source);
-		vo.setIncomeAmount(amount);
-		vo.setIncomeMemo(memo);
-		vo.setTagNo(tagNo);
-
-		accountBookService.insertIncome(vo);
-
-		int incomeNo = vo.getIncomeNo();
+		int incomeNo = incomeVO.getIncomeNo();
 
 		return incomeNo;
 	}
@@ -366,40 +434,36 @@ public class AccountBookController {
 	@ResponseBody
 	@RequestMapping("/accountBook/expenditure")
 	public int addExpenditure(
-			@RequestParam("expenditureItemName") String[] itemArray,
+			ExpenditureVO expenditureVO, 
 			@RequestParam("expenditureItemPrice") int[] priceArray,
-			@RequestParam("tagNo") String tagNo,
-			@RequestParam("memo") String memo,
-			ExpenditureVO expenditureVO,
-			HttpSession session) throws IOException {
+			@RequestParam("expenditureItemName") String[] nameArray,
+			HttpSession session) {
 		
-		// expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
-		System.out.println("====== VO 확인 ======");
-		System.out.println(expenditureVO.getExpenditureAddress());
-		System.out.println(expenditureVO.getExpenditureDate());
-		System.out.println(expenditureVO.getExpenditureImage());
-		System.out.println(expenditureVO.getExpenditureSource());
-		expenditureVO.setExpenditureMemo(memo);
-		expenditureVO.setTagNo(tagNo);
+		// session에서 accountBookNo, memberNo 가져오기
+		expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
+		String fileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("accountBookNo")+"_"+ expenditureVO.getExpenditureImage(); 
+		expenditureVO.setExpenditureImage(fileName);
 		
 		accountBookService.insertExpenditure(expenditureVO);
-		int expenditureNo = expenditureVO.getExpenditureNo();
 		
-		if(expenditureNo != 0) {
-			ArrayList<ExpenditureItemVO> expenditureItemList = new ArrayList<ExpenditureItemVO>();
-			for(int i=0; i<itemArray.length; i++) {
-				ExpenditureItemVO ItemVO = new ExpenditureItemVO();
-				ItemVO.setExpenditureNo(expenditureNo);
-				ItemVO.setExpenditureItemName(itemArray[i]);
-				ItemVO.setExpenditureItemPrice(priceArray[i]);
-				expenditureItemList.add(ItemVO);
+		int expenitureNo = expenditureVO.getExpenditureNo();
+		if(expenitureNo != 0) {
+			if(priceArray.length != 0 && nameArray.length != 0) {
+				ArrayList<ExpenditureItemVO> expenditureItemList = new ArrayList<ExpenditureItemVO>();
+				for(int i=0; i<priceArray.length; i++) {
+					ExpenditureItemVO ItemVO = new ExpenditureItemVO();
+					ItemVO.setExpenditureNo(expenitureNo);
+					ItemVO.setExpenditureItemName(nameArray[i]);
+					ItemVO.setExpenditureItemPrice(priceArray[i]);
+					expenditureItemList.add(ItemVO);
+				}
+				expenditureVO.setItemList(expenditureItemList);
+				accountBookService.insertExpenditureItem(expenditureItemList);
 			}
-			expenditureVO.setItemList(expenditureItemList);
-			accountBookService.insertExpenditureItem(expenditureItemList);
 		}
-		
-		return expenditureNo;
+		return expenitureNo;
 	}
+	
 
 	/****** 공유 가계부 ******/
 

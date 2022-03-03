@@ -19,13 +19,13 @@
 				<%-- 첫째 날 전까지 공란 --%>
 				<c:if test="${firstDay ne 0}">
 					<c:forEach begin="0" end="${firstDay - 1}" step="1">
-						<div class="border"></div>
+						<div class="emptyBox border"></div>
 					</c:forEach>
 				</c:if>
 				
 				<%-- 날짜 채우기 --%>
 				<c:forEach var="date" items="${dateList}" varStatus="dateStatus">
-					<div class="infoBox d-flex flex-column border-color-default">
+					<div class="infoBox d-flex flex-column border-color-default pointer-cursor">
 						<%-- 날짜, 휴무일 명칭(임시) --%>
 						<div class="dateBox d-flex align-items-center text-center">
 							<div class="date typeA ${date.date} rounded-circle m-1">${date.day}</div>
@@ -63,7 +63,7 @@
 												<div class="col-sm-12">
 													<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 													<table class="table mb-0">
-														<thead class="titleName">
+														<thead>
 															<tr class="text-center">
 																<th>구분</th>
 																<th>건수</th>
@@ -89,13 +89,13 @@
 							<%-- 지출 --%>
 							<c:if test="${dateExpenditureList[dateStatus.index].count ne 0}">
 								<div class="tagExpenditureListBox position-absolute d-none">
-									<div class="table table-responsive mb-0">
+									<div class="table mb-0">
 										<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 											<div class="row">
 												<div class="col-sm-12">
 													<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 													<table class="table mb-0">
-														<thead class="titleName">
+														<thead>
 															<tr class="text-center">
 																<th>구분</th>
 																<th>건수</th>
@@ -106,7 +106,7 @@
 															<c:forEach var="tagExpenditure" items="${tagExpenditureList[dateStatus.index]}">
 																<tr class="text-center">
 																	<td>${tagExpenditure.tag}</td>
-																	<td><fmt:formatNumber value="-${tagExpenditure.count}" pattern="#,###" /></td>
+																	<td><fmt:formatNumber value="${tagExpenditure.count}" pattern="#,###" /></td>
 																	<td class="expenditureValue"><fmt:formatNumber value="-${tagExpenditure.sum}" pattern="#,###" /></td>
 																</tr>
 															</c:forEach>
@@ -124,7 +124,7 @@
 				
 				<%-- 남은 날 공란 --%>
 				<c:forEach begin="${lastDay + 1}" end="6" step="1">
-					<div class="border"></div>
+					<div class="emptyBox border"></div>
 				</c:forEach>
 			</div>
 		</div>

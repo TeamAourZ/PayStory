@@ -10,7 +10,9 @@
 		<title>PayStory 내 가계부</title>
 		
 		<%-------- CSS : Custom --------%>
+		<link href="<c:url value='/main/css/accountBook/common.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/chart.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/color.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/mainBoard.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/calendar.css' />" rel="stylesheet" type="text/css">
 		
@@ -23,9 +25,10 @@
 		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
 		
 		<%-------- JS : Custom ------%>
-		<script src="<c:url value='/main/js/accountBook/calendarEtc.js' />" type="text/javascript"></script>
-		<script src="<c:url value='/main/js/accountBook/mainCalendar.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/etcMethod.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/main.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/chartAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/budgetStatusAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/mainBoardAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/calendarAjax.js' />" type="text/javascript"></script>
 	</head>
@@ -49,64 +52,36 @@
 								<div class="card shadow mb-4">
 									<%-- Card Header --%>
 									<div class="card-header p-3">
-										<input type="hidden" id="chartType" value="m">
-										<h6 class="m-0 font-weight-bold text-primary">월별 통계</h6>
+										<div class="d-flex justify-content-between">
+											<div id="chartMainTagBox" class="d-flex">
+												<input type="hidden" id="chartType" value="m">
+												<h6 id="chartTab1"  class="chartTab m-0 pointer-cursor font-weight-bold text-primary selected">수입</h6>
+												<h6 id="chartTab2"  class="chartTab m-0 pointer-cursor">지출</h6>
+											</div>
+											<div id="budgetStatusBox" class="position-absolute d-none">
+												<%-- ajax --%>
+											</div>
+											<i class="budgetStatusBoxToggle fas fa-info-circle fa-lg pointer-cursor"></i>
+										</div>
 									</div>
 									<%-- Card Body --%>
 									<div class="card-body">
-										<div class="d-flex justify-content-between">
-											<div id="chartMainTagBox" class="d-flex">
-												<div id="chartTab1" class="pointer-cursor chartTab selected">수입</div>
-												<div id="chartTab2" class="pointer-cursor chartTab">지출</div>
-											</div>
-											<div id="budgetStatusBox" class="d-none">
-												<div class="row">
-													<div class="col-6">당월 예산 :&nbsp;</div>
-													<div class="col-6">
-														<fmt:formatNumber value="${budget}" pattern="#,###" />
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-6">남은 예산 :&nbsp;</div>
-													<div class="col-6">
-														<c:set var="remainingBudget" value="${budget + incomeTotalAmount - expenditureTotalAmount}" />
-														<fmt:formatNumber value="${remainingBudget}" pattern="#,###" />
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-6">총 수입금 :&nbsp;</div>
-													<div class="col-6">
-														<fmt:formatNumber value="${incomeTotalAmount}" pattern="#,###" />
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-6">총 지출금 :&nbsp;</div>
-													<div class="col-6">
-														<fmt:formatNumber value="${expenditureTotalAmount}" pattern="#,###" />
-													</div>
-												</div>
-											</div>
-											<i class="budgetStatusBoxToggle fas fa-info-circle pointer-cursor"></i>
-										</div>
 										<div id="chartBox">
 											<%-- ajax --%>
 										</div>
 									</div>
 								</div>
 	
-								<%-- 게시판 : 최신글 --%>
+								<%-- 게시판 : 최신글, 공지사항 --%>
 								<div class="card shadow mb-4">
 									<%-- Card Header --%>
-									<div class="card-header p-3">
-										<h6 class="m-0 font-weight-bold text-primary">최신글</h6>
+									<div id="boardCategoryBox" class="card-header d-flex p-3">
+										<h6 id="boardTab1"  class="boardCategory m-0 pointer-cursor font-weight-bold text-primary selected">전체</h6>
+										<h6 id="boardTab2"  class="boardCategory m-0 pointer-cursor">공지사항</h6>
 									</div>
 									<%-- Card Body --%>
 									<div class="card-body">
-										<div id="categoryBox" class="d-flex mb-2">
-											<div id="boardTab1" class="pointer-cursor boardCategory selected">전체</div>
-											<div id="boardTab2" class="pointer-cursor boardCategory">공지사항</div>
-										</div>
-										<div id="postBox" class="d-flex flex-column">
+										<div id="boardBox" class="d-flex flex-column">
 											<%-- ajax --%>
 										</div>
 									</div>

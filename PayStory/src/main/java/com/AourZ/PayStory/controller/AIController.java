@@ -6,7 +6,6 @@ import java.io.IOException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -145,7 +144,7 @@ public class AIController {
 	@RequestMapping("/OCR")
 	public ExpenditureVO ocrUplaod(@RequestParam("expenditureImage") MultipartFile file, HttpSession session) throws IOException {
 		// 파일 공유하기 위해 프로젝트내 file/receipt 폴더에 업로드
-		String uploadPath = "C:/PayStory/PayStory/src/main/resources/static/file/receipt/";
+		String uploadPath = "C:/PayStory/file/receipt/";
 
 		String originalFileName = file.getOriginalFilename();
 		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
@@ -155,10 +154,6 @@ public class AIController {
 		File file1 = new File(filePathName);
 
 		file.transferTo(file1);
-		
-		// image VO에 저장
-		ExpenditureVO vo = new ExpenditureVO();
-		vo.setExpenditureImage(uploadFileName);
 		
 		ExpenditureVO result =  OCRService.clovaOCRService(filePathName);
 		
