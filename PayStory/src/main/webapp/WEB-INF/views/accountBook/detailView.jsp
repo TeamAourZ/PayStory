@@ -7,14 +7,13 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>PayStory 가계부 - 상세 조회</title>
+		<title>PayStory 가계부 - 대시보드 : 상세 내역 조회</title>
 		
 		<%-------- CSS : Custom --------%>
 		<link href="<c:url value='/main/css/accountBook/common.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/calendar.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/chart.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/color.css' />" rel="stylesheet" type="text/css">
-		<link href="<c:url value='/main/css/accountBook/detailView.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/detailViewList.css' />" rel="stylesheet" type="text/css">
 		
 		<%-------- CSS : Bootstrap --------%>

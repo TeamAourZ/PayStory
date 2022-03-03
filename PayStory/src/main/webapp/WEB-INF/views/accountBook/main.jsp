@@ -7,7 +7,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>PayStory 내 가계부</title>
+		<title>PayStory 가계부 - 대시보드 : 메인</title>
 		
 		<%-------- CSS : Custom --------%>
 		<link href="<c:url value='/main/css/accountBook/common.css' />" rel="stylesheet" type="text/css">
@@ -93,12 +93,24 @@
 								<div class="card shadow mb-4">
 									<%-- Card Header --%>
 									<div class="card-header d-flex justify-content-between p-3">
-										<h6 class="m-0 font-weight-bold text-primary">{가계부 타이틀}</h6>
+										<c:choose>
+											<c:when test="${accountBookTitle eq null || accountBookTitle eq ''}">
+												<c:choose>
+													<c:when test="${isShared eq false}">
+														<h6 class="m-0 font-weight-bold text-primary">내 가계부</h6>
+													</c:when>
+													<c:otherwise>
+														<h6 class="m-0 font-weight-bold text-primary">공유 가계부</h6>
+													</c:otherwise>
+												</c:choose>
+											</c:when>
+											<c:otherwise>
+												<h6 class="m-0 font-weight-bold text-primary">${accountBookTitle}</h6>
+											</c:otherwise>
+										</c:choose>
 										<c:if test="${isShared eq true}">
+											
 											<i class="fas fa-user-friends fa-lg pointer-cursor"></i>
-											<%-- 
-													소유자, 참여자 표시
-											 --%>
 										</c:if>
 									</div>
 									<%-- Card Body --%>

@@ -1,18 +1,6 @@
 @charset "UTF-8";
 
 /* 공통 / A, B */
-#calendarBtnBox i {
-	color: var(--gray);
-}
-
-#yearMonth {
-	color: rgba(0, 0, 0, 0.9);
-}
-
-#otherBtnBox {
-	gap: 5px;
-}
-
 .dateSel div.infoBox, .dateSel div.emptyBox {
     min-height: 90px;
     font-size: 13pt;
