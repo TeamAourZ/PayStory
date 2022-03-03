@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+.color-0 {
+	color: var(--blue);
+}
+
+.color-1 {
+	color: var(--purple);
+}
+
+.color-2 {
+	color: var(--pink);
+}
+
+.color-3 {
+	color: var(--red);
+}
+
+.color-4 {
+	color: var(--orange);
+}
+
+.color-5 {
+	color: var(--yellow);
+}
+
+.color-6 {
+	color: var(--teal);
+}
+
+.color-7 {
+	color: var(--cyan);
+}
+
+.color-8 {
+	color: var(--gray-dark);
+}
+
+.color-9 {
+	color: var(--success);
+}

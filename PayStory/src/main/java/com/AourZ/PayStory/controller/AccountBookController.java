@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -108,11 +109,21 @@ public class AccountBookController {
 		// map 정보 가져오기
 		int year = Integer.parseInt((String) param.get("year")); // 년
 		int month = Integer.parseInt((String) param.get("month")); // 월
-		String chartType = (String) param.get("chartType"); // 월 : m, 일 : d
-		String chartTab = (String) param.get("chartTab"); // 수입 : income, 지출 : expenditure
+		int day = -1;
+		int lastDate = Integer.parseInt((String) param.get("lastDate")); // 달의 마지막 날
+
+		if (param.get("day") != null && param.get("day") != "") {
+			day = Integer.parseInt((String) param.get("day")); // 일
+		}
 
 		model.addAttribute("year", year);
 		model.addAttribute("month", month);
+		model.addAttribute("day", day);
+
+		String chartType = (String) param.get("chartType"); // 월 : m, 일 : d
+		String chartTab = (String) param.get("chartTab"); // 수입 : income, 지출 : expenditure
+
+		model.addAttribute("chartType", chartType);
 
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
@@ -129,20 +140,68 @@ public class AccountBookController {
 			group2 = "year";
 		} else if (chartType.equals("m")) {
 			group2 = "month";
+
+			// 당월 월별 태그별 총 건수, 총 금액
+			ArrayList<TagTotalVO> dataList = methodList.selectTagTotalList(chartTab, accountBookNo, group1, group2,
+					date);
+
+			for (int i = 0; i < dataList.size(); i++) {
+				dataList.get(i).setTag(methodList.replaceTag(dataList.get(i).getTag())); // 태그 번호 to 태그 이름
+			}
+
+			model.addAttribute("dataList", dataList);
 		} else if (chartType.equals("d")) {
 			group2 = "day";
+
+			// 당월 일별 태그별 총 건수, 총 금액)
+			ArrayList<TagTotalVO> tempList = methodList.selectTagTotalList(chartTab, accountBookNo, group1, group2,
+					date);
+			ArrayList<ArrayList<TagTotalVO>> dataList = methodList.createDetailDataList(tempList, lastDate);
+
+			model.addAttribute("dataList", dataList);
 		}
-
-		// 당월 일별 / 월별 태그별 총 건수, 총 금액
-		ArrayList<TagTotalVO> dataList = methodList.selectTagTotalList(chartTab, accountBookNo, group1, group2, date);
-
-		for (int i = 0; i < dataList.size(); i++) {
-			dataList.get(i).setTag(methodList.replaceTag(dataList.get(i).getTag())); // 태그 번호 to 태그 이름
-		}
-
-		model.addAttribute("dataList", dataList);
-
+    
 		return "accountBook/chart";
+	}
+
+	/* 대시보드 메인 - 예산 현황 */
+	@RequestMapping("/accountBook/budgetStatus")
+	public String budget(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
+		// map 정보 가져오기
+		int year = Integer.parseInt((String) param.get("year")); // 년
+		int month = Integer.parseInt((String) param.get("month")); // 월
+
+		model.addAttribute("year", year);
+		model.addAttribute("month", month);
+
+		// session 정보 가져오기
+		HttpSession session = request.getSession();
+		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
+
+		// DB SELECT 기준 설정
+		String monthText = methodList.zeroFill(month); // 월
+		String date = Integer.toString(year) + "-" + monthText; // 년-월
+
+		// 예산
+		AccountBookBudgetVO budget = accountBookService.selectAccountBookBudget(accountBookNo, date);
+		if (budget != null) {
+			model.addAttribute("budget", budget.getBudgetAmount());
+		}
+
+		// 총 수입 (당월 총 건수, 총 금액)
+		ArrayList<TagTotalVO> income = methodList.selectTagTotalList("income", accountBookNo, "date", "month", date);
+		if (income != null && income.size() > 0) {
+			model.addAttribute("incomeTotalAmount", income.get(0).getSum());
+		}
+
+		// 총 지출 (당월 총 건수, 총 금액)
+		ArrayList<TagTotalVO> expenditure = methodList.selectTagTotalList("expenditure", accountBookNo, "date", "month",
+				date);
+		if (expenditure != null && expenditure.size() > 0) {
+			model.addAttribute("expenditureTotalAmount", expenditure.get(0).getSum());
+		}
+
+		return "accountBook/budgetStatus";
 	}
 
 	/* 대시보드 메인 - 예산 현황 */
@@ -310,6 +369,22 @@ public class AccountBookController {
 		} else { // C
 			return "accountBook/detailViewCalendar";
 		}
+	}
+
+	/* 수입 / 지출 입력 페이지 이동 */
+	@RequestMapping("/accountBook/add/{date}")
+	public String dateToAdd(@PathVariable("date") String date, Model model) {
+		String[] splitDate = date.split("-");
+
+		String year = splitDate[0];
+		String month = splitDate[1];
+		String day = splitDate[2];
+
+		model.addAttribute("year", year);
+		model.addAttribute("month", month);
+		model.addAttribute("day", day);
+
+		return "accountBook/addItemForm";
 	}
 
 	/* 대시보드 조회 */
