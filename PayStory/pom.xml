@@ -125,17 +125,26 @@
 		</dependency>
 		<!-- 첨부파일 -->
 		<!-- MultipartHttpServletRequset -->
-		 <dependency>
-			 <groupId>commons-io</groupId>
-			 <artifactId>commons-io</artifactId>
-			 <version>2.0.1</version>
-		 </dependency>		 
-		 <dependency>
-			 <groupId>commons-fileupload</groupId>
-			 <artifactId>commons-fileupload</artifactId>
-			 <version>1.2.2</version>
-		 </dependency>
-			
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0.1</version>
+		</dependency>		 
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- web socket -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+			<version>2.6.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>

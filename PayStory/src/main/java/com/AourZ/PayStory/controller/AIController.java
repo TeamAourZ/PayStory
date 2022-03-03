@@ -28,7 +28,8 @@ public class AIController {
 
 	@Autowired
 	private OCRService ocrService;
-
+	
+	
 	// Speech To Text!!
 	@RequestMapping("/clovaSTT")
 	public String clovaSTT(@RequestParam("uploadFile") MultipartFile file) {

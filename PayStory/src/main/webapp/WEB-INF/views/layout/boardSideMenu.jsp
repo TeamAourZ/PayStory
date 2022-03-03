@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 	<body>
@@ -33,7 +33,7 @@
 
             <!-- Nav Item - 상세 내역 조회 -->
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/accountBook/detailView' />">
+                <a class="nav-link" href="<c:url value='/accountBook/detailView'/>">
                     <i class="fas fa-tasks"></i>
                     <span>상세 내역 조회</span>
                 </a>
@@ -41,7 +41,7 @@
 
             <!-- Nav Item - 수입 | 지출 내역 추가 -->
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/accountBook/add' />">
+                <a class="nav-link" href="<c:url value='/accountBook/add'/>">
                     <i class="fas fa-plus-circle"></i>
                     <span>수입 | 지출 내역 추가</span>
                 </a>
@@ -52,7 +52,7 @@
 
             <!-- Nav Item - 게시판 -->
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/board/listAll' />">
+                <a class="nav-link" href="<c:url value='/board/listAll'/>">
                     <i class="far fa-clipboard"></i>
                     <span>게시판</span>
                 </a>
