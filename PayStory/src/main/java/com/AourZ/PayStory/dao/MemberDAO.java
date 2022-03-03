@@ -60,10 +60,10 @@ public class MemberDAO implements IMemberDAO {
 		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.memberAuth", memberEmail);
 		
 		// 회원 번호 조회
-		String memberNo = accountBookService.selectMemberNo(memberEmail);
+		MemberVO member = accountBookService.selectMemberInfo("memberEmail", memberEmail);
 		
 		// 일반 가계부 생성
-		accountBookService.createMyAccountBook(memberNo);
+		accountBookService.createMyAccountBook(member.getMemberNo());
 	}
 	
 	@Override

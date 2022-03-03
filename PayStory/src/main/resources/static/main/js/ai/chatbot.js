@@ -86,11 +86,11 @@
 	
 	// chatbot 아이콘 눌렀을 때 파일 업로드
 	$("#uploadFile").on('change',function(e){
-		event.preventDefault();
+		e.preventDefault();
 		
 		// 파일 이름 표시
 		let fileName = $(this).val();
-	  	$(".input-file-button").text(event.preventDefault());
+	  	$(".input-file-button").text(fileName);
 	  	
 	  	// 이미지 영역에 미리보기
 	  	let file = e.target.files;
@@ -104,9 +104,9 @@
 			
 			let render = new FileReader();
 			render.onload = function(e){
-				$('#chatBox').append('<div class="msgBox send"><span id="in"><span><img src="' + 
+				$('#chatBox').append('<div class="msgBox send"><span id="in"><img src="' + 
 										e.target.result + '" width="250px" height="250px">' +
-										'</span></span></div><br>');
+										'</span></div><br>');
 				
 			}
 			
@@ -175,8 +175,8 @@
 		
 		/* chatBox에 보낸 메시지 추가 */
 		if($('#message').val() != ""){
-			$('#chatBox').append('<div class="msgBox send"><span id="in"><span>' + 
-												$('#message').val() + '</span></span></div><br>');
+			$('#chatBox').append('<div class="msgBox send"><span id="in">' + 
+												$('#message').val() + '</span></div><br>');
 		}
 		
 		callAjax(); // 입력된 값 전송
@@ -198,8 +198,8 @@
 				for(var b in bubbles){
 					if(bubbles[b].type == 'text'){ // 기본 답변인 경우
 						/* chatBox에 받은 메시지 추가 */
-							$('#chatBox').append('<div class="msgBox receive"><span id="in"><span>PayStory 챗봇</span><br><br><span>' + 
-															   bubbles[b].data.description +'</span></span></div><br><br>'); 
+							$('#chatBox').append('<div class="msgBox receive"><span id="in">PayStory 챗봇<br><br>' + 
+															   bubbles[b].data.description +'</span></div><br><br>'); 
 															   
 						// 챗봇으로 부터 받은 텍스트 답변을 음성으로 변환하기 위해 TTS 호출									   
 						callAjaxTTS(bubbles[b].data.description);		

@@ -1,18 +1,6 @@
 @charset "UTF-8";
 
 /* 공통 / A, B */
-#calendarBtnBox i {
-	color: var(--gray);
-}
-
-#yearMonth {
-	color: rgba(0, 0, 0, 0.9);
-}
-
-#otherBtnBox {
-	gap: 5px;
-}
-
 .dateSel div.infoBox, .dateSel div.emptyBox {
     min-height: 90px;
     font-size: 13pt;
@@ -55,25 +43,15 @@
 	padding: 0.5rem;
 }
 
-.tagIncomeListBox, .tagExpenditureListBox, #budgetStatusBox {
+.tagIncomeListBox, .tagExpenditureListBox {
 	background: var(--light);
 	border-radius: 10px;
 	border: 1px solid var(--dark);
 	z-index: 10;
 }
 .tagIncomeListBox th, .tagIncomeListBox td,
-.tagExpenditureListBox th, .tagExpenditureListBox td,
-#budgetStatusBox th, #budgetStatusBox td {
+.tagExpenditureListBox th, .tagExpenditureListBox td {
 	padding: 0.5rem !important;
-}
-
-#budgetStatusBox {
-	right: 10%;
-}
-
-.detailBoxClose {
-	top: 0%;
-	right: 8%;
 }
 
 
