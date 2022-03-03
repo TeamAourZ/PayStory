@@ -506,6 +506,9 @@ public class AccountBookController {
 	//공유가계부 메인화면 (조회)
 	@RequestMapping("/accountBook/public/main")
 	public String movePublicMain() {
+		
+		
+		
 		return "accountBook/public/main";
 	}
 
