@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="PayStory 챗봇">
     <meta name="author" content="AourZ">
-    <title>PayStory 챗봇</title>
+    <title>PayStory chat</title>
 
     <!-- Custom fonts for this template-->
     <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -166,9 +166,7 @@
 				            </div>
 				            
 				            <!-- chatbox -->
-				            <div id="chatBox" type="text" name="expenditureImage" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadReceipt">
-				            	<hr>데이트<hr>
-				            </div>
+				            <div id="chatBox"></div>
 				            <!-- chat input -->
 				            <div class="chatbox_input">
 			            		<form id="chatForm_file" enctype="multipart/form-data">
