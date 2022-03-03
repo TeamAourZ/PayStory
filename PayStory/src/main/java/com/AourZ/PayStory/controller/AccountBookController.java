@@ -503,7 +503,7 @@ public class AccountBookController {
 
 	/****** 공유 가계부  ******/
 	
-	//공유가계부 메인
+	//공유가계부 메인화면 (조회)
 	@RequestMapping("/accountBook/public/main")
 	public String movePublicMain() {
 		return "accountBook/public/main";
@@ -543,7 +543,6 @@ public class AccountBookController {
 			}
     
 		return "redirect:../main";
-		// return "redirect:/product/listAllProduct"; // 이렇게 해도 됨
 	}
 
 	// 공유가계부 참여자 등록,삭제
