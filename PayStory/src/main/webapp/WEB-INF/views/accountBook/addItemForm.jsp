@@ -65,46 +65,49 @@
 											<input type="file" id="uploadReceipt" name="expenditureImage" class="custom-file-input shadow-none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadReceipt">
 											<label class="custom-file-label shadow-none" for="uploadReceipt">파일 선택</label>
 										</div>
-										<!-- 주소 : hidden -->
-										<input type="hidden" id="address" name="expenditureAddress" >
-										<!-- 날짜 -->
-										<div class="form-group">
-											<label for="expenditureDate">날짜</label>
-											<input type="datetime-local" id="expenditureDate" name="expenditureDate" class="form-control shadow-none" required>
-										</div>
-										<!-- 태그 -->
-										<div class="form-group">
-											<label for="expenditureTags">태그</label>
-											<select id="expenditureTags" name="tagNo" class="form-control form-control-sm shadow-none" required>
-												<option selected disabled value="">태그를 선택해주세요.</option>
-												<option value="t01">식품</option>
-												<option value="t02">용품</option>
-												<option value="t03">외식</option>
-												<option value="t04">주거/통신</option>
-												<option value="t05">교육/문화/미용/건강</option>
-												<option value="t06">교통/차량</option>
-												<option value="t07">경조사/용돈 등 사회생활</option>
-												<option value="t08">저축/보험</option>
-												<option value="t99">기타</option>
-											</select>
+										<div class="form-row">
+											<!-- 날짜 -->
+											<div class="form-group col-7">
+												<label for="expenditureDate">날짜</label>
+												<input type="datetime-local" id="expenditureDate" name="expenditureDate" class="form-control shadow-none" required>
+											</div>
+											<!-- 태그 -->
+											<div class="form-group col-5">
+												<label for="expenditureTags">태그</label>
+												<select id="expenditureTags" name="tagNo" class="form-control shadow-none" required>
+													<option selected disabled value="">태그를 선택해주세요.</option>
+													<option value="t01">식품</option>
+													<option value="t02">용품</option>
+													<option value="t03">외식</option>
+													<option value="t04">주거/통신</option>
+													<option value="t05">교육/문화/미용/건강</option>
+													<option value="t06">교통/차량</option>
+													<option value="t07">경조사/용돈 등 사회생활</option>
+													<option value="t08">저축/보험</option>
+													<option value="t99">기타</option>
+												</select>
+											</div>
 										</div>
 										<!-- 상호명 -->
 										<div class="form-group">
 											<label for="expenditureSource">상호명</label>
 											<input type="text" id="expenditureSource" name="expenditureSource" class="form-control form-control-sm shadow-none" required>
 										</div>
+										<!-- 주소 -->
+										<div class="form-group">
+											<label for="expenditureAddress">주소</label>
+											<input type="text" id="address" name="expenditureAddress" class="form-control form-control-sm shadow-none" required>
+										</div>
 										<!-- 아이템 아코디언 -->
 										<div class="accordion" id="itemAccordian">
 											<div class="card">
 												<div class="card-header" id="heading">
-													<h2 class="mb-0">
-														<button class="showItem btn btn-light btn-block text-left collapsed d-flex justify-content-between shadow-none py-2 px-3" type="button" data-toggle="collapse" data-target="#items" aria-expanded="false" aria-controls="items">
-														  상세 항목 
-														  <i class="fas fa-angle-down"></i>
-														</button>
-													</h2>
+													<button class="showItem btn btn-light btn-block text-left collapsed d-flex justify-content-between shadow-none py-2 px-3" type="button" data-toggle="collapse" data-target="#items" aria-expanded="false" aria-controls="items">
+													  상세 항목 
+													  <i class="fas fa-angle-up"></i>
+													</button>
 												</div>
-												<div id="items" class="collapse" aria-labelledby="heading" data-parent="#itemAccordian">
+												<div id="items" class="collapse show" aria-labelledby="heading" data-parent="#itemAccordian">
 													<div class="card-body">
 													  	<!-- 아이템 리스트 -->
 														<div id="itemWrap">
@@ -120,7 +123,6 @@
 																</div>
 																<div class="col-1">
 																	<button class="removeItem btn shadow-none p-0"><i class="fas fa-minus-circle"></i></button>
-																	<input type="button" class="removeItem btn shadow-none p-0" value="삭제">
 																</div> 
 															</div>
 														</div>
