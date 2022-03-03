@@ -36,13 +36,13 @@
                     
                     <!-- 게시글 작성 form -->
 					<div class="formWrap p-4 bg-white rounded">
-						<form id="newBoardForm" class="px-4" action="/board/register" method="post">
+						<form id="newBoardForm" class="px-4">
 							<%--<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" /> --%>		              		
 		              		<div class="form-row">
 		              			<!-- 제목 -->
 			              		<div class="form-group col-8">
 			              			<label>제목</label>
-			              			<input class="title form-control shadow-none" name="title">
+			              			<input class="title form-control shadow-none" name="boardTitle">
 			              		</div>
 			              		<!-- 카테고리 -->
 			              		<div class="form-group col-4">
@@ -58,7 +58,7 @@
 			              	<!-- 첨부파일 -->
 			              	<label for="uploadFile">첨부 파일</label>
 							<div class="custom-file mb-3"> 
-								<input type="file" id="uploadFile" name="uploadFile" class="custom-file-input shadow-none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadFile">
+								<input type="file" id="uploadFile" name="boardFile" class="custom-file-input shadow-none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadFile">
 								<label class="custom-file-label shadow-none" for="uploadFile">파일 선택</label>
 							</div>
 						    <!-- <div class="row">
@@ -73,7 +73,7 @@
 			              	<!-- 내용 -->
 		              		<div class="form-group">
 			              		<label>내용</label>
-			              		<textarea class="content form-control shadow-none" rows="10" name="content"></textarea>
+			              		<textarea class="content form-control shadow-none" rows="10" name="boardContents"></textarea>
 			              	</div>
 			              	<div class="d-flex align-items-center justify-content-center mt-3">
 								<button type="submit" class="btn btn-primary w-25 mr-3 shadow-none">등록</button>

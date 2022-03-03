@@ -14,7 +14,7 @@
 		const formData = new FormData();
 		formData.append('boardTitle',  $('.title').val());
 		formData.append('boardCategoryNo',  $('#categoryNo option:selected').val());
-		formData.append('boardFile',  $('#uploadFile')[0].files[0] || null);
+		formData.append('file',  $('#uploadFile')[0].files[0] || null);
 		formData.append('boardContents',  $('.content').val());
 
 		$.ajax({
