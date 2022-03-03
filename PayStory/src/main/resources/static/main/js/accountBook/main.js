@@ -151,14 +151,14 @@ $(function() {
 		detailBox.parent('div.detailBox').css('margin-top', '-4.2em');
 	});
 
-	/* detailBox 닫기 - 수입 상세 태그 / 지출 상세 태그 / 월별 예산 현황 */
+	/* detailBox 닫기 - 수입 상세 태그 / 지출 상세 태그 / 월별 예산 현황 / 공유 회원 목록 */
 	$(document).on('click', '.detailBoxClose', function(e) {
 		e.stopImmediatePropagation();
 
 		$(this).parent().parent().parent().parent().parent().addClass('d-none');
 	});
 
-	/* budgetStatusBox - 당월 예산, 남은 예산, 총 수입금, 총 지출금 */
+	/* 당월 예산, 남은 예산, 총 수입금, 총 지출금 */
 	$(document).on('click', '.budgetStatusBoxToggle', function(e) {
 		e.stopImmediatePropagation();
 
@@ -189,5 +189,12 @@ $(function() {
 		$(this).addClass('font-weight-bold text-primary selected');
 
 		mainBoardAjax(); // 게시판
+	});
+
+	/* 공유 회원 목록 */
+	$(document).on('click', '.shareMemberBoxToggle', function(e) {
+		e.stopImmediatePropagation();
+
+		$('#shareMemberBox').toggleClass('d-none');
 	});
 });

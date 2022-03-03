@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -99,12 +100,63 @@
 								<div class="card shadow mb-4">
 									<%-- Card Header --%>
 									<div class="card-header d-flex justify-content-between p-3">
-										<h6 class="m-0 font-weight-bold text-primary">{년월일}</h6>
+										<h6 id="selectedDate" class="m-0 font-weight-bold text-primary">asd</h6>
 										<c:if test="${isShared eq true}">
-											<i class="fas fa-user-friends fa-lg pointer-cursor"></i>
-											<%-- 
-												소유자, 참여자 표시
-											 --%>
+											<c:if test="${fn:length(shareMemberInfoList) gt 1}">
+												<div id="shareMemberBox" class="position-absolute d-none">
+													<div class="table mb-0">
+														<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+															<div class="row">
+																<div class="col-sm-12">
+																	<i class="detailBoxClose re-position-1 fas fa-times position-absolute pointer-cursor"></i>
+																	<table class="table mb-0">
+																		<thead>
+																			<tr class="text-center">
+																				<th colspan="3">목록</th>
+																			</tr>
+																		</thead>
+																		<tbody class="shareMember">
+																			<c:forEach var="member" items="${shareMemberInfoList}" varStatus="status">
+																				<tr class="text-center">
+																					<c:choose>
+																						<c:when test="${status.index eq 0}">
+																							<td>
+																								<div class="profileImage rounded-circle border-color-yellow">
+																									<%--
+																									
+																										이미지 경로 확인 필요
+																									
+																									 --%>
+																									<%-- <img src="${member.memberImage}"> --%>
+																								</div>
+																							</td>
+																						</c:when>
+																						<c:otherwise>
+																							<td>
+																								<div class="profileImage rounded-circle border-color-blue">
+																									<%--
+																									
+																										이미지 경로 확인 필요
+																									
+																									 --%>
+																									<%-- <img src="${member.memberImage}"> --%>
+																								</div>
+																							</td>
+																						</c:otherwise>
+																					</c:choose>
+																					<td class="align-middle">${member.memberName}</td>
+																					<td class="align-middle">${member.memberEmail}</td>
+																				</tr>
+																			</c:forEach>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<i class="shareMemberBoxToggle fas fa-user-friends fa-lg pointer-cursor"></i>
+											</c:if>
 										</c:if>
 									</div>
 									<div id="detailViewListBox" class="card-body d-flex flex-column align-items-center">

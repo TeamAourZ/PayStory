@@ -10,6 +10,8 @@ $(function() {
 		$('table').eq(0).addClass('table-responsive');
 	}
 
+	$('#selectedDate').text(nowYear + "년 " + (nowMonth + 1) + "월 " + nowDay + "일");
+
 	calendarAjax("C", nowYear, nowMonth); // 달력
 	chartAjax(nowYear, nowMonth, nowDay); // 차트
 	budgetStatusAjax(nowYear, nowMonth); // 예산 현황
@@ -89,6 +91,8 @@ $(function() {
 		$('.viewOn').removeClass('viewOn');
 
 		nowDay = $('.date.selected').text();
+
+		$('#selectedDate').text(nowYear + "년 " + (nowMonth + 1) + "월 " + nowDay + "일");
 
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
 	});
