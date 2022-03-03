@@ -28,6 +28,7 @@ import com.AourZ.PayStory.model.MainBoardVO;
 import com.AourZ.PayStory.model.MemberVO;
 import com.AourZ.PayStory.model.ShareAccountBookVO;
 import com.AourZ.PayStory.model.ShareBudgetVO;
+import com.AourZ.PayStory.model.ShareMemberVO;
 import com.AourZ.PayStory.model.TagTotalVO;
 import com.AourZ.PayStory.service.AccountBookService;
 import com.AourZ.PayStory.service.AccountCreateService;
@@ -99,6 +100,38 @@ public class AccountBookController {
 		model.addAttribute("accountBookTitle", accountBookTitle);
 		model.addAttribute("isShared", isShared);
 
+		// 소유자, 참여자 조회
+		ArrayList<ShareAccountBookVO> tempList = accountBookService.selectShareMemberList(accountBookNo);
+
+		// 소유자, 참여자 리스트
+		ArrayList<ShareMemberVO> shareMemberInfoList = new ArrayList<ShareMemberVO>();
+
+		boolean isOwner = false; // 소유자 리스트 추가 유무
+		String memberNo = ""; // 회원 번호
+
+		for (int i = 0; i < tempList.size(); i++) {
+			if (isOwner == false) {
+				memberNo = tempList.get(i).getOwner();
+
+				isOwner = true;
+				i -= 1;
+			} else {
+				memberNo = tempList.get(i).getParticipant();
+			}
+
+			MemberVO member = accountBookService.selectMemberInfo("memberNo", memberNo);
+
+			ShareMemberVO vo = new ShareMemberVO();
+
+			vo.setMemberName(member.getMemberName());
+			vo.setMemberEmail(member.getMemberEmail());
+			vo.setMemberImage(member.getMemberImage());
+
+			shareMemberInfoList.add(vo);
+		}
+
+		model.addAttribute("shareMemberInfoList", shareMemberInfoList);
+
 		return "accountBook/main";
 	}
 
@@ -131,18 +164,13 @@ public class AccountBookController {
 		// DB SELECT 기준 설정
 		String monthText = methodList.zeroFill(month); // 월
 		String date = Integer.toString(year) + "-" + monthText; // 년-월
-		String group1 = "tag"; // 날짜 기준, 태그 기준 설정
-		String group2 = ""; // 그룹 기준 - 년 / 월 / 일
 
 		if (chartType.equals("y")) {
 			date = Integer.toString(year);
-			group2 = "year";
 		} else if (chartType.equals("m")) {
-			group2 = "month";
-
 			// 당월 월별 태그별 총 건수, 총 금액
-			ArrayList<TagTotalVO> dataList = methodList.selectTagTotalList(chartTab, accountBookNo, group1, group2,
-					date);
+			ArrayList<TagTotalVO> dataList = accountBookService.selectAccountBookDataList(chartTab, accountBookNo,
+					"tag", "month", date, "%Y-%m");
 
 			for (int i = 0; i < dataList.size(); i++) {
 				dataList.get(i).setTag(methodList.replaceTag(dataList.get(i).getTag())); // 태그 번호 to 태그 이름
@@ -150,11 +178,9 @@ public class AccountBookController {
 
 			model.addAttribute("dataList", dataList);
 		} else if (chartType.equals("d")) {
-			group2 = "day";
-
 			// 당월 일별 태그별 총 건수, 총 금액)
-			ArrayList<TagTotalVO> tempList = methodList.selectTagTotalList(chartTab, accountBookNo, group1, group2,
-					date);
+			ArrayList<TagTotalVO> tempList = accountBookService.selectAccountBookDataList(chartTab, accountBookNo,
+					"tag", "day", date, "%Y-%m-%d");
 			ArrayList<ArrayList<TagTotalVO>> dataList = methodList.createDetailDataList(tempList, lastDate);
 
 			model.addAttribute("dataList", dataList);
@@ -188,14 +214,15 @@ public class AccountBookController {
 		}
 
 		// 총 수입 (당월 총 건수, 총 금액)
-		ArrayList<TagTotalVO> income = methodList.selectTagTotalList("income", accountBookNo, "date", "month", date);
+		ArrayList<TagTotalVO> income = accountBookService.selectAccountBookDataList("income", accountBookNo, "date",
+				"month", date, "%Y-%m");
 		if (income != null && income.size() > 0) {
 			model.addAttribute("incomeTotalAmount", income.get(0).getSum());
 		}
 
 		// 총 지출 (당월 총 건수, 총 금액)
-		ArrayList<TagTotalVO> expenditure = methodList.selectTagTotalList("expenditure", accountBookNo, "date", "month",
-				date);
+		ArrayList<TagTotalVO> expenditure = accountBookService.selectAccountBookDataList("expenditure", accountBookNo,
+				"date", "month", date, "%Y-%m");
 		if (expenditure != null && expenditure.size() > 0) {
 			model.addAttribute("expenditureTotalAmount", expenditure.get(0).getSum());
 		}
@@ -218,7 +245,7 @@ public class AccountBookController {
 		// 회원 정보 조회
 		MemberVO member = accountBookService.selectMemberInfo("memberNo", signInMemberNo);
 
-		// 게시글 정보 제한
+		// 게시글 리스트
 		ArrayList<MainBoardVO> boardList = new ArrayList<MainBoardVO>();
 
 		for (BoardVO board : originalBoardList) {
@@ -290,14 +317,16 @@ public class AccountBookController {
 
 		/* ---------------- income ---------------- */
 		// incomeList (당월 일별 총 건수, 총 금액)
-		tempList = methodList.selectTagTotalList("income", accountBookNo, "date", "day", date);
+		tempList = accountBookService.selectAccountBookDataList("income", accountBookNo, "date", "day", date,
+				"%Y-%m-%d");
 		ArrayList<TagTotalVO> dateIncomeList = methodList.createDataList(tempList, lastDate);
 
 		model.addAttribute("dateIncomeList", dateIncomeList);
 
 		if (calendarType.equals("A") || calendarType.equals("B")) {
-			// incomeItemList (당월 일별 태그별 총 건수, 총 금액)
-			tempList = methodList.selectTagTotalList("income", accountBookNo, "tag", "day", date);
+			// incomeTagList (당월 일별 태그별 총 건수, 총 금액)
+			tempList = accountBookService.selectAccountBookDataList("income", accountBookNo, "tag", "day", date,
+					"%Y-%m-%d");
 			ArrayList<ArrayList<TagTotalVO>> tagIncomeList = methodList.createDetailDataList(tempList, lastDate);
 
 			model.addAttribute("tagIncomeList", tagIncomeList);
@@ -306,14 +335,16 @@ public class AccountBookController {
 
 		/* ---------------- expenditure ---------------- */
 		// expenditureList (당월 일별 총 건수, 총 금액)
-		tempList = methodList.selectTagTotalList("expenditure", accountBookNo, "date", "day", date);
+		tempList = accountBookService.selectAccountBookDataList("expenditure", accountBookNo, "date", "day", date,
+				"%Y-%m-%d");
 		ArrayList<TagTotalVO> dateExpenditureList = methodList.createDataList(tempList, lastDate);
 
 		model.addAttribute("dateExpenditureList", dateExpenditureList);
 
 		if (calendarType.equals("A") || calendarType.equals("B")) {
-			// expenditureItemList (당월 일별 태그별 총 건수, 총 금액)
-			tempList = methodList.selectTagTotalList("expenditure", accountBookNo, "tag", "day", date);
+			// expenditureTagList (당월 일별 태그별 총 건수, 총 금액)
+			tempList = accountBookService.selectAccountBookDataList("expenditure", accountBookNo, "tag", "day", date,
+					"%Y-%m-%d");
 			ArrayList<ArrayList<TagTotalVO>> tagExpenditureList = methodList.createDetailDataList(tempList, lastDate);
 
 			model.addAttribute("tagExpenditureList", tagExpenditureList);
