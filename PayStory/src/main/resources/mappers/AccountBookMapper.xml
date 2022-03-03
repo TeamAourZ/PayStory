@@ -197,19 +197,18 @@
 	<!-- 수입 내역 추가 -->
 	<insert id="insertIncome" parameterType="com.AourZ.PayStory.model.IncomeVO" useGeneratedKeys="true" keyProperty="incomeNo">
 		INSERT INTO income 
-			(incomeDate, incomeSource, incomeMemo, incomeAmount, tagNo) 
+			(incomeDate, incomeSource, incomeMemo, incomeAmount, tagNo, accountBookNo) 
 		VALUES
-			(#{incomeDate}, #{incomeSource}, #{incomeMemo}, #{incomeAmount}, #{tagNo})
+			(#{incomeDate}, #{incomeSource}, #{incomeMemo}, #{incomeAmount}, #{tagNo}, #{accountBookNo})
 	</insert>
 
 	<!-- 지출 내역 추가 -->
 	<insert id="insertExpenditure" parameterType="com.AourZ.PayStory.model.ExpenditureVO" useGeneratedKeys="true" keyProperty="expenditureNo">
 		INSERT INTO expenditure 
-			(expenditureDate, expenditureImage, expenditureSource, expenditureMemo, expenditureAmount, expenditureAddress, tagNo) 
+			(expenditureDate, expenditureImage, expenditureSource, expenditureMemo, expenditureAmount, expenditureAddress, tagNo, accountBookNo) 
 		VALUES
-			(#{expenditureDate}, #{expenditureImage}, #{expenditureSource}, #{expenditureMemo}, #{expenditureAmount}, #{expenditureAddress}, #{tagNo})
+			(#{expenditureDate}, #{expenditureImage}, #{expenditureSource}, #{expenditureMemo}, #{expenditureAmount}, #{expenditureAddress}, #{tagNo}, #{accountBookNo})
 	</insert>
-
 	<!-- 지출 아이템 추가 -->
 	<insert id="insertExpenditureItem" parameterType="list">
 		INSERT INTO expenditure_item
