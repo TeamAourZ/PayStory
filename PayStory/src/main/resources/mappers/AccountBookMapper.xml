@@ -67,101 +67,43 @@
 	</select>
 	
 	<!-- 회원 정보 조회 -->
-	<select id="selectMemberInfo" parameterType="String" resultType="com.AourZ.PayStory.model.member.MemberVO">
+	<select id="selectMemberInfo" parameterType="HashMap" resultType="com.AourZ.PayStory.model.member.MemberVO">
 		SELECT *
 		FROM member
-		WHERE memberNo = #{memberNo}
-	</select>
-	
-	<!-- 회원 번호 조회 -->
-	<select id="selectMemberNo" parameterType="String" resultType="String">
-		SELECT memberNo
-		FROM member
-		WHERE memberEmail = #{memberEmail}
-	</select>
-	
-	<!-- 수입 - 총 개수, 총 금액 조회 -->
-	<select id="selectIncomeList" parameterType="HashMap" resultMap="tagTotalList">
 		<choose>
-			<when test="group1.equals('tag')">
-				<choose>
-					<when test="group2.equals('year')">
-						SELECT DATE_FORMAT(incomeDate, '%Y') AS fDate, tagNo, COUNT(*) AS count, SUM(incomeAmount) AS sum
-					</when>
-					<when test="group2.equals('month')">
-						SELECT DATE_FORMAT(incomeDate, '%Y-%m') AS fDate, tagNo, COUNT(*) AS count, SUM(incomeAmount) AS sum
-					</when>
-					<when test="group2.equals('day')">
-						SELECT DATE_FORMAT(incomeDate, '%Y-%m-%d') AS fDate, tagNo, COUNT(*) AS count, SUM(incomeAmount) AS sum
-					</when>
-				</choose>
-				FROM income
-				WHERE accountBookNo = #{accountBookNo}
-				GROUP BY fDate, tagNo
-				HAVING fDate LIKE CONCAT(#{date}, "%")
-				ORDER BY fDate ASC
+			<when test="condition.equals('memberEmail')">
+				WHERE memberEmail = #{value}
 			</when>
-			<when test="group1.equals('date')">
-				<choose>
-					<when test="group2.equals('year')">
-						SELECT DATE_FORMAT(incomeDate, '%Y') AS fDate, COUNT(*) AS count, SUM(incomeAmount) AS sum
-					</when>
-					<when test="group2.equals('month')">
-						SELECT DATE_FORMAT(incomeDate, '%Y-%m') AS fDate, COUNT(*) AS count, SUM(incomeAmount) AS sum
-					</when>
-					<when test="group2.equals('day')">
-						SELECT DATE_FORMAT(incomeDate, '%Y-%m-%d') AS fDate, COUNT(*) AS count, SUM(incomeAmount) AS sum
-					</when>
-				</choose>
-				FROM income
-				WHERE accountBookNo = #{accountBookNo}
-				GROUP BY fDate
-				HAVING fDate LIKE CONCAT(#{date}, "%")
-				ORDER BY fDate ASC
-			</when>
+			<otherwise> <!-- memberNo -->
+				WHERE memberNo = #{value}
+			</otherwise>
 		</choose>
 	</select>
 	
-	<!-- 지출 - 총 개수, 총 금액 조회 -->
-	<select id="selectExpenditureList" parameterType="HashMap" resultMap="tagTotalList">
+	<!-- 수입 / 지출 - 총 개수, 총 금액 조회 -->
+	<select id="selectAccountBookDataList" parameterType="HashMap" resultMap="tagTotalList">
+		SELECT
 		<choose>
-			<when test="group1.equals('tag')">
-				<choose>
-					<when test="group2.equals('year')">
-						SELECT DATE_FORMAT(expenditureDate, '%Y') AS fDate, tagNo, COUNT(*) AS count, SUM(expenditureAmount) AS sum
-					</when>
-					<when test="group2.equals('month')">
-						SELECT DATE_FORMAT(expenditureDate, '%Y-%m') AS fDate, tagNo, COUNT(*) AS count, SUM(expenditureAmount) AS sum
-					</when>
-					<when test="group2.equals('day')">
-						SELECT DATE_FORMAT(expenditureDate, '%Y-%m-%d') AS fDate, tagNo, COUNT(*) AS count, SUM(expenditureAmount) AS sum
-					</when>
-				</choose>
-				FROM expenditure
-				WHERE accountBookNo = #{accountBookNo}
-				GROUP BY fDate, tagNo
-				HAVING fDate LIKE CONCAT(#{date}, '%')
-				ORDER BY fDate ASC
+			<when test="condition.equals('income')">DATE_FORMAT(incomeDate, #{dateForm}) AS fDate,</when>
+			<when test="condition.equals('expenditure')">DATE_FORMAT(expenditureDate, #{dateForm}) AS fDate,</when>
+		</choose>
+		<if test="group1.equals('tag')">tagNo,</if>
+		COUNT(*) AS count,
+		<choose>
+			<when test="condition.equals('income')">
+				SUM(incomeAmount) AS sum
+				FROM income
 			</when>
-			<when test="group1.equals('date')">
-				<choose>
-					<when test="group2.equals('year')">
-						SELECT DATE_FORMAT(expenditureDate, '%Y') AS fDate, COUNT(*) AS count, SUM(expenditureAmount) AS sum
-					</when>
-					<when test="group2.equals('month')">
-						SELECT DATE_FORMAT(expenditureDate, '%Y-%m') AS fDate, COUNT(*) AS count, SUM(expenditureAmount) AS sum
-					</when>
-					<when test="group2.equals('day')">
-						SELECT DATE_FORMAT(expenditureDate, '%Y-%m-%d') AS fDate, COUNT(*) AS count, SUM(expenditureAmount) AS sum
-					</when>
-				</choose>
+			<when test="condition.equals('expenditure')">
+				SUM(expenditureAmount) AS sum
 				FROM expenditure
-				WHERE accountBookNo = #{accountBookNo}
-				GROUP BY fDate
-				HAVING fDate LIKE CONCAT(#{date}, '%')
-				ORDER BY fDate ASC
 			</when>
 		</choose>
+		WHERE accountBookNo = #{accountBookNo}
+		GROUP BY fDate
+		<if test="group1.equals('tag')">, tagNo</if>
+		HAVING fDate LIKE CONCAT(#{date}, "%")
+		ORDER BY fDate ASC
 	</select>
 	
 	<!-- 태그명 조회 -->
