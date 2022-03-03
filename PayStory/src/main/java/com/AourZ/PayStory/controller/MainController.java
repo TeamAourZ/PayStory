@@ -56,7 +56,7 @@ public class MainController {
 		String memberNo = (String)session.getAttribute("memberNo");
 		String date = nowDate();
 				
-		MemberVO member = memberService.getMemberInfo(memberNo);
+		MemberVO member = memberService.selectMemberInfo("memberNo", memberNo);
 		String memberName = member.getMemberName();
 		String memberImage = member.getMemberImage();
 		
