@@ -21,9 +21,10 @@ public interface IAccountBookDAO {
 	ArrayList<ShareAccountBookVO> selectShareMemberList(int accountBookNo);			// 공유 가계부 소유자, 참여자 조회
 	MemberVO selectMemberInfo(HashMap<String, Object> map);								// 회원 정보 조회
 	
-	ArrayList<TagTotalVO> selectIncomeList(HashMap<String, Object> map);		// 수입 - 태그별 건수, 태그별 총합
-	ArrayList<TagTotalVO> selectExpenditureList(HashMap<String, Object> map);// 지출 - 태그별 건수, 태그별 총합
-	String selectTagName(String tagNo);															// 태그 이름 조회
+	// 수입 / 지출 총 건수, 총 금액
+	ArrayList<TagTotalVO> selectAccountBookDataList(HashMap<String, Object> map);	
+	
+	String selectTagName(String tagNo); // 태그 이름 조회
 	
 	ArrayList<BoardVO> selectBoardList(HashMap<String, Object> map);// 게시판 게시글 리스트
 	String selectBoardCategoryName(String boardCategoryNo);				// 게시판 카테고리 이름 조회
