@@ -22,32 +22,7 @@
     <link rel="stylesheet" type="text/css" href="/main/css/ai/chatbot.css">
     <link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
     <script src="/main/js/ai/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript">
-		var bDisplay = true;
-		function doChatplay(){
-			var ctrChat = document.getElementById("rightSide");
-			if(ctrChat.style.display=='none'){
-				$("#container_chatbot").css({
-					"width": "100%"
-				});
-				ctrChat.style.display = 'block';
-			}else{
-				$("#container_chatbot").css({
-					"width": "30%"
-				});
-				ctrChat.style.display = 'none';
-			}
-		}
-		function doSearchplay(){
-			var ctrSearch = document.getElementById("search_chat");
-			if(ctrSearch.style.display=='none'){
-				ctrSearch.style.display = 'block';
-				
-			}else{
-				ctrSearch.style.display = 'none';
-			}
-		}
-	</script>
+	
 </head>
 
 <body id="page-top">
@@ -75,24 +50,25 @@
 				            <!-- header -->
 				            <div class="header">
 				                <div class="userimg">
-				                    <img src="<c:url value='/images/user.jpg' />" class="cover">
+				                    <img src="<c:url value='/images/${login.memberImage}' />" class="cover">
 				                </div>
 				                <ul class="nav_icons">
 				                    <li>
-				                    	<span><input type="button" class="delinput" value="&#xf002" onclick="doSearchplay();"></span>
+				                    	<span><input type="button" class="delinput" value="&#xf002" ></span>
 				                    </li>
 				                    
 				                    <li>
-				                        <span><input type="button" class="delinput" value="&#xf27a" onclick="doChatplay();"></span>
+				                        <span><input type="button" class="delinput" value="&#xf27a" onclick="window.open('/groupChat')"></span>
 				                        <!-- <span><input type="button" class="delinput" value="&#xf4b3" onclick="div_hide();"></span> -->
 				                    </li>
+				                    
 				                    <li>
 				                        <i class="fa-solid fa-ellipsis-vertical"></i>
 				                    </li>
 				                </ul>
 				            </div>
 				            <!-- search -->
-				            <div id="search_chat" class="search_chat" style="display:none;">
+				            <div id="search_chat" class="search_chat">
 				                <div>
 				                    <input type="text" placeholder="질문을 입력해주세요.">
 				                    <i class="fa-solid fa-magnifying-glass"></i>
@@ -111,7 +87,7 @@
 				                            <p class="time">10:56</p>
 				                        </div>
 				                        <div class="message_p">
-				                            <p>어떻게 지내? aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+				                            <p>안녕하세요. PayStory를 방문해 주셔서 감사합니다.</p>
 				                        </div>
 				                    </div>
 				                </div>
@@ -147,13 +123,13 @@
 				            </div>
 				        </div>
 
-				        <div id="rightSide" class="rightSide"  style="display:none;">
+				        <div id="rightSide" class="rightSide" >
 				            <div class="header">
 				                <div class="imgText">
 				                    <div class="userimg">
-				                        <img src="<c:url value='/images/user.jpg' />" class="cover">
+				                        <img src="<c:url value='/images/logo.png' />" class="cover">
 				                    </div>
-				                    <h4>정유성<br><span>online</span></h4>
+				                    <h4>PayStory 챗봇<br><span>online</span></h4>
 				                </div>
 				                <ul class="nav_icons">
 				                    <li>
@@ -167,7 +143,8 @@
 				            
 				            <!-- chatbox -->
 				            <div id="chatBox" type="text" name="expenditureImage" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadReceipt">
-				            	<hr>데이트<hr>
+				            	<p>${date}</p>
+				            	<hr>
 				            </div>
 				            <!-- chat input -->
 				            <div class="chatbox_input">
