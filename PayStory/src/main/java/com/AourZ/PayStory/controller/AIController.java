@@ -144,7 +144,7 @@ public class AIController {
 	@RequestMapping("/OCR")
 	public ExpenditureVO ocrUplaod(@RequestParam("expenditureImage") MultipartFile file, HttpSession session) throws IOException {
 		// 파일 공유하기 위해 프로젝트내 file/receipt 폴더에 업로드
-		String uploadPath = "C:/PayStory/PayStory/src/main/resources/static/file/receipt/";
+		String uploadPath = "C:/PayStory/file/receipt/";
 
 		String originalFileName = file.getOriginalFilename();
 		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
