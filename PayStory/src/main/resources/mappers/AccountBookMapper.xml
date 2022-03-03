@@ -4,14 +4,14 @@
 
 <mapper namespace="com.AourZ.PayStory.dao.IAccountBookDAO">
 	<!-- 공유 가계부 -->
-	<resultMap type="com.AourZ.PayStory.model.ShareAccountBookVO" id="shareMemberList">
+	<resultMap type="com.AourZ.PayStory.model.accountBook.ShareAccountBookVO" id="shareMemberList">
 		<result property="owner" column="owner"></result>
 		<result property="participant" column="participant"></result>
 		<result property="accountBookNo" column="accountBookNo"></result>
 	</resultMap>
 	
 	<!-- 태그별 총 건수, 총 금액 -->
-	<resultMap type="com.AourZ.PayStory.model.TagTotalVO" id="tagTotalList">
+	<resultMap type="com.AourZ.PayStory.model.accountBook.TagTotalVO" id="tagTotalList">
 		<result property="date" column="fdate"></result>
 		<result property="tag" column="tagNo"></result>
 		<result property="count" column="count"></result>
@@ -19,7 +19,7 @@
 	</resultMap>
 	
 	<!-- 게시글 -->
-	<resultMap type="com.AourZ.PayStory.model.BoardVO" id="boardList">
+	<resultMap type="com.AourZ.PayStory.model.board.BoardVO" id="boardList">
 		<result property="boardNo" column="boardNo"></result>
 		<result property="boardTitle" column="boardTitle"></result>
 		<result property="boardDate" column="boardDate"></result>
@@ -39,21 +39,21 @@
 	</insert>
 	
 	<!-- 일반 가계부 조회 -->
-	<select id="selectMyAccountBook" parameterType="HashMap" resultType="com.AourZ.PayStory.model.AccountBookVO">
+	<select id="selectMyAccountBook" parameterType="HashMap" resultType="com.AourZ.PayStory.model.accountBook.AccountBookVO">
 		SELECT *
 		FROM account_book
 		WHERE memberNo = #{memberNo} AND isShared = #{isShared}
 	</select>
 	
 	<!-- 공유 가계부 조회 -->
-	<select id="selectShareAccountBook" parameterType="int" resultType="com.AourZ.PayStory.model.AccountBookVO">
+	<select id="selectShareAccountBook" parameterType="int" resultType="com.AourZ.PayStory.model.accountBook.AccountBookVO">
 		SELECT *
 		FROM account_book
 		WHERE accountBookNo = #{accountBookNo}
 	</select>
 	
 	<!-- 가계부 예산 조회 -->
-	<select id="selectAccountBookBudget" parameterType="HashMap" resultType="com.AourZ.PayStory.model.AccountBookBudgetVO">
+	<select id="selectAccountBookBudget" parameterType="HashMap" resultType="com.AourZ.PayStory.model.accountBook.AccountBookBudgetVO">
 		SELECT budgetAmount
 		FROM account_book_budget
 		WHERE accountBookNo = #{accountBookNo} AND DATE_FORMAT(budgetDate, '%Y-%m') = #{date}
@@ -67,7 +67,7 @@
 	</select>
 	
 	<!-- 회원 정보 조회 -->
-	<select id="selectMemberInfo" parameterType="String" resultType="com.AourZ.PayStory.model.MemberVO">
+	<select id="selectMemberInfo" parameterType="String" resultType="com.AourZ.PayStory.model.member.MemberVO">
 		SELECT *
 		FROM member
 		WHERE memberNo = #{memberNo}
@@ -195,7 +195,7 @@
 	</select>
   
 	<!-- 수입 내역 추가 -->
-	<insert id="insertIncome" parameterType="com.AourZ.PayStory.model.IncomeVO" useGeneratedKeys="true" keyProperty="incomeNo">
+	<insert id="insertIncome" parameterType="com.AourZ.PayStory.model.accountBook.IncomeVO" useGeneratedKeys="true" keyProperty="incomeNo">
 		INSERT INTO income 
 			(incomeDate, incomeSource, incomeMemo, incomeAmount, tagNo, accountBookNo) 
 		VALUES
@@ -203,7 +203,7 @@
 	</insert>
 
 	<!-- 지출 내역 추가 -->
-	<insert id="insertExpenditure" parameterType="com.AourZ.PayStory.model.ExpenditureVO" useGeneratedKeys="true" keyProperty="expenditureNo">
+	<insert id="insertExpenditure" parameterType="com.AourZ.PayStory.model.accountBook.ExpenditureVO" useGeneratedKeys="true" keyProperty="expenditureNo">
 		INSERT INTO expenditure 
 			(expenditureDate, expenditureImage, expenditureSource, expenditureMemo, expenditureAmount, expenditureAddress, tagNo, accountBookNo) 
 		VALUES
