@@ -1,12 +1,9 @@
 @charset "UTF-8";
 
-#categoryBox {
+#boardCategoryBox {
 	gap: 10px;
-}
-#categoryBox div {
-	cursor: pointer;
 }
 
-#PostBox {
-	gap: 10px;
+.boardCategory.selected {
+	text-decoration: underline;
 }

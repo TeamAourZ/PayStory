@@ -7,9 +7,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Pay Story 가계부 - 수입/지출 내역 추가">
+    <meta name="description" content="PayStory 게시글 - 조회">
     <meta name="author" content="AourZ">
-    <title>수입 | 지출 내역 추가</title>
+    <title>PayStory 게시글 조회</title>
 
     <!-- Custom fonts for this template-->
     <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -38,7 +38,7 @@
                 <jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />
 				
 				<!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800 ml-5">게시글 뷰</h1>
+                    <h1 class="h3 mb-2 text-gray-800 ml-5">게시글 조회</h1>
 				
                 <!-- Begin Page Content -->
                 <div class="container-fluid">

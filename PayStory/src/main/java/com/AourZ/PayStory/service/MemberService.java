@@ -1,6 +1,8 @@
 package com.AourZ.PayStory.service;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.AourZ.PayStory.dao.IMemberDAO;
 import com.AourZ.PayStory.mail.IMailSender;
 import com.AourZ.PayStory.mail.TempKey;
+import com.AourZ.PayStory.model.BoardVO;
 import com.AourZ.PayStory.model.LoginVO;
 import com.AourZ.PayStory.model.MailUtils;
 import com.AourZ.PayStory.model.MemberVO;
@@ -53,6 +56,11 @@ public class MemberService implements IMemberService {
 	@Override
 	public int nameCnt(MemberVO memberVO)throws Exception{
 		return memberDAO.nameCnt(memberVO);
+	}
+	
+	@Override
+	public int emailCnt(String memberEmail)throws Exception{
+		return memberDAO.emailCnt(memberEmail);
 	}
 	
 	@Override
@@ -104,5 +112,55 @@ public class MemberService implements IMemberService {
 	public void updateImg(String memberImage, String memberEmail)throws Exception{
 		memberDAO.updateImg(memberImage, memberEmail);
 	}
-
+	
+	@Override
+	public List<MemberVO> memberList() {
+		return memberDAO.memberList();
+	}
+	
+	@Override
+	public void memberSanction(String memberEmail, int sanctionTime)throws Exception{
+		memberDAO.memberSanction(sanctionTime, memberEmail);
+	}
+	
+	@Override
+	public void memberSanctionCancel(String memberEmail)throws Exception{
+		memberDAO.memberSanctionCancel(memberEmail);
+	}
+	
+	@Override
+	public int memberRankCheck(String memberEmail)throws Exception{
+		return memberDAO.memberRankCheck(memberEmail);
+	}
+	
+	@Override
+	public Object memberSanctionTime(String memberEmail)throws Exception{
+		return memberDAO.memberSanctionTime(memberEmail);
+	}
+	
+	@Override
+	public void insertNotice(int boardNo)throws Exception{
+		memberDAO.insertNotice(boardNo);
+	}
+	
+	@Override
+	public void deleteNotice(int boardNo)throws Exception{
+		memberDAO.insertNotice(boardNo);
+	}
+	
+	@Override
+	public void memberMaster(String memberEmail)throws Exception{
+		memberDAO.memberMaster(memberEmail);
+	}
+	
+	@Override
+	public void memberMasterCancel(String memberEmail)throws Exception{
+		memberDAO.memberMasterCancel(memberEmail);
+	}
+	// 공지사항
+	@Override
+	public List<BoardVO> boardList() {
+		return memberDAO.boardList();
+	}
+	
 }	

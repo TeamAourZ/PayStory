@@ -1,21 +1,28 @@
 package com.AourZ.PayStory.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.AourZ.PayStory.model.BoardVO;
 import com.AourZ.PayStory.model.LoginVO;
 import com.AourZ.PayStory.model.MemberVO;
+import com.AourZ.PayStory.service.AccountBookService;
 
 @Repository
 public class MemberDAO implements IMemberDAO {
 	
 	@Inject
 	private SqlSession sqlsession;
+	
+	@Autowired
+	private AccountBookService accountBookService;
 		
 	@Override
 	public void register(MemberVO memberVO) throws Exception{
@@ -25,6 +32,11 @@ public class MemberDAO implements IMemberDAO {
 	@Override
 	public int nameCnt(MemberVO memberVO)throws Exception{
 		return sqlsession.selectOne("com.AourZ.PayStory.dao.IMemberDAO.nameCnt", memberVO);
+	}
+	
+	@Override
+	public int emailCnt(String memberEmail)throws Exception{
+		return sqlsession.selectOne("com.AourZ.PayStory.dao.IMemberDAO.emailCnt", memberEmail);
 	}
 	
 	@Override
@@ -46,6 +58,12 @@ public class MemberDAO implements IMemberDAO {
 	@Override
 	public void memberAuth(String memberEmail) throws Exception{
 		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.memberAuth", memberEmail);
+		
+		// 회원 번호 조회
+		MemberVO member = accountBookService.selectMemberInfo("memberEmail", memberEmail);
+		
+		// 일반 가계부 생성
+		accountBookService.createMyAccountBook(member.getMemberNo());
 	}
 	
 	@Override
@@ -89,5 +107,69 @@ public class MemberDAO implements IMemberDAO {
 		map.put("memberEmail", memberEmail);
 		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.updateImg", map);
 	}
+	
+	@Override
+	public List<MemberVO> memberList(){
+		return sqlsession.selectList("com.AourZ.PayStory.dao.IMemberDAO.memberList");	
+	}
+	
+	@Override
+	public void memberSanction(int sanctionTime, String memberEmail) throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("sanctionTime", sanctionTime);
+		map.put("memberEmail", memberEmail);
+		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.memberSanction", map);
+	}
+	
+	@Override
+	public void memberSanctionCancel(String memberEmail) throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("memberEmail", memberEmail);
+		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.memberSanctionCancel", map);
+	}
+	
+	@Override
+	public int memberRankCheck(String memberEmail)throws Exception{
+		return sqlsession.selectOne("com.AourZ.PayStory.dao.IMemberDAO.memberRankCheck", memberEmail);
+	}
 
+	@Override
+	public Object memberSanctionTime(String memberEmail)throws Exception{
+		return sqlsession.selectOne("com.AourZ.PayStory.dao.IMemberDAO.memberSanctionTime", memberEmail);
+	}
+	
+	@Override
+	public void insertNotice(int boardNo) throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.insertNotice", map);
+	}
+	
+	@Override
+	public void deleteNotice(int boardNo) throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.deleteNotice", map);
+	}
+	
+	@Override
+	public void memberMaster(String memberEmail) throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("memberEmail", memberEmail);
+		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.memberMaster", map);
+	}
+	
+	@Override
+	public void memberMasterCancel(String memberEmail) throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("memberEmail", memberEmail);
+		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.memberMasterCancel", map);
+	}
+	
+	// 공지사항
+	@Override
+	public List<BoardVO> boardList(){
+		return sqlsession.selectList("com.AourZ.PayStory.dao.IMemberDAO.boardList");
+	}
+	
 }

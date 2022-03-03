@@ -56,11 +56,11 @@ function fnSubmit() {
 		alert("닉네임은 2~15자, 특수문자 불가합니다.");
 		$("#memberName").focus();
 		return false;
-		} 
+	} 
 	 
 	 
 	if ($("#memberNameCheck").val() != 'Y') {
-	alert("닉네임 중복체크를 눌러주세요.");
+	alert("닉네임 중복체크를 눌러주세요.\n중복된 닉네임인지 확인해주세요.");
 	$("#memberNameCheck").focus();
 	 
 	return false;
@@ -78,7 +78,14 @@ function fnSubmit() {
 		alert("이메일을 형식에 맞게 입력해주세요. ex) email@naver.com");
 		$("#memberEmail").focus();
 		return false;
-		} 
+	} 
+		
+	if ($("#emailCheck").val() != 'Y') {
+	alert("이메일 중복체크를 눌러주세요.\n계정이 있는지 확인해주세요.");
+	$("#emailCheck").focus();
+	 
+	return false;
+	}	
 	 
 	if ($("#memberPwd").val() == null || $("#memberPwd").val() == "") {
 	alert("비밀번호를 입력해주세요.");
@@ -91,7 +98,7 @@ function fnSubmit() {
 		alert("비밀번호는 특수문자 포함 5~15자로 입력하세요.");
 		$("#memberPwd").focus();
 		return false;
-		} 
+	} 
 	 
 	if ($("#memberPwd2").val() == null || $("#memberPwd2").val() == "") {
 	alert("비밀번호 확인을 입력해주세요.");

@@ -30,95 +30,110 @@
 		<result property="boardCategoryNo" column="boardCategoryNo"></result>
 	</resultMap>
 	
-	<!-- 내 가계부 조회 -->
-	<select id="getMyAccountBook" parameterType="HashMap" resultType="com.AourZ.PayStory.model.AccountBookVO">
+	<!-- 일반 가계부 생성 -->
+	<insert id="createMyAccountBook" parameterType="String">
+		INSERT INTO account_book
+		(isShared, memberNo)
+		VALUES
+		(0, #{memberNo})
+	</insert>
+	
+	<!-- 일반 가계부 조회 -->
+	<select id="selectMyAccountBook" parameterType="HashMap" resultType="com.AourZ.PayStory.model.AccountBookVO">
 		SELECT *
 		FROM account_book
 		WHERE memberNo = #{memberNo} AND isShared = #{isShared}
 	</select>
 	
 	<!-- 공유 가계부 조회 -->
-	<select id="getShareAccountBook" parameterType="int" resultType="com.AourZ.PayStory.model.AccountBookVO">
+	<select id="selectShareAccountBook" parameterType="int" resultType="com.AourZ.PayStory.model.AccountBookVO">
 		SELECT *
 		FROM account_book
 		WHERE accountBookNo = #{accountBookNo}
 	</select>
 	
 	<!-- 가계부 예산 조회 -->
-	<select id="getAccountBookBudget" parameterType="HashMap" resultType="com.AourZ.PayStory.model.AccountBookBudgetVO">
+	<select id="selectAccountBookBudget" parameterType="HashMap" resultType="com.AourZ.PayStory.model.AccountBookBudgetVO">
 		SELECT budgetAmount
 		FROM account_book_budget
 		WHERE accountBookNo = #{accountBookNo} AND DATE_FORMAT(budgetDate, '%Y-%m') = #{date}
 	</select>
 	
 	<!-- 공유 가계부 소유자, 참여자 조회 -->
-	<select id="getShareMemberList" parameterType="int" resultMap="shareMemberList">
+	<select id="selectShareMemberList" parameterType="int" resultMap="shareMemberList">
 		SELECT *
 		FROM share_account_book
 		WHERE accountBookNo = #{accountBookNo}
 	</select>
 	
 	<!-- 회원 정보 조회 -->
-	<select id="getMemberInfo" parameterType="String" resultType="com.AourZ.PayStory.model.MemberVO">
+	<select id="selectMemberInfo" parameterType="HashMap" resultType="com.AourZ.PayStory.model.MemberVO">
 		SELECT *
 		FROM member
-		WHERE memberNo = #{memberNo}
+		<choose>
+			<when test="condition.equals('memberEmail')">
+				WHERE memberEmail = #{value}
+			</when>
+			<otherwise> <!-- memberNo -->
+				WHERE memberNo = #{value}
+			</otherwise>
+		</choose>
 	</select>
 	
 	<!-- 수입 - 총 개수, 총 금액 조회 -->
-	<select id="getIncomeList" parameterType="HashMap" resultMap="tagTotalList">
+	<select id="selectIncomeList" parameterType="HashMap" resultMap="tagTotalList">
 		<choose>
-			<when test="select.equals('tag')">
+			<when test="group1.equals('tag')">
 				<choose>
-					<when test="group.equals('year')">
+					<when test="group2.equals('year')">
 						SELECT DATE_FORMAT(incomeDate, '%Y') AS fDate, tagNo, COUNT(*) AS count, SUM(incomeAmount) AS sum
 					</when>
-					<when test="group.equals('month')">
+					<when test="group2.equals('month')">
 						SELECT DATE_FORMAT(incomeDate, '%Y-%m') AS fDate, tagNo, COUNT(*) AS count, SUM(incomeAmount) AS sum
 					</when>
-					<when test="group.equals('day')">
+					<when test="group2.equals('day')">
 						SELECT DATE_FORMAT(incomeDate, '%Y-%m-%d') AS fDate, tagNo, COUNT(*) AS count, SUM(incomeAmount) AS sum
 					</when>
 				</choose>
 				FROM income
 				WHERE accountBookNo = #{accountBookNo}
 				GROUP BY fDate, tagNo
-				HAVING fDate LIKE CONCAT(#{date}, '%')
+				HAVING fDate LIKE CONCAT(#{date}, "%")
 				ORDER BY fDate ASC
 			</when>
-			<when test="select.equals('date')">
+			<when test="group1.equals('date')">
 				<choose>
-					<when test="group.equals('year')">
+					<when test="group2.equals('year')">
 						SELECT DATE_FORMAT(incomeDate, '%Y') AS fDate, COUNT(*) AS count, SUM(incomeAmount) AS sum
 					</when>
-					<when test="group.equals('month')">
+					<when test="group2.equals('month')">
 						SELECT DATE_FORMAT(incomeDate, '%Y-%m') AS fDate, COUNT(*) AS count, SUM(incomeAmount) AS sum
 					</when>
-					<when test="group.equals('day')">
+					<when test="group2.equals('day')">
 						SELECT DATE_FORMAT(incomeDate, '%Y-%m-%d') AS fDate, COUNT(*) AS count, SUM(incomeAmount) AS sum
 					</when>
 				</choose>
 				FROM income
 				WHERE accountBookNo = #{accountBookNo}
 				GROUP BY fDate
-				HAVING fDate LIKE CONCAT(#{date}, '%')
+				HAVING fDate LIKE CONCAT(#{date}, "%")
 				ORDER BY fDate ASC
 			</when>
 		</choose>
 	</select>
 	
 	<!-- 지출 - 총 개수, 총 금액 조회 -->
-	<select id="getExpenditureList" parameterType="HashMap" resultMap="tagTotalList">
+	<select id="selectExpenditureList" parameterType="HashMap" resultMap="tagTotalList">
 		<choose>
-			<when test="select.equals('tag')">
+			<when test="group1.equals('tag')">
 				<choose>
-					<when test="group.equals('year')">
+					<when test="group2.equals('year')">
 						SELECT DATE_FORMAT(expenditureDate, '%Y') AS fDate, tagNo, COUNT(*) AS count, SUM(expenditureAmount) AS sum
 					</when>
-					<when test="group.equals('month')">
+					<when test="group2.equals('month')">
 						SELECT DATE_FORMAT(expenditureDate, '%Y-%m') AS fDate, tagNo, COUNT(*) AS count, SUM(expenditureAmount) AS sum
 					</when>
-					<when test="group.equals('day')">
+					<when test="group2.equals('day')">
 						SELECT DATE_FORMAT(expenditureDate, '%Y-%m-%d') AS fDate, tagNo, COUNT(*) AS count, SUM(expenditureAmount) AS sum
 					</when>
 				</choose>
@@ -128,15 +143,15 @@
 				HAVING fDate LIKE CONCAT(#{date}, '%')
 				ORDER BY fDate ASC
 			</when>
-			<when test="select.equals('date')">
+			<when test="group1.equals('date')">
 				<choose>
-					<when test="group.equals('year')">
+					<when test="group2.equals('year')">
 						SELECT DATE_FORMAT(expenditureDate, '%Y') AS fDate, COUNT(*) AS count, SUM(expenditureAmount) AS sum
 					</when>
-					<when test="group.equals('month')">
+					<when test="group2.equals('month')">
 						SELECT DATE_FORMAT(expenditureDate, '%Y-%m') AS fDate, COUNT(*) AS count, SUM(expenditureAmount) AS sum
 					</when>
-					<when test="group.equals('day')">
+					<when test="group2.equals('day')">
 						SELECT DATE_FORMAT(expenditureDate, '%Y-%m-%d') AS fDate, COUNT(*) AS count, SUM(expenditureAmount) AS sum
 					</when>
 				</choose>
@@ -150,30 +165,30 @@
 	</select>
 	
 	<!-- 태그명 조회 -->
-	<select id="getTagName" parameterType="String" resultType="String">
+	<select id="selectTagName" parameterType="String" resultType="String">
 		SELECT tagName
 		FROM tag
 		WHERE tagNo = #{tagNo}
 	</select>
 	
 	<!-- 게시글 목록 조회 -->
-	<select id="getBoardList" parameterType="HashMap" resultMap="boardList">
+	<select id="selectBoardList" parameterType="HashMap" resultMap="boardList">
 		SELECT *
 		FROM board
 		<choose>
-			<when test="allCheck eq false"> <!-- 공지사항 -->
+			<when test="boardTab eq 1"> <!-- 전체 -->
+				WHERE boardCategoryNo != #{boardCategoryNo}
+			</when>
+			<when test="boardTab eq 2"> <!-- 공지사항 -->
 				WHERE boardCategoryNo = #{boardCategoryNo}
 			</when>
-			<otherwise> <!-- 전체 -->
-				WHERE boardCategoryNo != #{boardCategoryNo}
-			</otherwise>
 		</choose>
 		ORDER BY boardDate DESC
 		LIMIT 6
 	</select>
 	
 	<!-- 게시판 카테고리 이름 조회 -->
-	<select id="getBoardCategoryName" parameterType="String" resultType="String">
+	<select id="selectBoardCategoryName" parameterType="String" resultType="String">
 		SELECT boardCategoryName
 		FROM board_category
 		WHERE boardCategoryNo = #{boardCategoryNo}
@@ -182,19 +197,18 @@
 	<!-- 수입 내역 추가 -->
 	<insert id="insertIncome" parameterType="com.AourZ.PayStory.model.IncomeVO" useGeneratedKeys="true" keyProperty="incomeNo">
 		INSERT INTO income 
-			(incomeDate, incomeSource, incomeMemo, incomeAmount, tagNo) 
+			(incomeDate, incomeSource, incomeMemo, incomeAmount, tagNo, accountBookNo) 
 		VALUES
-			(#{incomeDate}, #{incomeSource}, #{incomeMemo}, #{incomeAmount}, #{tagNo})
+			(#{incomeDate}, #{incomeSource}, #{incomeMemo}, #{incomeAmount}, #{tagNo}, #{accountBookNo})
 	</insert>
 
 	<!-- 지출 내역 추가 -->
-	<insert id="insertExpenditure" parameterType="map" useGeneratedKeys="true" keyProperty="expenditureNo">
+	<insert id="insertExpenditure" parameterType="com.AourZ.PayStory.model.ExpenditureVO" useGeneratedKeys="true" keyProperty="expenditureNo">
 		INSERT INTO expenditure 
-			(expenditureDate, expenditureImage, expenditureSource, expenditureMemo, expenditureAmount, expenditureAddress, tagNo) 
+			(expenditureDate, expenditureImage, expenditureSource, expenditureMemo, expenditureAmount, expenditureAddress, tagNo, accountBookNo) 
 		VALUES
-			(#{expenditureDate}, #{expenditureImage}, #{expenditureSource}, #{expenditureMemo}, #{expenditureAmount}, #{expenditureAddress}, #{tagNo})
+			(#{expenditureDate}, #{expenditureImage}, #{expenditureSource}, #{expenditureMemo}, #{expenditureAmount}, #{expenditureAddress}, #{tagNo}, #{accountBookNo})
 	</insert>
-
 	<!-- 지출 아이템 추가 -->
 	<insert id="insertExpenditureItem" parameterType="list">
 		INSERT INTO expenditure_item

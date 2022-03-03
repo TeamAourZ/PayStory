@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+#calendarBtnBox i {
+	color: var(--gray);
+}
+
+#otherBtnBox {
+	gap: 5px;
+}
+
+#shareMemberList {
+	gap: 5px;
+}
+
+.border {
+	border-radius: 5px;
+}
+
+.border-color-default {
+	border: 1px solid #b5b1b1;
+}
+
+.border-color-black {
+	border: 1px solid black !important;
+}
+
+.border-color-white {
+	border: 1px solid white !important;
+}
+
+.border-color-yellow-1 {
+	border: 1px solid yellow !important;
+}
+
+.border-color-yellow-2 {
+	border: 2px solid yellow !important;
+}
+
+.border-color-blue-1 {
+	border: 1px solid blue !important;
+}
+
+.border-color-blue-2 {
+	border: 2px solid blue !important;
+}
+
+.default-cursor {
+	cursor: default;
+}
+
+.pointer-cursor {
+    cursor: pointer;
+}
+
+.help-cursor {
+	cursor: help;
+}

@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>PayStory 이메일인증확인</title>
+    <title>PayStory 정지회원</title>
     <!-- Custom fonts for this template-->
     <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -31,9 +33,11 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">가입하신 메일을 확인해주세요.<br>메일인증을 하셔야 로그인이 가능합니다.</h1>
-                                <button type="button" class="btn btn-primary" onclick="location.href='/member/loginView'">로그인페이지</button>
-	 							<button type="button" class="btn btn-primary" onclick="location.href='/index'">메인페이지</button>
+                            	<!-- <input type="hidden" name="memberEmail" id="memberEmail" class="input-css"> -->
+                            	<h1 class="h4 text-gray-900 mb-4">본 계정은 정지된 회원입니다.</h1>
+                                <h2 class="h4 text-gray-900 mb-4">
+                               		정지기간:&nbsp;&nbsp;<fmt:formatDate value="${sanctionTime}" pattern="yyyy.MM.dd" />&nbsp;&nbsp;까지입니다.
+                                </h2>
                             </div>
                     </div>
                 </div>

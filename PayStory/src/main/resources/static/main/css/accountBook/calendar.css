@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+/* 공통 / A, B */
+.dateSel div.infoBox, .dateSel div.emptyBox {
+    min-height: 90px;
+    font-size: 13pt;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.today {
+	color: rgba(0, 0, 0, 1);
+	background: rgba(0, 255, 64, 0.51);
+}
+
+.incomeCount {
+	min-width: 21px;
+	border: 1px solid #2768fa;
+	font-size: 9pt;
+}
+
+.incomeValue {
+	color: #2768fa;
+	font-size: 9pt;
+}
+
+.expenditureCount {
+	min-width: 21px;
+	border: 1px solid #ffb500;
+	font-size: 9pt;
+}
+
+.expenditureValue {
+	color: #ffb500;
+	font-size: 9pt;
+}
+
+.detailBox {
+	font-size: 9pt;
+	margin-left: 2.75em;
+}
+.detailBox th, .detailBox td {
+	padding: 0.5rem;
+}
+
+.tagIncomeListBox, .tagExpenditureListBox, #budgetStatusBox {
+	background: var(--light);
+	border-radius: 10px;
+	border: 1px solid var(--dark);
+	z-index: 10;
+}
+.tagIncomeListBox th, .tagIncomeListBox td,
+.tagExpenditureListBox th, .tagExpenditureListBox td,
+#budgetStatusBox th, #budgetStatusBox td {
+	padding: 0.5rem !important;
+}
+
+#budgetStatusBox {
+	right: 10%;
+}
+
+.detailBoxClose {
+	top: 0%;
+	right: 8%;
+}
+
+
+/* A */
+.daySel.typeA {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 15px;
+}
+.daySel.typeA div:first-child, .daySel.typeA div:last-child {
+    background: #ffb500;
+}
+.daySel.typeA div {
+    color: white;
+    font-size: 13pt;
+    border-radius: 15px;
+    background: #2768fa;
+    text-align: center;
+}
+
+.dateSel.typeA {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 15px;
+}
+
+.date.typeA {
+	width: 24px;
+}
+
+
+/* B / C */
+.daySel.typeB tr th:first-child, .daySel.typeB tr th:last-child {
+    color: #ffb500;
+}
+.daySel.typeB tr th {
+	color: #2768fa;
+}
+.daySel.typeB div {
+    color: white;
+    font-size: 11pt;
+    border-radius: 15px;
+    background: #2768fa;
+    text-align: center;
+}
+
+.date.typeB {
+	width: 20px;
+}

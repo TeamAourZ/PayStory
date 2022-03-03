@@ -3,6 +3,7 @@
 #chartMainTagBox {
 	gap: 10px;
 }
-#chartMainTagBox div {
-	cursor: pointer;
+
+.chartTab.selected {
+	text-decoration: underline;
 }

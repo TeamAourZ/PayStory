@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <html>
-<head><style>.text-gray-600 {font-size: 15px;width: 54px;}</style></head>
+<head><style>.text-gray-600 {font-size: 15px;width: 85px;text-align: center;}</style></head>
 	<body>
 		<jsp:include page="/WEB-INF/views/layout/profileModal.jsp" flush="true"/>
 	    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -61,7 +61,7 @@
 		                <div class="dropdown-divider"></div>
 		                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
 		                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-		                    Logout
+		                    로그아웃
 		                </a>
 		            </div>
 		        </li>

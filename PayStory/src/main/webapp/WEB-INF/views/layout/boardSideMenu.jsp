@@ -9,7 +9,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<c:url value='/'/>">
                 <div class="sidebar-brand-icon">
-                    <img alt="logo" src="/main/images/logo.png" style="width: 100%;">
+                    <img alt="logo" src="<c:url value='/main/images/logo.png'/>" style="width: 100%;">
                 </div>
             </a>
 
