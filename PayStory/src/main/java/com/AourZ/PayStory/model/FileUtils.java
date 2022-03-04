@@ -50,7 +50,7 @@ public class FileUtils {
 		return memberImage;
 	}
 
-	public static String uploadReceipt(MultipartFile multipartFile, HttpSession session) throws IOException {
+	public static String[] uploadReceipt(MultipartFile multipartFile, HttpSession session) throws IOException {
 		String memberNo = (String) session.getAttribute("memberNo");
 		
 		// 회원번호별 새 폴더 생성
@@ -75,7 +75,7 @@ public class FileUtils {
 
 		multipartFile.transferTo(file1);
 		
-		String result =  uploadFileName;
+		String result[] =  {filePathName, uploadFileName};
 		
 		return result;
 	}

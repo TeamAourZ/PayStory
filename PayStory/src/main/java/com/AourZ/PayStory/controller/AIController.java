@@ -144,8 +144,9 @@ public class AIController {
 	/****** OCR *****/
 	@RequestMapping("/OCR")
 	public ExpenditureVO ocrUplaod(@RequestParam("receiptImage") MultipartFile file, HttpSession session) throws IOException {
-		String uploadFileName = FileUtils.uploadReceipt(file, session);
-		String filePathName = "/images/"+ uploadFileName;
+		String[] fileResult = FileUtils.uploadReceipt(file, session);
+		String filePathName = fileResult[0];
+		String uploadFileName = fileResult[1];
 		System.out.println(filePathName);
 		
 		ExpenditureVO result =  OCRService.clovaOCRService(filePathName);
