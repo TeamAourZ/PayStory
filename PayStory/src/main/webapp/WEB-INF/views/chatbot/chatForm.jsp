@@ -50,7 +50,7 @@
 				            <!-- header -->
 				            <div class="header">
 				                <div class="userimg">
-				                    <img src="<c:url value='/images/${login.memberImage}' />" class="cover">
+				                    <img src="<c:url value="/images/${login.memberImage}" />" class="cover">
 				                </div>
 				                <ul class="nav_icons">
 				                    <li>
@@ -58,7 +58,7 @@
 				                    </li>
 				                    
 				                    <li>
-				                        <span><input type="button" class="delinput" value="&#xf27a" onclick="window.open('/groupChat')"></span>
+				                        <span><input type="button" class="delinput" value="&#xf27a" ></span>
 				                        <!-- <span><input type="button" class="delinput" value="&#xf4b3" onclick="div_hide();"></span> -->
 				                    </li>
 				                    
