@@ -30,10 +30,10 @@ import com.AourZ.PayStory.model.accountBook.IncomeVO;
 import com.AourZ.PayStory.model.accountBook.MainBoardVO;
 import com.AourZ.PayStory.model.accountBook.ShareAccountBookVO;
 import com.AourZ.PayStory.model.accountBook.ShareBudgetVO;
-import com.AourZ.PayStory.model.accountBook.ShareMemberVO;
 import com.AourZ.PayStory.model.accountBook.TagTotalVO;
 import com.AourZ.PayStory.model.board.BoardVO;
 import com.AourZ.PayStory.model.member.MemberVO;
+import com.AourZ.PayStory.model.member.ShareMemberVO;
 import com.AourZ.PayStory.service.accountBook.AccountBookService;
 import com.AourZ.PayStory.service.accountBook.AccountCreateService;
 
@@ -565,5 +565,4 @@ public class AccountBookController {
 	public String moveRegisterParticipant() {
 		return "accountBook/public/registerParticipant";
 	}
->>>>>>> f8fd90aff269d14c09e5fd41a1773b30bd918564
 }
