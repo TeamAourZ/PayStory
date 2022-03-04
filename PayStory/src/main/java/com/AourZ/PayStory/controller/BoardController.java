@@ -28,6 +28,7 @@ public class BoardController {
     public String alllistView(Model model) {
     	ArrayList<BoardVO> boardList = service.getList();
     	model.addAttribute("boardList", boardList);
+    	model.addAttribute("noticeBoardList",service.noticeBoardList()); // 공지사항리스트
         return "/board/listView";
     }
     

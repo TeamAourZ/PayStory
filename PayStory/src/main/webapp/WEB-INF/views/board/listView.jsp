@@ -19,6 +19,7 @@
 
 	 <!-- CSS : main -->
     <link href="<c:url value='/main/css/board/listView.css'/>" rel="stylesheet">
+    <style>.noticeBoardList{cursor:pointer;}</style>
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -70,6 +71,19 @@
 			                                        </tr>
 			                                    </thead>
 			                                    <tbody>
+			                                    <!-- 공지사항 -->		
+												<c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
+		        									<tr class="boardList">
+		        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/></td>
+	        											<td>공지사항</td>
+										        		<td>[공지]  ${noticeBoardList.boardTitle}</td>
+										        		<td>PayStory 관리자</td>
+										        		<td>${noticeBoardList.boardViews}</td>
+										        		<td>${noticeBoardList.boardDate}</td>
+													</tr>
+												</c:forEach>
+			                                    
+			                                    
 			                                    	<%-- <tr>
 	        											<td><a href="<c:url value='/board/view'/>">1</a></td>
 										        		<td>공지</td>
@@ -100,7 +114,8 @@
 														</tr>
 													</c:forEach>
 			                                    </tbody>
-			                                </table>                                		
+			                                </table> 
+			                                                               		
                                 		</div>
                                 	</div>
                                 </div>

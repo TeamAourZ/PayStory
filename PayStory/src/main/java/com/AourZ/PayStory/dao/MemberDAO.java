@@ -83,7 +83,8 @@ public class MemberDAO implements IMemberDAO {
 	@Override
 	public void infoUpdate(MemberVO memberVO)throws Exception{
 		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("memberName", memberVO.getMemberName());	
+		map.put("memberName", memberVO.getMemberName());
+		map.put("memberEmail", memberVO.getMemberEmail());
 		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.infoUpdate", map);
 	}
 	
@@ -139,20 +140,6 @@ public class MemberDAO implements IMemberDAO {
 	}
 	
 	@Override
-	public void insertNotice(int boardNo) throws Exception{
-		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("boardNo", boardNo);
-		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.insertNotice", map);
-	}
-	
-	@Override
-	public void deleteNotice(int boardNo) throws Exception{
-		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("boardNo", boardNo);
-		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.deleteNotice", map);
-	}
-	
-	@Override
 	public void memberMaster(String memberEmail) throws Exception{
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("memberEmail", memberEmail);
@@ -168,8 +155,22 @@ public class MemberDAO implements IMemberDAO {
 	
 	// 공지사항
 	@Override
-	public List<BoardVO> boardList(){
-		return sqlsession.selectList("com.AourZ.PayStory.dao.IMemberDAO.boardList");
+	public List<BoardVO> noticeBoardList(){
+		return sqlsession.selectList("com.AourZ.PayStory.dao.IMemberDAO.noticeBoardList");
+	}
+	
+	@Override
+	public void insertNotice(int boardNo) throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.insertNotice", map);
+	}
+	
+	@Override
+	public void deleteNotice(int boardNo) throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.deleteNotice", map);
 	}
 	
 }

@@ -40,13 +40,13 @@ public class MemberService implements IMemberService {
 						"<br/>"+memberVO.getMemberName()+"님 "+
 						"<br/>PayStory에 회원가입해주셔서 감사합니다."+
 						"<br/>[이메일 인증 확인]을 눌러주세요."+
-						"<a href='http://localhost:8080/member/registerEmail?memberEmail=" + memberVO.getMemberEmail() +
+						"<a href='http://49.50.174.115:8080/member/registerEmail?memberEmail=" + memberVO.getMemberEmail() +
 						"&key=" + key +
 						"' target='_blenk'>이메일 인증 확인</a>");
 		sendMail.setFrom("paystory.aourz@gmail.com", "PayStory");
 		sendMail.setTo(memberVO.getMemberEmail());
 		sendMail.send(); 
-	}
+	}//"<a href='http://localhost:8080/member/registerEmail?memberEmail=" + memberVO.getMemberEmail() +
 	
 	@Override
 	public void memberAuth(String memberEmail) throws Exception{
@@ -86,12 +86,12 @@ public class MemberService implements IMemberService {
 							"<br/>비밀번호 찾기를 통한 임시 비밀번호입니다."+
 							"<br/>임시비밀번호 :   <h2>"+memberKey+"</h2>"+
 							"<br/>로그인 후 비밀번호 변경을 해주세요."+
-							"<a href='http://localhost:8080/member/loginView"+
+							"<a href='http://49.50.174.115:8080/member/loginView"+
 							">로그인 페이지</a>");
 			sendMail.setFrom("paystory.aourz@gmail.com", "PayStory");
 			sendMail.setTo(memberEmail);
 			sendMail.send();
-	}
+	}//"<a href='http://localhost:8080/member/loginView"+ 로컬주소
     
     @Override
 	public void infoUpdate(MemberVO memberVO)throws Exception{
@@ -139,16 +139,6 @@ public class MemberService implements IMemberService {
 	}
 	
 	@Override
-	public void insertNotice(int boardNo)throws Exception{
-		memberDAO.insertNotice(boardNo);
-	}
-	
-	@Override
-	public void deleteNotice(int boardNo)throws Exception{
-		memberDAO.insertNotice(boardNo);
-	}
-	
-	@Override
 	public void memberMaster(String memberEmail)throws Exception{
 		memberDAO.memberMaster(memberEmail);
 	}
@@ -157,10 +147,21 @@ public class MemberService implements IMemberService {
 	public void memberMasterCancel(String memberEmail)throws Exception{
 		memberDAO.memberMasterCancel(memberEmail);
 	}
+	
 	// 공지사항
 	@Override
-	public List<BoardVO> boardList() {
-		return memberDAO.boardList();
+	public List<BoardVO> noticeBoardList() {
+		return memberDAO.noticeBoardList();
+	}
+	
+	@Override
+	public void insertNotice(int boardNo)throws Exception{
+		memberDAO.insertNotice(boardNo);
+	}
+	
+	@Override
+	public void deleteNotice(int boardNo)throws Exception{
+		memberDAO.deleteNotice(boardNo);
 	}
 	
 }	

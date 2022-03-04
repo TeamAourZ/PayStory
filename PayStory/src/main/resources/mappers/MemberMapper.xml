@@ -161,37 +161,10 @@
 		update board SET NOTICE ='N' where boardNo = #{boardNo}
 	</update>
 	
-	<!-- 공지사항 목록 -->
-	<select id="noticeView" resultType="com.AourZ.PayStory.model.board.BoardVO">
-		SELECT boardNo , boardTitle , boardDate FROM board WHERE boardNo = 2 AND NOTICE = 'Y'
+	<!-- 공지사항 목록 -->	
+	<select id="noticeBoardList" resultMap="BoardVOResultMap" >		
+		select * from board where notice = 'Y' 
+		limit 0,2
 	</select>
-	
-	<select id="boardList" resultMap="BoardVOResultMap" >
-		<![CDATA[		
-			SELECT b.* FROM (SELECT @rownum:=@rownum+1 AS rnum, a.* FROM board AS a,
-            (SELECT @rownum:=0) AS r) AS b
-            WHERE rnum>=1 AND rnum<=3 ORDER BY boardNo DESC ;
-		]]>
-	</select>
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 </mapper>
