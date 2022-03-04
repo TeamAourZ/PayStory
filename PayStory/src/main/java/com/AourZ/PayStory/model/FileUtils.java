@@ -57,28 +57,11 @@ public class FileUtils {
 		}
 		
 		String originalFileName = multipartFile.getOriginalFilename();
+		String originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+		// 파일 중복 방지를 위한 UUID 생성
+		String storedFileName = getRandomString() + originalFileExtension;
 		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
-		String uploadFileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("accountBookNo")+"_"+originalFileName;
-		String filePathName = uploadPath + uploadFileName;
-		
-		File file1 = new File(filePathName);
-
-		multipartFile.transferTo(file1);
-		
-		return filePathName;
-	}
-	
-	public static String uploadBoardFile(MultipartFile multipartFile, HttpSession session) throws IOException {
-		String uploadPath = filePath + "board\\";
-		
-		File file = new File(uploadPath);
-		if(file.exists() == false) {
-			file.mkdirs();
-		}
-		
-		String originalFileName = multipartFile.getOriginalFilename();
-		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
-		String uploadFileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("boardNo")+"_"+originalFileName;
+		String uploadFileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("accountBookNo")+"_"+storedFileName;
 		String filePathName = uploadPath + uploadFileName;
 		
 		File file1 = new File(filePathName);
