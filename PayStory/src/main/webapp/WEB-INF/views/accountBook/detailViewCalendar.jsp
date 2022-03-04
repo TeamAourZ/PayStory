@@ -51,11 +51,11 @@
 															<%-- 일별 건수 --%>
 															<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
 																<%-- 수입 --%>
-																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																<c:if test="${dateIncomeList[dateIndex].count ne 0 && not empty dateIncomeList[dateIndex].count}">
 																	<div class="incomeCount rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
 																</c:if>
 																<%-- 지출 --%>
-																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0 && not empty dateExpenditureList[dateIndex].count}">
 																	<div class="expenditureCount rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
 																</c:if>
 															</div>
@@ -80,11 +80,11 @@
 															<%-- 일별 건수 --%>
 															<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
 																<%-- 수입 --%>
-																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																<c:if test="${dateIncomeList[dateIndex].count ne 0 && not empty dateIncomeList[dateIndex].count}">
 																	<div class="incomeCount rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
 																</c:if>
 																<%-- 지출 --%>
-																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0 && not empty dateExpenditureList[dateIndex].count}">
 																	<div class="expenditureCount rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
 																</c:if>
 															</div>
@@ -109,11 +109,11 @@
 															<%-- 일별 건수 --%>
 															<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
 																<%-- 수입 --%>
-																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																<c:if test="${dateIncomeList[dateIndex].count ne 0 && not empty dateIncomeList[dateIndex].count}">
 																	<div class="incomeCount rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
 																</c:if>
 																<%-- 지출 --%>
-																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0 && not empty dateExpenditureList[dateIndex].count}">
 																	<div class="expenditureCount rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
 																</c:if>
 															</div>
