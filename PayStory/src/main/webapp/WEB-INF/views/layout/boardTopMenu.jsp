@@ -41,7 +41,7 @@
 		               <!-- userName -->
 		               <span class="mr-2 d-none d-lg-inline text-gray-600 small">${login.memberName}</span>
 		               <!-- userImg -->
-		               <img class="img-profile rounded-circle" src="<c:url value='/images/${login.memberImage}' />">
+		               <img class="img-profile rounded-circle" src="<c:url value='/images/member/${login.memberImage}' />">
 		           </a>
 		           <!-- Dropdown - User Information -->
 		            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
