@@ -87,8 +87,8 @@
 	// chatbot 아이콘 눌렀을 때 파일 업로드
 	$("#uploadFile").on('change',function(e){
 		e.preventDefault();
-		
-	  	// 이미지 영역에 미리보기
+
+    // 이미지 영역에 미리보기
 	  	let file = e.target.files;
 	  	let fileArr = Array.prototype.slice.call(file);
 	  	
@@ -287,7 +287,7 @@
 				let image = result.expenditureImage;
 				
 				// 값 입력
-				let receiveChat = '<div class="msgBox receive"><span id="in"><span>PayStory 챗봇' + '<br>AI 인식 결과입니다.<br><br>' +
+				let receiveChat = '<div class="msgBox receive"><span id="in">PayStory 챗봇' + '<br>AI 인식 결과입니다.<br><br>' +
 								  '<table border="1" class="text-center"><tr><th>사용처</th><td colspan="2">'+source+'</td></tr>'+
 								  '<tr><th>주소</th><td colspan="2">'+address+'</td></tr>'+
 								  '<tr><th>사용 날짜</th><td colspan="2">'+date+'</td></tr>';
@@ -302,8 +302,8 @@
 				}
 				receiveChat += '<tr><th>총 지출 금액</th><td colspan="2">'+ totalAmount + '원</td><tr></table>'+
 							   '<br><br> 이 결과를 가계부에 저장하시겠습니까? (네: 1, 아니오: 0)</span></span></div>';
-				
-				$('#chatBox').append(receiveChat);
+
+        $('#chatBox').append(receiveChat);
 				
 			},
 			error: function(err){

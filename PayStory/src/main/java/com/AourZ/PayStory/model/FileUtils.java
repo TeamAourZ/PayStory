@@ -18,17 +18,16 @@ public class FileUtils {
 	public static String updateImg(
 			MultipartHttpServletRequest mpRequest, HttpSession session) throws Exception{
 		
-		
 		Iterator<String> iterator = mpRequest.getFileNames();
-		
+
 		MultipartFile multipartFile = null;
 		String originalFileName = null;
 		String originalFileExtension = null;
 		String storedFileName = null;
-		
+
 		String memberImage = "";
-		
-		String memberNo = (String) session.getAttribute("memberNo");
+
+    String memberNo = (String) session.getAttribute("memberNo");
 		// 회원번호별 새 폴더 생성
 		String uploadPath = filePath + "member/" + memberNo + "/";
 		
@@ -36,10 +35,10 @@ public class FileUtils {
 		if(file.exists() == false) {
 			file.mkdirs();
 		}
-		
-		while(iterator.hasNext()) {
+
+		while (iterator.hasNext()) {
 			multipartFile = mpRequest.getFile(iterator.next());
-			if(multipartFile.isEmpty() == false) {
+			if (multipartFile.isEmpty() == false) {
 				originalFileName = multipartFile.getOriginalFilename();
 				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
 				storedFileName = getRandomString() + originalFileExtension;
@@ -50,18 +49,18 @@ public class FileUtils {
 		}
 		return memberImage;
 	}
-	
+
 	public static String uploadReceipt(MultipartFile multipartFile, HttpSession session) throws IOException {
 		String memberNo = (String) session.getAttribute("memberNo");
 		
 		// 회원번호별 새 폴더 생성
 		String uploadPath = filePath + "receipt/" + memberNo + "/";
-		
-		File file = new File(uploadPath);
-		if(file.exists() == false) {
+
+    File file = new File(uploadPath);
+		if (file.exists() == false) {
 			file.mkdirs();
 		}
-		
+
 		String originalFileName = multipartFile.getOriginalFilename();
 		String originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
 		
@@ -71,7 +70,7 @@ public class FileUtils {
 		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
 		String uploadFileName = memberNo +"_"+ session.getAttribute("accountBookNo") +"_"+storedFileName;
 		String filePathName = uploadPath + uploadFileName;
-		
+
 		File file1 = new File(filePathName);
 
 		multipartFile.transferTo(file1);
@@ -88,10 +87,10 @@ public class FileUtils {
 		String uploadPath = filePath + "board/" + memberNo + "/";
 		
 		File file = new File(uploadPath);
-		if(file.exists() == false) {
+		if (file.exists() == false) {
 			file.mkdirs();
 		}
-		
+
 		String originalFileName = multipartFile.getOriginalFilename();
 		String originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
 		
@@ -101,12 +100,12 @@ public class FileUtils {
 		// 업로드 파일 이름 : "memberNo_boardNo_파일이름"
 		String uploadFileName = memberNo +"_"+ boardNo +"_"+storedFileName;
 		String filePathName = uploadPath + uploadFileName;
-		
+
 		File file1 = new File(filePathName);
 
 		multipartFile.transferTo(file1);
 	}
-	
+
 	public static String getRandomString() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}

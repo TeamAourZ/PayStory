@@ -45,4 +45,12 @@
 		VALUES
 			(#{boardTitle}, #{boardContents}, #{boardFile}, #{boardCategoryNo}, #{memberNo})
 	</insert>
+	
+	<!-- 공지사항 :서정원추가 -->
+	<select id="noticeBoardList" resultMap="board" >			
+		select * from board where notice = 'Y'
+		order by notice, boardDate desc
+		limit 0,2
+	</select>
+	
 </mapper>

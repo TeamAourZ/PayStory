@@ -25,10 +25,10 @@ public interface IMemberDAO {
 	public void memberSanctionCancel(String memberEmail)throws Exception;
 	public int memberRankCheck(String memberEmail)throws Exception;
 	public Object memberSanctionTime(String memberEmail)throws Exception;
-	public void insertNotice(int boardNo)throws Exception;
-	public void deleteNotice(int boardNo)throws Exception;
 	public void memberMaster(String memberEmail)throws Exception;
 	public void memberMasterCancel(String memberEmail)throws Exception;
 	// 공지사항
-	public List<BoardVO> boardList();
+	public List<BoardVO> noticeBoardList();
+	public void insertNotice(int boardNo)throws Exception;
+	public void deleteNotice(int boardNo)throws Exception;
 }

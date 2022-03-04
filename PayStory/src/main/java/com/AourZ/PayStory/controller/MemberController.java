@@ -266,7 +266,7 @@ public class MemberController {
 		//List<BoardVO> boardList = memberService.boardList();
 		
 		model.addAttribute("memberList",memberList);
-		model.addAttribute("boardList",memberService.boardList());
+		model.addAttribute("noticeBoardList",memberService.noticeBoardList());
 		return "/member/master";
 	}
 	
