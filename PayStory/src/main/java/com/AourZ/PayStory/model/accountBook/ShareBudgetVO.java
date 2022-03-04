@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.accountBook;
 
 public class ShareBudgetVO {
 	

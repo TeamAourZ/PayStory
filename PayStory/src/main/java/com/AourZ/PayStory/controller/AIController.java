@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.AourZ.PayStory.model.ExpenditureVO;
+import com.AourZ.PayStory.model.FileUtils;
+import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
 import com.AourZ.PayStory.service.ai.ChatbotService;
 import com.AourZ.PayStory.service.ai.OCRService;
 import com.AourZ.PayStory.service.ai.STTService;
@@ -146,21 +147,9 @@ public class AIController {
 	/****** OCR *****/
 	@RequestMapping("/OCR")
 	public ExpenditureVO ocrUplaod(@RequestParam("expenditureImage") MultipartFile file, HttpSession session) throws IOException {
-		// 파일 공유하기 위해 프로젝트내 file/receipt 폴더에 업로드
-		String uploadPath = "C:/PayStory/file/receipt/";
-
-		String originalFileName = file.getOriginalFilename();
-		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
-		String uploadFileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("accountBookNo")+"_"+originalFileName;
-		String filePathName = uploadPath + uploadFileName;
-
-		File file1 = new File(filePathName);
-
-		file.transferTo(file1);
-		
+		String filePathName = FileUtils.uploadReceipt(file, session);
 		ExpenditureVO result =  OCRService.clovaOCRService(filePathName);
 		
 		return result;
 	}
-
 }

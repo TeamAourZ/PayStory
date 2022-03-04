@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.board;
 
 public class BoardCategoryVO {
 	private String boardCategoryNo;

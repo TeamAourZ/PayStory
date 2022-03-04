@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.accountBook;
 
 public class IncomeVO {
 	private Integer incomeNo;		// 수입 내역 번호

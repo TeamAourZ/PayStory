@@ -2,17 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.AourZ.PayStory.dao.IBoardDAO" >
-	<resultMap type="com.AourZ.PayStory.model.MemberVO" id="member">
+	<resultMap type="com.AourZ.PayStory.model.member.MemberVO" id="member">
 		<result column="memberNo" property="memberNo"/>
 		<result column="memberName" property="memberName"/>
 	</resultMap>
 	
-	<resultMap type="com.AourZ.PayStory.model.BoardCategoryVO" id="boardCtg">
+	<resultMap type="com.AourZ.PayStory.model.board.BoardCategoryVO" id="boardCtg">
 		<result column="boardCategoryNo" property="boardCategoryNo"/>
 		<result column="boardCategoryName" property="boardCategoryName"/>
 	</resultMap>
 	
-	<resultMap type="com.AourZ.PayStory.model.BoardVO" id="board">
+	<resultMap type="com.AourZ.PayStory.model.board.BoardVO" id="board">
 		<result column="boardNo" property="boardNo"/>
 		<result column="boardTitle" property="boardTitle"/>
 		<result column="boardDate" property="boardDate"/>
@@ -34,12 +34,12 @@
 	</select>
 
 	<!-- 게시판 목록 : 카테고리별 -->
-	<select id="boardView" parameterType="int" resultType="com.AourZ.PayStory.model.BoardVO">
+	<select id="boardView" parameterType="int" resultType="com.AourZ.PayStory.model.board.BoardVO">
 		SELECT * FROM board WHERE boardNo = #{boardNo}
 	</select>
 
 	<!-- 게시글 작성 -->
-	<insert id="createBoard" parameterType="com.AourZ.PayStory.model.BoardVO" useGeneratedKeys="true" keyProperty="expenditureNo" >
+	<insert id="createBoard" parameterType="com.AourZ.PayStory.model.board.BoardVO" useGeneratedKeys="true" keyProperty="expenditureNo" >
 		INSERT INTO board 
 			(boardTitle, boardContents, boardFile, boardCategoryNo, memberNo) 
 		VALUES

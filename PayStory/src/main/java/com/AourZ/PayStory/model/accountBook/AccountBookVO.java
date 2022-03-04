@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.accountBook;
 
 public class AccountBookVO {
 	private int accountBookNo;				// 가계부 번호

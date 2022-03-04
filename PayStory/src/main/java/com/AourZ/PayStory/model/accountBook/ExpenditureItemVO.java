@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.accountBook;
 
 public class ExpenditureItemVO {
 	private String expenditureItemName;			// 지출 아이템 이름

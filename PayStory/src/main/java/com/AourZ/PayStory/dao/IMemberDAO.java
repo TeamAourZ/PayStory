@@ -3,9 +3,9 @@ package com.AourZ.PayStory.dao;
 
 import java.util.List;
 
-import com.AourZ.PayStory.model.BoardVO;
-import com.AourZ.PayStory.model.LoginVO;
-import com.AourZ.PayStory.model.MemberVO;
+import com.AourZ.PayStory.model.board.BoardVO;
+import com.AourZ.PayStory.model.member.LoginVO;
+import com.AourZ.PayStory.model.member.MemberVO;
 
 public interface IMemberDAO {
 	public void register(MemberVO memberVO) throws Exception;

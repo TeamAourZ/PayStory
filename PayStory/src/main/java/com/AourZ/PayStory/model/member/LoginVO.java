@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.member;
 
 public class LoginVO {
 	private String memberEmail;	// 로그인 이메일 아이디
