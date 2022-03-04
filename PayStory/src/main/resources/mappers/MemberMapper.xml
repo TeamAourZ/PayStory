@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
  <mapper namespace="com.AourZ.PayStory.dao.IMemberDAO">
-	<resultMap type="com.AourZ.PayStory.model.MemberVO" id="MemberVOResultMap">
+	<resultMap type="com.AourZ.PayStory.model.member.MemberVO" id="MemberVOResultMap">
 		<result property="memberNo" column="memberNo" />
 		<result property="memberName" column="memberName" />
 		<result property="memberEmail" column="memberEmail" />
@@ -15,7 +15,7 @@
 		<result property="memberSanctionTime" column="memberSanctionTime" />
 	</resultMap>
 	
-	<resultMap type="com.AourZ.PayStory.model.BoardVO" id="BoardVOResultMap">
+	<resultMap type="com.AourZ.PayStory.model.board.BoardVO" id="BoardVOResultMap">
 		<result column="boardNo" property="boardNo"/>
 		<result column="boardTitle" property="boardTitle"/>
 		<result column="boardDate" property="boardDate"/>
@@ -27,7 +27,7 @@
 	</resultMap>	
 	
 	<!-- 회원가입 -->
-	<insert id="register" parameterType="com.AourZ.PayStory.model.MemberVO">
+	<insert id="register" parameterType="com.AourZ.PayStory.model.member.MemberVO">
 		INSERT INTO member(
 			memberNo,
 			memberName,
@@ -42,7 +42,7 @@
 	</insert>	
 	
 	<!-- 닉네임중복 -->
-	<select id="nameCnt" parameterType="com.AourZ.PayStory.model.MemberVO" resultType="java.lang.Integer">
+	<select id="nameCnt" parameterType="com.AourZ.PayStory.model.member.MemberVO" resultType="java.lang.Integer">
 		<![CDATA[
 			select
 				count(*)
@@ -53,7 +53,7 @@
 		]]>	
 	</select> 
 	
-	<select id="emailCnt" parameterType="com.AourZ.PayStory.model.MemberVO" resultType="java.lang.Integer">
+	<select id="emailCnt" parameterType="com.AourZ.PayStory.model.member.MemberVO" resultType="java.lang.Integer">
 		<![CDATA[
 			select
 				count(*)
@@ -162,7 +162,7 @@
 	</update>
 	
 	<!-- 공지사항 목록 -->
-	<select id="noticeView" resultType="com.AourZ.PayStory.model.BoardVO">
+	<select id="noticeView" resultType="com.AourZ.PayStory.model.board.BoardVO">
 		SELECT boardNo , boardTitle , boardDate FROM board WHERE boardNo = 2 AND NOTICE = 'Y'
 	</select>
 	

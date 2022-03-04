@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.accountBook;
 
 public class DateVO {
 	private String date;				// 날짜 (년-월-일)

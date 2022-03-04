@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.accountBook;
 
 public class AccountBookBudgetVO {
 	private String budgetDate;	// 예산 대상 월 (년-월)

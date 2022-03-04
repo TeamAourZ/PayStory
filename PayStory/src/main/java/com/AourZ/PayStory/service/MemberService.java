@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.AourZ.PayStory.dao.IMemberDAO;
 import com.AourZ.PayStory.mail.IMailSender;
 import com.AourZ.PayStory.mail.TempKey;
-import com.AourZ.PayStory.model.BoardVO;
-import com.AourZ.PayStory.model.LoginVO;
-import com.AourZ.PayStory.model.MailUtils;
-import com.AourZ.PayStory.model.MemberVO;
+import com.AourZ.PayStory.model.board.BoardVO;
+import com.AourZ.PayStory.model.member.LoginVO;
+import com.AourZ.PayStory.model.member.MailUtils;
+import com.AourZ.PayStory.model.member.MemberVO;
 
 @Service
 public class MemberService implements IMemberService {

@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.board;
 
 public class BoardVO {
 	private int boardNo;						// 게시글 번호

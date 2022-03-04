@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.AourZ.PayStory.model.TagTotalVO;
-import com.AourZ.PayStory.service.AccountBookService;
+import com.AourZ.PayStory.model.accountBook.TagTotalVO;
+import com.AourZ.PayStory.service.accountBook.AccountBookService;
 
 @Repository
 public class AccountBookMethod {

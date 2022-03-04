@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.member;
 
 import java.io.UnsupportedEncodingException;
 

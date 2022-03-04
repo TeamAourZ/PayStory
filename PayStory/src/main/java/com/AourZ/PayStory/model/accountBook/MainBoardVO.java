@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.accountBook;
 
 public class MainBoardVO {
 	private String boardCategoryName;	// 게시글 카테고리
