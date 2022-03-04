@@ -488,11 +488,8 @@ public class AccountBookController {
 	public int addExpenditure(ExpenditureVO expenditureVO, @RequestParam("expenditureItemPrice") int[] priceArray,
 			@RequestParam("expenditureItemName") String[] nameArray, HttpSession session) {
 
-		// session에서 accountBookNo, memberNo 가져오기
+		// session에서 accountBookNo 가져오기
 		expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
-		String fileName = session.getAttribute("memberNo") + "_" + session.getAttribute("accountBookNo") + "_"
-				+ expenditureVO.getExpenditureImage();
-		expenditureVO.setExpenditureImage(fileName);
 
 		accountBookService.insertExpenditure(expenditureVO);
 

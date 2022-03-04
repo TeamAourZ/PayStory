@@ -21,7 +21,7 @@ public class BoardService implements IBoardService{
 	}
 
 	public ArrayList<BoardVO> getCategoryList(String ctgNo) {
-		return dao.getCategory(ctgNo);
+		return dao.getCategoryList(ctgNo);
 	}
 
 	public BoardVO boardView(int boardNo) {
