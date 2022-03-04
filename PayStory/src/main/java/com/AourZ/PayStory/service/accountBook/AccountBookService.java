@@ -77,14 +77,24 @@ public class AccountBookService implements IAccountBookService {
 
 	/* 수입 내역 조회 */
 	@Override
-	public ArrayList<IncomeVO> selectIncomeList(int accountBookNo) {
-		return dao.selectIncomeList(accountBookNo);
+	public ArrayList<IncomeVO> selectIncomeList(int accountBookNo, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("accountBookNo", accountBookNo);
+		map.put("date", date);
+
+		return dao.selectIncomeList(map);
 	}
 
 	/* 지출 내역 조회 */
 	@Override
-	public ArrayList<ExpenditureVO> selectExpenditureList(int accountBookNo) {
-		return dao.selectExpenditureList(accountBookNo);
+	public ArrayList<ExpenditureVO> selectExpenditureList(int accountBookNo, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("accountBookNo", accountBookNo);
+		map.put("date", date);
+
+		return dao.selectExpenditureList(map);
 	}
 
 	/* 지출 상세 항목 조회 */

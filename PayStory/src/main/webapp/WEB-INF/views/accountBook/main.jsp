@@ -129,7 +129,7 @@
 																					<c:choose>
 																						<c:when test="${status.index eq 0}">
 																							<td>
-																								<div class="profileImage rounded-circle border-color-yellow">
+																								<div class="profile-image rounded-circle border-color-yellow">
 																									<%--
 																									
 																										이미지 경로 확인 필요
@@ -141,7 +141,7 @@
 																						</c:when>
 																						<c:otherwise>
 																							<td>
-																								<div class="profileImage rounded-circle border-color-blue">
+																								<div class="profile-image rounded-circle border-color-blue">
 																									<%--
 																									
 																										이미지 경로 확인 필요
