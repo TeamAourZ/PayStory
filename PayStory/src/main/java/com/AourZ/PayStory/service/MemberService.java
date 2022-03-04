@@ -46,7 +46,7 @@ public class MemberService implements IMemberService {
 		sendMail.setFrom("paystory.aourz@gmail.com", "PayStory");
 		sendMail.setTo(memberVO.getMemberEmail());
 		sendMail.send(); 
-	}
+	}//"<a href='http://localhost:8080/member/registerEmail?memberEmail=" + memberVO.getMemberEmail() +
 	
 	@Override
 	public void memberAuth(String memberEmail) throws Exception{
@@ -91,7 +91,7 @@ public class MemberService implements IMemberService {
 			sendMail.setFrom("paystory.aourz@gmail.com", "PayStory");
 			sendMail.setTo(memberEmail);
 			sendMail.send();
-	}
+	}//"<a href='http://localhost:8080/member/loginView"+ 로컬주소
     
     @Override
 	public void infoUpdate(MemberVO memberVO)throws Exception{
@@ -139,16 +139,6 @@ public class MemberService implements IMemberService {
 	}
 	
 	@Override
-	public void insertNotice(int boardNo)throws Exception{
-		memberDAO.insertNotice(boardNo);
-	}
-	
-	@Override
-	public void deleteNotice(int boardNo)throws Exception{
-		memberDAO.insertNotice(boardNo);
-	}
-	
-	@Override
 	public void memberMaster(String memberEmail)throws Exception{
 		memberDAO.memberMaster(memberEmail);
 	}
@@ -157,10 +147,21 @@ public class MemberService implements IMemberService {
 	public void memberMasterCancel(String memberEmail)throws Exception{
 		memberDAO.memberMasterCancel(memberEmail);
 	}
+	
 	// 공지사항
 	@Override
-	public List<BoardVO> boardList() {
-		return memberDAO.boardList();
+	public List<BoardVO> noticeBoardList() {
+		return memberDAO.noticeBoardList();
+	}
+	
+	@Override
+	public void insertNotice(int boardNo)throws Exception{
+		memberDAO.insertNotice(boardNo);
+	}
+	
+	@Override
+	public void deleteNotice(int boardNo)throws Exception{
+		memberDAO.deleteNotice(boardNo);
 	}
 	
 }	
