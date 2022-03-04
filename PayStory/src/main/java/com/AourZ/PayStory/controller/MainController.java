@@ -65,12 +65,5 @@ public class MainController {
 		
 		return "chatbot/chatForm";
 	}
-	
-	// 단체 채팅
-	@RequestMapping("/groupChat")
-	public String groupChat() {
-		return "chatbot/groupChat";
-	}
-	
 
 }
