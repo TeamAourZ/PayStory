@@ -1,8 +1,11 @@
 package com.AourZ.PayStory.model;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,6 +46,46 @@ public class FileUtils {
 			}
 		}
 		return memberImage;
+	}
+	
+	public static String uploadReceipt(MultipartFile multipartFile, HttpSession session) throws IOException {
+		String uploadPath = filePath + "receipt\\";
+		
+		File file = new File(uploadPath);
+		if(file.exists() == false) {
+			file.mkdirs();
+		}
+		
+		String originalFileName = multipartFile.getOriginalFilename();
+		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
+		String uploadFileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("accountBookNo")+"_"+originalFileName;
+		String filePathName = uploadPath + uploadFileName;
+		
+		File file1 = new File(filePathName);
+
+		multipartFile.transferTo(file1);
+		
+		return filePathName;
+	}
+	
+	public static String uploadBoardFile(MultipartFile multipartFile, HttpSession session) throws IOException {
+		String uploadPath = filePath + "board\\";
+		
+		File file = new File(uploadPath);
+		if(file.exists() == false) {
+			file.mkdirs();
+		}
+		
+		String originalFileName = multipartFile.getOriginalFilename();
+		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
+		String uploadFileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("boardNo")+"_"+originalFileName;
+		String filePathName = uploadPath + uploadFileName;
+		
+		File file1 = new File(filePathName);
+
+		multipartFile.transferTo(file1);
+		
+		return filePathName;
 	}
 	
 	public static String getRandomString() {

@@ -28,10 +28,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
-import com.AourZ.PayStory.model.BoardVO;
 import com.AourZ.PayStory.model.FileUtils;
-import com.AourZ.PayStory.model.LoginVO;
-import com.AourZ.PayStory.model.MemberVO;
+import com.AourZ.PayStory.model.board.BoardVO;
+import com.AourZ.PayStory.model.member.LoginVO;
+import com.AourZ.PayStory.model.member.MemberVO;
 import com.AourZ.PayStory.service.IMemberService;
 
 @Controller

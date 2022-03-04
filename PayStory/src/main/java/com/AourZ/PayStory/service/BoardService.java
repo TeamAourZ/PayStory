@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.AourZ.PayStory.dao.IBoardDAO;
-import com.AourZ.PayStory.model.BoardVO;
+import com.AourZ.PayStory.model.board.BoardVO;
 
 
 @Service("BoardService")

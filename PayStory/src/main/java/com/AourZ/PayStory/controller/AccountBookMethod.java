@@ -1,32 +1,17 @@
 package com.AourZ.PayStory.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.AourZ.PayStory.model.TagTotalVO;
-import com.AourZ.PayStory.service.AccountBookService;
+import com.AourZ.PayStory.model.accountBook.TagTotalVO;
+import com.AourZ.PayStory.service.accountBook.AccountBookService;
 
 @Repository
 public class AccountBookMethod {
 	@Autowired
 	private AccountBookService accountBookService;
-
-	/* 수입 / 지출 데이터 조회 */
-	ArrayList<TagTotalVO> selectTagTotalList(String criterion, int accountBookNo, String group1, String group2,
-			String date) {
-		ArrayList<TagTotalVO> voList = new ArrayList<TagTotalVO>();
-
-		if (criterion.equals("income")) {
-			voList = accountBookService.selectIncomeList(accountBookNo, group1, group2, date);
-		} else if (criterion.equals("expenditure")) {
-			voList = accountBookService.selectExpenditureList(accountBookNo, group1, group2, date);
-		}
-
-		return voList;
-	}
 
 	/* 숫자 0 채우기 */
 	String zeroFill(int num) {
@@ -39,17 +24,6 @@ public class AccountBookMethod {
 		}
 
 		return text;
-	}
-
-	/* 현재 년-월 (시스템 시간 기준) */
-	String nowDate() {
-		LocalDate localDate = LocalDate.now();
-		String year = Integer.toString(localDate.getYear());
-		String month = zeroFill(localDate.getMonthValue());
-
-		String date = year + "-" + month;
-
-		return date;
 	}
 
 	/* 대시보드 메인 / 조회 - 달력((A / B) / C) : 수입 / 지출 날짜별 총 건수, 총 금액 */

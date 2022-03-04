@@ -86,11 +86,11 @@
 	
 	// chatbot 아이콘 눌렀을 때 파일 업로드
 	$("#uploadFile").on('change',function(e){
-		event.preventDefault();
+		e.preventDefault();
 		
 		// 파일 이름 표시
 		let fileName = $(this).val();
-	  	$(".input-file-button").text(event.preventDefault());
+	  	$(".input-file-button").text(fileName);
 	  	
 	  	// 이미지 영역에 미리보기
 	  	let file = e.target.files;
@@ -104,9 +104,9 @@
 			
 			let render = new FileReader();
 			render.onload = function(e){
-				$('#chatBox').append('<div class="msgBox send"><span id="in"><span><img src="' + 
+				$('#chatBox').append('<div class="msgBox send"><span id="in"><img src="' + 
 										e.target.result + '" width="250px" height="250px">' +
-										'</span></span></div><br>');
+										'</span></div><br>');
 				
 			}
 			
@@ -175,8 +175,8 @@
 		
 		/* chatBox에 보낸 메시지 추가 */
 		if($('#message').val() != ""){
-			$('#chatBox').append('<div class="msgBox send"><span id="in"><span>' + 
-												$('#message').val() + '</span></span></div><br>');
+			$('#chatBox').append('<div class="msgBox send"><span id="in">' + 
+												$('#message').val() + '</span></div><br>');
 		}
 		
 		callAjax(); // 입력된 값 전송
@@ -198,8 +198,8 @@
 				for(var b in bubbles){
 					if(bubbles[b].type == 'text'){ // 기본 답변인 경우
 						/* chatBox에 받은 메시지 추가 */
-							$('#chatBox').append('<div class="msgBox receive"><span id="in"><span>PayStory 챗봇</span><br><br><span>' + 
-															   bubbles[b].data.description +'</span></span></div><br><br>'); 
+							$('#chatBox').append('<div class="msgBox receive"><span id="in">PayStory 챗봇<br><br>' + 
+															   bubbles[b].data.description +'</span></div><br><br>'); 
 															   
 						// 챗봇으로 부터 받은 텍스트 답변을 음성으로 변환하기 위해 TTS 호출									   
 						callAjaxTTS(bubbles[b].data.description);		
@@ -262,14 +262,9 @@
        });
 	}
 	
-	/***** 금액 입력 EVENT *****/
 	// 금액 천단위 콤마 생성
 	function withComma(num){
 		return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	}
-	// 금액 콤마 해제
-	function withoutComma(num) {
-		return num.toString().replace(/,/g, '');
 	}
 	
 	/* OCR */
@@ -285,53 +280,46 @@
 			processData: false,
     		contentType: false,
 			success: function(result) {
-				/* 임시 - template ocr */
-				/**** result에서 원하는 값 추출 ****/
-				// 사용처 
-				let source = result.source;
-				
-				// 총 금액 : 숫자만 -> 콤마
-				let totalAmount = result.totalAmount;
-				totalAmount = withComma(totalAmount.replace(/[^0-9]/g, ''));
-				
-				// 날짜 : 포멧 변경 (yyyy-MM-ddThh:mm)
-				let date = result.date;
-				date = date.replace('22', '2022');
-				date = date.replace(/\//gi, '-');
-				date = date.replace(' ', 'T');
-				date = date.replace(/\s/gi, '');
-				date = date.slice(0, 16);
-				
+				// console.log(result)
+				// 날짜 
+				let date = result.expenditureDate;
+				$('#expenditureDate').val(date);
 				// 주소
-				let address = result.address.slice(4).replace(/\n/g, "");
+				let address = result.expenditureAddress;
+				$('#address').val(address);
+				// 사용처 
+				let source = result.expenditureSource;
+				$('#expenditureSource').val(source);
+				// 총 금액 : 콤마
+				let totalAmount = withComma(result.expenditureAmount);
+				$('#expenditureTotalAmount').val(totalAmount);
+				// 아이템 List
+				let itemList = result.itemList;
 				
-				// 아이템 name
-				let item = result.item;
-				
-				// 아이템 price
-				let amount = result.amount.replace(/[^0-9]/g, '');
-				
-				// 상세 항목 보이게
-				if(item){
-					$('.showItem').trigger('click');
-				}
-				console.log(source);
 				// 값 입력
-				$('#chatBox').append('<div class="msgBox receive"><span id="in"><span>PayStory 챗봇' + '<br><br>' + 
-												'<span> 가맹점:'+ source + '</span><br>'+
-												'<span> 지출금액:'+ amount + '</span><br>'+
-												'<span> 사용날짜:'+ date + '</span><br>'+
-												'<span> 사용처:'+ address + '</span><br>'+
-												'<span> 상품명:'+ item + '</span><br>'+
-												'<span> 총 지출금액:'+ totalAmount + '</span><br></span></span></div><br>');
+				let receiveChat = '<div class="msgBox receive"><span id="in"><span>PayStory 챗봇' + '<br>AI 인식 결과입니다.<br><br>' +
+								  '<table border="1" class="text-center"><tr><th>사용처</th><td colspan="2">'+source+'</td></tr>'+
+								  '<tr><th>주소</th><td colspan="2">'+address+'</td></tr>'+
+								  '<tr><th>사용 날짜</th><td colspan="2">'+date+'</td></tr>';
+									
+				if(itemList){
+					receiveChat += '<tr><th rowspan='+(itemList.length+1)+'>상세 항목</th><th>내용</th><th>금액</th>';
+					for(let i=0; i<itemList.length; i++){
+						receiveChat += '<tr><td>'+itemList[i].expenditureItemName+
+											 '</td><td class="text-right">'+withComma(itemList[i].expenditureItemPrice)+'원</td></tr>';
+					}
+					receiveChat += '</tr>';
+				}
+				receiveChat += '<tr><th>총 지출 금액</th><td colspan="2">'+ totalAmount + '원</td><tr></table>'+
+							   '<br><br> 이 결과를 가계부에 저장하시겠습니끼? (네: 1, 아니오: 0)</span></span></div>';
 				
+				$('#chatBox').append(receiveChat);
 			},
 			error: function(err){
 				console.log(err);
 			}
 		});
 	});
-	
 });
 
 

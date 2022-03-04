@@ -6,7 +6,7 @@
 <mapper namespace="com.AourZ.PayStory.dao.IShareAccountDAO">
 
 	<resultMap id="createAccountBook"
-		type="com.AourZ.PayStory.model.AccountBookVO">
+		type="com.AourZ.PayStory.model.accountBook.AccountBookVO">
 		<result property="accountBookNo" column="accountBookNo" />
 		<result property="accountBookTitle" column="accountBookTitle" />
 		<result property="accountBookDescribe"
@@ -19,7 +19,7 @@
 
 
 	<resultMap id="createShareAccountBook"
-		type="com.AourZ.PayStory.model.ShareAccountBookVO">
+		type="com.AourZ.PayStory.model.accountBook.ShareAccountBookVO">
 		<result property="participant" column="shareAccountBookDate" />
 		<result
 			property="shareAccountBookVOList.get().getParticipant()"
@@ -33,14 +33,14 @@
 
 	<!-- 공유가계부 전용 데이터 등록 -->
 	<insert id="createAccountBook"
-		parameterType="com.AourZ.PayStory.model.AccountBookVO">
+		parameterType="com.AourZ.PayStory.model.accountBook.AccountBookVO">
 		INSERT INTO account_book (accountBookTitle, memberNo,
 		isShared)
 		VALUES (#{accountBookTitle}, #{memberNo}, #{isShared})
 	</insert>
 
 	<insert id="createShareAccountBook"
-		parameterType="com.AourZ.PayStory.model.ShareAccountBookVO">
+		parameterType="com.AourZ.PayStory.model.accountBook.ShareAccountBookVO">
 		INSERT
 		INTO share_account_book
 		(
@@ -57,7 +57,7 @@
 	</insert>
 
 	<insert id="createShareBudget"
-		parameterType="com.AourZ.PayStory.model.ShareBudgetVO">
+		parameterType="com.AourZ.PayStory.model.accountBook.ShareBudgetVO">
 		INSERT INTO account_book_budget 
 		(
 		budgetDate,

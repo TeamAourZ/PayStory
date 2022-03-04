@@ -16,8 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import com.AourZ.PayStory.model.ExpenditureItemVO;
-import com.AourZ.PayStory.model.ExpenditureVO;
+import com.AourZ.PayStory.model.accountBook.ExpenditureItemVO;
+import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
 
 @Service
 public class OCRService {

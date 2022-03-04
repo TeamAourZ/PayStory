@@ -2,7 +2,7 @@ package com.AourZ.PayStory.dao;
 
 import java.util.ArrayList;
 
-import com.AourZ.PayStory.model.BoardVO;
+import com.AourZ.PayStory.model.board.BoardVO;
 import com.AourZ.PayStory.service.IBoardService;
 
 public interface IBoardDAO extends IBoardService {

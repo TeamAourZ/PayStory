@@ -10,10 +10,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.AourZ.PayStory.model.BoardVO;
-import com.AourZ.PayStory.model.LoginVO;
-import com.AourZ.PayStory.model.MemberVO;
-import com.AourZ.PayStory.service.AccountBookService;
+import com.AourZ.PayStory.model.board.BoardVO;
+import com.AourZ.PayStory.model.member.LoginVO;
+import com.AourZ.PayStory.model.member.MemberVO;
+import com.AourZ.PayStory.service.accountBook.AccountBookService;
 
 @Repository
 public class MemberDAO implements IMemberDAO {
@@ -60,10 +60,10 @@ public class MemberDAO implements IMemberDAO {
 		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.memberAuth", memberEmail);
 		
 		// 회원 번호 조회
-		String memberNo = accountBookService.selectMemberNo(memberEmail);
+		MemberVO member = accountBookService.selectMemberInfo("memberEmail", memberEmail);
 		
 		// 일반 가계부 생성
-		accountBookService.createMyAccountBook(memberNo);
+		accountBookService.createMyAccountBook(member.getMemberNo());
 	}
 	
 	@Override

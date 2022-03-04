@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.service;
+package com.AourZ.PayStory.service.accountBook;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,15 +8,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.AourZ.PayStory.dao.IAccountBookDAO;
-import com.AourZ.PayStory.model.AccountBookBudgetVO;
-import com.AourZ.PayStory.model.AccountBookVO;
-import com.AourZ.PayStory.model.BoardVO;
-import com.AourZ.PayStory.model.ExpenditureItemVO;
-import com.AourZ.PayStory.model.ExpenditureVO;
-import com.AourZ.PayStory.model.IncomeVO;
-import com.AourZ.PayStory.model.MemberVO;
-import com.AourZ.PayStory.model.ShareAccountBookVO;
-import com.AourZ.PayStory.model.TagTotalVO;
+import com.AourZ.PayStory.model.accountBook.AccountBookBudgetVO;
+import com.AourZ.PayStory.model.accountBook.AccountBookVO;
+import com.AourZ.PayStory.model.accountBook.ExpenditureItemVO;
+import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
+import com.AourZ.PayStory.model.accountBook.IncomeVO;
+import com.AourZ.PayStory.model.accountBook.ShareAccountBookVO;
+import com.AourZ.PayStory.model.accountBook.TagTotalVO;
+import com.AourZ.PayStory.model.board.BoardVO;
+import com.AourZ.PayStory.model.member.MemberVO;
 
 @Service
 public class AccountBookService implements IAccountBookService {
@@ -60,37 +60,28 @@ public class AccountBookService implements IAccountBookService {
 	}
 
 	@Override
-	public MemberVO selectMemberInfo(String memberNo) {
-		return dao.selectMemberInfo(memberNo);
-	}
-
-	@Override
-	public String selectMemberNo(String memberEmail) {
-		return dao.selectMemberNo(memberEmail);
-	}
-
-	@Override
-	public ArrayList<TagTotalVO> selectIncomeList(int accountBookNo, String group1, String group2, String date) {
+	public MemberVO selectMemberInfo(String condition, Object value) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
+		map.put("condition", condition);
+		map.put("value", value);
+
+		return dao.selectMemberInfo(map);
+	}
+
+	@Override
+	public ArrayList<TagTotalVO> selectAccountBookDataList(String condition, int accountBookNo, String group1,
+			String group2, String date, String dateForm) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("condition", condition);
 		map.put("accountBookNo", accountBookNo);
 		map.put("group1", group1);
 		map.put("group2", group2);
 		map.put("date", date);
+		map.put("dateForm", dateForm);
 
-		return dao.selectIncomeList(map);
-	}
-
-	@Override
-	public ArrayList<TagTotalVO> selectExpenditureList(int accountBookNo, String group1, String group2, String date) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-
-		map.put("accountBookNo", accountBookNo);
-		map.put("group1", group1);
-		map.put("group2", group2);
-		map.put("date", date);
-
-		return dao.selectExpenditureList(map);
+		return dao.selectAccountBookDataList(map);
 	}
 
 	@Override
