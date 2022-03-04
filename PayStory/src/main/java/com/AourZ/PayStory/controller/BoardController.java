@@ -32,8 +32,8 @@ public class BoardController {
     }
     
     // 카테고리별 목록
-    @RequestMapping("/board/listCategory")
-    public ArrayList<BoardVO> categorylistView(@RequestParam String ctgNo) {
+    @RequestMapping("/board/listCategory/{ctgNo}")
+    public ArrayList<BoardVO> categorylistView(@PathVariable String ctgNo) {
     	ArrayList<BoardVO> boardList = service.getCategoryList(ctgNo);
     	return boardList;
     }
