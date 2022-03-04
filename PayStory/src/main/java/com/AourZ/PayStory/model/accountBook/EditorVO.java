@@ -1,11 +1,11 @@
 package com.AourZ.PayStory.model.accountBook;
 
 public class EditorVO {
-	private String editDate;		// 수정 날짜
-	private String memberNo;		// 수정자
-	private int accountBookNo;	// 가계부 번호
-	private int incomeNo;			// 수입 내역 번호
-	private int expenditureNo;	// 지출 내역 번호
+	private String editDate;			// 수정 날짜
+	private String memberNo;			// 수정자
+	private Integer accountBookNo;	// 가계부 번호
+	private Integer incomeNo;		// 수입 내역 번호
+	private Integer expenditureNo;	// 지출 내역 번호
 
 	public String getEditDate() {
 		return editDate;
@@ -15,15 +15,15 @@ public class EditorVO {
 		return memberNo;
 	}
 
-	public int getAccountBookNo() {
+	public Integer getAccountBookNo() {
 		return accountBookNo;
 	}
 
-	public int getIncomeNo() {
+	public Integer getIncomeNo() {
 		return incomeNo;
 	}
 
-	public int getExpenditureNo() {
+	public Integer getExpenditureNo() {
 		return expenditureNo;
 	}
 
@@ -35,15 +35,15 @@ public class EditorVO {
 		this.memberNo = memberNo;
 	}
 
-	public void setAccountBookNo(int accountBookNo) {
+	public void setAccountBookNo(Integer accountBookNo) {
 		this.accountBookNo = accountBookNo;
 	}
 
-	public void setIncomeNo(int incomeNo) {
+	public void setIncomeNo(Integer incomeNo) {
 		this.incomeNo = incomeNo;
 	}
 
-	public void setExpenditureNo(int expenditureNo) {
+	public void setExpenditureNo(Integer expenditureNo) {
 		this.expenditureNo = expenditureNo;
 	}
 
