@@ -29,9 +29,6 @@ public class AIController {
 	@Autowired
 	private ChatbotService chatbotService;
 
-	@Autowired
-	private OCRService ocrService;
-
 	// Speech To Text!!
 	@RequestMapping("/clovaSTT")
 	public String clovaSTT(@RequestParam("uploadFile") MultipartFile file) {
@@ -146,10 +143,13 @@ public class AIController {
 
 	/****** OCR *****/
 	@RequestMapping("/OCR")
-	public ExpenditureVO ocrUplaod(@RequestParam("expenditureImage") MultipartFile file, HttpSession session) throws IOException {
-		String filePathName = FileUtils.uploadReceipt(file, session);
-		ExpenditureVO result =  OCRService.clovaOCRService(filePathName);
+	public ExpenditureVO ocrUplaod(@RequestParam("receiptImage") MultipartFile file, HttpSession session) throws IOException {
+		String uploadFileName = FileUtils.uploadReceipt(file, session);
+		String filePathName = "/images/"+ uploadFileName;
+		System.out.println(filePathName);
 		
+		ExpenditureVO result =  OCRService.clovaOCRService(filePathName);
+		result.setExpenditureImage(uploadFileName);
 		return result;
 	}
 }

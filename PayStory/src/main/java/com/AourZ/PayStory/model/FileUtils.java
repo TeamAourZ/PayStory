@@ -13,10 +13,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Component
 public class FileUtils {
-	private static final String filePath = "/PayStory/images/"; // 파일이 저장될 위치
-
-	public static String updateImg(MultipartHttpServletRequest mpRequest) throws Exception {
-
+	private static final String filePath = "/usr/local/tomcat9/webapps/ROOT/WEB-INF/classes/static/paystory/images/"; // 파일이 저장될 서버 위치
+	
+	public static String updateImg(
+			MultipartHttpServletRequest mpRequest, HttpSession session) throws Exception{
+		
 		Iterator<String> iterator = mpRequest.getFileNames();
 
 		MultipartFile multipartFile = null;
@@ -26,8 +27,12 @@ public class FileUtils {
 
 		String memberImage = "";
 
-		File file = new File(filePath);
-		if (file.exists() == false) {
+    String memberNo = (String) session.getAttribute("memberNo");
+		// 회원번호별 새 폴더 생성
+		String uploadPath = filePath + "member/" + memberNo + "/";
+		
+		File file = new File(uploadPath);
+		if(file.exists() == false) {
 			file.mkdirs();
 		}
 
@@ -37,7 +42,7 @@ public class FileUtils {
 				originalFileName = multipartFile.getOriginalFilename();
 				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
 				storedFileName = getRandomString() + originalFileExtension;
-				file = new File(filePath + storedFileName);
+				file = new File(uploadPath + storedFileName);
 				multipartFile.transferTo(file);
 				memberImage = storedFileName;
 			}
@@ -46,45 +51,59 @@ public class FileUtils {
 	}
 
 	public static String uploadReceipt(MultipartFile multipartFile, HttpSession session) throws IOException {
-		String uploadPath = filePath + "receipt\\";
+		String memberNo = (String) session.getAttribute("memberNo");
+		
+		// 회원번호별 새 폴더 생성
+		String uploadPath = filePath + "receipt/" + memberNo + "/";
 
-		File file = new File(uploadPath);
+    File file = new File(uploadPath);
 		if (file.exists() == false) {
 			file.mkdirs();
 		}
 
 		String originalFileName = multipartFile.getOriginalFilename();
+		String originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+		
+		// 파일 중복 방지를 위한 UUID 생성
+		String storedFileName = getRandomString() + originalFileExtension;
+		
 		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
-		String uploadFileName = session.getAttribute("memberNo") + "_" + session.getAttribute("accountBookNo") + "_"
-				+ originalFileName;
+		String uploadFileName = memberNo +"_"+ session.getAttribute("accountBookNo") +"_"+storedFileName;
 		String filePathName = uploadPath + uploadFileName;
 
 		File file1 = new File(filePathName);
 
 		multipartFile.transferTo(file1);
-
-		return filePathName;
+		
+		String result =  uploadFileName;
+		
+		return result;
 	}
-
-	public static String uploadBoardFile(MultipartFile multipartFile, HttpSession session) throws IOException {
-		String uploadPath = filePath + "board\\";
-
+	
+	public static void uploadBoard(MultipartFile multipartFile, int boardNo, HttpSession session) throws IOException {
+		String memberNo = (String) session.getAttribute("memberNo");
+		
+		// 회원번호별 새 폴더 생성
+		String uploadPath = filePath + "board/" + memberNo + "/";
+		
 		File file = new File(uploadPath);
 		if (file.exists() == false) {
 			file.mkdirs();
 		}
 
 		String originalFileName = multipartFile.getOriginalFilename();
-		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
-		String uploadFileName = session.getAttribute("memberNo") + "_" + session.getAttribute("boardNo") + "_"
-				+ originalFileName;
+		String originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+		
+		// 파일 중복 방지를 위한 UUID 생성
+		String storedFileName = getRandomString() + originalFileExtension;
+		
+		// 업로드 파일 이름 : "memberNo_boardNo_파일이름"
+		String uploadFileName = memberNo +"_"+ boardNo +"_"+storedFileName;
 		String filePathName = uploadPath + uploadFileName;
 
 		File file1 = new File(filePathName);
 
 		multipartFile.transferTo(file1);
-
-		return filePathName;
 	}
 
 	public static String getRandomString() {
