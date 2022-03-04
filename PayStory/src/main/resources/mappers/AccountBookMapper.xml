@@ -3,32 +3,65 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.AourZ.PayStory.dao.IAccountBookDAO">
+	<!-- ─────────────────────────── resultMap ─────────────────────────── -->
 	<!-- 공유 가계부 -->
 	<resultMap type="com.AourZ.PayStory.model.accountBook.ShareAccountBookVO" id="shareMemberList">
-		<result property="owner" column="owner"></result>
-		<result property="participant" column="participant"></result>
-		<result property="accountBookNo" column="accountBookNo"></result>
+		<result property="owner" column="owner" />
+		<result property="participant" column="participant" />
+		<result property="accountBookNo" column="accountBookNo" />
+	</resultMap>
+	
+	<!-- 수입 -->
+	<resultMap type="com.AourZ.PayStory.model.accountBook.IncomeVO" id="incomeList">
+		<result property="incomeNo" column="incomeNo" />
+		<result property="incomeDate" column="incomeDate" />
+		<result property="incomeSource" column="incomeSource" />
+		<result property="incomeMemo" column="incomeMemo" />
+		<result property="incomeAmount" column="incomeAmount" />
+		<result property="tagNo" column="tagNo" />
+		<result property="accountBookNo" column="accountBookNo" />
+	</resultMap>
+	
+	<!-- 지출 -->
+	<resultMap type="com.AourZ.PayStory.model.accountBook.ExpenditureVO" id="expenditureList">
+		<result property="expenditureNo" column="expenditureNo" />
+		<result property="expenditureDate" column="expenditureDate" />
+		<result property="expenditureImage" column="expenditureImage" />
+		<result property="expenditureSource" column="expenditureSource" />
+		<result property="expenditureMemo" column="expenditureMemo" />
+		<result property="expenditureAddress" column="expenditureAddress" />
+		<result property="expenditureAmount" column="expenditureAmount" />
+		<result property="tagNo" column="tagNo" />
+		<result property="accountBookNo" column="accountBookNo" />
+	</resultMap>
+	
+	<!-- 지출 상세 항목 -->
+	<resultMap type="com.AourZ.PayStory.model.accountBook.ExpenditureItemVO" id="expenditureItemList">
+		<result property="expenditureItemName" column="expenditureItemName" />
+		<result property="expenditureItemPrice" column="expenditureItemPrice" />
+		<result property="expenditureNo" column="expenditureNo" />
 	</resultMap>
 	
 	<!-- 태그별 총 건수, 총 금액 -->
 	<resultMap type="com.AourZ.PayStory.model.accountBook.TagTotalVO" id="tagTotalList">
-		<result property="date" column="fdate"></result>
-		<result property="tag" column="tagNo"></result>
-		<result property="count" column="count"></result>
-		<result property="sum" column="sum"></result>
+		<result property="date" column="fdate" />
+		<result property="tag" column="tagNo" />
+		<result property="count" column="count" />
+		<result property="sum" column="sum" />
 	</resultMap>
 	
 	<!-- 게시글 -->
 	<resultMap type="com.AourZ.PayStory.model.board.BoardVO" id="boardList">
-		<result property="boardNo" column="boardNo"></result>
-		<result property="boardTitle" column="boardTitle"></result>
-		<result property="boardDate" column="boardDate"></result>
-		<result property="boardViews" column="boardViews"></result>
-		<result property="boardContents" column="boardContents"></result>
-		<result property="boardFile" column="boardFile"></result>
-		<result property="memberNo" column="memberNo"></result>
-		<result property="boardCategoryNo" column="boardCategoryNo"></result>
+		<result property="boardNo" column="boardNo" />
+		<result property="boardTitle" column="boardTitle" />
+		<result property="boardDate" column="boardDate" />
+		<result property="boardViews" column="boardViews" />
+		<result property="boardContents" column="boardContents" />
+		<result property="boardFile" column="boardFile" />
+		<result property="memberNo" column="memberNo" />
+		<result property="boardCategoryNo" column="boardCategoryNo" />
 	</resultMap>
+	<!-- ─────────────────────────── resultMap ─────────────────────────── -->
 	
 	<!-- 일반 가계부 생성 -->
 	<insert id="createMyAccountBook" parameterType="String">
@@ -80,8 +113,31 @@
 		</choose>
 	</select>
 	
+	<!-- 수입 내역 조회 -->
+	<select id="selectIncomeList" parameterType="int" resultMap="incomeList">
+		SELECT *
+		FROM income
+		WHERE accountBookNo = #{accountBookNo}
+		ORDER BY incomeDate ASC
+	</select>
+	
+	<!-- 지출 내역 조회 -->
+	<select id="selectExpenditureList" parameterType="int" resultMap="expenditureList">
+		SELECT *
+		FROM expenditure
+		WHERE accountBookNo = #{accountBookNo}
+		ORDER BY expenditureDate ASC
+	</select>
+	
+	<!-- 지출 상세 항목 조회 -->
+	<select id="selectExpenditureItem" parameterType="int" resultMap="expenditureItemList">
+		SELECT *
+		FROM expenditure_item
+		WHERE expenditureNo = #{expenditureNo}
+	</select>
+	
 	<!-- 수입 / 지출 - 총 개수, 총 금액 조회 -->
-	<select id="selectAccountBookDataList" parameterType="HashMap" resultMap="tagTotalList">
+	<select id="selectAccountBookTotalDataList" parameterType="HashMap" resultMap="tagTotalList">
 		SELECT
 		<choose>
 			<when test="condition.equals('income')">DATE_FORMAT(incomeDate, #{dateForm}) AS fDate,</when>
@@ -95,7 +151,7 @@
 				FROM income
 			</when>
 			<when test="condition.equals('expenditure')">
-				SUM(expenditureAmount) AS sum
+				SUM(expenditureAmount) * -1 AS sum
 				FROM expenditure
 			</when>
 		</choose>
@@ -151,7 +207,7 @@
 		VALUES
 			(#{expenditureDate}, #{expenditureImage}, #{expenditureSource}, #{expenditureMemo}, #{expenditureAmount}, #{expenditureAddress}, #{tagNo}, #{accountBookNo})
 	</insert>
-	<!-- 지출 아이템 추가 -->
+	<!-- 지출 상세 항목 추가 -->
 	<insert id="insertExpenditureItem" parameterType="list">
 		INSERT INTO expenditure_item
 			(expenditureItemName, expenditureItemPrice, expenditureNo) 
