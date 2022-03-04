@@ -49,7 +49,11 @@ public class FileUtils {
 	}
 	
 	public static String uploadReceipt(MultipartFile multipartFile, HttpSession session) throws IOException {
-		String uploadPath = filePath + "receipt\\";
+		String memberNo = (String) session.getAttribute("memberNo");
+		String accountBookNo = (String) session.getAttribute("accountBookNo");
+		
+		// 회원번호별 새 폴더 생성
+		String uploadPath = filePath + "receipt\\" + memberNo + "\\";
 		
 		File file = new File(uploadPath);
 		if(file.exists() == false) {
@@ -58,10 +62,12 @@ public class FileUtils {
 		
 		String originalFileName = multipartFile.getOriginalFilename();
 		String originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+		
 		// 파일 중복 방지를 위한 UUID 생성
 		String storedFileName = getRandomString() + originalFileExtension;
+		
 		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
-		String uploadFileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("accountBookNo")+"_"+storedFileName;
+		String uploadFileName = memberNo +"_"+ accountBookNo +"_"+storedFileName;
 		String filePathName = uploadPath + uploadFileName;
 		
 		File file1 = new File(filePathName);
