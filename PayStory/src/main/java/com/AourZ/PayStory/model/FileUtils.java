@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Component
 public class FileUtils {
-	private static final String filePath = "C:\\PayStory\\images\\"; // 파일이 저장될 위치
+	private static final String filePath = "../home/PayStory/images/"; // 파일이 저장될 위치
 	
 	public static String updateImg(
 			MultipartHttpServletRequest mpRequest) throws Exception{
