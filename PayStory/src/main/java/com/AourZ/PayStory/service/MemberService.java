@@ -40,7 +40,7 @@ public class MemberService implements IMemberService {
 						"<br/>"+memberVO.getMemberName()+"님 "+
 						"<br/>PayStory에 회원가입해주셔서 감사합니다."+
 						"<br/>[이메일 인증 확인]을 눌러주세요."+
-						"<a href='http://localhost:8080/member/registerEmail?memberEmail=" + memberVO.getMemberEmail() +
+						"<a href='http://49.50.174.115:8080/member/registerEmail?memberEmail=" + memberVO.getMemberEmail() +
 						"&key=" + key +
 						"' target='_blenk'>이메일 인증 확인</a>");
 		sendMail.setFrom("paystory.aourz@gmail.com", "PayStory");
