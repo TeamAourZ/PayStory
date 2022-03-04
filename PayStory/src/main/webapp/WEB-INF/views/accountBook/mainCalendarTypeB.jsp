@@ -181,7 +181,7 @@
 																	<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
 																</c:if>
 																<%-- 지출 --%>
-																<c:if test="${dateExpenditureList[dateIndex].count ne 0 not empty dateExpenditureList[dateIndex].count}">
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0 && not empty dateExpenditureList[dateIndex].count}">
 																	<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
 																</c:if>
 															</div>
