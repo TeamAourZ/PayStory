@@ -35,7 +35,7 @@
 									<div class="screen" onclick="onclick=document.all.file.click()">
 										<div class="imageTextTop">프로필 이미지 수정</div>
 										<div class="imageTextBottom">클릭해주세요</div>
-										<img class="profile" src="/images/member/${login.memberImage}">
+										<img class="profile" src="/images/member/${login.memberNo}/${login.memberImage}">
 										<input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}" class="input-css">
 									</div> 
 									<input type="file" name="file" style="display: none" class="input-css">
