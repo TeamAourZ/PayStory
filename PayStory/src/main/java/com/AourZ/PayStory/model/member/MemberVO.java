@@ -6,8 +6,8 @@ public class MemberVO {
 	private String memberEmail;				// 회원 이메일 아이디
 	private String memberPwd;				// 회원 패스워드
 	private String memberImage;			// 회원 프로필 이미지
-	private int memberAuth;					// 회원 인증 유무
-	private int memberRank;					// 회원 권한 레벨
+	private Integer memberAuth;			// 회원 인증 유무
+	private Integer memberRank;			// 회원 권한 레벨
 	private String memberJoinDate;			// 회원 가입 날짜
 	private String memberSanctionTime;	// 회원 제재 기간 (계정 정지)
 
@@ -31,11 +31,11 @@ public class MemberVO {
 		return memberImage;
 	}
 
-	public int getMemberAuth() {
+	public Integer getMemberAuth() {
 		return memberAuth;
 	}
 
-	public int getMemberRank() {
+	public Integer getMemberRank() {
 		return memberRank;
 	}
 
@@ -67,11 +67,11 @@ public class MemberVO {
 		this.memberImage = memberImage;
 	}
 
-	public void setMemberAuth(int memberAuth) {
+	public void setMemberAuth(Integer memberAuth) {
 		this.memberAuth = memberAuth;
 	}
 
-	public void setMemberRank(int memberRank) {
+	public void setMemberRank(Integer memberRank) {
 		this.memberRank = memberRank;
 	}
 

@@ -24,11 +24,13 @@ public class AccountBookService implements IAccountBookService {
 	@Qualifier("IAccountBookDAO")
 	private IAccountBookDAO dao;
 
+	/* 일반 가계부 생성 */
 	@Override
 	public void createMyAccountBook(String memberNo) {
 		dao.createMyAccountBook(memberNo);
 	}
 
+	/* 일반 가계부 조회 */
 	@Override
 	public AccountBookVO selectMyAccountBook(String memberNo, boolean isShared) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -39,11 +41,13 @@ public class AccountBookService implements IAccountBookService {
 		return dao.selectMyAccountBook(map);
 	}
 
+	/* 공유 가계부 조회 */
 	@Override
 	public AccountBookVO selectShareAccountBook(int accountBookNo) {
 		return dao.selectShareAccountBook(accountBookNo);
 	}
 
+	/* 가계부 예산 조회 */
 	@Override
 	public AccountBookBudgetVO selectAccountBookBudget(int accountBookNo, String date) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -54,11 +58,13 @@ public class AccountBookService implements IAccountBookService {
 		return dao.selectAccountBookBudget(map);
 	}
 
+	/* 공유 가계부 소유자, 참여자 조회 */
 	@Override
 	public ArrayList<ShareAccountBookVO> selectShareMemberList(int accountBookNo) {
 		return dao.selectShareMemberList(accountBookNo);
 	}
 
+	/* 회원 정보 조회 */
 	@Override
 	public MemberVO selectMemberInfo(String condition, Object value) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -69,8 +75,27 @@ public class AccountBookService implements IAccountBookService {
 		return dao.selectMemberInfo(map);
 	}
 
+	/* 수입 내역 조회 */
 	@Override
-	public ArrayList<TagTotalVO> selectAccountBookDataList(String condition, int accountBookNo, String group1,
+	public ArrayList<IncomeVO> selectIncomeList(int accountBookNo) {
+		return dao.selectIncomeList(accountBookNo);
+	}
+
+	/* 지출 내역 조회 */
+	@Override
+	public ArrayList<ExpenditureVO> selectExpenditureList(int accountBookNo) {
+		return dao.selectExpenditureList(accountBookNo);
+	}
+
+	/* 지출 상세 항목 조회 */
+	@Override
+	public ArrayList<ExpenditureItemVO> selectExpenditureItem(int expenditureNo) {
+		return dao.selectExpenditureItem(expenditureNo);
+	}
+
+	/* 수입 / 지출 총 건수, 총 금액 */
+	@Override
+	public ArrayList<TagTotalVO> selectAccountBookTotalDataList(String condition, int accountBookNo, String group1,
 			String group2, String date, String dateForm) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
@@ -81,14 +106,16 @@ public class AccountBookService implements IAccountBookService {
 		map.put("date", date);
 		map.put("dateForm", dateForm);
 
-		return dao.selectAccountBookDataList(map);
+		return dao.selectAccountBookTotalDataList(map);
 	}
 
+	/* 태그 이름 조회 */
 	@Override
 	public String selectTagName(String tagNo) {
 		return dao.selectTagName(tagNo);
 	}
 
+	/* 게시판 게시글 리스트 */
 	@Override
 	public ArrayList<BoardVO> selectBoardList(int boardTab, String boardCategoryNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -99,6 +126,7 @@ public class AccountBookService implements IAccountBookService {
 		return dao.selectBoardList(map);
 	}
 
+	/* 게시판 카테고리 이름 조회 */
 	@Override
 	public String selectBoardCategoryName(String boardCategoryNo) {
 		return dao.selectBoardCategoryName(boardCategoryNo);

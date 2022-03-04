@@ -1,4 +1,8 @@
+<<<<<<< HEAD:PayStory/src/main/java/com/AourZ/PayStory/model/accountBook/ShareMemberVO.java
 package com.AourZ.PayStory.model.accountBook;
+=======
+package com.AourZ.PayStory.model.member;
+>>>>>>> f8fd90aff269d14c09e5fd41a1773b30bd918564:PayStory/src/main/java/com/AourZ/PayStory/model/member/ShareMemberVO.java
 
 public class ShareMemberVO {
 	private String memberName;		// 회원 이름 (닉네임)
