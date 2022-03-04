@@ -114,18 +114,18 @@
 	</select>
 	
 	<!-- 수입 내역 조회 -->
-	<select id="selectIncomeList" parameterType="int" resultMap="incomeList">
+	<select id="selectIncomeList" parameterType="HashMap" resultMap="incomeList">
 		SELECT *
 		FROM income
-		WHERE accountBookNo = #{accountBookNo}
+		WHERE accountBookNo = #{accountBookNo} AND CONCAT(#{date}, '%')
 		ORDER BY incomeDate ASC
 	</select>
 	
 	<!-- 지출 내역 조회 -->
-	<select id="selectExpenditureList" parameterType="int" resultMap="expenditureList">
+	<select id="selectExpenditureList" parameterType="HashMap" resultMap="expenditureList">
 		SELECT *
 		FROM expenditure
-		WHERE accountBookNo = #{accountBookNo}
+		WHERE accountBookNo = #{accountBookNo} AND CONCAT(#{date}, '%')
 		ORDER BY expenditureDate ASC
 	</select>
 	
@@ -158,7 +158,7 @@
 		WHERE accountBookNo = #{accountBookNo}
 		GROUP BY fDate
 		<if test="group1.equals('tag')">, tagNo</if>
-		HAVING fDate LIKE CONCAT(#{date}, "%")
+		HAVING fDate LIKE CONCAT(#{date}, '%')
 		ORDER BY fDate ASC
 	</select>
 	

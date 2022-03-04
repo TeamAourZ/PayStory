@@ -20,9 +20,9 @@ public interface IAccountBookService {
 	ArrayList<ShareAccountBookVO> selectShareMemberList(int accountBookNo);			// 공유 가계부 소유자, 참여자 조회
 	MemberVO selectMemberInfo(String condition, Object value);								// 회원 정보 조회
 	
-	ArrayList<IncomeVO> selectIncomeList(int accountBookNo);						// 수입 내역 조회
-	ArrayList<ExpenditureVO> selectExpenditureList(int accountBookNo);			// 지출 내역 조회
-	ArrayList<ExpenditureItemVO> selectExpenditureItem(int expenditureNo);	// 지출 상세 항목 조회
+	ArrayList<IncomeVO> selectIncomeList(int accountBookNo, String date);				// 수입 내역 조회
+	ArrayList<ExpenditureVO> selectExpenditureList(int accountBookNo, String date);	// 지출 내역 조회
+	ArrayList<ExpenditureItemVO> selectExpenditureItem(int expenditureNo);				// 지출 상세 항목 조회
 	ArrayList<TagTotalVO> selectAccountBookTotalDataList(String condition, int accountBookNo, String group1, String group2,
 			String date, String dateForm);	// 수입 / 지출 총 건수, 총 금액
 	String selectTagName(String tagNo);	// 태그 이름 조회
