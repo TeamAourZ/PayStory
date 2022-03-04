@@ -61,9 +61,10 @@
 											<!-- 영수증 등록 -->
 											<label for="uploadReceipt">영수증 등록</label>
 											<div class="custom-file mb-3">
+												<input type="hidden" id="imageValue"/>
 												<input type="file" id="uploadReceipt" name="expenditureImage"
 														class="custom-file-input shadow-none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadReceipt">
-													<label class="custom-file-label shadow-none" for="uploadReceipt">파일 선택</label>
+												<label class="custom-file-label shadow-none" for="uploadReceipt">파일 선택</label>
 											</div>
 											<!-- 주소 : hidden -->
 											<input type="hidden" id="address" name="expenditureAddress">
@@ -109,11 +110,11 @@
 															<button class="showItem btn btn-light btn-block text-left collapsed d-flex justify-content-between shadow-none py-2 px-3"
 																		type="button" data-toggle="collapse" data-target="#items" aria-expanded="false" aria-controls="items">
 																상세 항목
-																<i class="fas fa-angle-down"></i>
+																<i class="fas fa-angle-up"></i>
 															</button>
 														</h2>
 													</div>
-													<div id="items" class="collapse" aria-labelledby="heading" data-parent="#itemAccordian">
+													<div id="items" class="collapse show" aria-labelledby="heading" data-parent="#itemAccordian">
 														<div class="card-body">
 															<!-- 아이템 리스트 -->
 															<div id="itemWrap">
@@ -191,6 +192,14 @@
 									<div class="form-group">
 										<label for="incomeDate">날짜</label>
 										<input type="datetime-local" id="incomeDate" name="incomeDate" class="form-control shadow-none" required>
+										<%-- 대시보드 메인 - 달력에서 날짜 선택 후 + 버튼 눌렀을 때 --%>
+										<c:if test="${not empty dateTime}">
+											<input type="hidden" id="temp" value="${dateTime}">
+											<script type="text/javascript">
+												$('#incomeDate').val($('#temp').val());
+												$('#temp').remove(); // 삭제
+											</script>
+										</c:if>
 									</div>
 									<!-- 태그 -->
 									<div class="form-group">

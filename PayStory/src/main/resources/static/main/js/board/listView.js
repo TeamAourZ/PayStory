@@ -12,6 +12,7 @@ $(function(){
 			
 			// 선택 ajax
 			let ctgNo = $(this).attr('data-ctgNo');
+			console.log(ctgNo)
 			$.ajax({
 				type: 'post',
 				url: '/board/listCategory',

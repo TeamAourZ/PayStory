@@ -603,4 +603,5 @@ public class AccountBookController {
 	public String moveRegisterParticipant() {
 		return "accountBook/public/registerParticipant";
 	}
+
 }
