@@ -50,7 +50,7 @@
 				            <!-- header -->
 				            <div class="header">
 				                <div class="userimg">
-				                    <img src="<c:url value="/images/member/${login.memberImage}" />" class="cover">
+				                    <img src="<c:url value="/images/member/${login.memberNo}/${login.memberImage}" />" class="cover">
 				                </div>
 				                <ul class="nav_icons">
 				                    <li>
