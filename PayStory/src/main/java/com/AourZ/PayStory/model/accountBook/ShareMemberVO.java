@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model;
+package com.AourZ.PayStory.model.accountBook;
 
 public class ShareMemberVO {
 	private String memberName;		// 회원 이름 (닉네임)

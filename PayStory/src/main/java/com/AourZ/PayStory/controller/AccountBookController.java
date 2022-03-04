@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.AourZ.PayStory.model.ShareMemberVO;
 import com.AourZ.PayStory.model.accountBook.AccountBookBudgetVO;
 import com.AourZ.PayStory.model.accountBook.AccountBookVO;
 import com.AourZ.PayStory.model.accountBook.DateVO;
@@ -27,6 +26,7 @@ import com.AourZ.PayStory.model.accountBook.IncomeVO;
 import com.AourZ.PayStory.model.accountBook.MainBoardVO;
 import com.AourZ.PayStory.model.accountBook.ShareAccountBookVO;
 import com.AourZ.PayStory.model.accountBook.ShareBudgetVO;
+import com.AourZ.PayStory.model.accountBook.ShareMemberVO;
 import com.AourZ.PayStory.model.accountBook.TagTotalVO;
 import com.AourZ.PayStory.model.board.BoardVO;
 import com.AourZ.PayStory.model.member.MemberVO;
@@ -415,8 +415,10 @@ public class AccountBookController {
 	/* 지출 항목 추가 */
 	@ResponseBody
 	@RequestMapping("/accountBook/expenditure")
-	public int addExpenditure(ExpenditureVO expenditureVO, @RequestParam("expenditureItemPrice") int[] priceArray,
-			@RequestParam("expenditureItemName") String[] nameArray, HttpSession session) {
+	public int addExpenditure(ExpenditureVO expenditureVO, 
+							 @RequestParam("expenditureItemPrice") int[] priceArray,
+							 @RequestParam("expenditureItemName") String[] nameArray, 
+							 HttpSession session) {
 
 		// session에서 accountBookNo, memberNo 가져오기
 		expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
