@@ -242,7 +242,7 @@ public class MemberController {
 	// 프로필사진
 	@RequestMapping(value="/updateImg", method=RequestMethod.POST)
 	public String updateImg(MultipartHttpServletRequest mpRequest, HttpSession session , String memberEmail)throws Exception {	
-		String memberImage = FileUtils.updateImg(mpRequest); 
+		String memberImage = FileUtils.updateImg(mpRequest, session); 
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");		
 		memberService.updateImg(memberImage, memberEmail);	
 		memberVO.setMemberImage(memberImage);

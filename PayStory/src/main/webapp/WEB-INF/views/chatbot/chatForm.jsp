@@ -50,7 +50,7 @@
 				            <!-- header -->
 				            <div class="header">
 				                <div class="userimg">
-				                    <img src="<c:url value='/images/${login.memberImage}' />" class="cover">
+				                    <img src="<c:url value="/images/member/${login.memberNo}/${login.memberImage}" />" class="cover">
 				                </div>
 				                <ul class="nav_icons">
 				                    <li>
@@ -58,7 +58,7 @@
 				                    </li>
 				                    
 				                    <li>
-				                        <span><input type="button" class="delinput" value="&#xf27a" onclick="window.open('/groupChat')"></span>
+				                        <span><input type="button" class="delinput" value="&#xf27a" ></span>
 				                        <!-- <span><input type="button" class="delinput" value="&#xf4b3" onclick="div_hide();"></span> -->
 				                    </li>
 				                    
@@ -142,7 +142,7 @@
 				            </div>
 				            
 				            <!-- chatbox -->
-				            <div id="chatBox" type="text" name="expenditureImage" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadReceipt">
+				            <div id="chatBox">
 				            	<p>${date}</p>
 				            	<hr>
 				            </div>
@@ -173,13 +173,12 @@
 								</div>
 				            </div>
 				            <!-- 이미지 모달 창 -->
-				            
-					            <div class="modal_chatbotImg" name="modal_chatbotImg">
-								  <div class="modal_chatbotContent" name="modal_chatbotContent">
-								  	<form id="modal_formBox">
-								  	</form>
-								  </div>
-								</div>
+				            <div class="modal_chatbotImg" name="modal_chatbotImg">
+							  <div class="modal_chatbotContent" name="modal_chatbotContent">
+							  	<form id="modal_formBox">
+							  	</form>
+							  </div>
+							</div>
 				        </div>
 				    </div>	<!-- Chatbot container row end -->
                 </div>	<!-- container-fluid end -->
@@ -208,7 +207,6 @@
     <script src="/bootstrap/js/sb-admin-2.min.js"></script>
     
     <!-- Chatbot JS-->
-    
     <script src="/main/js/ai/chatbot.js"></script>
     <script src="https://kit.fontawesome.com/7031b090f1.js" crossorigin="anonymous"></script>
     
