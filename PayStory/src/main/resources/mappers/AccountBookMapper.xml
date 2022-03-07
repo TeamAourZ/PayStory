@@ -129,6 +129,21 @@
 		ORDER BY expenditureDate ASC
 	</select>
 	
+	<!-- 내역 삭제 -->
+	<delete id="deleteItem" parameterType="HashMap">
+		DELETE
+		<choose>
+			<when test="condition.equals('income')">
+				FROM income
+				WHERE incomeNo = #{dataNo}
+			</when>
+			<when test="condition.equals('expenditure')">
+				FROM expenditure
+				WHERE expenditureNo = #{dataNo}
+			</when>
+		</choose>
+	</delete>
+	
 	<!-- 지출 상세 항목 조회 -->
 	<select id="selectExpenditureItem" parameterType="int" resultMap="expenditureItemList">
 		SELECT *

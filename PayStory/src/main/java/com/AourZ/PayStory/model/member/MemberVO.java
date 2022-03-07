@@ -11,6 +11,7 @@ public class MemberVO {
 	private String memberJoinDate;			// 회원 가입 날짜
 	private String memberSanctionTime;	// 회원 제재 기간 (계정 정지)
 
+
 	public String getMemberNo() {
 		return memberNo;
 	}
@@ -82,5 +83,6 @@ public class MemberVO {
 	public void setMemberSanctionTime(String memberSanctionTime) {
 		this.memberSanctionTime = memberSanctionTime;
 	}
+
 
 }
