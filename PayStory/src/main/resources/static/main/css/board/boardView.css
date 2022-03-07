@@ -1,4 +1,17 @@
 @charset "UTF-8";
 /* boardView.css */
 
+.boardWrap {
+	width: 90%;
+    margin: 0 auto;
+}
 .form-control[readonly] { background: none; }
+
+/* 첨부 파일 영역 */
+.card {
+	height: 180px; 
+	width: 220px;
+}
+.card:hover { cursor: pointer; }
+
+.card img { height: inherit; }

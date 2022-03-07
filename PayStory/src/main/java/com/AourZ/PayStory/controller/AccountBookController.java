@@ -528,9 +528,13 @@ public class AccountBookController {
 
 		// session에서 accountBookNo, memberNo 가져오기
 		expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
-		String fileName = session.getAttribute("memberNo") + "_" + session.getAttribute("accountBookNo") + "_"
-				+ expenditureVO.getExpenditureImage();
-		expenditureVO.setExpenditureImage(fileName);
+		
+		// 파일 없을 때 예외 처리하기
+		if(expenditureVO.getExpenditureImage() != null) {
+			String fileName = session.getAttribute("memberNo") + "_" + session.getAttribute("accountBookNo") + "_"
+					+ expenditureVO.getExpenditureImage();
+			expenditureVO.setExpenditureImage(fileName);
+		}
 
 		accountBookService.insertExpenditure(expenditureVO);
 

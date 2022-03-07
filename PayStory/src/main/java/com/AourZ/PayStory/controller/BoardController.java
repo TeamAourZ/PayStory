@@ -109,25 +109,41 @@ public class BoardController {
 		model.addAttribute("board", board);
 		return "/board/boardView";
 	}
+	
+	// 게시글 수정 폼으로 이동
+	@RequestMapping("/board/updateForm/{boardNo}")
+	public String updateForm(@PathVariable int boardNo, Model model) {
+		BoardVO board = service.boardView(boardNo);
+		String memberName = replaceMember(board.getMemberNo()); // 회원 번호 to 회원 이름
+		board.setMemberName(memberName);
+		
+		model.addAttribute("board", board);
+		return "/board/updateBoardForm";
+	}
 
 	// 수정
 	@ResponseBody
 	@RequestMapping("/board/update")
 	public int update(@RequestParam(value = "file", required = false) MultipartFile file,
+					  @RequestParam(value = "boardFileInDB", required = false) String fileNameDB,
 					  BoardVO vo,
 					  HttpSession session) throws IOException {
 
+		String memberNo = (String) session.getAttribute("memberNo");
+		
 		// 파일 업로드 및 파일 이름 지정
 		if(file != null) { 
 			String fileName = FileUtils.uploadBoardFile(file, session);
 			vo.setBoardFile(fileName);
 		};
 		
-		vo.setMemberNo((String) session.getAttribute("memberNo"));
+		// 서버에서 삭제
+		if(fileNameDB != null) {
+			FileUtils.removeBoardFile(memberNo, fileNameDB);
+		}
 						
-		service.updateBoard(vo); 
-		int boardNo = vo.getBoardNo();
+		int result = service.updateBoard(vo); 
 		 
-		return boardNo;
+		return result;
 	}
 }

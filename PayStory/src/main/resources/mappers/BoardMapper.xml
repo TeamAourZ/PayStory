@@ -59,6 +59,13 @@
 		VALUES
 			(#{boardTitle}, #{boardContents}, #{boardFile}, #{boardCategoryNo}, #{memberNo})
 	</insert>
+
+	<!-- 게시글 수정 -->
+	<insert id="updateBoard" parameterType="com.AourZ.PayStory.model.board.BoardVO">
+		UPDATE board 
+		SET boardTitle=#{boardTitle}, boardContents=#{boardContents}, boardFile=#{boardFile}, boardCategoryNo=#{boardCategoryNo} 
+		WHERE boardNo=#{boardNo}
+	</insert>
 	
 	<!-- 공지사항 :서정원추가 -->
 	<select id="noticeBoardList" resultMap="board" >			

@@ -45,29 +45,55 @@
                     
                     <!-- 게시글 -->
                     <c:if test="${ not empty board }">
-                    	<div class="p-4 bg-white w-75 m-auto rounded">
+                    	<div class="boardWrap p-4 bg-white rounded">
 						 <div class="px-4">
-		              		<div class="form-row">
+	              			<!-- boardNo -->
+	              			<input type="hidden" class="boardNo" value="${ board.boardNo }"/>
+		              		<div class="row">
 		              			<!-- 제목 -->
 			              		<div class="form-group col-8">
 			              			<label>제목</label>
 			              			<input type="text" class="form-control shadow-none" value="${ board.boardTitle }" readonly/>
 			              		</div>
-			              		<!-- 카테고리 -->
+			              		<!-- 작성자 -->
+			              		<div class="form-group col-3">
+			              			<label>작성자</label>
+			              			<input type="text" class="form-control shadow-none" value="${ board.memberName }" readonly/>
+			              		</div>
+		              		</div>
+		              		<div class="row">
+		              			<!-- 카테고리 -->
 			              		<div class="form-group col-4">
 				              		<label>카테고리</label>
 				              		<input type="text" class="form-control shadow-none" value="${ board.boardCategoryName }" readonly/>
+				              	</div>
+			              		<!-- 작성일  -->
+			              		<div class="form-group col-4">
+			              			<label>작성일</label>
+			              			<input type="text" class="form-control shadow-none" value="${ board.boardDate }" readonly/>
+			              		</div>
+			              		<!-- 조회수 -->
+			              		<div class="form-group col-3">
+				              		<label>조회 수</label>
+				              		<input type="text" class="form-control shadow-none text-right" value="${ board.boardViews }" readonly/>
 				              	</div>
 		              		</div>
 			              	<!-- 첨부파일 -->
 			              	<div class="form-group">
 				              	<label>첨부 파일</label>
-				              	<input class="form-control shadow-none" readonly/>
+				              	<c:if test="${ not empty board.boardFile }">
+				              		<div class="card" style="">
+									  <img src="/images/board/${board.memberNo}/${board.boardFile}" class="card-img">
+									  <div class="card-img-overlay">
+									  	<!-- 확대보기 또는 다운로드 -->
+									  </div>
+									</div>
+				              	</c:if>
 			              	</div>
 			              	<!-- 내용 -->
 		              		<div class="form-group">
 			              		<label>내용</label>
-			              		<textarea class="content form-control shadow-none" name="boardContents" readonly>${ board.boardContents }</textarea>
+			              		<textarea class="content form-control shadow-none" rows="10" readonly>${ board.boardContents }</textarea>
 			              	</div>
 			              	<div class="d-flex align-items-center justify-content-center mt-3">
 			              		<c:choose>

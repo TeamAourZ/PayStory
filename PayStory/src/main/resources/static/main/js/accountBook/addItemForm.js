@@ -301,7 +301,7 @@
 		
 		const formData = new FormData();
 		console.log($('#uploadReceipt').val())
-  		formData.append("expenditureImage", $('#imageValue').val());
+  		formData.append("expenditureImage", $('#imageValue').val() || null);
   		formData.append("expenditureDate", $('#expenditureDate').val());
   		formData.append("expenditureSource", $('#expenditureSource').val());
   		formData.append("expenditureAddress", $('#address').val());
