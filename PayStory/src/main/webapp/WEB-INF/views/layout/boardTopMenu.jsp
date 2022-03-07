@@ -41,7 +41,7 @@
 		               <!-- userName -->
 		               <span class="mr-2 d-none d-lg-inline text-gray-600 small">${login.memberName}</span>
 		               <!-- userImg -->
-		               <img class="img-profile rounded-circle" src="<c:url value='/images/member/${login.memberNo}/${login.memberImage}' />">
+		               <img class="img-profile rounded-circle" onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"' src="<c:url value='/images/member/${login.memberNo}/${login.memberImage}'/>">
 		           </a>
 		           <!-- Dropdown - User Information -->
 		            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

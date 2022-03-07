@@ -76,7 +76,7 @@
 								<%-- 게시판 : 최신글, 공지사항 --%>
 								<div class="card shadow mb-4">
 									<%-- Card Header --%>
-									<div id="boardCategoryBox" class="card-header d-flex p-3">
+									<div id="boardCategoryBox" class="card-header d-flex p-3 flex-gap-2">
 										<h6 id="boardTab1"  class="boardCategory m-0 pointer-cursor font-weight-bold text-primary selected">전체</h6>
 										<h6 id="boardTab2"  class="boardCategory m-0 pointer-cursor">공지사항</h6>
 									</div>
