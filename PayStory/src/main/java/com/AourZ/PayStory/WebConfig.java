@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
 		.addResourceLocations("file:///C:/PayStory/images/");
 		
 		registry.addResourceHandler("/voice/**")
-		.addResourceLocations("file:///C:/upload/");
+		.addResourceLocations("file:///C:/PayStory/upload/");
 	}
 	
 }
