@@ -4,6 +4,8 @@ Chart.defaults.global.defaultFontColor = '#858796';
 
 var ctx = document.getElementById("chartCanvas");
 
+console.log(sumList);
+
 var myPieChart = new Chart(ctx, {
 	type: 'doughnut',
 	data: {
