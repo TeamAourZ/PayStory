@@ -49,9 +49,9 @@
 				              		<label>카테고리</label>
 				              		<select id="boardCategoryNo" name="boardCategoryNo" class="form-control shadow-none" required>
 										<option selected disabled value="">카테고리를 선택해주세요.</option>
-										<option value="1">질문</option>
-										<option value="2">정보공유</option>
-										<option value="3">자유게시판</option>
+										<option value="bc002">질문</option>
+										<option value="bc003">정보공유</option>
+										<option value="bc004">자유게시판</option>
 									</select>
 				              	</div>
 		              		</div>

@@ -65,38 +65,21 @@
 			                                            <th>카테고리</th>
 			                                            <th>제목</th>
 			                                            <th>작성자</th>
-			                                            <th>조회</th>
 			                                            <th>날짜</th>
+			                                            <th>조회</th>
+			                                            <th>삭제</th>
 			                                        </tr>
 			                                    </thead>
 			                                    <tbody>
-			                                    	<%-- <tr>
-	        											<td><a href="<c:url value='/board/view'/>">1</a></td>
-										        		<td>공지</td>
-										        		<td><a href="<c:url value='/board/view'/>">공유가계부 사용방법</a></td>
-										        		<td>관리자</td>
-										        		<td>15</td>
-										        		<td class="d-flex justify-content-between">
-										        			2022-02-20
-										        			<a href="<c:url value='/board/delete'/>"><i class="fa far fa-trash-alt"></i></a>
-										        		</td>
-													</tr>
-			                                    	<tr>
-	        											<td><a href="<c:url value='/board/view'/>">2</a></td>
-										        		<td>공지</td>
-										        		<td>영수증 AI 사용방법</td>
-										        		<td>관리자</td>
-										        		<td>100</td>
-										        		<td>2022-02-20</td>
-													</tr> --%>
 				                                    <c:forEach var="list" items="${boardList}" varStatus="status">
 			        									<tr class="boardList">
 		        											<td><input type="hidden" value='${list.boardNo}'/>${status.count}</td>
-											        		<td>${list.boardCategoryNo}</td>
+											        		<td>${list.boardCategoryName}</td>
 											        		<td>${list.boardTitle}</td>
-											        		<td>${list.memberNo}</td>
-											        		<td>${list.boardViews}</td>
+											        		<td>${list.memberName}</td>
 											        		<td>${list.boardDate}</td>
+											        		<td>${list.boardViews}</td>
+											        		<td><i class="fa fas fa-trash-alt"></i></td>
 														</tr>
 													</c:forEach>
 			                                    </tbody>
