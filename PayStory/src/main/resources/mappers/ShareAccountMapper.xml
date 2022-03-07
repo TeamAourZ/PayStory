@@ -5,33 +5,73 @@
 
 <mapper namespace="com.AourZ.PayStory.dao.IShareAccountDAO">
 
-	<resultMap id="createAccountBook"
-		type="com.AourZ.PayStory.model.accountBook.AccountBookVO">
+	<resultMap id="AccountBookList" type="com.AourZ.PayStory.model.accountBook.AccountBookVO">
 		<result property="accountBookNo" column="accountBookNo" />
 		<result property="accountBookTitle" column="accountBookTitle" />
-		<result property="accountBookDescribe"
-			column="accountBookDescribe" />
+		<result property="accountBookDescribe" column="accountBookDescribe" />
 		<result property="accountBookDate" column="accountBookDate" />
 		<result property="isShared" column="isShared" />
-		<result property="budget" column="budget" />
 		<result property="memberNo" column="memberNo" />
 	</resultMap>
 
 
-	<resultMap id="createShareAccountBook"
-		type="com.AourZ.PayStory.model.accountBook.ShareAccountBookVO">
-		<result property="participant" column="shareAccountBookDate" />
-		<result
-			property="shareAccountBookVOList.get().getParticipant()"
-			column="owner" />
-		<result property="owner" column="participant" />
+	<resultMap id="MemberList" type="com.AourZ.PayStory.model.member.MemberVO">
+		<result property="memberNo" column="memberNo" />
+		<result property="memberName" column="memberName" />
+		<result property="memberEmail" column="memberEmail" />
+		<result property="memberPwd" column="memberPwd" />
+		<result property="memberImage" column="memberImage" />
+		<result property="memberAuth" column="memberAuth" />
+		<result property="memberRank" column="memberRank" />
+		<result property="memberJoinDate" column="memberJoinDate" />
+		<result property="memberSanctionTime" column="memberSanctionTime" />
 	</resultMap>
+
+
 
 	<!-- 공유가계부 메인화면 조회 -->
 
 
+	<select id="selectShareAccountBookNo" parameterType="String"
+		resultMap="AccountBookList">
+		SELECT * FROM account_book
+		WHERE accountBookNo IN
+		(
+		SELECT accountBookNo FROM share_account_book
+		WHERE participant = #{memberNo}
+		UNION ALL
+		SELECT accountBookNo FROM account_book
+		WHERE memberNo = #{memberNo} and isShared = 1
+		)
+		Order by accountBookNo ASC
+	</select>
+
+	<select id="selectShareAccountOwner" parameterType="int"
+		resultType="com.AourZ.PayStory.model.member.MemberVO">
+		SELECT *
+		FROM member
+		WHERE memberNo = 
+		(
+		SELECT memberNo FROM account_book 
+		WHERE accountBookNo = #{accountBookNo}
+		)
+	</select>
+
+	<select id="selectShareAccountParticipant" parameterType="int" 
+		resultMap="MemberList">
+		SELECT *
+		FROM member 
+		WHERE
+		memberNo IN 
+		(
+		SELECT participant From share_account_book 
+		WHERE accountBookNo = #{accountBookNo})
+	</select>
+
+
 
 	<!-- 공유가계부 전용 데이터 등록 -->
+	
 	<insert id="createAccountBook"
 		parameterType="com.AourZ.PayStory.model.accountBook.AccountBookVO">
 		INSERT INTO account_book (accountBookTitle, memberNo,
@@ -51,24 +91,28 @@
 		VALUES
 		(
 		#{owner},
-		(SELECT memberNo FROM member WHERE memberEmail=#{participant}),
-		(SELECT MAX(accountBookNo) FROM account_book WHERE memberNo =#{owner})
+		(SELECT memberNo FROM member WHERE
+		memberEmail=#{participant}),
+		(SELECT MAX(accountBookNo) FROM
+		account_book WHERE memberNo =#{owner})
 		)
 	</insert>
 
 	<insert id="createShareBudget"
 		parameterType="com.AourZ.PayStory.model.accountBook.ShareBudgetVO">
-		INSERT INTO account_book_budget 
+		INSERT INTO account_book_budget
 		(
 		budgetDate,
-		budgetAmount, 
+		budgetAmount,
 		accountBookNo
 		)
-		VALUES 
+		VALUES
 		(
-		(SELECT DATE_FORMAT(now(),'%Y-%m-%d')),
+		(SELECT
+		DATE_FORMAT(now(),'%Y-%m-%d')),
 		#{budgetAmount},
-		(SELECT MAX(accountBookNo) FROM account_book WHERE memberNo =#{owner})
+		(SELECT
+		MAX(accountBookNo) FROM account_book WHERE memberNo =#{owner})
 		)
 	</insert>
 
