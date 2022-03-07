@@ -96,6 +96,17 @@ public class AccountBookService implements IAccountBookService {
 
 		return dao.selectExpenditureList(map);
 	}
+	
+	/* 내역 삭제 */
+	@Override
+	public void deleteItem(String condition, int dataNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("condition", condition);
+		map.put("dataNo", dataNo);
+		
+		dao.deleteItem(map);
+	}
 
 	/* 지출 상세 항목 조회 */
 	@Override

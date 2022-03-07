@@ -108,6 +108,10 @@
 		update member set memberImage = #{memberImage} where memberEmail = #{memberEmail}
 	</update>
 	
+	<!-- 회원탈퇴 -->
+	<delete id="memberDelete">
+		delete from member where memberEmail = #{memberEmail}
+	</delete>
 	
 	<!-- ********관리자******* -->
 	

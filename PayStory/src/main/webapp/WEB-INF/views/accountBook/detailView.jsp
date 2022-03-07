@@ -32,6 +32,8 @@
 		<script src="<c:url value='/main/js/ajax/chartAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/budgetStatusAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/detailViewListAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/deleteItemAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/editItemAjax.js' />" type="text/javascript"></script>
 	</head>
 	<body>
 		<div id="wrapper">

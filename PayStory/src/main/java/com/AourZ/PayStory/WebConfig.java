@@ -14,7 +14,6 @@ public class WebConfig implements WebMvcConfigurer {
 		//.addResourceLocations("file:///C:/paystory/images/");		//테스트용
 		
 		registry.addResourceHandler("/voice/**")
-		.addResourceLocations("file:///PayStory/upload/");
+		.addResourceLocations("file:///C:/PayStory/upload/");
 	}
-	
 }

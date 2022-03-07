@@ -66,32 +66,33 @@
 			                                            <th>카테고리</th>
 			                                            <th>제목</th>
 			                                            <th>작성자</th>
-			                                            <th>조회</th>
 			                                            <th>날짜</th>
+			                                            <th>조회</th>
+			                                            <th>삭제</th>
 			                                        </tr>
 			                                    </thead>
 			                                    <tbody>
-			                                    
-                                            <!-- 공지사항 -->		
-												<c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
-		        									<tr class="boardList">
-		        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/></td>
-	        											<td>공지사항</td>
-										        		<td>[공지]  ${noticeBoardList.boardTitle}</td>
-										        		<td>PayStory 관리자</td>
-										        		<td>${noticeBoardList.boardViews}</td>
-										        		<td>${noticeBoardList.boardDate}</td>
-													</tr>
-												</c:forEach>
+                                            		<!-- 공지사항 -->		
+													<c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
+			        									<tr class="boardList">
+			        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/></td>
+		        											<td>공지사항</td>
+											        		<td>[공지]  ${noticeBoardList.boardTitle}</td>
+											        		<td>PayStory 관리자</td>
+											        		<td>${noticeBoardList.boardViews}</td>
+											        		<td>${noticeBoardList.boardDate}</td>
+														</tr>
+													</c:forEach>
 				                                    
-                                            <c:forEach var="list" items="${boardList}" varStatus="status">
+                                            		<c:forEach var="list" items="${boardList}" varStatus="status">
 			        									<tr class="boardList">
 		        											<td><input type="hidden" value='${list.boardNo}'/>${status.count}</td>
-											        		<td>${list.boardCategoryNo}</td>
+											        		<td>${list.boardCategoryName}</td>
 											        		<td>${list.boardTitle}</td>
-											        		<td>${list.memberNo}</td>
-											        		<td>${list.boardViews}</td>
+											        		<td>${list.memberName}</td>
 											        		<td>${list.boardDate}</td>
+											        		<td>${list.boardViews}</td>
+											        		<td><i class="fa fas fa-trash-alt"></i></td>
 														</tr>
 													</c:forEach>
 			                                    </tbody>

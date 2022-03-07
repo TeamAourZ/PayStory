@@ -110,6 +110,11 @@ public class MemberDAO implements IMemberDAO {
 	}
 	
 	@Override
+	public void memberDelete(String memberEmail)throws Exception{
+		sqlsession.delete("com.AourZ.PayStory.dao.IMemberDAO.memberDelete", memberEmail);
+	}
+	
+	@Override
 	public List<MemberVO> memberList(){
 		return sqlsession.selectList("com.AourZ.PayStory.dao.IMemberDAO.memberList");	
 	}

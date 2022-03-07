@@ -12,34 +12,47 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="detailViewItem" items="${detailViewItemList}" varStatus="detailViewItemStatus">
-						<%-- 수입 / 지출 구분 --%>
-						<c:choose>
-							<c:when test="${detailViewItem.condition eq 'income'}">
-								<div class="card shadow dataBox w-100 p-2 incomeData">
-							</c:when>
-							<c:when test="${detailViewItem.condition eq 'expenditure'}">
-								<div class="card shadow dataBox w-100 p-2 expenditureData">
-							</c:when>
-						</c:choose>
+					<%-- 수입 / 지출 구분 --%>
+					<c:choose>
+						<c:when test="${detailViewItem.condition eq 'income'}">
+							<div class="card shadow dataBox w-100 p-2 incomeData">
+						</c:when>
+						<c:when test="${detailViewItem.condition eq 'expenditure'}">
+							<div class="card shadow dataBox w-100 p-2 expenditureData">
+						</c:when>
+					</c:choose>
 						<%-- 수입 / 지출 내역 --%>
 						<div class="card-body row p-0">
+							<%-- 내역 시간 --%>
+							<%-- <div class="sourceDate text-xs position-absolute">${fn:substring(detailViewItem.date, 12, 8)}</div> --%>
 							<%-- 태그 --%>
 							<div class="col-2 align-self-center">
-								<div class="rounded-circle text-center p-0">${detailViewItem.tagName}</div>
+								<c:choose>
+									<c:when test="${detailViewItem.condition eq 'income'}">
+										<div class="rounded-circle income-color font-weight-bold text-center p-0">${detailViewItem.tagName}</div>
+									</c:when>
+									<c:when test="${detailViewItem.condition eq 'expenditure'}">
+										<div class="rounded-circle expenditure-color font-weight-bold text-center p-0">${detailViewItem.tagName}</div>
+									</c:when>
+								</c:choose>
 							</div>
 							<%-- 내용 1 --%>
-							<div class="col-8">
-								<div class="d-flex flex-column flex-gap-1">
+							<div class="col-8 align-self-center">
+								<div class="d-flex flex-column flex-gap-2">
 									<div class="d-flex flex-gap-3">
 										<%-- 수입 / 지출원 --%>
-										<h6 class="dataSource">${detailViewItem.source}</h6>
+										<div class="dataSource">${detailViewItem.source}</div>
 										<%-- 수입 / 지출 금액 --%>
-										<h6 class="dataAmount"><fmt:formatNumber value="${detailViewItem.amount}" pattern="#,###" /></h6>
+										<div class="dataAmount">
+											<fmt:formatNumber value="${detailViewItem.amount}" pattern="#,###" />
+										</div>
 									</div>
-									<div>
-										<%-- 수입 / 지출 내용 --%>
-										<h6 class="dataMemo">${detailViewItem.memo}</h6>
-									</div>
+									<c:if test="${not empty detailViewItem.memo}">
+										<div>
+											<%-- 수입 / 지출 내용 --%>
+											<div class="dataMemo">${detailViewItem.memo}</div>
+										</div>
+									</c:if>
 									<%-- 지출 상세 항목 --%>
 									<c:if test="${detailViewItem.condition eq 'expenditure'}">
 										<c:set var="breakValue" value="false" /> <%-- break --%>
@@ -77,7 +90,9 @@
 																	<c:forEach var="item" items="${expenditureItem.value}">
 																		<div class="itemBox d-flex justify-content-between mb-1">
 																			<div class="itemName ml-5">${item.expenditureItemName}</div>
-																			<div class="itemPrice mr-5">${item.expenditureItemPrice}</div>
+																			<div class="itemPrice mr-5">
+																				<fmt:formatNumber value="${item.expenditureItemPrice}" pattern="#,###" />
+																			</div>
 																		</div>
 																	</c:forEach>
 																</div>
@@ -95,16 +110,20 @@
 							</div>
 							
 							<%-- 내용 2 --%>
-							<div class="col-2 d-flex flex-column">
+							<div class="col-2 d-flex flex-column flex-gap-2">
 								<div class="text-right">
-									<i class="dataEdit far fa-edit fa-lg pointer-cursor"></i>
-									<i class="dataDelete far fa-trash-alt fa-lg pointer-cursor"></i>
+									<i class="dataEdit far fa-edit fa-lg pointer-cursor">
+									</i>
+									<i class="dataDelete far fa-trash-alt fa-lg pointer-cursor">
+										<%-- 삭제 이벤트를 위한 데이터 적재 --%>
+										<input type="hidden" value="${detailViewItem.condition}"> <%-- condition --%>
+										<input type="hidden" value="${detailViewItem.dataNo}"> <%-- dataNo --%>
+									</i>
 								</div>
-								<div>
-									{예금 변동 내역}
-									<%-- 
-										연산 고안 필요
-									 --%>
+								<div class="d-flex h-100 align-self-end align-items-center">
+									<div class="changeBudget">
+										123
+									</div>
 								</div>
 							</div>
 						</div>
