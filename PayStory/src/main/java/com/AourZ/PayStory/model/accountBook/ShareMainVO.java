@@ -5,7 +5,7 @@ public class ShareMainVO {
 	private String ownerName;				// 회원 이름 (닉네임)
 	private String ownerImage;			// 회원 프로필 이미지
 	private String participantImage[];			// 회원 프로필 이미지
-	
+	private Integer accountBookNo;
 	
 	public String getAccountBookTitle() {
 		return accountBookTitle;
@@ -30,6 +30,12 @@ public class ShareMainVO {
 	}
 	public void setParticipantImage(String[] participantImage) {
 		this.participantImage = participantImage;
+	}
+	public Integer getAccountBookNo() {
+		return accountBookNo;
+	}
+	public void setAccountBookNo(Integer accountBookNo) {
+		this.accountBookNo = accountBookNo;
 	}
 	
 }

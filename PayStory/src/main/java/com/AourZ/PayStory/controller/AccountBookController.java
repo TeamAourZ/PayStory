@@ -563,7 +563,6 @@ public class AccountBookController {
 				// main view 페이지에 전달할 모델
 				ArrayList<ShareMainVO> shareMainVOList = new ArrayList<ShareMainVO>();
 				
-				
 				// 로그인한 회원 No
 				String memberNo = (String) httpSession.getAttribute("memberNo"); 
 				
@@ -579,9 +578,9 @@ public class AccountBookController {
 					// participant image담을 배열 생성
 					String participant[] = new String[3];
 					// participant image담기
-					for(int z = 0; z < participantVO.size(); z++) {
+					for(int z = 0; z < participantVO.size(); z++) {	//participantVO.size() 질문
 						participant[z]=participantVO.get(z).getMemberImage();
-					}	// participantVO.get(z).getMemberImage(); 에 데이터 없을 때 오류 뜸(db에 기본 이미지라도 저장되어 있어야)
+					}
 					
 					ShareMainVO shareMainVO = new ShareMainVO();
 					
@@ -590,6 +589,8 @@ public class AccountBookController {
 					shareMainVO.setOwnerImage(ownerVO.getMemberImage());
 					shareMainVO.setOwnerName(ownerVO.getMemberName());
 					shareMainVO.setParticipantImage(participant);
+					shareMainVO.setAccountBookNo(accountBookVO.get(i).getAccountBookNo());
+					
 					
 					//shareMainVOList에 shareMainVO넣기
 					shareMainVOList.add(shareMainVO);
@@ -597,9 +598,20 @@ public class AccountBookController {
 					model.addAttribute("shareMainVOList", shareMainVOList);
 		
 		return "accountBook/public/main";
-		//방향을 잘못 잡아서 이거 하는데 5일 넘게 걸린듯,,, 어떻게 다들 빨리 하는지
+		
 	}
 
+	
+	//공유가계부 메인화면에서 공유가계부 클릭시 accountBookNo 세션에 저장후 detailView 페이지로
+	@RequestMapping("/accountBook/public/setAccountNo")
+	public String movePublicDetail(HttpSession httpSession, @RequestParam Integer num){
+		
+		httpSession.setAttribute("accountBookNo", num);
+		
+		return "redirect:../shareMain";
+	}
+	
+	
 	// 공유가계부 생성화면
 	@RequestMapping("/accountBook/public/create")
 	public String movePublicCreate() {

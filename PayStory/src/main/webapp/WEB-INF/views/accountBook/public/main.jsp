@@ -72,7 +72,7 @@
 									style="margin: -15px; height: 25px; width: 25px; width: 25px; float: right; padding-top: 5px;">
 									<i class="far fa-edit"></i>
 								</span>
-								<div onclick="location.href='/accountBook/detailView'">
+								<div onclick="location.href='/accountBook/public/setAccountNo?num=${shareMain.accountBookNo}'">
 									<span class="ellipsis">${shareMain.accountBookTitle}</span>
 									<div class="box" style="background: #BDBDBD;">
 										<c:choose>
