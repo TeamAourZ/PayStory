@@ -43,4 +43,13 @@
 			}
 		});
 	});
+	
+	// 취소 버튼 클릭
+	$('.listBtn').on('click', function(){
+		let answer = confirm("작성을 취소하시겠습니끼?");
+		if(answer) {
+			alert('목록 페이지로 이동합니다.');
+			location.href="/board/listAll";
+		}
+	});
 });

@@ -21,7 +21,7 @@
 		<result column="boardFile" property="boardFile"/>
 		<result column="memberNo" property="memberNo"/>
 		<result column="boardCategoryNo" property="boardCategoryNo"/>
-		<result column="categoryName" property="categoryName"/>
+		<result column="boardCategoryName" property="boardCategoryName"/>
 		<result column="memberName" property="memberName"/>
 	</resultMap>
 
@@ -63,7 +63,7 @@
 	<!-- 공지사항 :서정원추가 -->
 	<select id="noticeBoardList" resultMap="board" >			
 		select * from board where notice = 'Y'
-		order by notice, boardDate desc
+		order by notice, boardDate DESC
 		limit 0,2
 	</select>
 	

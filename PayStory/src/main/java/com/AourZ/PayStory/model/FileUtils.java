@@ -85,7 +85,7 @@ public class FileUtils {
 		String memberNo = (String) session.getAttribute("memberNo");
 		
 		// 회원번호별 새 폴더 생성
-		String uploadPath = filePath + "board/" + memberNo + "/";
+		String uploadPath = filePath + "board/";
 		
 		File file = new File(uploadPath);
 		if (file.exists() == false) {

@@ -55,7 +55,7 @@ public class BoardController {
 
 	// 카테고리별 목록
 	@RequestMapping("/board/listCategory/{ctgNo}")
-	public String categorylistView(@PathVariable String ctgNo, Model model) {
+	public String categorylistView(@PathVariable String ctgNo) {
 		ArrayList<BoardVO> boardList = service.getCategoryList(ctgNo);
 		
 		for (BoardVO board : boardList) {
@@ -66,8 +66,6 @@ public class BoardController {
 			board.setMemberName(memberName);
 		}
 		
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("categoryNo", ctgNo);
 		return "/board/listView";
 	}
 
@@ -102,7 +100,34 @@ public class BoardController {
 	@RequestMapping("/board/view/{boardNo}")
 	public String view(@PathVariable int boardNo, Model model) {
 		BoardVO board = service.boardView(boardNo);
+		String boardCategoryName = replaceCategory(board.getBoardCategoryNo()); // 카테고리 번호 to 카테고리 이름
+		String memberName = replaceMember(board.getMemberNo()); // 회원 번호 to 회원 이름
+		
+		board.setBoardCategoryName(boardCategoryName);
+		board.setMemberName(memberName);
+		
 		model.addAttribute("board", board);
-		return "/board/view";
+		return "/board/boardView";
+	}
+
+	// 수정
+	@ResponseBody
+	@RequestMapping("/board/update")
+	public int update(@RequestParam(value = "file", required = false) MultipartFile file,
+					  BoardVO vo,
+					  HttpSession session) throws IOException {
+
+		// 파일 업로드 및 파일 이름 지정
+		if(file != null) { 
+			String fileName = FileUtils.uploadBoardFile(file, session);
+			vo.setBoardFile(fileName);
+		};
+		
+		vo.setMemberNo((String) session.getAttribute("memberNo"));
+						
+		service.updateBoard(vo); 
+		int boardNo = vo.getBoardNo();
+		 
+		return boardNo;
 	}
 }
