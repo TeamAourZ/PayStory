@@ -72,32 +72,57 @@
 									style="margin: -15px; height: 25px; width: 25px; width: 25px; float: right; padding-top: 5px;">
 									<i class="far fa-edit"></i>
 								</span>
-								<div>
+								<div onclick="location.href='/accountBook/detailView'">
 									<span class="ellipsis">${shareMain.accountBookTitle}</span>
 									<div class="box" style="background: #BDBDBD;">
-										<img class="profile"
-											src=<c:url value='/images/${shareMain.ownerImage}.jpg'/>
-											alt="">
+										<c:choose>
+											<c:when test="${shareMain.ownerImage == null}">
+												<img class="profile" src="<c:url value='/main/images/blankprofile.png'></c:url>" alt="">
+											</c:when>
+											
+											<c:otherwise>
+											    <img class="profile" src=<c:url value='/images/${shareMain.ownerImage}.jpg'/>alt="">
+										    </c:otherwise>
+										</c:choose>
+
 									</div>
 
 									<span class="ellipsis">${shareMain.ownerName}</span>
 									<div class="box2"
 										style="background: #BDBDBD; display: inline-block;">
-										<img class="profile"
-											src=<c:url value='/images/${shareMain.participantImage[0]}.jpg'/>
-											width="50px" height="50px" alt="">
+											<c:choose>
+											    <c:when test="${shareMain.participantImage[0] == null }">
+											       <img class="profile" src="<c:url value='/main/images/blankprofile.png'></c:url>" width="50px" height="50px" alt="">
+											    </c:when>
+											   
+											    <c:otherwise>
+											        <img class="profile" src=<c:url value='/images/${shareMain.participantImage[0]}.jpg'></c:url> width="50px" height="50px" alt="">
+											    </c:otherwise>
+											</c:choose>
 									</div>
 									<div class="box2"
 										style="background: #BDBDBD; display: inline-block;">
-										<img class="profile"
-											src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264"
-											width="50px" height="50px" alt="">
+										<c:choose>
+											    <c:when test="${shareMain.participantImage[1] == null}">
+											       <img class="profile" src="<c:url value='/main/images/blankprofile.png'></c:url>" width="50px" height="50px" alt="">
+											    </c:when>
+											   
+											    <c:otherwise>
+											        <img class="profile" src=<c:url value='/images/${shareMain.participantImage[0]}.jpg'></c:url> width="50px" height="50px" alt="">
+											    </c:otherwise>
+											</c:choose>
 									</div>
 									<div class="box2"
 										style="background: #BDBDBD; display: inline-block;">
-										<img class="profile"
-											src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264"
-											width="50px" height="50px" alt="">
+										<c:choose>
+											    <c:when test="${shareMain.participantImage[2] == null}">
+											       <img class="profile" src="<c:url value='/main/images/blankprofile.png'></c:url>" width="50px" height="50px" alt="">
+											    </c:when>
+											   
+											    <c:otherwise>
+											        <img class="profile" src=<c:url value='/images/${shareMain.participantImage[0]}.jpg'></c:url> width="50px" height="50px" alt="">
+											    </c:otherwise>
+											</c:choose>
 									</div>
 								</div>
 							</div>
@@ -201,7 +226,6 @@
 			itemSelector : '.grid-item',
 			columnWidth : 200
 		});
-
 	</script>
 </body>
 </html>

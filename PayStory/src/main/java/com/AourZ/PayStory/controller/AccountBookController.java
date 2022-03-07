@@ -579,7 +579,7 @@ public class AccountBookController {
 					// participant image담을 배열 생성
 					String participant[] = new String[3];
 					// participant image담기
-					for(int z = 0; z < 3; z++) {
+					for(int z = 0; z < participantVO.size(); z++) {
 						participant[z]=participantVO.get(z).getMemberImage();
 					}	// participantVO.get(z).getMemberImage(); 에 데이터 없을 때 오류 뜸(db에 기본 이미지라도 저장되어 있어야)
 					
