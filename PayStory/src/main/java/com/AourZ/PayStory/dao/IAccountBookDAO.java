@@ -23,6 +23,7 @@ public interface IAccountBookDAO {
 
 	ArrayList<IncomeVO> selectIncomeList(HashMap<String, Object> map);						// 수입 내역 조회
 	ArrayList<ExpenditureVO> selectExpenditureList(HashMap<String, Object> map);			// 지출 내역 조회
+	void deleteItem(HashMap<String, Object> map);															// 내역 삭제
 	ArrayList<ExpenditureItemVO> selectExpenditureItem(int expenditureNo);						// 지출 상세 항목 조회
 	ArrayList<TagTotalVO> selectAccountBookTotalDataList(HashMap<String, Object> map);	// 수입 / 지출 총 건수, 총 금액
 	String selectTagName(String tagNo);																			// 태그 이름 조회

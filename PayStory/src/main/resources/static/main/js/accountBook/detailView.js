@@ -125,4 +125,26 @@ $(function() {
 
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
 	});
+
+	/* 수정 버튼 클릭 */
+	$(document).on('click', '.dataEdit', function(e) {
+		e.stopImmediatePropagation();
+
+	});
+
+	/* 삭제 버튼 클릭 */
+	$(document).on('click', '.dataDelete', function(e) {
+		e.stopImmediatePropagation();
+
+		if (confirm("해당 내역을 삭제하시겠습니까?")) {
+			let condition = $(this).children('input:first-child').val(); // 수입 / 지출 구분
+			let dataNo = $(this).children('input:last-child').val(); // 수입 / 지출 내역 번호
+
+			deleteItemAjax(condition, dataNo, nowYear, nowMonth, nowDay);
+			
+			alert("삭제가 완료되었습니다.");
+		} else {
+
+		}
+	});
 });

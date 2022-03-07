@@ -87,6 +87,9 @@ public class AccountBookController {
 		model.addAttribute("accountBookTitle", accountBookTitle);
 		model.addAttribute("isShared", isShared);
 
+		// session 정보 등록
+		session.setAttribute("isShared", isShared);
+
 		return "accountBook/main";
 	}
 
@@ -105,6 +108,9 @@ public class AccountBookController {
 
 		model.addAttribute("accountBookTitle", accountBookTitle);
 		model.addAttribute("isShared", isShared);
+
+		// session 정보 갱신
+		session.setAttribute("isShared", isShared);
 
 		// 소유자, 참여자 조회
 		ArrayList<ShareAccountBookVO> tempList = accountBookService.selectShareMemberList(accountBookNo);
@@ -455,17 +461,6 @@ public class AccountBookController {
 			Collections.sort(detailViewItemList, new DetailViewItemComparator()); // 날짜를 기준으로 오름차순 정렬
 
 			model.addAttribute("detailViewItemList", detailViewItemList);
-			
-			for (DetailViewItemVO vo : detailViewItemList) {
-				System.out.print(vo.getCondition() + " / ");
-				System.out.print(vo.getDataNo() + " / ");
-				System.out.print(vo.getReceiptImage() + " / ");
-				System.out.print(vo.getSource() + " / ");
-				System.out.print(vo.getMemo() + " / ");
-				System.out.print(vo.getAmount() + " / ");
-				System.out.print(vo.getTagName() + " / ");
-				System.out.println(vo.getAccountBookNo());
-			}
 		}
 
 		// 지출 상세 항목 리스트
@@ -485,20 +480,25 @@ public class AccountBookController {
 			Arrays.sort(keyList); // key 값(지출 번호)을 기준으로 오름차순 정렬
 
 			model.addAttribute("expenditureItemList", expenditureItemList);
-			
-			for (Object key : keyList) {
-				ArrayList<ExpenditureItemVO> tempArrayVo = expenditureItemList.get(key);
-				
-				System.out.println(">>>>>>");
-				for (ExpenditureItemVO vo : tempArrayVo) {
-					System.out.print(vo.getExpenditureItemName() + " / ");
-					System.out.print(vo.getExpenditureItemPrice() + " / ");
-					System.out.println(vo.getExpenditureNo());
-				}
-			}
 		}
 
 		return "accountBook/detailViewList";
+	}
+
+	/* 대시보드 조회 - 내역 수정 */
+	@RequestMapping("/accountBook/detailViewList/edit")
+	public String accountBookDataEdit() {
+		return "";
+	}
+
+	/* 대시보드 조회 - 내역 삭제 */
+	@RequestMapping("/accountBook/detailViewList/delete")
+	public void accountBookDataDelete(@RequestParam HashMap<String, Object> param) {
+		// map 정보 가져오기
+		String condition = (String) param.get("condition"); // 수입 / 지출 구분
+		int dataNo = Integer.parseInt((String) param.get("dataNo")); // 내역 번호
+
+		accountBookService.deleteItem(condition, dataNo);
 	}
 
 	/* 지출,수입 내역 추가 form */
