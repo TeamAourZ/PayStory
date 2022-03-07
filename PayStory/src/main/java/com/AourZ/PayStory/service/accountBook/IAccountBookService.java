@@ -22,6 +22,7 @@ public interface IAccountBookService {
 	
 	ArrayList<IncomeVO> selectIncomeList(int accountBookNo, String date);				// 수입 내역 조회
 	ArrayList<ExpenditureVO> selectExpenditureList(int accountBookNo, String date);	// 지출 내역 조회
+	void deleteItem(String condition, int dataNo);														// 내역 삭제
 	ArrayList<ExpenditureItemVO> selectExpenditureItem(int expenditureNo);				// 지출 상세 항목 조회
 	ArrayList<TagTotalVO> selectAccountBookTotalDataList(String condition, int accountBookNo, String group1, String group2,
 			String date, String dateForm);	// 수입 / 지출 총 건수, 총 금액
