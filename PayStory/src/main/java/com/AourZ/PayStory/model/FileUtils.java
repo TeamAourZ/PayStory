@@ -13,10 +13,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Component
 public class FileUtils {
-	
+
 	private static final String filePath = "/usr/local/tomcat9/webapps/ROOT/WEB-INF/classes/static/paystory/images/"; // 파일이 저장될 서버 위치
 	//private static final String filePath = "C:/paystory/images/";	// 테스트용
-	
 	
 	public static String updateImg(
 			MultipartHttpServletRequest mpRequest, HttpSession session) throws Exception{
@@ -83,7 +82,7 @@ public class FileUtils {
 		return result;
 	}
 	
-	public static void uploadBoard(MultipartFile multipartFile, int boardNo, HttpSession session) throws IOException {
+	public static String uploadBoardFile(MultipartFile multipartFile, HttpSession session) throws IOException {
 		String memberNo = (String) session.getAttribute("memberNo");
 		
 		// 회원번호별 새 폴더 생성
@@ -100,13 +99,16 @@ public class FileUtils {
 		// 파일 중복 방지를 위한 UUID 생성
 		String storedFileName = getRandomString() + originalFileExtension;
 		
-		// 업로드 파일 이름 : "memberNo_boardNo_파일이름"
-		String uploadFileName = memberNo +"_"+ boardNo +"_"+storedFileName;
+		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
+		String uploadFileName = session.getAttribute("memberNo") +"_"+ storedFileName;
 		String filePathName = uploadPath + uploadFileName;
+		
 
 		File file1 = new File(filePathName);
 
 		multipartFile.transferTo(file1);
+		
+		return uploadFileName;
 	}
 
 	public static String getRandomString() {

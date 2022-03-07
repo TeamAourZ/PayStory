@@ -7,15 +7,23 @@
 		if(e.keyCode == 13) e.preventDefault();
 	});
 	
+	$("#uploadFile").change(function(e){
+		// 파일 이름 표시
+		let fileName = $(this).val();
+	  	$(".custom-file-label").text(fileName.substring(12));
+	});	
+	
 	/* Submit - 게시글 */
 	$('#newBoardForm').on('submit', function(e){
 		e.preventDefault();
 		
 		const formData = new FormData();
 		formData.append('boardTitle',  $('.title').val());
-		formData.append('boardCategoryNo',  $('#categoryNo option:selected').val());
-		formData.append('boardFile',  $('#uploadFile')[0].files[0] || null);
+		formData.append('boardCategoryNo',  $('#boardCategoryNo option:selected').val());
+		formData.append('file',  $('#uploadFile')[0].files[0] || null);
 		formData.append('boardContents',  $('.content').val());
+		
+		console.log($('#boardCategoryNo option:selected').val())
 
 		$.ajax({
 			type:"post",
@@ -35,11 +43,4 @@
 			}
 		});
 	});
-	
-	$("#uploadFile").change(function(e){
-		// 파일 이름 표시
-		let fileName = $(this).val();
-		console.log(fileName)
-	  	$(".custom-file-label").text(fileName.substring(12));
-	});	
 });

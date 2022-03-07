@@ -36,7 +36,6 @@
 										<div class="imageTextTop">프로필 이미지 수정</div>
 										<div class="imageTextBottom">클릭해주세요</div>
 										<img class="profile" onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"' src="/images/member/${login.memberNo}/${login.memberImage}">
-										<img class="profile" src="<c:url value='/main/images/blankprofile.png'/>">
 									</div> 
 									<input type="file" name="file" style="display: none" class="input-css">
 									<input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}" class="input-css">
@@ -72,7 +71,7 @@
 				<div class="card-body">
 					<a href="<c:url value='/member/pwUpdateView'/>"
 						class="btn btn-info btn-block">비밀번호 변경</a> 
-					<%-- <a href="<c:url value='/member/memberDelete'/>" class="btn btn-default btn-block">회원 탈퇴</a> --%>
+					<a href="<c:url value='/member/deleteView'/>" class="btn btn-default btn-block">회원 탈퇴</a>
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">취소하기</button>
