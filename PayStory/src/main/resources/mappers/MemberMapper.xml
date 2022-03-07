@@ -91,7 +91,7 @@
 	</select>
 	
 	<!-- 프로필수정 -->
-	<update id="infoUpdate">
+	<update id="infoUpdate" parameterType="com.AourZ.PayStory.model.member.MemberVO">
 		update member set memberName = #{memberName} where memberEmail = #{memberEmail}
 	</update>
 	

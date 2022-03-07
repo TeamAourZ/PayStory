@@ -87,8 +87,8 @@
 	// chatbot 아이콘 눌렀을 때 파일 업로드
 	$("#uploadFile").on('change',function(e){
 		e.preventDefault();
-	  	
-	  	// 이미지 영역에 미리보기
+
+    // 이미지 영역에 미리보기
 	  	let file = e.target.files;
 	  	let fileArr = Array.prototype.slice.call(file);
 	  	
@@ -103,15 +103,11 @@
 				$('#chatBox').append('<div class="msgBox send"><span id="in"><img src="' + 
 										e.target.result + '" width="250px" height="250px">' +
 										'</span></div><br>');
-				
 			}
-			
 			render.readAsDataURL(f);
-			
 		});
 	});
-	/*$(document).on('click', '.removeItem' ,function(e){
-	}*/
+
 	$(document).on('click', '.msgBox img', function(e){
     	$(".modal_chatbotImg").fadeIn();
     	$('.modal_chatbotContent').html('<span><img src="' + 
@@ -266,7 +262,7 @@
 	/* OCR */
 	$('#uploadFile').on('change', function(){
 		const formData = new FormData();
-  		formData.append("expenditureImage", $(this)[0].files[0]);
+  		formData.append("receiptImage", $(this)[0].files[0]);
   		
 		$.ajax({
 			type:"post",	
@@ -279,18 +275,16 @@
 				// console.log(result)
 				// 날짜 
 				let date = result.expenditureDate;
-				$('#expenditureDate').val(date);
 				// 주소
 				let address = result.expenditureAddress;
-				$('#address').val(address);
 				// 사용처 
 				let source = result.expenditureSource;
-				$('#expenditureSource').val(source);
 				// 총 금액 : 콤마
 				let totalAmount = withComma(result.expenditureAmount);
-				$('#expenditureTotalAmount').val(totalAmount);
 				// 아이템 List
 				let itemList = result.itemList;
+				// 영수증 이미지
+				let image = result.expenditureImage;
 				
 				// 값 입력
 				let receiveChat = '<div class="msgBox receive"><span id="in">PayStory 챗봇' + '<br>AI 인식 결과입니다.<br><br>' +
@@ -307,9 +301,10 @@
 					receiveChat += '</tr>';
 				}
 				receiveChat += '<tr><th>총 지출 금액</th><td colspan="2">'+ totalAmount + '원</td><tr></table>'+
-							   '<br><br> 이 결과를 가계부에 저장하시겠습니끼? (네: 1, 아니오: 0)</span></div>';
+							   '<br><br> 이 결과를 가계부에 저장하시겠습니까? (네: 1, 아니오: 0)</span></span></div>';
+
+        $('#chatBox').append(receiveChat);
 				
-				$('#chatBox').append(receiveChat);
 			},
 			error: function(err){
 				console.log(err);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.AourZ.PayStory.model.FileUtils;
 import com.AourZ.PayStory.model.board.BoardVO;
 import com.AourZ.PayStory.service.BoardService;
 
@@ -34,7 +35,7 @@ public class BoardController {
     
     // 카테고리별 목록
     @RequestMapping("/board/listCategory")
-    public ArrayList<BoardVO> categorylistView(@RequestParam String ctgNo) {
+    public ArrayList<BoardVO> categorylistView(@RequestParam("boardCategoryNo") String ctgNo) {
     	ArrayList<BoardVO> boardList = service.getCategoryList(ctgNo);
     	return boardList;
     }
@@ -49,36 +50,17 @@ public class BoardController {
     @ResponseBody
     @RequestMapping("/board/create")
     public int create(@RequestParam(value="boardFile", required = false) MultipartFile file,
-    		@RequestParam("boardTitle") String title,
-    		@RequestParam("boardCategoryNo") String ctgNo,
-    		@RequestParam("boardContents") String contents,
+    		BoardVO boardVO,
     		HttpSession session) throws IOException {
-    	
-    	// 파일 업로드 및 파일 이름 지정
-		String fileName = null;
-		if(file != null) {
-			String uploadPath = "C:/PayStory/PayStory/src/main/resources/static/file/board/";
-
-			String originalFileName = file.getOriginalFilename();
-			fileName = originalFileName;
-			String filePathName = uploadPath + originalFileName;
-			// String uploadFileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("accountBookNo")+"_"+originalFileName;
-			// String filePathName = uploadPath + uploadFileName;
-			File file1 = new File(filePathName);	
-
-			file.transferTo(file1);
-		}
+		boardVO.setMemberNo((String) session.getAttribute("memberNo"));
 		
-		BoardVO vo = new BoardVO();
-		vo.setBoardCategoryNo(ctgNo);
-		vo.setBoardContents(contents);
-		vo.setBoardFile(fileName);
-		vo.setBoardTitle(title);
-		vo.setMemberNo((String) session.getAttribute("sid"));
+		service.createBoard(boardVO);
+		int boardNo = boardVO.getBoardNo();
+
+		// 파일 업로드 및 파일 이름 지정
+		FileUtils.uploadBoard(file, boardNo, session);
 		
-		service.createBoard(vo);
-		int boardNo = vo.getBoardNo();
-        return boardNo;
+		return boardNo;
     }
 
     // 수정폼으로 이동

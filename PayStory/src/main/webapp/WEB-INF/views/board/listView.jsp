@@ -47,10 +47,10 @@
                         	<!-- 게시판 header : 글쓰기 버튼, 카테고리, 검색 -->
                         	<nav class="nav boardCategory">
 							  <a class="nav-link active" data-ctgNo="*">전체</a>
-							  <a class="nav-link" data-ctgNo="ctgNotice">공지</a>
-							  <a class="nav-link" data-ctgNo="ctgQA">질문</a>
-							  <a class="nav-link" data-ctgNo="ctgInfo">정보공유</a>
-							  <a class="nav-link" data-ctgNo="ctgFree">자유게시판</a>
+							  <a class="nav-link" data-ctgNo="bc001">공지</a>
+							  <a class="nav-link" data-ctgNo="bc002">질문</a>
+							  <a class="nav-link" data-ctgNo="bc003">정보공유</a>
+							  <a class="nav-link" data-ctgNo="bc004">자유게시판</a>
 							</nav>
                         	<a href="<c:url value='/board/write'/>" class="btn btn-primary" >글쓰기</a>	
                         </div>
@@ -71,7 +71,8 @@
 			                                        </tr>
 			                                    </thead>
 			                                    <tbody>
-			                                    <!-- 공지사항 -->		
+			                                    
+                                            <!-- 공지사항 -->		
 												<c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
 		        									<tr class="boardList">
 		        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/></td>
@@ -82,28 +83,8 @@
 										        		<td>${noticeBoardList.boardDate}</td>
 													</tr>
 												</c:forEach>
-			                                    
-			                                    
-			                                    	<%-- <tr>
-	        											<td><a href="<c:url value='/board/view'/>">1</a></td>
-										        		<td>공지</td>
-										        		<td><a href="<c:url value='/board/view'/>">공유가계부 사용방법</a></td>
-										        		<td>관리자</td>
-										        		<td>15</td>
-										        		<td class="d-flex justify-content-between">
-										        			2022-02-20
-										        			<a href="<c:url value='/board/delete'/>"><i class="fa far fa-trash-alt"></i></a>
-										        		</td>
-													</tr>
-			                                    	<tr>
-	        											<td><a href="<c:url value='/board/view'/>">2</a></td>
-										        		<td>공지</td>
-										        		<td>영수증 AI 사용방법</td>
-										        		<td>관리자</td>
-										        		<td>100</td>
-										        		<td>2022-02-20</td>
-													</tr> --%>
-				                                    <c:forEach var="list" items="${boardList}" varStatus="status">
+				                                    
+                                            <c:forEach var="list" items="${boardList}" varStatus="status">
 			        									<tr class="boardList">
 		        											<td><input type="hidden" value='${list.boardNo}'/>${status.count}</td>
 											        		<td>${list.boardCategoryNo}</td>

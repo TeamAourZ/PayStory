@@ -35,12 +35,12 @@
 									<div class="screen" onclick="onclick=document.all.file.click()">
 										<div class="imageTextTop">프로필 이미지 수정</div>
 										<div class="imageTextBottom">클릭해주세요</div>
-										<img class="profile" src="/images/${login.memberImage}">
-										<input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}" class="input-css">
+										<img class="profile" onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"' src="/images/member/${login.memberNo}/${login.memberImage}">
+										<img class="profile" src="<c:url value='/main/images/blankprofile.png'/>">
 									</div> 
 									<input type="file" name="file" style="display: none" class="input-css">
 									<input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}" class="input-css">
-									<button type="submit" class="btn btn-primary btn-block" id="imgC">사진변경</button>
+									<button class="btn btn-primary btn-block" id="imgC">사진변경</button>
 								</a>
 							</li>
 						</ul>
@@ -48,8 +48,7 @@
 				</form>
 				<form id="infoView" action="/member/infoUpdate" method="POST"
 					class="form-signup form-user panel-body" autocomplete="off">
-					<input type="hidden" id="memberNameCheck" name="memberNameCheck"
-						value="N" class="input-css"/>
+					<input type="hidden" id="memberNameCheck" name="memberNameCheck" value="N" class="input-css"/>
 					<fieldset>
 						
 						<!-- 이메일, 닉네임 --><!-- class="form-control -->
@@ -65,11 +64,10 @@
 								</span> 
 								<span class="text">중복체크</span>
 							</a> 
-							<input type="text" name="memberName" class="input-css" placeholder="닉네임" value="${login.memberName}" id="memberName">
+							<input type="text" name="memberName" class="input-css" placeholder="닉네임" value="${login.memberName}" id="memberName">		
 						</div>
 					</fieldset>
-					<button class="btn btn-primary btn-block" type="button"
-						onclick="fnSubmit(); return false;">정보 수정</button>
+					<button type="submit" class="btn btn-primary btn-block" onclick="fnSubmit(); return false;">정보 수정</button>
 				</form>
 				<div class="card-body">
 					<a href="<c:url value='/member/pwUpdateView'/>"
@@ -77,8 +75,7 @@
 					<%-- <a href="<c:url value='/member/memberDelete'/>" class="btn btn-default btn-block">회원 탈퇴</a> --%>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">취소하기</button>
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">취소하기</button>
 				</div>
 			</div>
 		</div>

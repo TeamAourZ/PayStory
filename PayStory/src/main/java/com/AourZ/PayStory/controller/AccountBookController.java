@@ -404,8 +404,6 @@ public class AccountBookController {
 		String monthText = methodList.zeroFill(month);
 		String dayText = methodList.zeroFill(day);
 		String date = year + "-" + monthText + "-" + dayText;
-		
-		System.out.println(">>>>>" + date);
 
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
@@ -457,7 +455,7 @@ public class AccountBookController {
 			Collections.sort(detailViewItemList, new DetailViewItemComparator()); // 날짜를 기준으로 오름차순 정렬
 
 			model.addAttribute("detailViewItemList", detailViewItemList);
-
+			
 			for (DetailViewItemVO vo : detailViewItemList) {
 				System.out.print(vo.getCondition() + " / ");
 				System.out.print(vo.getDataNo() + " / ");
@@ -487,10 +485,11 @@ public class AccountBookController {
 			Arrays.sort(keyList); // key 값(지출 번호)을 기준으로 오름차순 정렬
 
 			model.addAttribute("expenditureItemList", expenditureItemList);
-
+			
 			for (Object key : keyList) {
 				ArrayList<ExpenditureItemVO> tempArrayVo = expenditureItemList.get(key);
-
+				
+				System.out.println(">>>>>>");
 				for (ExpenditureItemVO vo : tempArrayVo) {
 					System.out.print(vo.getExpenditureItemName() + " / ");
 					System.out.print(vo.getExpenditureItemPrice() + " / ");
@@ -604,4 +603,5 @@ public class AccountBookController {
 	public String moveRegisterParticipant() {
 		return "accountBook/public/registerParticipant";
 	}
+
 }

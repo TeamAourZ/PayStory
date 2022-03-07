@@ -205,12 +205,14 @@ public class MemberController {
 
 	// 회원정보 수정로직
 	@RequestMapping(value="/infoUpdate", method=RequestMethod.POST)
-	public String infoUpdate(HttpServletRequest request,HttpSession session,MemberVO memberVO,Model model,RedirectAttributes rttr)throws Exception{
-				
-		memberService.infoUpdate(memberVO); 
-		session.setAttribute("login", memberVO);
-		rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다.");
-		return"/accountBook/main";
+	public String infoUpdate(HttpServletRequest request,HttpSession session, MemberVO memberVO, String memberName,Model model,RedirectAttributes rttr)throws Exception{		
+		MemberVO vo = (MemberVO) session.getAttribute("login");		
+		
+		vo.setMemberName(memberName);
+		memberService.infoUpdate(memberVO); 		
+		session.setAttribute("login", vo);
+			
+		return "/accountBook/main";
 	}
 	
 	// 비밀번호 수정로직
@@ -242,7 +244,7 @@ public class MemberController {
 	// 프로필사진
 	@RequestMapping(value="/updateImg", method=RequestMethod.POST)
 	public String updateImg(MultipartHttpServletRequest mpRequest, HttpSession session , String memberEmail)throws Exception {	
-		String memberImage = FileUtils.updateImg(mpRequest); 
+		String memberImage = FileUtils.updateImg(mpRequest, session); 
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");		
 		memberService.updateImg(memberImage, memberEmail);	
 		memberVO.setMemberImage(memberImage);
