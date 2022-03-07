@@ -19,6 +19,7 @@
 
 	 <!-- CSS : main -->
     <link href="<c:url value='/main/css/board/listView.css'/>" rel="stylesheet">
+    <style>.noticeBoardList{cursor:pointer;}</style>
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -46,10 +47,10 @@
                         	<!-- 게시판 header : 글쓰기 버튼, 카테고리, 검색 -->
                         	<nav class="nav boardCategory">
 							  <a class="nav-link active" data-ctgNo="*">전체</a>
-							  <a class="nav-link" data-ctgNo="ctgNotice">공지</a>
-							  <a class="nav-link" data-ctgNo="ctgQA">질문</a>
-							  <a class="nav-link" data-ctgNo="ctgInfo">정보공유</a>
-							  <a class="nav-link" data-ctgNo="ctgFree">자유게시판</a>
+							  <a class="nav-link" data-ctgNo="bc001">공지</a>
+							  <a class="nav-link" data-ctgNo="bc002">질문</a>
+							  <a class="nav-link" data-ctgNo="bc003">정보공유</a>
+							  <a class="nav-link" data-ctgNo="bc004">자유게시판</a>
 							</nav>
                         	<a href="<c:url value='/board/write'/>" class="btn btn-primary" >글쓰기</a>	
                         </div>
@@ -71,6 +72,18 @@
 			                                        </tr>
 			                                    </thead>
 			                                    <tbody>
+	                                           		<!-- 공지사항 -->		
+													<c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
+			        									<tr class="boardList">
+			        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/></td>
+		        											<td>공지사항</td>
+											        		<td>[공지]  ${noticeBoardList.boardTitle}</td>
+											        		<td>PayStory 관리자</td>
+											        		<td>${noticeBoardList.boardViews}</td>
+											        		<td>${noticeBoardList.boardDate}</td>
+														</tr>
+													</c:forEach>
+				                                    
 				                                    <c:forEach var="list" items="${boardList}" varStatus="status">
 			        									<tr class="boardList">
 		        											<td><input type="hidden" value='${list.boardNo}'/>${status.count}</td>
@@ -83,7 +96,8 @@
 														</tr>
 													</c:forEach>
 			                                    </tbody>
-			                                </table>                                		
+			                                </table> 
+			                                                               		
                                 		</div>
                                 	</div>
                                 </div>

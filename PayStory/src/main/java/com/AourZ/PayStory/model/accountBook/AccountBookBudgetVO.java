@@ -1,19 +1,19 @@
 package com.AourZ.PayStory.model.accountBook;
 
 public class AccountBookBudgetVO {
-	private String budgetDate;	// 예산 대상 월 (년-월)
-	private int budgetAmount;	// 예산
-	private int accountBookNo;	// 가계부 번호
+	private String budgetDate;		// 예산 대상 월 (년-월)
+	private Integer budgetAmount;	// 예산
+	private Integer accountBookNo;	// 가계부 번호
 
 	public String getBudgetDate() {
 		return budgetDate;
 	}
 
-	public int getBudgetAmount() {
+	public Integer getBudgetAmount() {
 		return budgetAmount;
 	}
 
-	public int getAccountBookNo() {
+	public Integer getAccountBookNo() {
 		return accountBookNo;
 	}
 
@@ -21,11 +21,11 @@ public class AccountBookBudgetVO {
 		this.budgetDate = budgetDate;
 	}
 
-	public void setBudgetAmount(int budgetAmount) {
+	public void setBudgetAmount(Integer budgetAmount) {
 		this.budgetAmount = budgetAmount;
 	}
 
-	public void setAccountBookNo(int accountBookNo) {
+	public void setAccountBookNo(Integer accountBookNo) {
 		this.accountBookNo = accountBookNo;
 	}
 

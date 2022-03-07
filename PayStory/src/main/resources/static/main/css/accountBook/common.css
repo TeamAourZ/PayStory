@@ -1,5 +1,38 @@
 @charset "UTF-8";
 
+#calendarBtnBox i {
+	color: var(--gray);
+}
+
+#otherBtnBox {
+	gap: 5px;
+}
+
+#budgetStatusBox, #shareMemberBox {
+	background: var(--light);
+	border-radius: 10px;
+	border: 1px solid var(--dark);
+	z-index: 10;
+}
+
+#budgetStatusBox th, #budgetStatusBox td
+#shareMemberBox th, #shareMemberBox td {
+	padding: 0.5rem !important;
+}
+
+#budgetStatusBox {
+	right: 10%;
+}
+
+#shareMemberBox {
+	right: 8%;
+}
+
+.profileImage {
+	min-width: 50px;
+	min-height: 50px;
+}
+
 .border {
 	border-radius: 5px;
 }
@@ -14,6 +47,24 @@
 
 .border-color-white {
 	border: 1px solid white !important;
+}
+
+.border-color-yellow {
+	border: 1px solid yellow !important;
+}
+
+.border-color-blue {
+	border: 1px solid blue !important;
+}
+
+.detailBoxClose {
+	top: 0%;
+	right: 8%;
+}
+
+.detailBoxClose.re-position-1 {
+	top: 0%;
+	right: 4%;
 }
 
 .default-cursor {

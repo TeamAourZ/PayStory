@@ -101,20 +101,24 @@ $(function() {
 
 	/* 달력 + 버튼 클릭 이벤트 */
 	$('#selectDayAddDataBtn').on('click', function() {
-		/*if (0 < nowDay && nowDay <= 31) {
-			let date = nowYear + "-" + (nowMonth + 1) + "-" + nowDay; // 년-월-일
+		if (0 < nowDay && nowDay <= 31) {
+			let year = nowYear;
+			let month = nowMonth + 1;
+			let day = nowDay;
+			let hours = date.getHours();
+			let minutes = date.getMinutes();
 
-			location.href = "/accountBook/add/" + date; // 내역 입력 페이지 이동
+			month = month < 10 ? "0" + month : month;
+			day = day < 10 ? "0" + day : day;
+			hours = hours < 10 ? "0" + hours : hours;
+			minutes = minutes < 10 ? "0" + minutes : minutes;
+
+			let dateTime = year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
+
+			location.href = "/accountBook/add/" + dateTime; // 내역 입력 페이지 이동
 		} else {
 			alert("날짜를 선택해주세요.");
-		}*/
-		/*
-		
-		
-		addItemForm 수정 요청 또는 수정 허락 받아야 함
-		
-		
-		*/
+		}
 	});
 
 	/* 달력 수입 / 지출 태그 */
@@ -147,14 +151,14 @@ $(function() {
 		detailBox.parent('div.detailBox').css('margin-top', '-4.2em');
 	});
 
-	/* detailBox 닫기 - 수입 상세 태그 / 지출 상세 태그 / 월별 예산 현황 */
+	/* detailBox 닫기 - 수입 상세 태그 / 지출 상세 태그 / 월별 예산 현황 / 공유 회원 목록 */
 	$(document).on('click', '.detailBoxClose', function(e) {
 		e.stopImmediatePropagation();
 
 		$(this).parent().parent().parent().parent().parent().addClass('d-none');
 	});
 
-	/* budgetStatusBox - 당월 예산, 남은 예산, 총 수입금, 총 지출금 */
+	/* 당월 예산, 남은 예산, 총 수입금, 총 지출금 */
 	$(document).on('click', '.budgetStatusBoxToggle', function(e) {
 		e.stopImmediatePropagation();
 
@@ -185,5 +189,12 @@ $(function() {
 		$(this).addClass('font-weight-bold text-primary selected');
 
 		mainBoardAjax(); // 게시판
+	});
+
+	/* 공유 회원 목록 */
+	$(document).on('click', '.shareMemberBoxToggle', function(e) {
+		e.stopImmediatePropagation();
+
+		$('#shareMemberBox').toggleClass('d-none');
 	});
 });

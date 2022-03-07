@@ -199,7 +199,7 @@
 	/* OCR */
 	$('#uploadReceipt').on('change', function(){
 		const formData = new FormData();
-  		formData.append("expenditureImage", $(this)[0].files[0]);
+  		formData.append("receiptImage", $(this)[0].files[0]);
   		
 		$.ajax({
 			type:"post",	
@@ -224,6 +224,9 @@
 				$('#expenditureTotalAmount').val(totalAmount);
 				// 아이템 List
 				let itemList = result.itemList;
+				// 영수증 이미지
+				let image = result.expenditureImage;
+				$('#imageValue').val(image);
 				
 				if(itemList){
 					for(let i=0; i<itemList.length; i++){
@@ -298,7 +301,7 @@
 		
 		const formData = new FormData();
 		console.log($('#uploadReceipt').val())
-  		formData.append("expenditureImage", $('.custom-file-label').text());
+  		formData.append("expenditureImage", $('#imageValue').val());
   		formData.append("expenditureDate", $('#expenditureDate').val());
   		formData.append("expenditureSource", $('#expenditureSource').val());
   		formData.append("expenditureAddress", $('#address').val());

@@ -170,10 +170,10 @@
 	                                  		<h6 class="m-0 font-weight-bold text-primary">공지사항설정</h6>
 	                              		</div>
 	                               	<div class="card-body">                                    
-	                                   	<form id="memberSanction" action="/member/memberSanctionCancel" method="POST" class="form-signup form-user panel-body"  autocomplete="off">                                         
+	                                   	<form id="insertNotice" action="/member/insertNotice" method="POST" class="form-signup form-user panel-body"  autocomplete="off">                                         
 	                  							<div class="form-group">
 						                        <label class="control-labell" for="fullName">공지사항등록</label>
-						                        <input type="text" name="memberEmail" class="form-control input-sm" placeholder="게시글번호등록">
+						                        <input type="text" name="boardNo" class="form-control input-sm" placeholder="게시판번호">
 	                   						</div>                   
 							                <button class="btn btn-primary btn-block" type="submit" >등록</button>
 							            </form>
@@ -186,10 +186,10 @@
 	                                  		<h6 class="m-0 font-weight-bold text-primary">공지사항해제</h6>
 	                              		</div>
 	                               	<div class="card-body">                                    
-	                                   	<form id="memberSanction" action="/member/memberSanctionCancel" method="POST" class="form-signup form-user panel-body"  autocomplete="off">                                         
+	                                   	<form id="deleteNotice" action="/member/deleteNotice" method="POST" class="form-signup form-user panel-body"  autocomplete="off">                                         
 	                  							<div class="form-group">
 						                        <label class="control-labell" for="fullName">공지사항해제</label>
-						                        <input type="text" name="memberEmail" class="form-control input-sm" placeholder="게시글번호등록">
+						                        <input type="text" name="boardNo" class="form-control input-sm" placeholder="게시판번호">
 	                   						</div>                   
 							                <button class="btn btn-primary btn-block" type="submit" >해제</button>
 							            </form>
@@ -219,12 +219,12 @@
 							                                        </tr>
 							                                    </thead>
 							                                    <tbody>
-								                                    <c:forEach var="boardList" items="${boardList}" varStatus="status">
-							        									<tr class="boardList">
-						        											<td><input type="hidden" value='${boardList.boardNo}'/>${status.count}</td>
-															        		<td>${boardList.boardTitle}</td>
-															        		<td>${boardList.memberNo}</td>
-															        		<td>${boardList.boardDate}</td>
+								                                    <c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status">
+							        									<tr class="noticeBoardList">
+						        											<td>${noticeBoardList.boardNo}</td>
+															        		<td>${noticeBoardList.boardTitle}</td>
+															        		<td>${noticeBoardList.memberNo}</td>
+															        		<td>${noticeBoardList.boardDate}</td>
 																		</tr> 
 																	</c:forEach>
 							                                    </tbody>
@@ -240,7 +240,7 @@
 						</div>
 						
 						<div class="container-fluid">
-		                    <h1 class="h3 mb-2 text-gray-800 ml-5">게시글 작성</h1>
+		                    <h1 class="h3 mb-2 text-gray-800 ml-5">공지사항 작성</h1>
 		                    <!-- 게시글 작성 form -->
 							<div class="formWrap p-4 bg-white rounded">
 								<form id="newBoardForm" class="px-4" action="/board/register" method="post">              		

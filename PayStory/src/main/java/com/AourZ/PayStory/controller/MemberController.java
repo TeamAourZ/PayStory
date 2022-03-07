@@ -29,7 +29,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.AourZ.PayStory.model.FileUtils;
-import com.AourZ.PayStory.model.board.BoardVO;
 import com.AourZ.PayStory.model.member.LoginVO;
 import com.AourZ.PayStory.model.member.MemberVO;
 import com.AourZ.PayStory.service.IMemberService;
@@ -243,7 +242,7 @@ public class MemberController {
 	// 프로필사진
 	@RequestMapping(value="/updateImg", method=RequestMethod.POST)
 	public String updateImg(MultipartHttpServletRequest mpRequest, HttpSession session , String memberEmail)throws Exception {	
-		String memberImage = FileUtils.updateImg(mpRequest); 
+		String memberImage = FileUtils.updateImg(mpRequest, session); 
 		MemberVO memberVO = (MemberVO) session.getAttribute("login");		
 		memberService.updateImg(memberImage, memberEmail);	
 		memberVO.setMemberImage(memberImage);
@@ -267,7 +266,7 @@ public class MemberController {
 		//List<BoardVO> boardList = memberService.boardList();
 		
 		model.addAttribute("memberList",memberList);
-		model.addAttribute("boardList",memberService.boardList());
+		model.addAttribute("noticeBoardList",memberService.noticeBoardList());
 		return "/member/master";
 	}
 	

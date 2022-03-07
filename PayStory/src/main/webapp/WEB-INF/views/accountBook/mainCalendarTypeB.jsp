@@ -52,11 +52,11 @@
 															<%-- 일별 건수 --%>
 															<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
 																<%-- 수입 --%>
-																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																<c:if test="${dateIncomeList[dateIndex].count ne 0 && not empty dateIncomeList[dateIndex].count}">
 																	<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
 																</c:if>
 																<%-- 지출 --%>
-																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0 && not empty dateExpenditureList[dateIndex].count}">
 																	<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
 																</c:if>
 															</div>
@@ -81,18 +81,18 @@
 															<%-- 일별 건수 --%>
 															<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
 																<%-- 수입 --%>
-																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																<c:if test="${dateIncomeList[dateIndex].count ne 0 && not empty dateIncomeList[dateIndex].count}">
 																	<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
 																</c:if>
 																<%-- 지출 --%>
-																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0 && not empty dateExpenditureList[dateIndex].count}">
 																	<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
 																</c:if>
 															</div>
 															<%-- 일별 상세 - 태그별 건수, 총 금액 --%>
 															<div class="detailBox">
 																<%-- 수입 --%>
-																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																<c:if test="${dateIncomeList[dateIndex].count ne 0 && not empty dateIncomeList[dateIndex].count}">
 																	<div class="tagIncomeListBox position-absolute d-none">
 																		<div class="table mb-0">
 																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -124,7 +124,7 @@
 																	</div>
 																</c:if>
 																<%-- 지출 --%>
-																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0 && not empty dateExpenditureList[dateIndex].count}">
 																	<div class="tagExpenditureListBox position-absolute d-none">
 																		<div class="table mb-0">
 																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -144,7 +144,7 @@
 																									<tr class="text-center">
 																										<td>${tagExpenditure.tag}</td>
 																										<td><fmt:formatNumber value="${tagExpenditure.count}" pattern="#,###" /></td>
-																										<td class="expenditureValue"><fmt:formatNumber value="-${tagExpenditure.sum}" pattern="#,###" /></td>
+																										<td class="expenditureValue"><fmt:formatNumber value="${tagExpenditure.sum}" pattern="#,###" /></td>
 																									</tr>
 																								</c:forEach>
 																							</tbody>
@@ -177,18 +177,18 @@
 															<%-- 일별 건수 --%>
 															<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
 																<%-- 수입 --%>
-																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																<c:if test="${dateIncomeList[dateIndex].count ne 0 && not empty dateIncomeList[dateIndex].count}">
 																	<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
 																</c:if>
 																<%-- 지출 --%>
-																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0 && not empty dateExpenditureList[dateIndex].count}">
 																	<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
 																</c:if>
 															</div>
 															<%-- 일별 상세 - 태그별 건수, 총 금액 --%>
 															<div class="detailBox">
 																<%-- 수입 --%>
-																<c:if test="${dateIncomeList[dateIndex].count ne 0}">
+																<c:if test="${dateIncomeList[dateIndex].count ne 0 && not empty dateIncomeList[dateIndex].count}">
 																	<div class="tagIncomeListBox position-absolute d-none">
 																		<div class="table mb-0">
 																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -220,7 +220,7 @@
 																	</div>
 																</c:if>
 																<%-- 지출 --%>
-																<c:if test="${dateExpenditureList[dateIndex].count ne 0}">
+																<c:if test="${dateExpenditureList[dateIndex].count ne 0 && not empty dateExpenditureList[dateIndex].count}">
 																	<div class="tagExpenditureListBox position-absolute d-none">
 																		<div class="table mb-0">
 																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -240,7 +240,7 @@
 																									<tr class="text-center">
 																										<td>${tagExpenditure.tag}</td>
 																										<td><fmt:formatNumber value="${tagExpenditure.count}" pattern="#,###" /></td>
-																										<td class="expenditureValue"><fmt:formatNumber value="-${tagExpenditure.sum}" pattern="#,###" /></td>
+																										<td class="expenditureValue"><fmt:formatNumber value="${tagExpenditure.sum}" pattern="#,###" /></td>
 																									</tr>
 																								</c:forEach>
 																							</tbody>

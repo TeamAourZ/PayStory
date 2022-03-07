@@ -143,10 +143,14 @@ public class AIController {
 
 	/****** OCR *****/
 	@RequestMapping("/OCR")
-	public ExpenditureVO ocrUplaod(@RequestParam("expenditureImage") MultipartFile file, HttpSession session) throws IOException {
-		String filePathName = FileUtils.uploadReceipt(file, session);
-		ExpenditureVO result =  OCRService.clovaOCRService(filePathName);
+	public ExpenditureVO ocrUplaod(@RequestParam("receiptImage") MultipartFile file, HttpSession session) throws IOException {
+		String[] fileResult = FileUtils.uploadReceipt(file, session);
+		String filePathName = fileResult[0];
+		String uploadFileName = fileResult[1];
+		System.out.println(filePathName);
 		
+		ExpenditureVO result =  OCRService.clovaOCRService(filePathName);
+		result.setExpenditureImage(uploadFileName);
 		return result;
 	}
 }

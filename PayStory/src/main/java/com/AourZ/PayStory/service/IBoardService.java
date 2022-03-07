@@ -1,6 +1,7 @@
 package com.AourZ.PayStory.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -14,4 +15,5 @@ public interface IBoardService {
 	public String selectMemberName(String memberNo);
 	public BoardVO boardView(int boardNo);
 	public int createBoard(BoardVO vo);
+	public List<BoardVO> noticeBoardList();
 }

@@ -24,7 +24,7 @@ public class BoardVO {
 		return boardDate;
 	}
 
-	public int getBoardViews() {
+	public Integer getBoardViews() {
 		return boardViews;
 	}
 
@@ -44,7 +44,7 @@ public class BoardVO {
 		return boardCategoryNo;
 	}
 
-	public void setBoardNo(int boardNo) {
+	public void setBoardNo(Integer boardNo) {
 		this.boardNo = boardNo;
 	}
 
@@ -56,7 +56,7 @@ public class BoardVO {
 		this.boardDate = boardDate;
 	}
 
-	public void setBoardViews(int boardViews) {
+	public void setBoardViews(Integer boardViews) {
 		this.boardViews = boardViews;
 	}
 

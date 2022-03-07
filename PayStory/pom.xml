@@ -53,6 +53,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+                    <groupId>com.vaadin.external.google</groupId>
+                    <artifactId>android-json</artifactId>
+                </exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- JSP 뷰 사용 -->
@@ -126,7 +132,8 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.0.1</version>
-		</dependency>
+		</dependency>		 
+
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -145,6 +152,7 @@
 			<artifactId>maven-war-plugin</artifactId>
 			<version>3.1.0</version>
 			<type>maven-plugin</type>
+
 		</dependency>
 	</dependencies>
 

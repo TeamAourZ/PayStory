@@ -10,10 +10,12 @@ $(function() {
 		$('table').eq(0).addClass('table-responsive');
 	}
 
+	$('#selectedDate').text(nowYear + "년 " + (nowMonth + 1) + "월 " + nowDay + "일");
+
 	calendarAjax("C", nowYear, nowMonth); // 달력
 	chartAjax(nowYear, nowMonth, nowDay); // 차트
 	budgetStatusAjax(nowYear, nowMonth); // 예산 현황
-	detailViewListAjax(); // 상세 내역
+	detailViewListAjax($('#selectedDate').text()); // 상세 내역
 
 	/* 페이지 크기 변화 감지 */
 	$(window).resize(function() {
@@ -90,7 +92,10 @@ $(function() {
 
 		nowDay = $('.date.selected').text();
 
+		$('#selectedDate').text(nowYear + "년 " + (nowMonth + 1) + "월 " + nowDay + "일");
+
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
+		detailViewListAjax($('#selectedDate').text()); // 상세 내역
 	});
 
 	/* detailBox 닫기 - 월별 예산 현황 */

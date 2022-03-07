@@ -19,5 +19,4 @@ public class BoardCategoryVO {
 	public void setBoardCategoryName(String boardCategoryName) {
 		this.boardCategoryName = boardCategoryName;
 	}
-
 }
