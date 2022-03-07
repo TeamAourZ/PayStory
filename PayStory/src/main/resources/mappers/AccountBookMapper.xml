@@ -207,6 +207,7 @@
 		VALUES
 			(#{expenditureDate}, #{expenditureImage}, #{expenditureSource}, #{expenditureMemo}, #{expenditureAmount}, #{expenditureAddress}, #{tagNo}, #{accountBookNo})
 	</insert>
+	
 	<!-- 지출 상세 항목 추가 -->
 	<insert id="insertExpenditureItem" parameterType="list">
 		INSERT INTO expenditure_item
