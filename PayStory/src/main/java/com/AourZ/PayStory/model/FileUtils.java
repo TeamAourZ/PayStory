@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class FileUtils {
 	// private static final String filePath = "/usr/local/tomcat9/webapps/ROOT/WEB-INF/classes/static/paystory/images/"; // 파일이 저장될 서버 위치
 	private static final String filePath = "C:/PayStory/images/"; // 파일이 저장될 서버 위치
-	
+
 	public static String updateImg(
 			MultipartHttpServletRequest mpRequest, HttpSession session) throws Exception{
 		
@@ -102,6 +102,7 @@ public class FileUtils {
 		String uploadFileName = session.getAttribute("memberNo") +"_"+ storedFileName;
 		String filePathName = uploadPath + uploadFileName;
 		
+
 		File file1 = new File(filePathName);
 
 		multipartFile.transferTo(file1);

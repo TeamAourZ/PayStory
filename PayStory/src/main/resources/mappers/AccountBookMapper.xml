@@ -207,8 +207,12 @@
 		VALUES
 			(#{expenditureDate}, #{expenditureImage}, #{expenditureSource}, #{expenditureMemo}, #{expenditureAmount}, #{expenditureAddress}, #{tagNo}, #{accountBookNo})
 	</insert>
+<<<<<<< HEAD
 	
 	<!-- 지출 아이템 추가 -->
+=======
+	<!-- 지출 상세 항목 추가 -->
+>>>>>>> e99c3322a37f5a4642c2ab0e17525b4eca72ae3f
 	<insert id="insertExpenditureItem" parameterType="list">
 		INSERT INTO expenditure_item
 			(expenditureItemName, expenditureItemPrice, expenditureNo) 

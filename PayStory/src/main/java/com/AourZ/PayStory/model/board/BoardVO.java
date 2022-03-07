@@ -12,7 +12,7 @@ public class BoardVO {
 	private String boardCategoryNo;		// 게시글 카테고리 번호
 	private String boardCategoryName;	// 카테고리 명
   
-	public int getBoardNo() {
+	public Integer getBoardNo() {
 		return boardNo;
 	}
 

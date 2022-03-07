@@ -72,7 +72,7 @@
 			                                        </tr>
 			                                    </thead>
 			                                    <tbody>
-	                                           		<!-- 공지사항 -->		
+                                            		<!-- 공지사항 -->		
 													<c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
 			        									<tr class="boardList">
 			        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/></td>
@@ -84,7 +84,7 @@
 														</tr>
 													</c:forEach>
 				                                    
-				                                    <c:forEach var="list" items="${boardList}" varStatus="status">
+                                            		<c:forEach var="list" items="${boardList}" varStatus="status">
 			        									<tr class="boardList">
 		        											<td><input type="hidden" value='${list.boardNo}'/>${status.count}</td>
 											        		<td>${list.boardCategoryName}</td>

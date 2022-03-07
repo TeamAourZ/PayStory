@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e99c3322a37f5a4642c2ab0e17525b4eca72ae3f
 # Created by https://www.toptal.com/developers/gitignore/api/windows,eclipse,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,eclipse,java
 
@@ -138,6 +141,7 @@ $RECYCLE.BIN/
 
 # local test directory
 images/
+<<<<<<< HEAD
 =======
 # Created by https://www.toptal.com/developers/gitignore/api/windows,eclipse,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,eclipse,java
@@ -279,4 +283,6 @@ $RECYCLE.BIN/
 # ignore local uplod file
 images/
 >>>>>>> board_create
+=======
+>>>>>>> e99c3322a37f5a4642c2ab0e17525b4eca72ae3f
 upload/

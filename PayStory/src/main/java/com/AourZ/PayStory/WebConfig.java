@@ -15,5 +15,4 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/voice/**")
 		.addResourceLocations("file:///C:/PayStory/upload/");
 	}
-	
 }
