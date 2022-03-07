@@ -32,15 +32,5 @@ build/
 ### VS Code ###
 .vscode/
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 ### ignore properties ###
 *.properties
-=======
-### ignore porperties ###
-*..properties
->>>>>>> board_create
-=======
-### ignore properties ###
-*.properties
->>>>>>> e99c3322a37f5a4642c2ab0e17525b4eca72ae3f
