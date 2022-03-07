@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-#chartMainTagBox {
-	gap: 10px;
-}
-
 .chartTab.selected {
 	text-decoration: underline;
 }
