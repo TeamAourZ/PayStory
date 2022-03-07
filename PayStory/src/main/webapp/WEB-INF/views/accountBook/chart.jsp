@@ -111,7 +111,7 @@
 						</div>
 						
 						<%-------- JS : Bootstrap --------%>
-						<script src="<c:url value='/bootstrap/vendor/chart.js/Chart.min.js' />"></script>
+						<%-- <script src="<c:url value='/bootstrap/vendor/chart.js/Chart.min.js' />"></script> --%>
 					
 						<%-------- JS : Custom --------%>
 						<script src="<c:url value='/main/js/accountBook/chart.js' />"></script>
