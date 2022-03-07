@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-#boardCategoryBox {
-	gap: 10px;
-}
-
 .boardCategory.selected {
 	text-decoration: underline;
 }

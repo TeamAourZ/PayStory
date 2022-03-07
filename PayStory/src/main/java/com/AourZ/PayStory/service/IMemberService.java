@@ -18,6 +18,7 @@ public interface IMemberService {
 	public void pwUpdate(String memberEmail, String hashedPw)throws Exception;
 	public void updateImg(String memberImage, String memberEmail)throws Exception;
 	public int emailCnt(String memberEmail)throws Exception;
+	public void memberDelete(String memberEmail)throws Exception;
 	public List<MemberVO> memberList();
 	public void memberSanction(String memberEmail, int sanctionTime)throws Exception;
 	public void memberSanctionCancel(String memberEmail)throws Exception;

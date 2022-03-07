@@ -67,7 +67,6 @@ public class MemberController {
 		memberService.register(memberVO);
 		model.addAttribute("member", memberVO);
 		 
-		rttr.addFlashAttribute("msg", "가입이 완료되었습니다.");
 		rttr.addAttribute("memberEmail", memberVO.getMemberEmail());
 		rttr.addAttribute("memberName", memberVO.getMemberName());
 		
@@ -205,12 +204,14 @@ public class MemberController {
 
 	// 회원정보 수정로직
 	@RequestMapping(value="/infoUpdate", method=RequestMethod.POST)
-	public String infoUpdate(HttpServletRequest request,HttpSession session,MemberVO memberVO,Model model,RedirectAttributes rttr)throws Exception{
-				
-		memberService.infoUpdate(memberVO); 
-		session.setAttribute("login", memberVO);
-		rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다.");
-		return"/accountBook/main";
+	public String infoUpdate(HttpServletRequest request,HttpSession session, MemberVO memberVO, String memberName,Model model,RedirectAttributes rttr)throws Exception{		
+		MemberVO vo = (MemberVO) session.getAttribute("login");		
+		
+		vo.setMemberName(memberName);
+		memberService.infoUpdate(memberVO); 		
+		session.setAttribute("login", vo);
+			
+		return "/accountBook/main";
 	}
 	
 	// 비밀번호 수정로직
@@ -251,6 +252,20 @@ public class MemberController {
 		return "/accountBook/main";
 	}
 	
+	@RequestMapping(value="/deleteView", method=RequestMethod.GET)
+	public String deleteView() throws Exception{
+		return "/member/deleteView";
+	}
+    
+    @RequestMapping(value="/delete", method=RequestMethod.POST)
+	public String delete(String memberEmail,RedirectAttributes rttr,HttpSession session)throws Exception{
+		String msg = "이용해주셔서 감사합니다.";
+    	memberService.memberDelete(memberEmail);
+		session.invalidate();
+		rttr.addFlashAttribute("msg", msg);
+		return "redirect:/member/loginView";
+	}
+	
 	
 	// *********** 관리자 ***********
 	@RequestMapping(value="/master", method=RequestMethod.GET)
@@ -263,7 +278,6 @@ public class MemberController {
 		}		
 		
 		List<MemberVO> memberList = memberService.memberList();
-		//List<BoardVO> boardList = memberService.boardList();
 		
 		model.addAttribute("memberList",memberList);
 		model.addAttribute("noticeBoardList",memberService.noticeBoardList());

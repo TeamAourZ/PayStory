@@ -114,6 +114,11 @@ public class MemberService implements IMemberService {
 	}
 	
 	@Override
+	public void memberDelete(String memberEmail)throws Exception{
+		memberDAO.memberDelete(memberEmail);
+	}
+	
+	@Override
 	public List<MemberVO> memberList() {
 		return memberDAO.memberList();
 	}
