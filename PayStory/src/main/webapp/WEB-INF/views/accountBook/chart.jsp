@@ -23,7 +23,7 @@
 						</script>
 						<input type="hidden" id="temp" value="
 							<c:forEach var="data" items="${dataList}" varStatus="dataStatus">
-								${data.tag}/${data.count}/${data.sum}@
+								${data.tag}^${data.count}^${data.sum}@
 							</c:forEach>
 						">
 						<script type="text/javascript">
@@ -33,7 +33,7 @@
 							
 							// 용도에 맞게 합치기
 							for (let i = 0; i < firstSplitData.length; i++) {
-								let secondSplitData = firstSplitData[i].split('/');
+								let secondSplitData = firstSplitData[i].split('^');
 								tagList.push(secondSplitData[0]);
 								countList.push(secondSplitData[1]);
 								sumList.push(secondSplitData[2]);
