@@ -10,8 +10,8 @@ var myPieChart = new Chart(ctx, {
 		labels: tagList,
 		datasets: [{
 			data: sumList,
-			backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-			hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+			backgroundColor: ['#4e73df', '#6f42c1', '#e83e8c', '#e74a3b', '#fd7e14', '#f6c23e', '#20c9a6', '#36b9cc', '#5a5c69', '#1cc88a'],
+			hoverBackgroundColor: ['#4e73df', '#6f42c1', '#e83e8c', '#e74a3b', '#fd7e14', '#f6c23e', '#20c9a6', '#36b9cc', '#5a5c69', '#1cc88a'],
 			hoverBorderColor: "rgba(234, 236, 244, 1)",
 		}],
 	},
