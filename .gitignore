@@ -282,7 +282,4 @@ $RECYCLE.BIN/
 
 # ignore local uplod file
 images/
->>>>>>> board_create
-=======
->>>>>>> e99c3322a37f5a4642c2ab0e17525b4eca72ae3f
 upload/
