@@ -50,7 +50,12 @@ public class BoardService implements IBoardService{
 	public int updateBoard(BoardVO vo) {
 		return dao.updateBoard(vo);
 	}
-	
+
+	@Override
+	public void deleteBoard(int boardNo) {
+		dao.deleteBoard(boardNo);
+	}
+
 	@Override
 	public List<BoardVO> noticeBoardList() {
 		return dao.noticeBoardList();

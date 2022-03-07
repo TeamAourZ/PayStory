@@ -99,6 +99,7 @@
 			              		<c:choose>
 									<c:when test="${ board.memberNo eq sessionScope.memberNo }">
 										<button type="button" class="updateBtn btn btn-primary w-25 mr-3 shadow-none">수정</button>
+										<button type="button" class="deleteBtn btn btn-primary w-25 mr-3 shadow-none">삭제</button>
 										<button type="button" class="listBtn btn btn-primary w-25 shadow-none">목록</button>
 									</c:when>
 									<c:otherwise>

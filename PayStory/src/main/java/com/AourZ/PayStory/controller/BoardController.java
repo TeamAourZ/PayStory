@@ -55,7 +55,7 @@ public class BoardController {
 
 	// 카테고리별 목록
 	@RequestMapping("/board/listCategory/{ctgNo}")
-	public String categorylistView(@PathVariable String ctgNo) {
+	public String categorylistView(@PathVariable String ctgNo, Model model) {
 		ArrayList<BoardVO> boardList = service.getCategoryList(ctgNo);
 		
 		for (BoardVO board : boardList) {
@@ -66,6 +66,7 @@ public class BoardController {
 			board.setMemberName(memberName);
 		}
 		
+		model.addAttribute("boardList", boardList);
 		return "/board/listView";
 	}
 
@@ -145,5 +146,12 @@ public class BoardController {
 		int result = service.updateBoard(vo); 
 		 
 		return result;
+	}
+	
+	// 삭제
+	@RequestMapping("/board/delete/{boardNo}")
+	public String delete(@PathVariable int boardNo) {
+		service.deleteBoard(boardNo);
+		return "redirect:/board/listAll";
 	}
 }

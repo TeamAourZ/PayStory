@@ -84,7 +84,9 @@
 								 	</c:otherwise>
                         		</c:choose>
 							</nav>
-                        	<a href="<c:url value='/board/write'/>" class="btn btn-primary" >글쓰기</a>	
+                        	<c:if test="${ ctgNo ne 'bc001' }">
+                        		<a href="<c:url value='/board/write'/>" class="btn btn-primary" >글쓰기</a>
+                        	</c:if>	
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" style="overflow: hidden;">
@@ -100,21 +102,20 @@
 			                                            <th>작성자</th>
 			                                            <th>날짜</th>
 			                                            <th>조회</th>
-			                                            <th>삭제</th>
 			                                        </tr>
 			                                    </thead>
 			                                    <tbody>
-                                            		<!-- 공지사항 -->		
-													<%-- <c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
+                                            		<!-- 상단 공지사항 -->		
+													<c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
 			        									<tr class="boardList">
-			        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/></td>
+			        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/>${status.count}</td>
 		        											<td>공지사항</td>
 											        		<td>[공지]  ${noticeBoardList.boardTitle}</td>
 											        		<td>PayStory 관리자</td>
 											        		<td>${noticeBoardList.boardViews}</td>
 											        		<td>${noticeBoardList.boardDate}</td>
 														</tr>
-													</c:forEach> --%>
+													</c:forEach>
 				                                    
                                             		<c:forEach var="list" items="${boardList}" varStatus="status">
 			        									<tr class="boardList">
@@ -124,7 +125,6 @@
 											        		<td>${list.memberName}</td>
 											        		<td>${list.boardDate}</td>
 											        		<td>${list.boardViews}</td>
-											        		<td><i class="deleteBoard fa fas fa-trash-alt"></i></td>
 														</tr>
 													</c:forEach>
 			                                    </tbody>

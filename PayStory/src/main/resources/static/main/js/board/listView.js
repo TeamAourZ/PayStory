@@ -8,6 +8,7 @@ $(function(){
 		$(this).on('click', function(){
 			// 선택으로 이동
 			let ctgNo = $(this).attr('data-ctgNo');
+			console.log(ctgNo)
 			
 			if(ctgNo != '*') location.href='/board/listCategory/' + ctgNo;
 			else location.href='/board/listAll';
@@ -20,10 +21,4 @@ $(function(){
 		let boardNo = $(this).children(":first").children("input").val();
 		location.href='/board/view/'+ boardNo;
 	});
-	
-	// 삭제 버튼 클릭
-	$(document).on('click', '.deleteBoard', function(){
-		let boardNo = $(this).parents('.boardList').children(":first").children("input").val();
-		location.href='/board/delete/'+ boardNo;
-	})
 });

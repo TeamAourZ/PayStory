@@ -61,11 +61,16 @@
 	</insert>
 
 	<!-- 게시글 수정 -->
-	<insert id="updateBoard" parameterType="com.AourZ.PayStory.model.board.BoardVO">
+	<update id="updateBoard" parameterType="com.AourZ.PayStory.model.board.BoardVO">
 		UPDATE board 
 		SET boardTitle=#{boardTitle}, boardContents=#{boardContents}, boardFile=#{boardFile}, boardCategoryNo=#{boardCategoryNo} 
 		WHERE boardNo=#{boardNo}
-	</insert>
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM board WHERE boardNo=#{boardNo}
+	</delete>
 	
 	<!-- 공지사항 :서정원추가 -->
 	<select id="noticeBoardList" resultMap="board" >			
