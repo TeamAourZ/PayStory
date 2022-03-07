@@ -6,7 +6,7 @@
 <html>
 	<body>
 		<div id="dateBox" class="mt-2">
-			<div class="daySel typeA mb-2 mr-1">
+			<div class="daySel typeA mb-2 mr-1 grid-gap-3">
 				<div>SUN</div>
 				<div>MON</div>
 				<div>TUE</div>
@@ -15,7 +15,7 @@
 				<div>FRI</div>
 				<div>SAT</div>
 			</div>
-			<div class="dateSel typeA">
+			<div class="dateSel typeA grid-gap-3">
 				<%-- 첫째 날 전까지 공란 --%>
 				<c:if test="${firstDay ne 0}">
 					<c:forEach begin="0" end="${firstDay - 1}" step="1">

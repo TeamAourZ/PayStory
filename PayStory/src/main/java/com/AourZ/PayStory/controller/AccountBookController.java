@@ -3,8 +3,10 @@ package com.AourZ.PayStory.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +25,6 @@ import com.AourZ.PayStory.model.accountBook.AccountBookVO;
 import com.AourZ.PayStory.model.accountBook.DateVO;
 import com.AourZ.PayStory.model.accountBook.DetailViewItemComparator;
 import com.AourZ.PayStory.model.accountBook.DetailViewItemVO;
-import com.AourZ.PayStory.model.accountBook.ExpenditureItemComparator;
 import com.AourZ.PayStory.model.accountBook.ExpenditureItemVO;
 import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
 import com.AourZ.PayStory.model.accountBook.IncomeVO;
@@ -144,7 +145,7 @@ public class AccountBookController {
 	@RequestMapping("/accountBook/chart")
 	public String chart(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
 		// map 정보 가져오기
-		int year = Integer.parseInt((String) param.get("year")); // 년
+		String year = (String) param.get("year"); // 년
 		int month = Integer.parseInt((String) param.get("month")); // 월
 		int day = -1;
 		int lastDate = Integer.parseInt((String) param.get("lastDate")); // 달의 마지막 날
@@ -168,10 +169,10 @@ public class AccountBookController {
 
 		// DB SELECT 기준 설정
 		String monthText = methodList.zeroFill(month); // 월
-		String date = Integer.toString(year) + "-" + monthText; // 년-월
+		String date = year + "-" + monthText; // 년-월
 
 		if (chartType.equals("y")) {
-			date = Integer.toString(year);
+			date = year;
 		} else if (chartType.equals("m")) {
 			// 당월 월별 태그별 총 건수, 총 금액
 			ArrayList<TagTotalVO> dataList = accountBookService.selectAccountBookTotalDataList(chartTab, accountBookNo,
@@ -198,7 +199,7 @@ public class AccountBookController {
 	@RequestMapping("/accountBook/budgetStatus")
 	public String budget(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
 		// map 정보 가져오기
-		int year = Integer.parseInt((String) param.get("year")); // 년
+		String year = (String) param.get("year"); // 년
 		int month = Integer.parseInt((String) param.get("month")); // 월
 
 		model.addAttribute("year", year);
@@ -210,7 +211,7 @@ public class AccountBookController {
 
 		// DB SELECT 기준 설정
 		String monthText = methodList.zeroFill(month); // 월
-		String date = Integer.toString(year) + "-" + monthText; // 년-월
+		String date = year + "-" + monthText; // 년-월
 
 		// 예산
 		AccountBookBudgetVO budget = accountBookService.selectAccountBookBudget(accountBookNo, date);
@@ -277,7 +278,7 @@ public class AccountBookController {
 	public String mainCalendar(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
 		// map 정보 가져오기
 		String calendarType = (String) param.get("calendarType"); // 가계부 타입
-		int year = Integer.parseInt((String) param.get("year")); // 년
+		String year = (String) param.get("year"); // 년
 		int month = Integer.parseInt((String) param.get("month")); // 월
 		int firstDay = Integer.parseInt((String) param.get("firstDay")); // 달의 시작 요일 번호
 		int lastDate = Integer.parseInt((String) param.get("lastDate")); // 달의 마지막 날
@@ -301,7 +302,7 @@ public class AccountBookController {
 		for (int i = 1; i <= lastDate; i++) {
 			String dayText = methodList.zeroFill(i);
 
-			String date = Integer.toString(year) + "-" + monthText + "-" + dayText; // 날짜별 class data
+			String date = year + "-" + monthText + "-" + dayText; // 날짜별 class data
 
 			DateVO vo = new DateVO();
 
@@ -316,7 +317,7 @@ public class AccountBookController {
 		/* ---------------- dateList ---------------- */
 
 		// 그룹 조건 - 년-월
-		String date = Integer.toString(year) + "-" + monthText; // 년-월
+		String date = year + "-" + monthText; // 년-월
 
 		ArrayList<TagTotalVO> tempList = null;
 
@@ -393,7 +394,17 @@ public class AccountBookController {
 
 	/* 대시보드 조회 - 상세 내역 */
 	@RequestMapping("/accountBook/detailViewList")
-	public String detailViewList(HttpServletRequest request, Model model) {
+	public String detailViewList(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
+		// map 정보 가져오기
+		String year = (String) param.get("year"); // 년
+		int month = Integer.parseInt((String) param.get("month")); // 월
+		int day = Integer.parseInt((String) param.get("day")); // 일
+
+		// DB SELECT 기준 설정
+		String monthText = methodList.zeroFill(month);
+		String dayText = methodList.zeroFill(day);
+		String date = year + "-" + monthText + "-" + dayText;
+
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
@@ -402,7 +413,7 @@ public class AccountBookController {
 		ArrayList<DetailViewItemVO> detailViewItemList = new ArrayList<DetailViewItemVO>();
 
 		// 수입 내역 조회
-		ArrayList<IncomeVO> incomeList = accountBookService.selectIncomeList(accountBookNo);
+		ArrayList<IncomeVO> incomeList = accountBookService.selectIncomeList(accountBookNo, date);
 
 		// 수입 내역 리스트에 추가
 		for (IncomeVO income : incomeList) {
@@ -421,7 +432,7 @@ public class AccountBookController {
 		}
 
 		// 지출 내역 조회
-		ArrayList<ExpenditureVO> expenditureList = accountBookService.selectExpenditureList(accountBookNo);
+		ArrayList<ExpenditureVO> expenditureList = accountBookService.selectExpenditureList(accountBookNo, date);
 
 		// 지출 내역 리스트에 추가
 		for (ExpenditureVO expenditure : expenditureList) {
@@ -440,25 +451,52 @@ public class AccountBookController {
 			detailViewItemList.add(vo);
 		}
 
-		Collections.sort(detailViewItemList, new DetailViewItemComparator()); // 날짜를 기준으로 오름차순 정렬
+		if (detailViewItemList != null && detailViewItemList.size() > 0) {
+			Collections.sort(detailViewItemList, new DetailViewItemComparator()); // 날짜를 기준으로 오름차순 정렬
 
-		model.addAttribute("detailViewItemList", detailViewItemList);
+			model.addAttribute("detailViewItemList", detailViewItemList);
+			
+			for (DetailViewItemVO vo : detailViewItemList) {
+				System.out.print(vo.getCondition() + " / ");
+				System.out.print(vo.getDataNo() + " / ");
+				System.out.print(vo.getReceiptImage() + " / ");
+				System.out.print(vo.getSource() + " / ");
+				System.out.print(vo.getMemo() + " / ");
+				System.out.print(vo.getAmount() + " / ");
+				System.out.print(vo.getTagName() + " / ");
+				System.out.println(vo.getAccountBookNo());
+			}
+		}
 
 		// 지출 상세 항목 리스트
-		ArrayList<ArrayList<ExpenditureItemVO>> expenditureItemList = new ArrayList<ArrayList<ExpenditureItemVO>>();
+		Map<Integer, ArrayList<ExpenditureItemVO>> expenditureItemList = new HashMap<Integer, ArrayList<ExpenditureItemVO>>();
 
 		for (int i = 0; i < expenditureList.size(); i++) {
 			ArrayList<ExpenditureItemVO> voList = accountBookService
 					.selectExpenditureItem(expenditureList.get(i).getExpenditureNo());
 
-			if (voList != null) {
-				expenditureItemList.add(voList);
+			if (voList != null && voList.size() > 0) {
+				expenditureItemList.put(voList.get(0).getExpenditureNo(), voList);
 			}
 		}
 
-		Collections.sort(expenditureItemList, new ExpenditureItemComparator()); // 지출 번호를 기준으로 오름차순 정렬
+		if (expenditureItemList != null && expenditureItemList.size() > 0) {
+			Object[] keyList = expenditureItemList.keySet().toArray();
+			Arrays.sort(keyList); // key 값(지출 번호)을 기준으로 오름차순 정렬
 
-		model.addAttribute("expenditureItemList", expenditureItemList);
+			model.addAttribute("expenditureItemList", expenditureItemList);
+			
+			for (Object key : keyList) {
+				ArrayList<ExpenditureItemVO> tempArrayVo = expenditureItemList.get(key);
+				
+				System.out.println(">>>>>>");
+				for (ExpenditureItemVO vo : tempArrayVo) {
+					System.out.print(vo.getExpenditureItemName() + " / ");
+					System.out.print(vo.getExpenditureItemPrice() + " / ");
+					System.out.println(vo.getExpenditureNo());
+				}
+			}
+		}
 
 		return "accountBook/detailViewList";
 	}
@@ -488,8 +526,11 @@ public class AccountBookController {
 	public int addExpenditure(ExpenditureVO expenditureVO, @RequestParam("expenditureItemPrice") int[] priceArray,
 			@RequestParam("expenditureItemName") String[] nameArray, HttpSession session) {
 
-		// session에서 accountBookNo 가져오기
+		// session에서 accountBookNo, memberNo 가져오기
 		expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
+		String fileName = session.getAttribute("memberNo") + "_" + session.getAttribute("accountBookNo") + "_"
+				+ expenditureVO.getExpenditureImage();
+		expenditureVO.setExpenditureImage(fileName);
 
 		accountBookService.insertExpenditure(expenditureVO);
 
@@ -562,4 +603,5 @@ public class AccountBookController {
 	public String moveRegisterParticipant() {
 		return "accountBook/public/registerParticipant";
 	}
+
 }

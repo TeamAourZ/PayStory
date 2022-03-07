@@ -39,10 +39,10 @@
 									<td>총 수입금 :</td>
 									<c:choose>
 										<c:when test="${empty incomeTotalAmount}">
-											<td>0</td>
+											<td class="income-color">0</td>
 										</c:when>
 										<c:otherwise>
-											<td><fmt:formatNumber value="${incomeTotalAmount}" pattern="#,###" /></td>
+											<td class="income-color"><fmt:formatNumber value="${incomeTotalAmount}" pattern="#,###" /></td>
 										</c:otherwise>
 									</c:choose>
 								</tr>
@@ -50,10 +50,10 @@
 									<td>총 지출금 :</td>
 									<c:choose>
 										<c:when test="${empty expenditureTotalAmount}">
-											<td>0</td>
+											<td class="expenditure-color">0</td>
 										</c:when>
 										<c:otherwise>
-											<td><fmt:formatNumber value="${expenditureTotalAmount}" pattern="#,###" /></td>
+											<td class="expenditure-color"><fmt:formatNumber value="${expenditureTotalAmount}" pattern="#,###" /></td>
 										</c:otherwise>
 									</c:choose>
 								</tr>
