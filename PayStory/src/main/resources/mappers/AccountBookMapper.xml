@@ -117,7 +117,7 @@
 	<select id="selectIncomeList" parameterType="HashMap" resultMap="incomeList">
 		SELECT *
 		FROM income
-		WHERE accountBookNo = #{accountBookNo} AND CONCAT(#{date}, '%')
+		WHERE accountBookNo = #{accountBookNo} AND incomeDate LIKE CONCAT(#{date}, '%')
 		ORDER BY incomeDate ASC
 	</select>
 	
@@ -125,7 +125,7 @@
 	<select id="selectExpenditureList" parameterType="HashMap" resultMap="expenditureList">
 		SELECT *
 		FROM expenditure
-		WHERE accountBookNo = #{accountBookNo} AND CONCAT(#{date}, '%')
+		WHERE accountBookNo = #{accountBookNo} AND expenditureDate LIKE CONCAT(#{date}, '%')
 		ORDER BY expenditureDate ASC
 	</select>
 	
@@ -207,6 +207,7 @@
 		VALUES
 			(#{expenditureDate}, #{expenditureImage}, #{expenditureSource}, #{expenditureMemo}, #{expenditureAmount}, #{expenditureAddress}, #{tagNo}, #{accountBookNo})
 	</insert>
+	
 	<!-- 지출 상세 항목 추가 -->
 	<insert id="insertExpenditureItem" parameterType="list">
 		INSERT INTO expenditure_item

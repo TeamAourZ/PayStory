@@ -21,25 +21,39 @@
 		<result column="boardFile" property="boardFile"/>
 		<result column="memberNo" property="memberNo"/>
 		<result column="boardCategoryNo" property="boardCategoryNo"/>
+		<result column="categoryName" property="categoryName"/>
+		<result column="memberName" property="memberName"/>
 	</resultMap>
 
 	<!-- 게시판 목록: 전체 -->
 	<select id="getList" resultMap="board">
-		SELECT * FROM board ORDER BY boardDate
+		SELECT * FROM board ORDER BY boardDate DESC
 	</select>
 
 	<!-- 게시판 목록 : 카테고리별 -->
 	<select id="getCategoryList" parameterType="String" resultMap="board">
-		SELECT * FROM board WHERE boardCategoryNo = #{boardCategoryNo} ORDER BY boardDate
+		SELECT * FROM board WHERE boardCategoryNo = #{boardCategoryNo} ORDER BY boardDate DESC
+	</select>
+	
+	<!-- 게시글 작성자 회원 이름 조회 -->
+	<select id="selectMemberName" parameterType="String" resultType="String">
+		SELECT memberName
+		FROM member
+		WHERE memberNo = #{memberNo}
+	</select>
+	
+	<!-- 게시판 카테고리 이름 조회 -->
+	<select id="selectBoardCategoryName" parameterType="String" resultType="String">
+		SELECT boardCategoryName FROM board_category WHERE boardCategoryNo = #{boardCategoryNo}
 	</select>
 
-	<!-- 게시판 목록 : 카테고리별 -->
+	<!-- 게시판 조회 -->
 	<select id="boardView" parameterType="int" resultType="com.AourZ.PayStory.model.board.BoardVO">
 		SELECT * FROM board WHERE boardNo = #{boardNo}
 	</select>
 
 	<!-- 게시글 작성 -->
-	<insert id="createBoard" parameterType="com.AourZ.PayStory.model.board.BoardVO" useGeneratedKeys="true" keyProperty="expenditureNo" >
+	<insert id="createBoard" parameterType="com.AourZ.PayStory.model.board.BoardVO" useGeneratedKeys="true" keyProperty="boardNo" >
 		INSERT INTO board 
 			(boardTitle, boardContents, boardFile, boardCategoryNo, memberNo) 
 		VALUES

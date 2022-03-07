@@ -11,6 +11,8 @@ import com.AourZ.PayStory.model.board.BoardVO;
 public interface IBoardService {
 	public ArrayList<BoardVO> getList();
 	public ArrayList<BoardVO> getCategoryList(String ctgNo);
+	public String selectBoardCategoryName(String categoryNo);
+	public String selectMemberName(String memberNo);
 	public BoardVO boardView(int boardNo);
 	public int createBoard(BoardVO vo);
 	public List<BoardVO> noticeBoardList();
