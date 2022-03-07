@@ -237,31 +237,7 @@
 	                   				</div>
 	              				</div>				
 	               			</div>  							
-						</div>
-						
-						<div class="container-fluid">
-		                    <h1 class="h3 mb-2 text-gray-800 ml-5">공지사항 작성</h1>
-		                    <!-- 게시글 작성 form -->
-							<div class="formWrap p-4 bg-white rounded">
-								<form id="newBoardForm" class="px-4" action="/board/register" method="post">              		
-				              		<div class="form-row">
-				              			<!-- 제목 -->
-					              		<div class="form-group col-8">
-					              			<label>제목</label>
-					              			<input class="title form-control shadow-none" name="title">
-					              		</div>		              		
-				              		</div>
-					              	<!-- 내용 -->
-				              		<div class="form-group">
-					              		<label>내용</label>
-					              		<textarea class="content form-control shadow-none" rows="10" name="content"></textarea>
-					              	</div>
-					              	<div class="d-flex align-items-center justify-content-center mt-3">
-										<button type="submit" class="btn btn-primary w-25 mr-3 shadow-none">등록</button>
-									</div>
-			              		</form>
-							</div>
-		                </div>							
+						</div>						
 					</div>		
 				</div>
 			</div>

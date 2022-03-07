@@ -13,7 +13,6 @@ public class WebConfig implements WebMvcConfigurer {
 		.addResourceLocations("file:///usr/local/tomcat9/webapps/ROOT/WEB-INF/classes/static/paystory/images/");
 		
 		registry.addResourceHandler("/voice/**")
-		.addResourceLocations("file:///PayStory/upload/");
+		.addResourceLocations("file:///C:/PayStory/upload/");
 	}
-	
 }
