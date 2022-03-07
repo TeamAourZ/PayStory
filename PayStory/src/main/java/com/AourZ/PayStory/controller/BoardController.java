@@ -1,6 +1,5 @@
 package com.AourZ.PayStory.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.AourZ.PayStory.model.FileUtils;
 import com.AourZ.PayStory.model.board.BoardVO;
 import com.AourZ.PayStory.service.BoardService;
 
@@ -27,6 +27,15 @@ public class BoardController {
 	@RequestMapping("/board/listAll")
 	public String alllistView(Model model) {
 		ArrayList<BoardVO> boardList = service.getList();
+		
+		for (BoardVO board : boardList) {
+			String boardCategoryName = replaceCategory(board.getBoardCategoryNo()); // 카테고리 번호 to 카테고리 이름
+			String memberName = replaceMember(board.getMemberNo()); // 회원 번호 to 회원 이름
+
+			board.setBoardCategoryName(boardCategoryName);
+			board.setMemberName(memberName);
+		}
+		
 		model.addAttribute("boardList", boardList);
 		return "/board/listView";
 	}
@@ -35,7 +44,29 @@ public class BoardController {
 	@RequestMapping("/board/listCategory")
 	public ArrayList<BoardVO> categorylistView(@RequestParam String ctgNo) {
 		ArrayList<BoardVO> boardList = service.getCategoryList(ctgNo);
+		
+		for (BoardVO board : boardList) {
+			String boardCategoryName = replaceCategory(board.getBoardCategoryNo()); // 카테고리 번호 to 카테고리 이름
+			String memberName = replaceMember(board.getMemberNo()); // 회원 번호 to 회원 이름
+
+			board.setBoardCategoryName(boardCategoryName);
+			board.setMemberName(memberName);
+		}
+		
 		return boardList;
+	}
+	
+	// 카테고리 번호 to 카테고리 이름 메서드
+	String replaceCategory(String categoryNo) {
+		String categoryName = service.selectBoardCategoryName(categoryNo);
+
+		return categoryName;
+	}
+	
+	// 회원 번호 to 회원 이름 메서드
+	String replaceMember(String memberNo) {
+		String memberName = service.selectMemberName(memberNo);
+		return memberName;
 	}
 
 	// 게시글 작성 폼을 이동
@@ -52,19 +83,9 @@ public class BoardController {
 					  HttpSession session) throws IOException {
 
 		// 파일 업로드 및 파일 이름 지정
-		String fileName = null;
-
 		if(file != null) { 
-			String uploadPath = "C:/PayStory/PayStory/src/main/resources/static/file/board/";
-			String originalFileName = file.getOriginalFilename(); 
-			fileName = originalFileName; 
-			String filePathName = uploadPath + originalFileName; 
-			// String uploadFileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("accountBookNo")+"_"+originalFileName; 
-			// String filePathName = uploadPath + uploadFileName; 
-			File file1 = new File(filePathName); 
-			file.transferTo(file1); 
-
-			vo.setBoardFile(fileName); 
+			String fileName = FileUtils.uploadBoardFile(file, session);
+			vo.setBoardFile(fileName);
 		};
 		
 		vo.setMemberNo((String) session.getAttribute("memberNo"));

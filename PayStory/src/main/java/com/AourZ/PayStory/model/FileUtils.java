@@ -78,14 +78,14 @@ public class FileUtils {
 		
 		String originalFileName = multipartFile.getOriginalFilename();
 		// 업로드 파일 이름 : "memberNo_accountBookNo_파일이름"
-		String uploadFileName = session.getAttribute("memberNo") +"_"+ session.getAttribute("boardNo")+"_"+originalFileName;
+		String uploadFileName = session.getAttribute("memberNo") +"_"+ originalFileName;
 		String filePathName = uploadPath + uploadFileName;
 		
 		File file1 = new File(filePathName);
 
 		multipartFile.transferTo(file1);
 		
-		return filePathName;
+		return uploadFileName;
 	}
 	
 	public static String getRandomString() {

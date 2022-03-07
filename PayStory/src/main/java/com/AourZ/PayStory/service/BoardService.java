@@ -19,15 +19,28 @@ public class BoardService implements IBoardService{
 	public ArrayList<BoardVO> getList() {
 		 return dao.getList();
 	}
-
+	
+	@Override
 	public ArrayList<BoardVO> getCategoryList(String ctgNo) {
 		return dao.getCategory(ctgNo);
 	}
+	
+	@Override
+	public String selectBoardCategoryName(String categoryNo) {
+		return dao.selectBoardCategoryName(categoryNo);
+	}
+	
+	@Override
+	public String selectMemberName(String memberNo) {
+		return dao.selectMemberName(memberNo);
+	}
 
+	@Override
 	public BoardVO boardView(int boardNo) {
 		return dao.boardView(boardNo);
 	}
 
+	@Override
 	public int createBoard(BoardVO vo) {
 		return dao.createBoard(vo);
 	}
