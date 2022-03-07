@@ -46,11 +46,43 @@
                         <div class="card-header py-3 d-flex justify-content-between">
                         	<!-- 게시판 header : 글쓰기 버튼, 카테고리, 검색 -->
                         	<nav class="nav boardCategory">
-							  <a class="nav-link active" data-ctgNo="*">전체</a>
-							  <a class="nav-link" data-ctgNo="bc001">공지</a>
-							  <a class="nav-link" data-ctgNo="bc002">질문</a>
-							  <a class="nav-link" data-ctgNo="bc003">정보공유</a>
-							  <a class="nav-link" data-ctgNo="bc004">자유게시판</a>
+                        		<c:choose>
+                        			<c:when test="${ ctgNo eq 'bc001' }">
+	                       				<a class="nav-link" data-ctgNo="*">전체</a>
+									 	<a class="nav-link active" data-ctgNo="bc001">공지</a>
+									 	<a class="nav-link" data-ctgNo="bc002">질문</a>
+									 	<a class="nav-link" data-ctgNo="bc003">정보공유</a>
+									 	<a class="nav-link" data-ctgNo="bc004">자유게시판</a>
+								 	</c:when>
+                        			<c:when test="${ ctgNo eq 'bc002' }">
+	                       				<a class="nav-link" data-ctgNo="*">전체</a>
+									 	<a class="nav-link" data-ctgNo="bc001">공지</a>
+									 	<a class="nav-link active" data-ctgNo="bc002">질문</a>
+									 	<a class="nav-link" data-ctgNo="bc003">정보공유</a>
+									 	<a class="nav-link" data-ctgNo="bc004">자유게시판</a>
+								 	</c:when>
+                        			<c:when test="${ ctgNo eq 'bc003' }">
+	                       				<a class="nav-link" data-ctgNo="*">전체</a>
+									 	<a class="nav-link" data-ctgNo="bc001">공지</a>
+									 	<a class="nav-link" data-ctgNo="bc002">질문</a>
+									 	<a class="nav-link active" data-ctgNo="bc003">정보공유</a>
+									 	<a class="nav-link" data-ctgNo="bc004">자유게시판</a>
+								 	</c:when>
+                        			<c:when test="${ ctgNo eq 'bc004' }">
+	                       				<a class="nav-link" data-ctgNo="*">전체</a>
+									 	<a class="nav-link" data-ctgNo="bc001">공지</a>
+									 	<a class="nav-link" data-ctgNo="bc002">질문</a>
+									 	<a class="nav-link" data-ctgNo="bc003">정보공유</a>
+									 	<a class="nav-link active" data-ctgNo="bc004">자유게시판</a>
+								 	</c:when>
+                        			<c:otherwise>
+	                       				<a class="nav-link active" data-ctgNo="*">전체</a>
+									 	<a class="nav-link" data-ctgNo="bc001">공지</a>
+									 	<a class="nav-link" data-ctgNo="bc002">질문</a>
+									 	<a class="nav-link" data-ctgNo="bc003">정보공유</a>
+									 	<a class="nav-link" data-ctgNo="bc004">자유게시판</a>
+								 	</c:otherwise>
+                        		</c:choose>
 							</nav>
                         	<a href="<c:url value='/board/write'/>" class="btn btn-primary" >글쓰기</a>	
                         </div>
@@ -73,7 +105,7 @@
 			                                    </thead>
 			                                    <tbody>
                                             		<!-- 공지사항 -->		
-													<c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
+													<%-- <c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
 			        									<tr class="boardList">
 			        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/></td>
 		        											<td>공지사항</td>
@@ -82,7 +114,7 @@
 											        		<td>${noticeBoardList.boardViews}</td>
 											        		<td>${noticeBoardList.boardDate}</td>
 														</tr>
-													</c:forEach>
+													</c:forEach> --%>
 				                                    
                                             		<c:forEach var="list" items="${boardList}" varStatus="status">
 			        									<tr class="boardList">
@@ -92,7 +124,7 @@
 											        		<td>${list.memberName}</td>
 											        		<td>${list.boardDate}</td>
 											        		<td>${list.boardViews}</td>
-											        		<td><i class="fa fas fa-trash-alt"></i></td>
+											        		<td><i class="deleteBoard fa fas fa-trash-alt"></i></td>
 														</tr>
 													</c:forEach>
 			                                    </tbody>

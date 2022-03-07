@@ -4,26 +4,13 @@
  
 $(function(){
 	// 카테고리 
-	$('.boardCategory a').each(function(i){
+	$('.boardCategory a').each(function(){
 		$(this).on('click', function(){
-			// 선택된 것만 CSS 적용 OK
-			$('.boardCategory a:not(:eq('+i+'))').removeClass('active');
-			$(this).addClass('active');
-			
-			// 선택 ajax
+			// 선택으로 이동
 			let ctgNo = $(this).attr('data-ctgNo');
-			console.log(ctgNo)
-			$.ajax({
-				type: 'post',
-				url: '/board/listCategory',
-				data: {'boardCategoryNo': ctgNo},
-				sucess: function(result){
-					console.log(result)
-				},
-				error: function(e){
-					console.log(e)
-				}
-			});
+			
+			if(ctgNo != '*') location.href='/board/listCategory/' + ctgNo;
+			else location.href='/board/listAll';
 		});
 	});
 	
@@ -33,4 +20,10 @@ $(function(){
 		let boardNo = $(this).children(":first").children("input").val();
 		location.href='/board/view/'+ boardNo;
 	});
+	
+	// 삭제 버튼 클릭
+	$(document).on('click', '.deleteBoard', function(){
+		let boardNo = $(this).parents('.boardList').children(":first").children("input").val();
+		location.href='/board/delete/'+ boardNo;
+	})
 });
