@@ -48,6 +48,9 @@
 				              		<label>카테고리</label>
 				              		<select id="boardCategoryNo" name="boardCategoryNo" class="form-control shadow-none" required>
 										<option selected disabled value="">카테고리를 선택해주세요.</option>
+										<c:if test="${ sessionScope.memberRank eq '3' }">
+											<option value="bc001">공지사항</option>
+										</c:if>
 										<option value="bc002">질문</option>
 										<option value="bc003">정보공유</option>
 										<option value="bc004">자유게시판</option>
