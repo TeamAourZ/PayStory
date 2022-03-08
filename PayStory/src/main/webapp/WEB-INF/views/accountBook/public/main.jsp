@@ -81,7 +81,7 @@
 											</c:when>
 											
 											<c:otherwise>
-											    <img class="profile" src=<c:url value='/images/member/${shareMain.ownerNo}/${shareMain.ownerImage}'/>alt="">
+											    <img class="profile" src="<c:url value='/images/member/${shareMain.ownerNo}/${shareMain.ownerImage}'></c:url>"alt="">
 										    </c:otherwise>
 										</c:choose>
 
@@ -96,7 +96,7 @@
 											    </c:when>
 											   
 											    <c:otherwise>
-											        <img class="profile" src=<c:url value='/images/member/${shareMain.participantNo[0]}/${shareMain.participantImage[0]}'></c:url> width="50px" height="50px" alt="">
+											        <img class="profile" src="<c:url value='/images/member/${shareMain.participantNo[0]}/${shareMain.participantImage[0]}'></c:url>" width="50px" height="50px" alt="">
 											    </c:otherwise>
 											</c:choose>
 									</div>
@@ -108,7 +108,7 @@
 											    </c:when>
 											   
 											    <c:otherwise>
-											        <img class="profile" src=<c:url value='/images/member/${shareMain.participantNo[1]}/${shareMain.participantImage[1]}'></c:url> width="50px" height="50px" alt="">
+											        <img class="profile" src="<c:url value='/images/member/${shareMain.participantNo[1]}/${shareMain.participantImage[1]}'></c:url>" width="50px" height="50px" alt="">
 											    </c:otherwise>
 										</c:choose>
 									</div>
@@ -120,7 +120,7 @@
 											    </c:when>
 											   
 											    <c:otherwise>
-											        <img class="profile" src=<c:url value='/images/member/${shareMain.participantNo[2]}/${shareMain.participantImage[2]}'></c:url> width="50px" height="50px" alt="">
+											        <img class="profile" src="<c:url value='/images/member/${shareMain.participantNo[2]}/${shareMain.participantImage[2]}'></c:url>" width="50px" height="50px" alt="">
 											    </c:otherwise>
 										</c:choose>
 									</div>
