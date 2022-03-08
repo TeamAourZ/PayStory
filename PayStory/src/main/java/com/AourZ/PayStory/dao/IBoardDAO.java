@@ -13,5 +13,7 @@ public interface IBoardDAO extends IBoardService {
 	public String selectMemberName(String memberNo);
 	public BoardVO boardView(int boardNo);
 	public int createBoard(BoardVO vo);
+	public int updateBoard(BoardVO vo);
+	public void deleteBoard(int boardNo);
 	public List<BoardVO> noticeBoardList();
 }

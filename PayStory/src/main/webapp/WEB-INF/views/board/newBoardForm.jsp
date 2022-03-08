@@ -37,7 +37,6 @@
                     <!-- 게시글 작성 form -->
 					<div class="formWrap p-4 bg-white rounded">
 						<form id="newBoardForm" class="px-4">
-							<%--<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" /> --%>		              		
 		              		<div class="form-row">
 		              			<!-- 제목 -->
 			              		<div class="form-group col-8">
@@ -61,15 +60,6 @@
 								<input type="file" id="uploadFile" name="boardFile" class="custom-file-input shadow-none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadFile">
 								<label class="custom-file-label shadow-none" for="uploadFile">파일 선택</label>
 							</div>
-						    <!-- <div class="row">
-						        <div class="col-lg-12">
-						            <div class="card mb-4">
-						                <div class="card-body uploadResult">
-						                	<ul></ul>
-						                </div>
-						            </div>
-						        </div>
-						    </div> -->
 			              	<!-- 내용 -->
 		              		<div class="form-group">
 			              		<label>내용</label>
@@ -77,7 +67,7 @@
 			              	</div>
 			              	<div class="d-flex align-items-center justify-content-center mt-3">
 								<button type="submit" class="btn btn-primary w-25 mr-3 shadow-none">등록</button>
-								<button type="button" class="btn btn-primary w-25 shadow-none">취소</button>
+								<button type="button" class="listBtn btn btn-primary w-25 shadow-none">취소</button>
 							</div>
 	              		</form>
 					</div>

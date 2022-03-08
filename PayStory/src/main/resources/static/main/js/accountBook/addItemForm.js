@@ -273,7 +273,7 @@
 			},
 			success: function(result) {
 				if(result != 0){
-					alert("수입내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
+					alert("수입 내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
 					location.href = "/accountBook/myMain";
 				}
 			},
@@ -301,7 +301,7 @@
 		
 		const formData = new FormData();
 		console.log($('#uploadReceipt').val())
-  		formData.append("expenditureImage", $('#imageValue').val());
+  		formData.append("expenditureImage", $('#imageValue').val() || null);
   		formData.append("expenditureDate", $('#expenditureDate').val());
   		formData.append("expenditureSource", $('#expenditureSource').val());
   		formData.append("expenditureAddress", $('#address').val());
@@ -319,7 +319,7 @@
     		contentType: false,
 			success: function(result) {
 				if(result != 0){
-					alert("지출내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
+					alert("지출 내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
 					location.href = "/accountBook/myMain";
 				}
 			},

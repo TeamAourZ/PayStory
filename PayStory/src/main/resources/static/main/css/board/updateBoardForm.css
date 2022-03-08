@@ -1,0 +1,20 @@
+@charset "UTF-8";
+/* updateBoardForm.css */
+
+/* 첨부 파일 영역 */
+.card {
+	height: 180px; 
+	width: 220px;
+}
+.card:hover { cursor: pointer; }
+
+.card img { height: inherit; }
+
+.deleteBtn.hidden { display: none; }
+
+.deleteBtn {
+    float: right;
+	font-size: 25px;
+    color: #4e73df;
+    cursor: pointer;
+}

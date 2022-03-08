@@ -1,7 +1,8 @@
 /**
- * newBoardForm.js
+ * updateBoardForm.js
  */
- $(document).ready(function(){
+ 
+$(function(){
 	/***** 엔터키 submit 안 되게 OK *****/
 	$(document).on('keydown', function(e){
 		if(e.keyCode == 13) e.preventDefault();
@@ -13,8 +14,23 @@
 	  	$(".custom-file-label").text(fileName.substring(12));
 	});	
 	
-	/* Submit - 게시글 */
-	$('#newBoardForm').on('submit', function(e){
+	$('.card').hover(function(){
+		$('.deleteBtn').removeClass('hidden');
+	}, function(){
+		$('.deleteBtn').addClass('hidden');
+	});	
+	
+	/* 첨부 파일 이미지 삭제 */
+	$('.deleteBtn').each(function(){
+		$(this).on('click', function(e){
+			e.preventDefault();
+			let currentImg = $(this).parent().parent();
+			currentImg.remove();
+		});
+	});
+	
+	/* Submit - 게시글 수정 */
+	$('#updateBoardForm').on('submit', function(e){
 		e.preventDefault();
 		
 		const formData = new FormData();
@@ -22,19 +38,22 @@
 		formData.append('boardCategoryNo',  $('#boardCategoryNo option:selected').val());
 		formData.append('file',  $('#uploadFile')[0].files[0] || null);
 		formData.append('boardContents',  $('.content').val());
+		formData.append('boardFileInDB', $('.boardFileInDB').val());
+		formData.append('boardNo', $('.boardNo').val());
 		
+		console.log($('.boardFileInDB').val())
 		console.log($('#boardCategoryNo option:selected').val())
 
 		$.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',	
-			url: "/board/create", 	
+			url: "/board/update", 	
 			data: formData, 
 			processData: false,
     		contentType: false,
 			success: function(result) {
 				if(result != 0){
-					alert("게시글을 정상적으로 등록했습니다.\n게시판 목록 페이지로 이동합니다.");
+					alert("게시글을 정상적으로 수정했습니다.\n게시판 목록 페이지로 이동합니다.");
 					location.href = "/board/listAll";
 				}
 			},
