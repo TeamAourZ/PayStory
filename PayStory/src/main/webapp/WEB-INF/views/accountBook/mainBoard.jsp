@@ -29,8 +29,8 @@
 													<c:otherwise>
 														<tr class="postItem pointer-cursor">
 															<input type="hidden" value="${board.boardNo}" />
-															<td class="border-color-white p-1 w-15 text-left">${board.boardCategoryName}</td>
-															<td class="border-color-white p-1 w-65 text-left">${board.boardTitle}</td>
+															<td class="border-color-white p-1 w-20 text-left">${board.boardCategoryName}</td>
+															<td class="border-color-white p-1 w-60 text-left">${board.boardTitle}</td>
 															<td class="border-color-white p-1 w-20 text-right">${board.memberName}</td>
 														</tr>
 													</c:otherwise>
