@@ -84,9 +84,16 @@
 								 	</c:otherwise>
                         		</c:choose>
 							</nav>
-                        	<c:if test="${ ctgNo ne 'bc001' }">
-                        		<a href="<c:url value='/board/write'/>" class="btn btn-primary" >글쓰기</a>
-                        	</c:if>	
+                        	<c:choose>
+                        		<c:when test="${ ctgNo ne 'bc001' }">
+	                        		<a href="<c:url value='/board/write'/>" class="btn btn-primary" >글쓰기</a>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<c:if test="${ sessionScope.memberRank eq '3' }">
+		                        		<a href="<c:url value='/board/write'/>" class="btn btn-primary" >글쓰기</a>
+                        			</c:if>
+                        		</c:otherwise>
+                        	</c:choose>	
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" style="overflow: hidden;">
