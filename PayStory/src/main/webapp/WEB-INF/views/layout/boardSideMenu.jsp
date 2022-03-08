@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+	<head>
+	
+	</head>
 	<body>
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -65,7 +68,16 @@
                     <span>챗봇</span>
                 </a>
             </li>
-
+            
+            <!-- Nav Item - 관리자 -->
+            <c:if test="${login.memberRank == 3}">
+	            <li class="nav-item">
+	                <a class="nav-link" href="<c:url value='/member/master' />">
+	                    <i class="fas fa-address-book"></i>
+	                    <span>관리자</span>
+	                </a>
+	            </li>
+			</c:if>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
