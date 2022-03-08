@@ -165,6 +165,7 @@ public class MemberController {
 		// model.addAttribute로 member라는 key에 memberVO의 데이터를 담았다.
 		model.addAttribute("member", memberVO);
 		httpSession.setAttribute("memberNo", memberVO.getMemberNo()); // 2022.02.20 강성우추가... 세션으로 'sid'에 'memberNo'값 저장
+		httpSession.setAttribute("memberRank", memberVO.getMemberRank()); // 2022.03.08 박하영 추가 세션에 회원 권한 저장
 		
 		return "/accountBook/main";
 	}

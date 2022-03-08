@@ -19,6 +19,24 @@ $(function(){
 	// 해당 게시글 번호를 가진 조회 페이지로 이동
 	$(document).on('click', '.boardList', function(){
 		let boardNo = $(this).children(":first").children("input").val();
-		location.href='/board/view/'+ boardNo;
+		let currntViews =$(this).children(":last").children("input").val();
+		$(this).children(":last").children("input").val(++currntViews);
+		let updateViews = $(this).children(":last").children("input").val();
+		
+		// 조회수 추가
+		$.ajax({
+			type: 'post',
+			url: '/board/updateViews',
+			data: {'boardViews': updateViews, 'boardNo': boardNo},
+			success: function(result){
+				if(result != 0){
+					// 조회 페이지로 이동
+					location.href='/board/view/'+ boardNo;
+				}
+			},
+			error: function(e){
+				console.log(e);
+			}
+		});
 	});
 });

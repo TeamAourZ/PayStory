@@ -1,6 +1,7 @@
 package com.AourZ.PayStory.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,10 @@ public class BoardService implements IBoardService{
 	@Override
 	public List<BoardVO> noticeBoardList() {
 		return dao.noticeBoardList();
+	}
+
+	@Override
+	public int updateViews(HashMap<String, Object> map) {
+		return dao.updateViews(map);
 	}
 }

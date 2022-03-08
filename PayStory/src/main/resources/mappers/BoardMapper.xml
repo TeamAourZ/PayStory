@@ -60,6 +60,13 @@
 			(#{boardTitle}, #{boardContents}, #{boardFile}, #{boardCategoryNo}, #{memberNo})
 	</insert>
 
+	<!-- 게시글 조회수 추가 -->
+	<update id="updateViews" parameterType="map">
+		UPDATE board 
+		SET boardViews=#{boardViews} 
+		WHERE boardNo=#{boardNo}
+	</update>
+
 	<!-- 게시글 수정 -->
 	<update id="updateBoard" parameterType="com.AourZ.PayStory.model.board.BoardVO">
 		UPDATE board 
