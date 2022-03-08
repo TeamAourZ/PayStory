@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Component
 public class FileUtils {
 	private static final String filePath = "/usr/local/tomcat9/webapps/ROOT/WEB-INF/classes/static/paystory/images/"; // 파일이 저장될 서버 위치
+	// private static final String filePath = "C:/PayStory/images/"; // 로컬용
 	
 	public static String updateImg(
 			MultipartHttpServletRequest mpRequest, HttpSession session) throws Exception{
