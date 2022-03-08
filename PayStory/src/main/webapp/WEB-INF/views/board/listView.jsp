@@ -115,12 +115,12 @@
                                             		<!-- 상단 공지사항 -->		
 													<c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
 			        									<tr class="boardList">
-			        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/>${status.count}</td>
+			        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/></td>
 		        											<td>공지사항</td>
 											        		<td>[공지]  ${noticeBoardList.boardTitle}</td>
 											        		<td>PayStory 관리자</td>
-											        		<td>${noticeBoardList.boardViews}</td>
 											        		<td>${noticeBoardList.boardDate}</td>
+											        		<td>${noticeBoardList.boardViews}</td>
 														</tr>
 													</c:forEach>
 				                                    
