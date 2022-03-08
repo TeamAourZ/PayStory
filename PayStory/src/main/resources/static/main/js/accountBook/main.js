@@ -30,9 +30,9 @@ $(function() {
 			isType = "B";
 			calendarAjax(isType, nowYear, nowMonth); // 달력
 		} else if (width >= 620 && isType == "B") {
-			$('table').eq(0).removeClass('table-responsive');
+			$('.isScroll').removeClass('table-responsive');
 		} else if (width < 620 && isType == "B") {
-			$('table').eq(0).addClass('table-responsive');
+			$('.isScroll').addClass('table-responsive');
 		}
 	});
 
@@ -179,7 +179,7 @@ $(function() {
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
 	});
 
-	/* 카테고리 선택 */
+	/* 게시판 카테고리 선택 (전체, 공지사항) */
 	$('.boardCategory').on('click', function() {
 		$('.boardCategory').each(function() {
 			if ($(this).hasClass('selected')) {
@@ -189,6 +189,15 @@ $(function() {
 		$(this).addClass('font-weight-bold text-primary selected');
 
 		mainBoardAjax(); // 게시판
+	});
+
+	/* 게시판 호버 */
+	$(document).on('click', '.postItem', function(e) {
+		e.stopImmediatePropagation();
+
+		let boardNo = $(this).children('input').val();
+
+		location.href = '/board/view/' + boardNo;
 	});
 
 	/* 공유 회원 목록 */
