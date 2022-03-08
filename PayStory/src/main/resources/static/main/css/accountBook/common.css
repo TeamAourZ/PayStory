@@ -103,14 +103,10 @@
 	cursor: help;
 }
 
-.w-15 {
-  width: 15% !important;
-}
-
 .w-20 {
   width: 20% !important;
 }
 
-.w-65 {
-  width: 65% !important;
+.w-60 {
+  width: 60% !important;
 }
