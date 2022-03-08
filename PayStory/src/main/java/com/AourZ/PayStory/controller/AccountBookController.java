@@ -531,7 +531,8 @@ public class AccountBookController {
 		expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
 		
 		// 파일 없을 때 예외 처리하기
-		if(!expenditureVO.getExpenditureImage().equals("null")) {
+		System.out.println();
+		if(!expenditureVO.getExpenditureImage().equals("")) {
 			String fileName = session.getAttribute("memberNo") + "_" + session.getAttribute("accountBookNo") + "_"
 					+ expenditureVO.getExpenditureImage();
 			expenditureVO.setExpenditureImage(fileName);
