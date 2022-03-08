@@ -124,7 +124,7 @@
 											        		<td>${list.boardTitle}</td>
 											        		<td>${list.memberName}</td>
 											        		<td>${list.boardDate}</td>
-											        		<td>${list.boardViews}</td>
+											        		<td><input type="hidden" value='${list.boardViews}'/>${list.boardViews}</td>
 														</tr>
 													</c:forEach>
 			                                    </tbody>

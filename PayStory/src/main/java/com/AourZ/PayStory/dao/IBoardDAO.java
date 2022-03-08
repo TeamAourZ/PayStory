@@ -1,6 +1,7 @@
 package com.AourZ.PayStory.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.AourZ.PayStory.model.board.BoardVO;
@@ -16,4 +17,5 @@ public interface IBoardDAO extends IBoardService {
 	public int updateBoard(BoardVO vo);
 	public void deleteBoard(int boardNo);
 	public List<BoardVO> noticeBoardList();
+	public int updateViews(HashMap<String, Object> map);
 }

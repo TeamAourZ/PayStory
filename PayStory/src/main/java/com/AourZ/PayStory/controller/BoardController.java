@@ -2,6 +2,7 @@ package com.AourZ.PayStory.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -97,6 +98,14 @@ public class BoardController {
 		return boardNo;
 	}
 
+	// 조회수 추가
+	@ResponseBody
+	@RequestMapping("/board/updateViews")
+	public int updateViews(@RequestParam HashMap<String, Object> map) {
+		int result = service.updateViews(map);
+		return result;
+	}
+	
 	// 조회
 	@RequestMapping("/board/view/{boardNo}")
 	public String view(@PathVariable int boardNo, Model model) {
