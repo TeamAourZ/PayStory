@@ -81,7 +81,7 @@
 											</c:when>
 											
 											<c:otherwise>
-											    <img class="profile" src=<c:url value='/images/${shareMain.ownerImage}.jpg'/>alt="">
+											    <img class="profile" src=<c:url value='/images/member/${shareMain.ownerNo}/${shareMain.ownerImage}'/>alt="">
 										    </c:otherwise>
 										</c:choose>
 
