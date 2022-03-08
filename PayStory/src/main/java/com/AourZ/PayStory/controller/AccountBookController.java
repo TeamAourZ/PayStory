@@ -557,54 +557,65 @@ public class AccountBookController {
 		return expenitureNo;
 	}
 
+	
 	/****** 공유 가계부 ******/
 
 	// 공유가계부 메인
 	@RequestMapping("/accountBook/public/main")
 	public String movePublicMain(Model model, HttpSession httpSession) {
 
-		// main view 페이지에 전달할 모델
-		ArrayList<ShareMainVO> shareMainVOList = new ArrayList<ShareMainVO>();
-
-		// 로그인한 회원 No
-		String memberNo = (String) httpSession.getAttribute("memberNo");
-
-		// 참여중인 공유가계부 데이터 가져오기
-		ArrayList<AccountBookVO> accountBookVO = shareAccountService.selectShareAccountBookNo(memberNo);
-
-		for (int i = 0; i < accountBookVO.size(); i++) {
-			// 공유가계부 owner 데이터 가져오기
-			MemberVO ownerVO = shareAccountService.selectShareAccountOwner(accountBookVO.get(i).getAccountBookNo());
-			// 공유가계부 participant 데이터 가져오기
-			ArrayList<MemberVO> participantVO = shareAccountService
-					.selectShareAccountParticipant(accountBookVO.get(i).getAccountBookNo());
-
-			// participant image담을 배열 생성
-			String participant[] = new String[3];
-			// participant image담기
-			for (int z = 0; z < participantVO.size(); z++) { // participantVO.size() 질문
-				participant[z] = participantVO.get(z).getMemberImage();
-			}
-
-			ShareMainVO shareMainVO = new ShareMainVO();
-
-			// 원하는 정보만 빼내서 shareMainVO에 넣기
-			shareMainVO.setAccountBookTitle(accountBookVO.get(i).getAccountBookTitle());
-			shareMainVO.setOwnerImage(ownerVO.getMemberImage());
-			shareMainVO.setOwnerName(ownerVO.getMemberName());
-			shareMainVO.setParticipantImage(participant);
-			shareMainVO.setAccountBookNo(accountBookVO.get(i).getAccountBookNo());
-
-			// shareMainVOList에 shareMainVO넣기
-			shareMainVOList.add(shareMainVO);
-		}
-		model.addAttribute("shareMainVOList", shareMainVOList);
+		
+				// main view 페이지에 전달할 모델
+				ArrayList<ShareMainVO> shareMainVOList = new ArrayList<ShareMainVO>();
+				
+				// 로그인한 회원 No
+				String memberNo = (String) httpSession.getAttribute("memberNo"); 
+				
+				// 참여중인 공유가계부 데이터 가져오기
+				ArrayList<AccountBookVO> accountBookVO = shareAccountService.selectShareAccountBookNo(memberNo);
+				
+				for(int i = 0; i < accountBookVO.size(); i++) {
+					// 공유가계부 owner 데이터 가져오기
+					MemberVO ownerVO = shareAccountService.selectShareAccountOwner(accountBookVO.get(i).getAccountBookNo()); 
+					// 공유가계부 participant 데이터 가져오기
+					ArrayList<MemberVO> participantVO = shareAccountService.selectShareAccountParticipant(accountBookVO.get(i).getAccountBookNo());
+					
+					// participant image담을 배열 생성
+					String participant[] = new String[3];
+					String participantNo[] = new String[3];
+					
+					// participant image, memberNo담기
+					for(int z = 0; z < participantVO.size(); z++) {	//participantVO.size() 질문
+						participant[z]=participantVO.get(z).getMemberImage();
+						participantNo[z]=participantVO.get(z).getMemberNo();
+					}
+					
+					ShareMainVO shareMainVO = new ShareMainVO();
+					
+					//원하는 정보만 빼내서 shareMainVO에 넣기
+					shareMainVO.setAccountBookTitle(accountBookVO.get(i).getAccountBookTitle());
+					shareMainVO.setOwnerNo(ownerVO.getMemberNo());
+					shareMainVO.setOwnerImage(ownerVO.getMemberImage());
+					shareMainVO.setOwnerName(ownerVO.getMemberName());
+					shareMainVO.setParticipantImage(participant);
+					shareMainVO.setParticipantNo(participantNo);
+					shareMainVO.setAccountBookNo(accountBookVO.get(i).getAccountBookNo());
+					
+					
+					//shareMainVOList에 shareMainVO넣기
+					shareMainVOList.add(shareMainVO);
+				}
+					model.addAttribute("shareMainVOList", shareMainVOList);
+		
 
 		return "accountBook/public/main";
 
 	}
 
-	// 공유가계부 메인화면에서 공유가계부 클릭시 accountBookNo 세션에 저장후 detailView 페이지로
+
+	
+	//공유가계부 메인화면에서 공유가계부 클릭시 accountBookNo 세션에 저장후 대시보드-공유가계부 페이지로
+
 	@RequestMapping("/accountBook/public/setAccountNo")
 	public String movePublicDetail(HttpSession httpSession, @RequestParam Integer num) {
 

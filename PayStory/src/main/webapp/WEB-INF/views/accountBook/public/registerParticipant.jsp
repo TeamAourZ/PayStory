@@ -46,38 +46,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                   	<div class="publicAccountBox" style="display:inline-block;">
-                    	<span class="ellipsis">가계부 제목</span>
-                    	<div class="box" style="background: #BDBDBD;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264"  alt="">
-						</div>
-                    	<span class="ellipsis">닉네임</span>
-                    	<div class="box2" style="background: #BDBDBD; display:inline-block;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
-						</div>
-                    	<div class="box2" style="background: #BDBDBD; display:inline-block;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
-						</div>
-                    	<div class="box2" style="background: #BDBDBD; display:inline-block;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
-						</div>
-                    </div>
-                   	<div class="publicAccountBox" style="display:inline-block;">
-                    	<span class="ellipsis">가계부 제목</span>
-                    	<div class="box" style="background: #BDBDBD;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264"  alt="">
-						</div>
-                    	<span class="ellipsis">닉네임</span>
-                    	<div class="box2" style="background: #BDBDBD; display:inline-block;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
-						</div>
-                    	<div class="box2" style="background: #BDBDBD; display:inline-block;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
-						</div>
-                    	<div class="box2" style="background: #BDBDBD; display:inline-block;">
-	                    	<img class="profile" src="https://coresos-phinf.pstatic.net/a/33gd00/7_c33Ud018svc36bcd94hfref_6uci51.jpg?type=cover_a264" width="50px" height="50px" alt="">
-						</div>
-                    </div>
+                   
                    	
                     <!-- Content Row -->
 					
