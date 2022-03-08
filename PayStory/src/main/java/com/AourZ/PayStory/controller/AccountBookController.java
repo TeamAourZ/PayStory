@@ -553,6 +553,7 @@ public class AccountBookController {
 		return expenitureNo;
 	}
 
+	
 	/****** 공유 가계부 ******/
 
 	// 공유가계부 메인
@@ -577,18 +578,23 @@ public class AccountBookController {
 					
 					// participant image담을 배열 생성
 					String participant[] = new String[3];
-					// participant image담기
+					String participantNo[] = new String[3];
+					
+					// participant image, memberNo담기
 					for(int z = 0; z < participantVO.size(); z++) {	//participantVO.size() 질문
 						participant[z]=participantVO.get(z).getMemberImage();
+						participantNo[z]=participantVO.get(z).getMemberNo();
 					}
 					
 					ShareMainVO shareMainVO = new ShareMainVO();
 					
 					//원하는 정보만 빼내서 shareMainVO에 넣기
 					shareMainVO.setAccountBookTitle(accountBookVO.get(i).getAccountBookTitle());
+					shareMainVO.setOwnerNo(ownerVO.getMemberNo());
 					shareMainVO.setOwnerImage(ownerVO.getMemberImage());
 					shareMainVO.setOwnerName(ownerVO.getMemberName());
 					shareMainVO.setParticipantImage(participant);
+					shareMainVO.setParticipantNo(participantNo);
 					shareMainVO.setAccountBookNo(accountBookVO.get(i).getAccountBookNo());
 					
 					
@@ -602,7 +608,7 @@ public class AccountBookController {
 	}
 
 	
-	//공유가계부 메인화면에서 공유가계부 클릭시 accountBookNo 세션에 저장후 detailView 페이지로
+	//공유가계부 메인화면에서 공유가계부 클릭시 accountBookNo 세션에 저장후 대시보드-공유가계부 페이지로
 	@RequestMapping("/accountBook/public/setAccountNo")
 	public String movePublicDetail(HttpSession httpSession, @RequestParam Integer num){
 		

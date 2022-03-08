@@ -91,12 +91,12 @@
 									<div class="box2"
 										style="background: #BDBDBD; display: inline-block;">
 											<c:choose>
-											    <c:when test="${shareMain.participantImage[0] == null }">
+											    <c:when test="${shareMain.participantImage[0] == null}">
 											       <img class="profile" src="<c:url value='/main/images/blankprofile.png'></c:url>" width="50px" height="50px" alt="">
 											    </c:when>
 											   
 											    <c:otherwise>
-											        <img class="profile" src=<c:url value='/images/${shareMain.participantImage[0]}.jpg'></c:url> width="50px" height="50px" alt="">
+											        <img class="profile" src=<c:url value='/images/member/${shareMain.participantNo[0]}/${shareMain.participantImage[0]}'></c:url> width="50px" height="50px" alt="">
 											    </c:otherwise>
 											</c:choose>
 									</div>
@@ -108,9 +108,9 @@
 											    </c:when>
 											   
 											    <c:otherwise>
-											        <img class="profile" src=<c:url value='/images/${shareMain.participantImage[0]}.jpg'></c:url> width="50px" height="50px" alt="">
+											        <img class="profile" src=<c:url value='/images/member/${shareMain.participantNo[1]}/${shareMain.participantImage[1]}'></c:url> width="50px" height="50px" alt="">
 											    </c:otherwise>
-											</c:choose>
+										</c:choose>
 									</div>
 									<div class="box2"
 										style="background: #BDBDBD; display: inline-block;">
@@ -120,9 +120,9 @@
 											    </c:when>
 											   
 											    <c:otherwise>
-											        <img class="profile" src=<c:url value='/images/${shareMain.participantImage[0]}.jpg'></c:url> width="50px" height="50px" alt="">
+											        <img class="profile" src=<c:url value='/images/member/${shareMain.participantNo[2]}/${shareMain.participantImage[2]}'></c:url> width="50px" height="50px" alt="">
 											    </c:otherwise>
-											</c:choose>
+										</c:choose>
 									</div>
 								</div>
 							</div>
