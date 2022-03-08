@@ -5,11 +5,6 @@ var nowMonth = date.getMonth(); // 0~11까지
 var nowDay = date.getDate(); // 오늘 날짜
 
 $(function() {
-	/* 달력 B 스크롤바 생성 */
-	if ((1183 < getWidth() && getWidth() < 1643) || (getWidth() < 620)) {
-		$('table').eq(0).addClass('table-responsive');
-	}
-
 	$('#selectedDate').text(nowYear + "년 " + (nowMonth + 1) + "월 " + nowDay + "일");
 
 	calendarAjax("C", nowYear, nowMonth); // 달력
@@ -22,11 +17,11 @@ $(function() {
 		let width = getWidth();
 
 		if (1183 < width && width < 1643) {
-			$('table').eq(0).addClass('table-responsive');
+			$('.isScroll').addClass('table-responsive');
 		} else if (width >= 620) {
-			$('table').eq(0).removeClass('table-responsive');
+			$('.isScroll').removeClass('table-responsive');
 		} else if (width < 620) {
-			$('table').eq(0).addClass('table-responsive');
+			$('.isScroll').addClass('table-responsive');
 		}
 	});
 
@@ -141,7 +136,7 @@ $(function() {
 			let dataNo = $(this).children('input:last-child').val(); // 수입 / 지출 내역 번호
 
 			deleteItemAjax(condition, dataNo, nowYear, nowMonth, nowDay);
-			
+
 			alert("삭제가 완료되었습니다.");
 		} else {
 
