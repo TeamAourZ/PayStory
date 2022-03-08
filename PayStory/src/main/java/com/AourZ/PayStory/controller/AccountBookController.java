@@ -245,18 +245,11 @@ public class AccountBookController {
 
 	/* 대시보드 메인 - 게시판 */
 	@RequestMapping("/accountBook/board")
-	public String board(@RequestParam("boardTab") int boardTab, HttpServletRequest request, Model model) {
-		// session 정보 가져오기
-		HttpSession session = request.getSession();
-		String signInMemberNo = (String) session.getAttribute("memberNo"); // 회원 번호
-
-		String boardCategoryNo = "c1000";
+	public String board(@RequestParam("boardTab") int boardTab, Model model) {
+		String boardCategoryNo = "bc001";
 
 		// 게시글 조회
 		ArrayList<BoardVO> originalBoardList = accountBookService.selectBoardList(boardTab, boardCategoryNo);
-
-		// 회원 정보 조회
-		MemberVO member = accountBookService.selectMemberInfo("memberNo", signInMemberNo);
 
 		// 게시글 리스트
 		ArrayList<MainBoardVO> boardList = new ArrayList<MainBoardVO>();
@@ -264,10 +257,16 @@ public class AccountBookController {
 		for (BoardVO board : originalBoardList) {
 			MainBoardVO vo = new MainBoardVO();
 
+			int boardNo = board.getBoardNo();
 			String boardCategoryName = methodList.replaceCategory(board.getBoardCategoryNo()); // 카테고리 번호 to 카테고리 이름
 			String boardTitle = board.getBoardTitle();
+
+			// 회원 정보 조회
+			MemberVO member = accountBookService.selectMemberInfo("memberNo", board.getMemberNo());
+
 			String memberName = member.getMemberName();
 
+			vo.setBoardNo(boardNo);
 			vo.setBoardCategoryName(boardCategoryName);
 			vo.setBoardTitle(boardTitle);
 			vo.setMemberName(memberName);
@@ -529,9 +528,14 @@ public class AccountBookController {
 
 		// session에서 accountBookNo, memberNo 가져오기
 		expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
-		String fileName = session.getAttribute("memberNo") + "_" + session.getAttribute("accountBookNo") + "_"
-				+ expenditureVO.getExpenditureImage();
-		expenditureVO.setExpenditureImage(fileName);
+
+		// 파일 없을 때 예외 처리하기
+		System.out.println();
+		if (!expenditureVO.getExpenditureImage().equals("")) {
+			String fileName = session.getAttribute("memberNo") + "_" + session.getAttribute("accountBookNo") + "_"
+					+ expenditureVO.getExpenditureImage();
+			expenditureVO.setExpenditureImage(fileName);
+		}
 
 		accountBookService.insertExpenditure(expenditureVO);
 
@@ -557,9 +561,9 @@ public class AccountBookController {
 	/****** 공유 가계부 ******/
 
 	// 공유가계부 메인
-
 	@RequestMapping("/accountBook/public/main")
 	public String movePublicMain(Model model, HttpSession httpSession) {
+
 		
 				// main view 페이지에 전달할 모델
 				ArrayList<ShareMainVO> shareMainVOList = new ArrayList<ShareMainVO>();
@@ -603,21 +607,23 @@ public class AccountBookController {
 				}
 					model.addAttribute("shareMainVOList", shareMainVOList);
 		
+
 		return "accountBook/public/main";
-		
+
 	}
+
 
 	
 	//공유가계부 메인화면에서 공유가계부 클릭시 accountBookNo 세션에 저장후 대시보드-공유가계부 페이지로
+
 	@RequestMapping("/accountBook/public/setAccountNo")
-	public String movePublicDetail(HttpSession httpSession, @RequestParam Integer num){
-		
+	public String movePublicDetail(HttpSession httpSession, @RequestParam Integer num) {
+
 		httpSession.setAttribute("accountBookNo", num);
-		
+
 		return "redirect:../shareMain";
 	}
-	
-	
+
 	// 공유가계부 생성화면
 	@RequestMapping("/accountBook/public/create")
 	public String movePublicCreate() {
@@ -625,40 +631,39 @@ public class AccountBookController {
 	}
 
 	// 공유가계부 생성
-		@RequestMapping("/accountBook/public/create/do")
-		public String createShareAccountBook(AccountBookVO accountBook, ShareAccountBookVO shareAccountBook,
-				ShareBudgetVO ShareBudget, HttpSession httpSession) {
+	@RequestMapping("/accountBook/public/create/do")
+	public String createShareAccountBook(AccountBookVO accountBook, ShareAccountBookVO shareAccountBook,
+			ShareBudgetVO ShareBudget, HttpSession httpSession) {
 
-			// 가계부 데이터 등록(공유가계부 전용)
-			accountBook.setIsShared(true);
-			accountBook.setMemberNo((String) httpSession.getAttribute("memberNo"));
-			shareAccountService.createAccountBook(accountBook);
+		// 가계부 데이터 등록(공유가계부 전용)
+		accountBook.setIsShared(true);
+		accountBook.setMemberNo((String) httpSession.getAttribute("memberNo"));
+		shareAccountService.createAccountBook(accountBook);
 
-			// 예산 등록(공유가계부 전용)
-			ShareBudget.setOwner((String) httpSession.getAttribute("memberNo"));
-			shareAccountService.createShareBudget(ShareBudget);
+		// 예산 등록(공유가계부 전용)
+		ShareBudget.setOwner((String) httpSession.getAttribute("memberNo"));
+		shareAccountService.createShareBudget(ShareBudget);
 
-			// 공유가계부 데이터 등록(공유가계부 전용)
-			shareAccountBook.setOwner((String) httpSession.getAttribute("memberNo"));
-			String participant = "";
+		// 공유가계부 데이터 등록(공유가계부 전용)
+		shareAccountBook.setOwner((String) httpSession.getAttribute("memberNo"));
+		String participant = "";
 
-			for (int i = 0; i < shareAccountBook.getParticipant_list().length; i++) {
-				participant = shareAccountBook.getParticipant_list()[i];
-				if (participant == null) {
-					continue;
-				}
-				shareAccountBook.setParticipant(participant);
-				shareAccountService.createShareAccountBook(shareAccountBook);
+		for (int i = 0; i < shareAccountBook.getParticipant_list().length; i++) {
+			participant = shareAccountBook.getParticipant_list()[i];
+			if (participant == null) {
+				continue;
 			}
-
-			return "redirect:../main";
+			shareAccountBook.setParticipant(participant);
+			shareAccountService.createShareAccountBook(shareAccountBook);
 		}
 
-		// 공유가계부 참여자 등록,삭제
-		@RequestMapping("/accountBook/public/registerParticipant")
-		public String moveRegisterParticipant() {
-			
-			
-			return "accountBook/public/registerParticipant";
-		}
+		return "redirect:../main";
 	}
+
+	// 공유가계부 참여자 등록,삭제
+	@RequestMapping("/accountBook/public/registerParticipant")
+	public String moveRegisterParticipant() {
+
+		return "accountBook/public/registerParticipant";
+	}
+}
