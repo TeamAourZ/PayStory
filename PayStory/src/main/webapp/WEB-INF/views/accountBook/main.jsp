@@ -54,7 +54,7 @@
 									<%-- Card Header --%>
 									<div class="card-header p-3">
 										<div class="d-flex justify-content-between">
-											<div id="chartMainTagBox" class="d-flex">
+											<div id="chartMainTagBox" class="d-flex flex-gap-2">
 												<input type="hidden" id="chartType" value="m">
 												<h6 id="chartTab1"  class="chartTab m-0 pointer-cursor font-weight-bold text-primary selected">수입</h6>
 												<h6 id="chartTab2"  class="chartTab m-0 pointer-cursor">지출</h6>

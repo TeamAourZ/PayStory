@@ -21,7 +21,7 @@
 		<result column="boardFile" property="boardFile"/>
 		<result column="memberNo" property="memberNo"/>
 		<result column="boardCategoryNo" property="boardCategoryNo"/>
-		<result column="categoryName" property="categoryName"/>
+		<result column="boardCategoryName" property="boardCategoryName"/>
 		<result column="memberName" property="memberName"/>
 	</resultMap>
 
@@ -59,11 +59,30 @@
 		VALUES
 			(#{boardTitle}, #{boardContents}, #{boardFile}, #{boardCategoryNo}, #{memberNo})
 	</insert>
+
+	<!-- 게시글 조회수 추가 -->
+	<update id="updateViews" parameterType="map">
+		UPDATE board 
+		SET boardViews=#{boardViews} 
+		WHERE boardNo=#{boardNo}
+	</update>
+
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="com.AourZ.PayStory.model.board.BoardVO">
+		UPDATE board 
+		SET boardTitle=#{boardTitle}, boardContents=#{boardContents}, boardFile=#{boardFile}, boardCategoryNo=#{boardCategoryNo} 
+		WHERE boardNo=#{boardNo}
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM board WHERE boardNo=#{boardNo}
+	</delete>
 	
 	<!-- 공지사항 :서정원추가 -->
 	<select id="noticeBoardList" resultMap="board" >			
 		select * from board where notice = 'Y'
-		order by notice, boardDate desc
+		order by notice, boardDate DESC
 		limit 0,2
 	</select>
 	

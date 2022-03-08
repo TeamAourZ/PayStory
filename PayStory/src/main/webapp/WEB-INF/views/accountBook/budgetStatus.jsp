@@ -31,7 +31,7 @@
 								<tr class="text-right">
 									<td>남은 예산 :</td>
 									<td>
-										<c:set var="remainingBudget" value="${budget + incomeTotalAmount - expenditureTotalAmount}" />
+										<c:set var="remainingBudget" value="${budget + incomeTotalAmount + expenditureTotalAmount}" />
 										<fmt:formatNumber value="${remainingBudget}" pattern="#,###" />
 									</td>
 								</tr>

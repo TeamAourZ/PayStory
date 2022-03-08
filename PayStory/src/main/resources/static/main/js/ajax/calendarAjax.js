@@ -23,6 +23,16 @@ function calendarAjax(calendarType, year, month) {
 
 			$('#yearMonth').text(`${year}년 ${month + 1}월`); // 년-월 텍스트 변경
 
+			if (calendarType == "B") {
+				if (getWidth() < 620) {
+					$('.isScroll').addClass('table-responsive');
+				}
+			} else if (calendarType == "C") {
+				if ((1183 < getWidth() && getWidth() < 1643) || (getWidth() < 620)) {
+					$('.isScroll').addClass('table-responsive');
+				}
+			}
+
 			dayColor(year, month); // 요일별 색상 지정
 
 			checkToday(); // 오늘 날짜
