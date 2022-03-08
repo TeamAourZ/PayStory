@@ -102,3 +102,11 @@
 .help-cursor {
 	cursor: help;
 }
+
+.w-20 {
+  width: 20% !important;
+}
+
+.w-60 {
+  width: 60% !important;
+}
