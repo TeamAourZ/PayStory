@@ -301,13 +301,13 @@
 		
 		const formData = new FormData();
 		console.log($('#uploadReceipt').val())
-  		formData.append("expenditureImage", $('#imageValue').val() || null);
+  		formData.append("expenditureImage", $('#imageValue').val());
   		formData.append("expenditureDate", $('#expenditureDate').val());
   		formData.append("expenditureSource", $('#expenditureSource').val());
   		formData.append("expenditureAddress", $('#address').val());
   		formData.append("expenditureAmount", parseInt(withoutComma($('#expenditureTotalAmount').val())));
   		formData.append("tagNo", $('#expenditureTags option:selected').val());
-  		formData.append("expenditureMemo", $('#expenditureMemo').val() || "");
+  		formData.append("expenditureMemo", $('#expenditureMemo').val());
   		formData.append("expenditureItemPrice", itemPriceArray);
   		formData.append("expenditureItemName", itemNameArray);
 			
