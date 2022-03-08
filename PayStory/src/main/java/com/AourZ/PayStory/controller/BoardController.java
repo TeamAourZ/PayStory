@@ -68,6 +68,7 @@ public class BoardController {
 			board.setMemberName(memberName);
 		}
 		
+		model.addAttribute("noticeBoardList",service.noticeBoardList()); // 공지사항리스트
 		model.addAttribute("boardList", boardList);
 		return "/board/listView";
 	}
