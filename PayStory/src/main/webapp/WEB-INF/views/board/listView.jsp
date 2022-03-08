@@ -49,35 +49,35 @@
                         		<c:choose>
                         			<c:when test="${ ctgNo eq 'bc001' }">
 	                       				<a class="nav-link" data-ctgNo="*">전체</a>
-									 	<a class="nav-link active" data-ctgNo="bc001">공지</a>
+									 	<a class="nav-link active" data-ctgNo="bc001">공지사항</a>
 									 	<a class="nav-link" data-ctgNo="bc002">질문</a>
 									 	<a class="nav-link" data-ctgNo="bc003">정보공유</a>
 									 	<a class="nav-link" data-ctgNo="bc004">자유게시판</a>
 								 	</c:when>
                         			<c:when test="${ ctgNo eq 'bc002' }">
 	                       				<a class="nav-link" data-ctgNo="*">전체</a>
-									 	<a class="nav-link" data-ctgNo="bc001">공지</a>
+									 	<a class="nav-link" data-ctgNo="bc001">공지사항</a>
 									 	<a class="nav-link active" data-ctgNo="bc002">질문</a>
 									 	<a class="nav-link" data-ctgNo="bc003">정보공유</a>
 									 	<a class="nav-link" data-ctgNo="bc004">자유게시판</a>
 								 	</c:when>
                         			<c:when test="${ ctgNo eq 'bc003' }">
 	                       				<a class="nav-link" data-ctgNo="*">전체</a>
-									 	<a class="nav-link" data-ctgNo="bc001">공지</a>
+									 	<a class="nav-link" data-ctgNo="bc001">공지사항</a>
 									 	<a class="nav-link" data-ctgNo="bc002">질문</a>
 									 	<a class="nav-link active" data-ctgNo="bc003">정보공유</a>
 									 	<a class="nav-link" data-ctgNo="bc004">자유게시판</a>
 								 	</c:when>
                         			<c:when test="${ ctgNo eq 'bc004' }">
 	                       				<a class="nav-link" data-ctgNo="*">전체</a>
-									 	<a class="nav-link" data-ctgNo="bc001">공지</a>
+									 	<a class="nav-link" data-ctgNo="bc001">공지사항</a>
 									 	<a class="nav-link" data-ctgNo="bc002">질문</a>
 									 	<a class="nav-link" data-ctgNo="bc003">정보공유</a>
 									 	<a class="nav-link active" data-ctgNo="bc004">자유게시판</a>
 								 	</c:when>
                         			<c:otherwise>
 	                       				<a class="nav-link active" data-ctgNo="*">전체</a>
-									 	<a class="nav-link" data-ctgNo="bc001">공지</a>
+									 	<a class="nav-link" data-ctgNo="bc001">공지사항</a>
 									 	<a class="nav-link" data-ctgNo="bc002">질문</a>
 									 	<a class="nav-link" data-ctgNo="bc003">정보공유</a>
 									 	<a class="nav-link" data-ctgNo="bc004">자유게시판</a>
