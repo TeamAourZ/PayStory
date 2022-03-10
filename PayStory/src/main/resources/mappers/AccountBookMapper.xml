@@ -171,34 +171,51 @@
 			<when test="condition.equals('income')">
 				UPDATE income
 				SET
-					incomeDate = #{date},
-					incomeSource = #{source},
-					incomeMemo = #{memo},
-					incomeAmount = #{amount},
-					tagNo = #{tagNo}
-				WHERE incomeNo = {dataNo}
+					incomeDate = #{income.incomeDate},
+					incomeSource = #{income.incomeSource},
+					incomeMemo = #{income.incomeMemo},
+					incomeAmount = #{income.incomeAmount},
+					tagNo = #{income.tagNo}
+				WHERE incomeNo = #{dataNo}
 			</when>
 			<when test="condition.equals('expenditure')">
 				UPDATE expenditure
 				SET
-					expenditureDate = #{date},
-					expenditureImage = #{receiptImage},
-					expenditureSource = #{source},
-					expenditureMemo = #{memo},
-					expenditureAddress = #{sourceAddress},
-					expenditureAmount = #{amount},
-					tagNo = #{tagNo}
-				WHERE expenditureNo = {dataNo}
+					expenditureDate = #{expenditureVO.expenditureDate},
+					expenditureImage = #{expenditureVO.expenditureImage},
+					expenditureSource = #{expenditureVO.expenditureSource},
+					expenditureMemo = #{expenditureVO.expenditureMemo},
+					expenditureAddress = #{expenditureVO.expenditureAddress},
+					expenditureAmount = #{expenditureVO.expenditureAmount},
+					tagNo = #{expenditureVO.tagNo}
+				WHERE expenditureNo = #{dataNo}
 			</when>
 		</choose>
 	</update>
 	
-	<!-- 지출 상세 내역 수정 -->
+	<!-- 지출 내역 상세 항목 삭제 -->
 	<delete id="deleteDetailItem" parameterType="int">
 		DELETE
 		FROM expenditure_item
 		WHERE expenditureNo = #{expenditureNo}
 	</delete>
+	
+	<!-- 내역 수정자 추가 -->
+	<insert id="insertEditor" parameterType="HashMap">
+		INSERT INTO editor
+		(
+			memberNo, accountBookNo,
+			<choose>
+				<when test="condition.equals('income')">
+					incomeNo
+				</when>
+				<when test="condition.equals('expenditure')">
+					expenditureNo
+				</when>
+			</choose>
+		)
+		VALUES (#{memberNo}, #{accountBookNo}, #{dataNo})
+	</insert>
 	
 	<!-- 수입 / 지출 - 총 개수, 총 금액 조회 -->
 	<select id="selectAccountBookTotalDataList" parameterType="HashMap" resultMap="tagTotalList">
