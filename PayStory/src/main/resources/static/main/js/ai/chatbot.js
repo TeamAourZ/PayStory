@@ -301,8 +301,15 @@
 					receiveChat += '</tr>';
 				}
 				receiveChat += '<tr><th>총 지출 금액</th><td colspan="2">'+ totalAmount + '원</td><tr></table>'+
-							   '<br><br> 이 결과를 가계부에 저장하시겠습니까? (네: 1, 아니오: 0)</span></span></div>';
+							   '<br><br> 가계부 등록 페이지로 이동합니다. </span></span></div>';
+				for(var i=0; i<itemList.length; i++) {
+					for (key in itemList[i]) {
+						data += key + "=" + itemList[i][key] + ",";
+					}
+				}
+				
 				openNewWindow.location.href = "/accountBook/add/chat/" + date + "/" + source + "/" + totalAmount + "/" + data;
+				
         $('#chatBox').append(receiveChat);
 				
 			},
