@@ -383,8 +383,8 @@ public class AccountBookController {
 	}
 	
 	// 챗봇에서 영수증 등록 페이지로 값 넘기면서 페이지 이동
-	@RequestMapping("/accountBook/add/chat/{date}/{source}/{totalAmount}/{data}")
-	public String resultChatOCR(@PathVariable("date") String date,
+	@RequestMapping("/accountBook/add/chat/{dateTime}/{source}/{totalAmount}/{data}")
+	public String resultChatOCR(@PathVariable("dateTime") String dateTime,
 							    @PathVariable("source") String source,
 							    @PathVariable("totalAmount") String totalAmount,
 							    @PathVariable("data") String data, Model model) {
@@ -403,7 +403,7 @@ public class AccountBookController {
 			itemsList.add(vo);
 		}
 		
-		model.addAttribute("date", date);
+		model.addAttribute("dateTime", dateTime);
 		model.addAttribute("source", source);
 		model.addAttribute("totalAmount", totalAmount);
 		model.addAttribute("itemsList", itemsList);
