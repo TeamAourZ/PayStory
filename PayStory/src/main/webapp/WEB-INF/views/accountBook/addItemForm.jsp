@@ -66,8 +66,8 @@
 														class="custom-file-input shadow-none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadReceipt">
 												<label class="custom-file-label shadow-none" for="uploadReceipt">파일 선택</label>
 											</div>
-											<!-- 주소 : hidden -->
-											<input type="hidden" id="address" name="expenditureAddress">
+											<!-- isShared : hidden -->
+											<input type="hidden" id="isShared" value="${ sessionScope.isShared }">
 											<!-- 날짜 -->
 											<div class="form-group">
 												<label for="expenditureDate">날짜</label>
@@ -101,6 +101,11 @@
 											<div class="form-group">
 												<label for="expenditureSource">상호명</label>
 												<input type="text" id="expenditureSource" name="expenditureSource" class="form-control form-control-sm shadow-none" required>
+											</div>
+											<!-- 주소 -->
+											<div class="form-group">
+												<label for="expenditureAddress">주소</label>
+												<input type="text" id="expenditureAddress" name="expenditureAddress" class="form-control form-control-sm shadow-none" required>
 											</div>
 											<!-- 아이템 아코디언 -->
 											<div class="accordion" id="itemAccordian">
@@ -188,6 +193,8 @@
 							<div class="tab-pane fade px-5" id="income" role="tabpanel">
 								<!-- 수입 Form -->
 								<form id="incomeForm" class="my-4">
+									<!-- isShared : hidden -->
+									<input type="hidden" id="isShared" value="${ sessionScope.isShared }">
 									<!-- 날짜 -->
 									<div class="form-group">
 										<label for="incomeDate">날짜</label>
