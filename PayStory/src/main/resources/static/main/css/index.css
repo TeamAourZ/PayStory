@@ -1,8 +1,8 @@
 @charset "UTF-8";
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-
 /* *********공통******** */
+
 *{
 	list-style: none;
 	text-decoration: none;
@@ -286,7 +286,6 @@
 
 @media screen and (max-width: 1320px) { .css-rgylcs { display: none; } }
 
-
 .css-1foy5fx {
     width: 590px;
 }
@@ -319,7 +318,6 @@
 .css-1ot8705 {
     padding: 98px 0 57px 0;
 }
-
 
 .p-container--default {
     max-width: 1615px;
