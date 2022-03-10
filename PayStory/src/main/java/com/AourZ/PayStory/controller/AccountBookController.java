@@ -342,9 +342,11 @@ public class AccountBookController {
 			return "accountBook/mainCalendarTypeA";
 		} else if (calendarType.equals("B")) {
 			return "accountBook/mainCalendarTypeB";
-		} else { // C
+		} else if (calendarType.equals("C")) {
 			return "accountBook/detailViewCalendar";
 		}
+
+		return "X";
 	}
 
 	/* 수입 / 지출 입력 페이지 이동 - 지출 탭으로만 */
@@ -535,88 +537,108 @@ public class AccountBookController {
 		return "accountBook/detailViewList";
 	}
 
-	/* 대시보드 조회 - 내역 수정 */
+	/* 대시보드 조회 - 내역 수정 페이지 이동 */
 	@RequestMapping("/accountBook/detailViewList/edit/{condition}/{dataNo}")
 	public String accountBookDataEdit(@PathVariable("condition") String condition,
 			@PathVariable("dataNo") String dataNo, HttpServletRequest request, Model model) {
+		// 수정 페이지 인식용
+		model.addAttribute("isEdit", true);
+
+		// 구분용
+		model.addAttribute("condition", condition);
+
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
 
-		/*********/
+		if (condition.equals("income")) {
+			// 수입 내역 조회
+			IncomeVO income = accountBookService.selectIncome(accountBookNo, dataNo);
 
-//		/* ---------------- 내역 ---------------- */
-//		// 등록 내역 리스트
-//		ArrayList<DetailViewItemVO> detailViewItemList = new ArrayList<DetailViewItemVO>();
-//
-//		// 수입 내역 조회
-//		ArrayList<IncomeVO> incomeList = accountBookService.selectIncomeList(accountBookNo, date);
-//
-//		// 수입 내역 리스트에 추가
-//		for (IncomeVO income : incomeList) {
-//			DetailViewItemVO vo = new DetailViewItemVO();
-//
-//			vo.setCondition("income");
-//			vo.setDataNo(income.getIncomeNo());
-//			vo.setDate(income.getIncomeDate());
-//			vo.setSource(income.getIncomeSource());
-//			vo.setMemo(income.getIncomeMemo());
-//			vo.setAmount(income.getIncomeAmount());
-//			vo.setTagName(methodList.replaceTag("name", income.getTagNo()));
-//			vo.setAccountBookNo(income.getAccountBookNo());
-//
-//			detailViewItemList.add(vo);
-//		}
-//
-//		// 지출 내역 조회
-//		ArrayList<ExpenditureVO> expenditureList = accountBookService.selectExpenditureList(accountBookNo, date);
-//
-//		// 지출 내역 리스트에 추가
-//		for (ExpenditureVO expenditure : expenditureList) {
-//			DetailViewItemVO vo = new DetailViewItemVO();
-//
-//			vo.setCondition("expenditure");
-//			vo.setDataNo(expenditure.getExpenditureNo());
-//			vo.setDate(expenditure.getExpenditureDate());
-//			vo.setReceiptImage(expenditure.getExpenditureImage());
-//			vo.setSource(expenditure.getExpenditureSource());
-//			vo.setMemo(expenditure.getExpenditureMemo());
-//			vo.setAmount(-expenditure.getExpenditureAmount());
-//			vo.setTagName(methodList.replaceTag("name", expenditure.getTagNo()));
-//			vo.setAccountBookNo(expenditure.getAccountBookNo());
-//
-//			detailViewItemList.add(vo);
-//		}
-//
-//		if (detailViewItemList != null && detailViewItemList.size() > 0) {
-//			Collections.sort(detailViewItemList, new DetailViewItemComparator()); // 날짜를 기준으로 오름차순 정렬
-//
-//			model.addAttribute("detailViewItemList", detailViewItemList);
-//		}
-//
-//		// 지출 상세 항목 리스트
-//		Map<Integer, ArrayList<ExpenditureItemVO>> expenditureItemList = new HashMap<Integer, ArrayList<ExpenditureItemVO>>();
-//
-//		for (int i = 0; i < expenditureList.size(); i++) {
-//			ArrayList<ExpenditureItemVO> voList = accountBookService
-//					.selectExpenditureItem(expenditureList.get(i).getExpenditureNo());
-//
-//			if (voList != null && voList.size() > 0) {
-//				expenditureItemList.put(voList.get(0).getExpenditureNo(), voList);
-//			}
-//		}
-//
-//		if (expenditureItemList != null && expenditureItemList.size() > 0) {
-//			Object[] keyList = expenditureItemList.keySet().toArray();
-//			Arrays.sort(keyList); // key 값(지출 번호)을 기준으로 오름차순 정렬
-//
-//			model.addAttribute("expenditureItemList", expenditureItemList);
-//		}
-//		/* ---------------- 내역 ---------------- */
+			model.addAttribute("income", income);
+		} else if (condition.equals("expenditure")) {
+			// 지출 내역 조회
+			ExpenditureVO expenditure = accountBookService.selectExpenditure(accountBookNo, dataNo);
 
-		/*********/
+			model.addAttribute("expenditure", expenditure);
+
+			// 지출 상세 내역 조회
+			ArrayList<ExpenditureItemVO> expenditureItemList = accountBookService
+					.selectExpenditureItem(expenditure.getExpenditureNo());
+
+			model.addAttribute("expenditureItemList", expenditureItemList);
+		}
 
 		return "accountBook/addItemForm";
+	}
+
+	/* 수정된 내역 반영 (수입) */
+	@ResponseBody
+	@RequestMapping("/income/{condition}/{dataNo}")
+	public int incomeEdit(IncomeVO incomeVO, @PathVariable("condition") String condition,
+			@PathVariable("dataNo") int dataNo, HttpServletRequest request) {
+		// session 정보 가져오기
+		HttpSession session = request.getSession();
+		String memberNo = (String) session.getAttribute("memberNo"); // 회원 번호
+		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("income", incomeVO);
+		map.put("condition", condition);
+		map.put("dataNo", dataNo);
+
+		// 수입 내역 업데이트
+		accountBookService.updateItem(map);
+
+		// 수정자 추가
+		accountBookService.insertEditor(memberNo, accountBookNo, condition, dataNo);
+
+		return -1;
+	}
+
+	/* 수정된 내역 반영 (지출) */
+	@ResponseBody
+	@RequestMapping("/expenditure/{condition}/{dataNo}")
+	public int expenditureEdit(ExpenditureVO expenditureVO, @RequestParam("expenditureItemPrice") int[] priceArray,
+			@RequestParam("expenditureItemName") String[] nameArray, @PathVariable("condition") String condition,
+			@PathVariable("dataNo") int dataNo, HttpServletRequest request) {
+		// session 정보 가져오기
+		HttpSession session = request.getSession();
+		String memberNo = (String) session.getAttribute("memberNo"); // 회원 번호
+		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("expenditureVO", expenditureVO);
+		map.put("condition", condition);
+		map.put("dataNo", dataNo);
+
+		// 지출 내역 업데이트
+		accountBookService.updateItem(map);
+
+		// 기존 지출 상세 항목 삭제
+		accountBookService.deleteDetailItem(dataNo);
+
+		// 업데이트 된 지출 상세 항목 추가
+		ArrayList<ExpenditureItemVO> expenditureItemList = new ArrayList<ExpenditureItemVO>();
+
+		for (int i = 0; i < priceArray.length; i++) {
+			ExpenditureItemVO ItemVO = new ExpenditureItemVO();
+
+			ItemVO.setExpenditureNo(dataNo);
+			ItemVO.setExpenditureItemName(nameArray[i]);
+			ItemVO.setExpenditureItemPrice(priceArray[i]);
+
+			expenditureItemList.add(ItemVO);
+		}
+
+		accountBookService.insertExpenditureItem(expenditureItemList);
+
+		// 수정자 추가
+		accountBookService.insertEditor(memberNo, accountBookNo, condition, dataNo);
+
+		return -1;
 	}
 
 	/* 대시보드 조회 - 내역 삭제 */

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -37,22 +38,24 @@
 						
 					<!-- Begin Page Content -->
 					<div class="container-fluid">
-						<!-- Option Button : 지출 / 수입 선택 -->
-						<div class="d-flex align-items-center justify-content-center mb-4">
-							<ul class="nav nav-pills nav-justified w-50">
-								<li class="nav-item mr-4">
-									<a class="nav-link border border-primary active" data-toggle="tab" href="#expenditure" role="tab">지출</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link border border-primary" data-toggle="tab" href="#income" role="tab">수입</a>
-								</li>
-							</ul>
-						</div>
-	
+						<%-- 내역 수정을 통해 진입 시 지출 / 수입 선택 불가 --%>
+						<c:if test="${not isEdit}">
+							<!-- Option Button : 지출 / 수입 선택 -->
+							<div id="navTabBox" class="d-flex align-items-center justify-content-center mb-4">
+								<ul class="nav nav-pills nav-justified w-50">
+									<li class="nav-item mr-4">
+										<a class="nav-link border border-primary active" data-toggle="tab" href="#expenditure" role="tab">지출</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link border border-primary" data-toggle="tab" href="#income" role="tab">수입</a>
+									</li>
+								</ul>
+							</div>
+						</c:if>
+						
 						<!-- Form panels -->
 						<div class="tab-content p-4 bg-white rounded">
-							<div class="tab-pane fade in show active" id="expenditure"
-								role="tabpanel">
+							<div class="tab-pane fade in show active" id="expenditure" role="tabpanel">
 								<!--지출 Form-->
 								<form id="expenditureForm" class="my-4">
 									<div class="form-row px-3">
@@ -143,7 +146,6 @@
 																					$('#temp').remove(); // 삭제
 																				</script>
 																			</c:forEach>
-																			
 																		</c:if>
 																	</div>
 																	<div class="col-4">
@@ -166,6 +168,23 @@
 																		<!-- <input type="button" class="removeItem btn shadow-none p-0" value="삭제"> -->
 																	</div>
 																</div>
+																<c:if test="${isEdit && (fn:length(expenditureItemList) - 1 gt 0)}">
+																	<c:forEach begin="0" end="${fn:length(expenditureItemList) - 2}" step="1">
+																		<div class="item form-group form-row" id="newItem">
+																			<div class="col-7">
+																				<input type="text" class="expenditureItem form-control form-control-sm shadow-none">
+																			</div>
+																			<div class="col-4">
+																				<input type="text" class="expenditureItemAmount form-control form-control-sm shadow-none">
+																			</div>
+																			<div class="col-1">
+																				<button class="removeItem btn shadow-none p-0">
+																					<i class="fas fa-minus-circle"></i>
+																				</button>
+																			</div>
+																		</div>
+																	</c:forEach>
+																</c:if>
 															</div>
 															<!-- 아이템 추가 버튼 -->
 															<div class="addBtn w-100 d-flex justify-content-center">
@@ -216,7 +235,7 @@
 										</div>
 									</div>
 									<div class="d-flex align-items-center justify-content-center mt-3">
-										<button type="submit" class="btn btn-primary w-25 mr-3 shadow-none">등록</button>
+										<button type="submit" id="expenditureSubmitBtn" class="btn btn-primary w-25 mr-3 shadow-none">등록</button>
 										<button type="button" class="cancelBtn btn btn-primary w-25 shadow-none">취소</button>
 									</div>
 								</form>
@@ -275,7 +294,7 @@
 										<textarea id="incomeMemo" name="incomeMemo" class="memoBox form-control shadow-none" rows="3" maxlength="100"></textarea>
 									</div>
 									<div class="d-flex align-items-center justify-content-center mt-3">
-										<button type="submit" class="btn btn-primary w-25 mr-3 shadow-none">등록</button>
+										<button type="submit" id="incomeSubmitBtn" class="btn btn-primary w-25 mr-3 shadow-none">등록</button>
 										<button type="button" class="cancelBtn btn btn-primary w-25 shadow-none">취소</button>
 									</div>
 								</form>
@@ -288,6 +307,101 @@
 			<!-- End of Content Wrapper -->
 		</div>
 		<!-- End of Page Wrapper -->
+		
+		<%-- ajax 제어용 --%>
+		<input type="hidden" id="isEdit" value="${isEdit}"> <%-- 수정 유무 --%>
+		<input type="hidden" id="condition" value="${condition}"> <%-- 수정 유무 --%>
+		
+		<%-- 내역 수정 --%>
+		<c:if test="${isEdit}">
+			<c:choose>
+				<c:when test="${condition eq 'income'}">
+					<%-- 내역 수정을 위한 원본 데이터 : 수입 --%>
+					<div id="hiddenIncomeData">
+						<input type="hidden" value="${fn:substring(income.incomeDate, 0, 16)}"> <%-- 날짜 --%>
+						<input type="hidden" value="${income.tagNo}"> <%-- 태그 --%>
+						<input type="hidden" value="${income.incomeSource}"> <%-- 수입원 --%>
+						<input type="hidden" value="${income.incomeAmount}"> <%-- 금액 --%>
+						<input type="hidden" value="${income.incomeMemo}"> <%-- 메모 --%>
+						<input type="hidden" value="${income.incomeNo}"> <%-- 수입 번호 --%>
+					</div>
+					<%-- 원본 데이터 반영 --%>
+					<script type="text/javascript">
+						$('#incomeSubmitBtn').text("수정"); // submit 버튼 텍스트 내용 수정
+						
+						/* 탭 전환 */
+						$('#navTabBox ul').children('li:first-child a').removeClass('active');
+						$('#navTabBox ul').children('li:last-child a').addClass('active');
+						$('#expenditureForm').parent().removeClass('active show');
+						$('#incomeForm').parent().addClass('active show');
+						
+						/* 반영 */
+						let date = $('#hiddenIncomeData').children('input').eq(0).val();
+						date = date.replace(' ', 'T');
+						$('#incomeDate').val(date); // 날짜
+						
+						$('#incomeTags').val($('#hiddenIncomeData').children('input').eq(1).val()); // 태그
+						$('#incomeSource').val($('#hiddenIncomeData').children('input').eq(2).val()); // 수입원
+						$('#incomeAmount').val($('#hiddenIncomeData').children('input').eq(3).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')); // 금액
+						$('#incomeMemo').val($('#hiddenIncomeData').children('input').eq(4).val()); // 메모
+					</script>
+				</c:when>
+				<c:when test="${condition eq 'expenditure'}">
+					<%-- 내역 수정을 위한 원본 데이터 : 지출 --%>
+					<div id="hiddenExpenditureData">
+						<input type="hidden" value="${fn:substring(expenditure.expenditureDate, 0, 16)}"> <%-- 날짜 --%>
+						<input type="hidden" value="${expenditure.tagNo}"> <%-- 태그 --%>
+						<input type="hidden" value="${expenditure.expenditureSource}"> <%-- 상호명 --%>
+						<input type="hidden" value="${expenditure.expenditureAddress}"> <%-- 주소 --%>
+						<c:set var="expenditureItemNameList" value="" />
+						<c:set var="expenditureItemPriceList" value="" />
+						<c:forEach var="item" items="${expenditureItemList}">
+							<c:set var="expenditureItemNameList" value="${expenditureItemNameList}━${item.expenditureItemName}" />
+							<c:set var="expenditureItemPriceList" value="${expenditureItemPriceList}━${item.expenditureItemPrice}" />
+						</c:forEach>
+						<input type="hidden" value="${expenditureItemNameList}"> <%-- 상세 항목 : 이름 --%>
+						<input type="hidden" value="${expenditureItemPriceList}"> <%-- 상세 항목 : 금액 --%>
+						<input type="hidden" value="${fn:length(expenditureItemList)}"> <%-- 상세 항목 길이 --%>
+						<input type="hidden" value="${expenditure.expenditureMemo}"> <%-- 메모 --%>
+						<input type="hidden" value="${expenditure.expenditureNo}"> <%-- 지출 번호 --%>
+					</div>
+					<%-- 원본 데이터 반영 --%>
+					<script type="text/javascript">
+						$('#expenditureSubmitBtn').text("수정"); // submit 버튼 텍스트 내용 수정
+						
+						/* 반영 */
+						let date = $('#hiddenExpenditureData').children('input').eq(0).val();
+						date = date.replace(' ', 'T');
+						$('#expenditureDate').val(date); // 날짜
+						
+						$('#expenditureTags').val($('#hiddenExpenditureData').children('input').eq(1).val()); // 태그
+						$('#expenditureSource').val($('#hiddenExpenditureData').children('input').eq(2).val()); // 상호명
+						$('#expenditureAddress').val($('#hiddenExpenditureData').children('input').eq(3).val()); // 주소
+						$('#expenditureMemo').val($('#hiddenExpenditureData').children('input').eq(7).val()); // 메모
+						
+						let nameList = $('#hiddenExpenditureData').children('input').eq(4).val().split('━'); // 상세 항목 이름
+						nameList.shift(); // 맨 앞 요소 꺼내기 (삭제)
+						let priceList = $('#hiddenExpenditureData').children('input').eq(5).val().split('━'); // 상세 항목 금액
+						priceList.shift(); // 맨 앞 요소 꺼내기 (삭제)
+						
+						/* 상세 항목 반영 */
+						for (let i = 0; i < $('#hiddenExpenditureData').children('input').eq(6).val(); i++) {
+							$('.expenditureItem').eq(i).val(nameList.shift());
+							$('.expenditureItemAmount').eq(i).val(priceList.shift().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+						}
+						
+						let sum = 0;
+						$('.expenditureItemAmount').each(function() {
+							let itemAmount = $(this).val();
+							if (itemAmount) {
+								sum += parseInt(itemAmount.toString().replace(/,/g, ''));
+							}
+						});
+						$('#expenditureTotalAmount').val(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+					</script>
+				</c:when>
+			</c:choose>
+		</c:if>
 		
 		<!-- 영수증 이미지 Modal-->
 		<jsp:include page="/WEB-INF/views/accountBook/receiptImageModal.jsp" flush="true" />

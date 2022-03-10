@@ -33,7 +33,9 @@ public interface IAccountBookService {
 	
 	void deleteItem(String condition, int dataNo);			// 내역 삭제
 	void updateItem(HashMap<String, Object> map);	// 내역 수정
-	void deleteDetailItem(int expenditureNo);				// 지출 상세 내역 삭제
+	void deleteDetailItem(int expenditureNo);				// 지출 내역 상세 항목 삭제
+	
+	void insertEditor(String memberNo, int accountBookNo, String condition, int dataNo); // 내역 수정자 추가
 	
 	ArrayList<BoardVO> selectBoardList(int boardTab, String boardCategoryNo);	// 게시판 게시글 리스트
 	String selectBoardCategoryName(String boardCategoryNo);							// 게시판 카테고리 이름 조회

@@ -168,10 +168,22 @@ public class AccountBookService implements IAccountBookService {
 	public void updateItem(HashMap<String, Object> map) {
 		dao.updateItem(map);
 	}
-	
-	/* 지출 상세 내역 삭제 */
+
+	/* 지출 내역 상세 항목 삭제 */
 	public void deleteDetailItem(int expenditureNo) {
 		dao.deleteDetailItem(expenditureNo);
+	}
+
+	/* 내역 수정자 추가 */
+	public void insertEditor(String memberNo, int accountBookNo, String condition, int dataNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("memberNo", memberNo);
+		map.put("accountBookNo", accountBookNo);
+		map.put("condition", condition);
+		map.put("dataNo", dataNo);
+		
+		dao.insertEditor(map);
 	}
 
 	/* 게시판 게시글 리스트 */
