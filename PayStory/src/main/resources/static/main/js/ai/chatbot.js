@@ -274,7 +274,7 @@
 			success: function(result) {
 				var openNewWindow = window.open("about:blank");
 				// 날짜 
-				let date = result.expenditureDate;
+				let dateTime = result.expenditureDate;
 				// 주소
 				let address = result.expenditureAddress;
 				// 사용처 
@@ -291,7 +291,7 @@
 				let receiveChat = '<div class="msgBox receive"><span id="in">PayStory 챗봇' + '<br>AI 인식 결과입니다.<br><br>' +
 								  '<table border="1" class="text-center"><tr><th>사용처</th><td colspan="2">'+source+'</td></tr>'+
 								  '<tr><th>주소</th><td colspan="2">'+address+'</td></tr>'+
-								  '<tr><th>사용 날짜</th><td colspan="2">'+date+'</td></tr>';
+								  '<tr><th>사용 날짜</th><td colspan="2">'+dateTime+'</td></tr>';
 									
 				if(itemList){
 					receiveChat += '<tr><th rowspan='+(itemList.length+1)+'>상세 항목</th><th>내용</th><th>금액</th>';
@@ -309,7 +309,7 @@
 					}
 				}
 				
-				openNewWindow.location.href = "/accountBook/add/chat/" + date + "/" + source + "/" + totalAmount + "/" + data;
+				openNewWindow.location.href = "/accountBook/add/chat/" + dateTime + "/" + source + "/" + totalAmount + "/" + data;
 				
         $('#chatBox').append(receiveChat);
 				
