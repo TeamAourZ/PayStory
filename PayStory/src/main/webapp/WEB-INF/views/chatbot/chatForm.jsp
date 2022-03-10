@@ -202,7 +202,7 @@
 				                    </div>
 				                    <div class="details">
 				                        <div class="listHead">
-				                            <h4>손혜진</h4>
+				                            <h4>손예진</h4>
 				                            <p class="time">10:56</p>
 				                        </div>
 				                        <div class="message_p">

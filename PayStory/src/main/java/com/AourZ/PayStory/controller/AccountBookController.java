@@ -389,8 +389,6 @@ public class AccountBookController {
 							    @PathVariable("totalAmount") String totalAmount,
 							    @PathVariable("data") String data, Model model) {
 		
-		
-		
 		ExpenditureItemVO vo = new ExpenditureItemVO();
 		
 		ArrayList<ExpenditureItemVO> itemsList = new ArrayList<ExpenditureItemVO>();
@@ -402,8 +400,6 @@ public class AccountBookController {
 			} else if(i==1) {
 				vo.setExpenditureItemPrice(Integer.parseInt(items[i].split("=")[1]));
 			}
-			System.out.println("400" + items[i].split("=")[0]);
-			System.out.println("401" + items[i].split("=")[1]);
 			itemsList.add(vo);
 		}
 		
