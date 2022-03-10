@@ -285,7 +285,8 @@
 				let itemList = result.itemList;
 				// 영수증 이미지
 				let image = result.expenditureImage;
-				
+				// 데이터 문자열 변환
+				let data = ""
 				// 값 입력
 				let receiveChat = '<div class="msgBox receive"><span id="in">PayStory 챗봇' + '<br>AI 인식 결과입니다.<br><br>' +
 								  '<table border="1" class="text-center"><tr><th>사용처</th><td colspan="2">'+source+'</td></tr>'+
