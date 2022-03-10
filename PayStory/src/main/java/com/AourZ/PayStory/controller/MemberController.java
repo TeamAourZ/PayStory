@@ -243,9 +243,13 @@ public class MemberController {
 	
 	// 프로필사진
 	@RequestMapping(value="/updateImg", method=RequestMethod.POST)
-	public String updateImg(MultipartHttpServletRequest mpRequest, HttpSession session , String memberEmail)throws Exception {	
+	public String updateImg(MultipartHttpServletRequest mpRequest, HttpSession session , String memberImageInDB, String memberEmail)throws Exception {	
 		String memberImage = FileUtils.updateImg(mpRequest, session); 
-		MemberVO memberVO = (MemberVO) session.getAttribute("login");		
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
+		
+		// 기존 프로필 이미지 삭제
+		FileUtils.removeProfile((String) session.getAttribute("memberNo"), memberImageInDB);
+		
 		memberService.updateImg(memberImage, memberEmail);	
 		memberVO.setMemberImage(memberImage);
 		session.setAttribute("login", memberVO);
