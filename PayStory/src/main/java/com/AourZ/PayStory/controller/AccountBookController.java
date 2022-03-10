@@ -697,10 +697,42 @@ public class AccountBookController {
 		return "redirect:../main";
 	}
 
-	// 공유가계부 참여자 등록,삭제
-	@RequestMapping("/accountBook/public/registerParticipant")
-	public String moveRegisterParticipant() {
-
-		return "accountBook/public/registerParticipant";
+	
+	
+	// 공유가계부 참여자 편집
+	@RequestMapping("/accountBook/public/editParticipant")
+	public String moveRegisterParticipant(Model model, @RequestParam Integer num, HttpSession httpSession) {
+		
+		//수정할 accountBookNo 세션에 저장
+		httpSession.setAttribute("accountBookNo", num);
+		
+		// 공유가계부 owner 데이터 가져오기
+		MemberVO ownerVO = shareAccountService.selectShareAccountOwner(num); 
+		// 공유가계부 participant 데이터 가져오기
+		ArrayList<MemberVO> participantVO = shareAccountService.selectShareAccountParticipant(num);
+		
+		// participant image담을 배열 생성
+		String participant[] = new String[3];
+		String participantNo[] = new String[3];
+		
+		// participant image, memberNo담기
+		for(int z = 0; z < participantVO.size(); z++) {	//participantVO.size() 질문
+			participant[z]=participantVO.get(z).getMemberImage();
+			participantNo[z]=participantVO.get(z).getMemberNo();
+		}
+		
+		ShareMainVO shareMainVO = new ShareMainVO();
+		
+		//원하는 정보만 빼내서 shareMainVO에 넣기
+		shareMainVO.setOwnerNo(ownerVO.getMemberNo());
+		shareMainVO.setOwnerImage(ownerVO.getMemberImage());
+		shareMainVO.setOwnerName(ownerVO.getMemberName());
+		shareMainVO.setParticipantImage(participant);
+		shareMainVO.setParticipantNo(participantNo);
+		
+		//보내기
+		model.addAttribute("shareMainVO", shareMainVO);
+		
+		return "accountBook/public/editParticipant";
 	}
 }
