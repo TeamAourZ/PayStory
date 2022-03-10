@@ -121,10 +121,22 @@ $(function() {
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
 	});
 
+	/* 기록 버튼 클릭 */
+	$(document).on('click', '.dataEditHistory', function(e) {
+		e.stopImmediatePropagation();
+
+	});
+
 	/* 수정 버튼 클릭 */
 	$(document).on('click', '.dataEdit', function(e) {
 		e.stopImmediatePropagation();
 
+		if (confirm("해당 내역을 수정하시겠습니까?")) {
+			let condition = $(this).parent('div').children('input').eq(0).val();	// 수입 / 지출 구분
+			let dataNo = $(this).parent('div').children('input').eq(1).val();	// 수입 / 지출 내역 번호
+
+			location.href = "/accountBook/detailViewList/edit/" + condition + "/" + dataNo; // 수정 페이지 이동 (수입 / 지출 입력 페이지 활용)
+		}
 	});
 
 	/* 삭제 버튼 클릭 */
@@ -132,16 +144,23 @@ $(function() {
 		e.stopImmediatePropagation();
 
 		if (confirm("해당 내역을 삭제하시겠습니까?")) {
-			let condition = $(this).children('input:first-child').val(); // 수입 / 지출 구분
-			let dataNo = $(this).children('input:nth-child(2)').val(); // 수입 / 지출 내역 번호
-			let receiptImage = $(this).children('input:last-child').val(); // 영수증 이미지
+			let condition = $(this).parent('div').children('input').eq(0).val();			// 수입 / 지출 구분
+			let dataNo = $(this).parent('div').children('input').eq(1).val();			// 수입 / 지출 내역 번호
+			let receiptImage = $(this).parent('div').children('input').eq(2).val();	// 영수증 이미지
 
-			console.log(receiptImage);
 			deleteItemAjax(condition, dataNo, receiptImage, nowYear, nowMonth, nowDay);
 
 			alert("삭제가 완료되었습니다.");
 		} else {
 
 		}
+	});
+
+
+	/* 이미지 아이콘 클릭 시 영수증 이미지 모달 띄우기 */
+	$(document).on('click', '.receiptImageShow', function(e) {
+		e.stopImmediatePropagation();
+
+		$('#receiptImgModal').attr('src', '/images/receipt/' + accountBookNo + '/' + $(this).next('input').val());
 	});
 });

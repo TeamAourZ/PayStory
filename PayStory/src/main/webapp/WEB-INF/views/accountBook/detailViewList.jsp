@@ -5,12 +5,18 @@
 
 <!DOCTYPE html>
 <html>
+	<head>
+		<script type="text/javascript">
+			var accountBookNo = '<%= session.getAttribute("accountBookNo") %>';
+		</script>
+	</head>
 	<body>
 		<c:choose>
 			<c:when test="${empty detailViewItemList}">
 				<span>내역이 존재하지 않습니다.</span>
 			</c:when>
 			<c:otherwise>
+				<c:set var="remainingBalance" value="${amount}" />
 				<c:forEach var="detailViewItem" items="${detailViewItemList}" varStatus="detailViewItemStatus">
 					<%-- 수입 / 지출 구분 --%>
 					<c:choose>
@@ -24,7 +30,7 @@
 						<%-- 수입 / 지출 내역 --%>
 						<div class="card-body row p-0">
 							<%-- 내역 시간 --%>
-							<%-- <div class="sourceDate text-xs position-absolute">${fn:substring(detailViewItem.date, 12, 8)}</div> --%>
+							<div class="sourceDate text-xs position-absolute">${fn:substring(detailViewItem.date, 11, 19)}</div>
 							<%-- 태그 --%>
 							<div class="col-2 align-self-center">
 								<c:choose>
@@ -44,7 +50,14 @@
 										<div class="dataSource">${detailViewItem.source}</div>
 										<%-- 수입 / 지출 금액 --%>
 										<div class="dataAmount">
-											<fmt:formatNumber value="${detailViewItem.amount}" pattern="#,###" />
+											<c:choose>
+												<c:when test="${detailViewItem.amount > 0}">
+													<fmt:formatNumber value="${detailViewItem.amount}" pattern="#,###" />
+												</c:when>
+												<c:otherwise>
+													<fmt:formatNumber value="${detailViewItem.amount * -1}" pattern="#,###" />
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</div>
 									<c:if test="${not empty detailViewItem.memo}">
@@ -70,14 +83,8 @@
 															</h2>
 															<div class="side text-center">
 																<c:if test="${not empty detailViewItem.receiptImage}">
-																	<i class="far fa-image fa-lg pointer-cursor"></i>
-																	<%--
-																	
-																	
-																		클릭 시 모달로 해당 영수증 이미지 뿌려주기
-																	
-																	
-																	 --%>
+																	<i class="receiptImageShow far fa-image fa-lg pointer-cursor" data-toggle="modal" data-target="#receiptModal"></i>
+																	<input type="hidden" value="${detailViewItem.receiptImage}">
 																</c:if>
 															</div>
 														</div>
@@ -111,19 +118,19 @@
 							
 							<%-- 내용 2 --%>
 							<div class="col-2 d-flex flex-column flex-gap-2">
-								<div class="text-right">
-									<i class="dataEdit far fa-edit fa-lg pointer-cursor">
-									</i>
-									<i class="dataDelete far fa-trash-alt fa-lg pointer-cursor">
-										<%-- 삭제 이벤트를 위한 데이터 적재 --%>
-										<input type="hidden" value="${detailViewItem.condition}"> <%-- condition --%>
-										<input type="hidden" value="${detailViewItem.dataNo}"> <%-- dataNo --%>
-										<input type="hidden" value="${detailViewItem.receiptImage}"> <!-- receiptImage -->
-									</i>
+								<div class="d-flex justify-content-end flex-gap-1">
+									<i class="dataEditHistory fas fa-history fa-lg pointer-cursor"></i>
+									<i class="dataEdit far fa-edit fa-lg pointer-cursor"></i>
+									<i class="dataDelete far fa-trash-alt fa-lg pointer-cursor"></i>
+									<%-- 삭제 이벤트를 위한 데이터 적재 --%>
+									<input type="hidden" value="${detailViewItem.condition}"> <%-- condition --%>
+									<input type="hidden" value="${detailViewItem.dataNo}"> <%-- dataNo --%>
+									<input type="hidden" value="${detailViewItem.receiptImage}"> <%-- receiptImage --%>
 								</div>
 								<div class="d-flex h-100 align-self-end align-items-center">
 									<div class="changeBudget">
-										123
+										<c:set var="remainingBalance" value="${remainingBalance + detailViewItem.amount}" />
+										<fmt:formatNumber value="${remainingBalance}" pattern="#,###" />
 									</div>
 								</div>
 							</div>
@@ -132,5 +139,8 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
+		
+		<%-- 영수증 이미지 Modal --%>
+		<jsp:include page="/WEB-INF/views/accountBook/receiptImageModal.jsp" flush="true" />
 	</body>
 </html>
