@@ -11,10 +11,13 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/images/**")
 		// .addResourceLocations("file:///C:/PayStory/images/");
-		.addResourceLocations("file:///usr/local/tomcat9/webapps/ROOT/WEB-INF/classes/static/paystory/images/");
+		.addResourceLocations("file:///usr/local/tomcat9/webapps/ROOT/WEB-INF/classes/static/paystory/images/")
+		.addResourceLocations("file:///upload/");
 		
 		registry.addResourceHandler("/voice/**")
 		// .addResourceLocations("file:///C:/PayStory/upload/");
-		.addResourceLocations("file:///usr/local/tomcat9/webapps/ROOT/WEB-INF/classes/static/paystory/voices/");
+		.addResourceLocations("file:///usr/local/tomcat9/webapps/ROOT/WEB-INF/classes/static/paystory/voices/")
+		.addResourceLocations("file:///upload/");
+		
 	}
 }
