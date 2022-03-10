@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	
+		<script src="<c:url value='/main/js/sideMenu.js'/>"></script>
 	</head>
 	<body>
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -21,7 +21,8 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/accountBook/myMain'/>">
+            	<input type="hidden" id="isShared" value="${ sessionScope.isShared }">
+                <a class="nav-link" id="dashBoard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>대시보드</span></a>
             </li>
@@ -87,27 +88,5 @@
             </div>
         </ul>
         <!-- End of Sidebar -->
-        
-        <!-- script -->
-        <script type="text/javascript">
-        	$('#addItemBtn').on('click', function(){
-        		const date = new Date();
-
-        		let year = date.getFullYear();
-        		let month = date.getMonth() + 1; 
-        		let day = date.getDate(); 
-        		let hours = date.getHours();
-    			let minutes = date.getMinutes();
-    			
-    			month = month < 10 ? "0" + month : month;
-    			day = day < 10 ? "0" + day : day;
-    			hours = hours < 10 ? "0" + hours : hours;
-    			minutes = minutes < 10 ? "0" + minutes : minutes;
-    			
-    			let dateTime = year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
-        		
-    			location.href = "/accountBook/add/" + dateTime; // 내역 입력 페이지 이동
-        	})
-        </script>
 	</body>
 </html>
