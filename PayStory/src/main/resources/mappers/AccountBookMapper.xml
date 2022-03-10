@@ -113,6 +113,20 @@
 		</choose>
 	</select>
 	
+	<!-- 수입 내역 조회 (단일) -->
+	<select id="selectIncome" parameterType="HashMap" resultType="com.AourZ.PayStory.model.accountBook.IncomeVO">
+		SELECT *
+		FROM income
+		WHERE accountBookNo = #{accountBookNo} AND incomeNo = #{dataNo}
+	</select>
+	
+	<!-- 지출 내역 조회 (단일) -->
+	<select id="selectExpenditure" parameterType="HashMap" resultType="com.AourZ.PayStory.model.accountBook.ExpenditureVO">
+		SELECT *
+		FROM expenditure
+		WHERE accountBookNo = #{accountBookNo} AND expenditureNo = #{dataNo}
+	</select>
+	
 	<!-- 수입 내역 조회 -->
 	<select id="selectIncomeList" parameterType="HashMap" resultMap="incomeList">
 		SELECT *
@@ -127,6 +141,13 @@
 		FROM expenditure
 		WHERE accountBookNo = #{accountBookNo} AND expenditureDate LIKE CONCAT(#{date}, '%')
 		ORDER BY expenditureDate ASC
+	</select>
+	
+	<!-- 지출 상세 항목 조회 -->
+	<select id="selectExpenditureItem" parameterType="int" resultMap="expenditureItemList">
+		SELECT *
+		FROM expenditure_item
+		WHERE expenditureNo = #{expenditureNo}
 	</select>
 	
 	<!-- 내역 삭제 -->
@@ -144,12 +165,40 @@
 		</choose>
 	</delete>
 	
-	<!-- 지출 상세 항목 조회 -->
-	<select id="selectExpenditureItem" parameterType="int" resultMap="expenditureItemList">
-		SELECT *
+	<!-- 내역 수정 -->
+	<update id="updateItem" parameterType="HashMap">
+		<choose>
+			<when test="condition.equals('income')">
+				UPDATE income
+				SET
+					incomeDate = #{date},
+					incomeSource = #{source},
+					incomeMemo = #{memo},
+					incomeAmount = #{amount},
+					tagNo = #{tagNo}
+				WHERE incomeNo = {dataNo}
+			</when>
+			<when test="condition.equals('expenditure')">
+				UPDATE expenditure
+				SET
+					expenditureDate = #{date},
+					expenditureImage = #{receiptImage},
+					expenditureSource = #{source},
+					expenditureMemo = #{memo},
+					expenditureAddress = #{sourceAddress},
+					expenditureAmount = #{amount},
+					tagNo = #{tagNo}
+				WHERE expenditureNo = {dataNo}
+			</when>
+		</choose>
+	</update>
+	
+	<!-- 지출 상세 내역 수정 -->
+	<delete id="deleteDetailItem" parameterType="int">
+		DELETE
 		FROM expenditure_item
 		WHERE expenditureNo = #{expenditureNo}
-	</select>
+	</delete>
 	
 	<!-- 수입 / 지출 - 총 개수, 총 금액 조회 -->
 	<select id="selectAccountBookTotalDataList" parameterType="HashMap" resultMap="tagTotalList">
@@ -177,11 +226,20 @@
 		ORDER BY fDate ASC
 	</select>
 	
-	<!-- 태그명 조회 -->
-	<select id="selectTagName" parameterType="String" resultType="String">
-		SELECT tagName
-		FROM tag
-		WHERE tagNo = #{tagNo}
+	<!-- 태그 번호 / 이름 조회 -->
+	<select id="selectTagInfo" parameterType="HashMap" resultType="String">
+		<choose>
+			<when test="condition.equals('no')">
+				SELECT tagNo
+				FROM tag
+				WHERE tagName = #{tag}
+			</when>
+			<when test="condition.equals('name')">
+				SELECT tagName
+				FROM tag
+				WHERE tagNo = #{tag}
+			</when>
+		</choose>
 	</select>
 	
 	<!-- 게시글 목록 조회 -->
