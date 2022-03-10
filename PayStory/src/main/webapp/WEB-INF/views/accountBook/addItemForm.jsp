@@ -105,7 +105,7 @@
 											<!-- 주소 -->
 											<div class="form-group">
 												<label for="expenditureAddress">주소</label>
-												<input type="text" id="expenditureAddress" name="expenditureAddress" class="form-control form-control-sm shadow-none" required>
+												<input type="text" id="expenditureAddress" name="expenditureAddress" class="form-control form-control-sm shadow-none">
 											</div>
 											<!-- 아이템 아코디언 -->
 											<div class="accordion" id="itemAccordian">

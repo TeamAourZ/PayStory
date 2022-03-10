@@ -133,9 +133,11 @@ $(function() {
 
 		if (confirm("해당 내역을 삭제하시겠습니까?")) {
 			let condition = $(this).children('input:first-child').val(); // 수입 / 지출 구분
-			let dataNo = $(this).children('input:last-child').val(); // 수입 / 지출 내역 번호
+			let dataNo = $(this).children('input:nth-child(2)').val(); // 수입 / 지출 내역 번호
+			let receiptImage = $(this).children('input:last-child').val(); // 영수증 이미지
 
-			deleteItemAjax(condition, dataNo, nowYear, nowMonth, nowDay);
+			console.log(receiptImage);
+			deleteItemAjax(condition, dataNo, receiptImage, nowYear, nowMonth, nowDay);
 
 			alert("삭제가 완료되었습니다.");
 		} else {

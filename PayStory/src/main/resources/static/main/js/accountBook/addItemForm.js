@@ -318,7 +318,7 @@
   		formData.append("expenditureMemo", $('#expenditureMemo').val());
   		formData.append("expenditureItemPrice", itemPriceArray);
   		formData.append("expenditureItemName", itemNameArray);
-			
+		
 		$.ajax({
 			type:"post",
 			url: "/accountBook/expenditure", 	
