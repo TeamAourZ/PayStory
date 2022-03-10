@@ -255,7 +255,6 @@
     flex-wrap: wrap;
     width: calc(100% + 30px);
     margin: 0px -30px -30px 0px;
-   /*  opacity: 0; */
     transform: translate3d(0px, 50px, 0px);
 }
 
