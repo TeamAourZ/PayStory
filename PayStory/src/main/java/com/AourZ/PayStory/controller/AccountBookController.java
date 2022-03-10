@@ -381,7 +381,40 @@ public class AccountBookController {
 
 		return "accountBook/addItemForm";
 	}
-
+	
+	// 챗봇에서 영수증 등록 페이지로 값 넘기면서 페이지 이동
+	@RequestMapping("/accountBook/add/chat/{date}/{source}/{totalAmount}/{data}")
+	public String resultChatOCR(@PathVariable("date") String date,
+							    @PathVariable("source") String source,
+							    @PathVariable("totalAmount") String totalAmount,
+							    @PathVariable("data") String data, Model model) {
+		
+		
+		
+		ExpenditureItemVO vo = new ExpenditureItemVO();
+		
+		ArrayList<ExpenditureItemVO> itemsList = new ArrayList<ExpenditureItemVO>();
+		
+		String[] items = data.substring(0, data.length()-1).split(",");
+		for(int i=0; i<items.length; i++) {
+			if(i==0) {
+				vo.setExpenditureItemName(items[i].split("=")[1]);
+			} else if(i==1) {
+				vo.setExpenditureItemPrice(Integer.parseInt(items[i].split("=")[1]));
+			}
+			System.out.println("400" + items[i].split("=")[0]);
+			System.out.println("401" + items[i].split("=")[1]);
+			itemsList.add(vo);
+		}
+		
+		model.addAttribute("date", date);
+		model.addAttribute("source", source);
+		model.addAttribute("totalAmount", totalAmount);
+		model.addAttribute("itemsList", itemsList);
+		return "accountBook/addItemForm";
+		
+	}
+	
 	/* 대시보드 조회 */
 	@RequestMapping("/accountBook/detailView")
 	public String detailView(HttpServletRequest request, Model model) {

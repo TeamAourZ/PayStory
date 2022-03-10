@@ -73,8 +73,8 @@
 												<label for="expenditureDate">날짜</label>
 												<input type="datetime-local" id="expenditureDate" name="expenditureDate" class="form-control shadow-none" required>
 												<%-- 대시보드 메인 - 달력에서 날짜 선택 후 + 버튼 눌렀을 때 --%>
-												<c:if test="${not empty dateTime}">
-													<input type="hidden" id="temp" value="${dateTime}">
+												<c:if test="${not empty date}">
+													<input type="hidden" id="temp" value="${date}">
 													<script type="text/javascript">
 														$('#expenditureDate').val($('#temp').val());
 														$('#temp').remove(); // 삭제
@@ -101,6 +101,13 @@
 											<div class="form-group">
 												<label for="expenditureSource">상호명</label>
 												<input type="text" id="expenditureSource" name="expenditureSource" class="form-control form-control-sm shadow-none" required>
+												<c:if test="${not empty source}">
+													<input type="hidden" id="temp" value="${source}">
+													<script type="text/javascript">
+														$('#expenditureSource').val($('#temp').val());
+														$('#temp').remove(); // 삭제
+													</script>
+												</c:if>
 											</div>
 											<!-- 주소 -->
 											<div class="form-group">
@@ -127,11 +134,30 @@
 																<div class="item default form-group form-row">
 																	<div class="col-7">
 																		<label for="expenditureItem">내용</label>
-																		<input type="text" name="expenditureItemName" class="expenditureItem form-control form-control-sm shadow-none">
+																		<input type="text" id= "expenditureItemName" name="expenditureItemName" class="expenditureItem form-control form-control-sm shadow-none">
+																		<c:if test="${not empty itemsList}">
+																			<c:forEach var="items" items="${itemsList}">
+																				<input type="text" id="temp" value="${items.expenditureItemName}">
+																				<script type="text/javascript">
+																					$('#expenditureItemName').val($('#temp').val());
+																					$('#temp').remove(); // 삭제
+																				</script>
+																			</c:forEach>
+																			
+																		</c:if>
 																	</div>
 																	<div class="col-4">
 																		<label for="expenditureItemAmount">금액</label>
-																		<input type="text" name="expenditureItemPrice" class="expenditureItemAmount form-control form-control-sm shadow-none">
+																		<input type="text" id= "expenditureItemPrice" name="expenditureItemPrice" class="expenditureItemAmount form-control form-control-sm shadow-none">
+																		<c:if test="${not empty itemsList}">
+																			<c:forEach var="items" items="${itemsList}">
+																				<input type="hidden" id="temp" value="${items.expenditureItemPrice}">
+																				<script type="text/javascript">
+																					$('#expenditureItemPrice').val($('#temp').val());
+																					$('#temp').remove(); // 삭제
+																				</script>
+																			</c:forEach>
+																		</c:if>
 																	</div>
 																	<div class="col-1">
 																		<button class="removeItem btn shadow-none p-0">
@@ -158,6 +184,13 @@
 												<div class="col-4 d-flex">
 													<input type="text" id="expenditureTotalAmount" name="expenditureAmount" class="form-control-plaintext text-right" value="0" readonly>
 													<span style="padding: 0.5rem 0;">원</span>
+													<c:if test="${not empty totalAmount}">
+														<input type="hidden" id="temp" value="${totalAmount}">
+														<script type="text/javascript">
+															$('#expenditureTotalAmount').val($('#temp').val());
+															$('#temp').remove(); // 삭제
+														</script>
+													</c:if>
 												</div>
 											</div>
 											<!-- 메모 -->
