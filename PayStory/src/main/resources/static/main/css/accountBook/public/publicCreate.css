@@ -83,6 +83,15 @@ h5{
    
 }
 
+.P-delbtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 13px;
+   
+}
+
 .delImage {
 	width: 100%;
 }
