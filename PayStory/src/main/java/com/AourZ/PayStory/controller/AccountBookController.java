@@ -501,7 +501,7 @@ public class AccountBookController {
 		accountBookService.deleteItem(condition, dataNo);
 	}
 
-	/* 지출,수입 내역 추가 form */
+	/* 지출,수입 내역 추가 form으로 이동 */
 	@RequestMapping("/accountBook/add")
 	public String addItemForm() {
 		return "accountBook/addItemForm";

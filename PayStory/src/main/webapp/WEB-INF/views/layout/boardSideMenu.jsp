@@ -44,7 +44,7 @@
 
             <!-- Nav Item - 수입 | 지출 내역 추가 -->
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/accountBook/add'/>">
+                <a class="nav-link" id="addItemBtn">
                     <i class="fas fa-plus-circle"></i>
                     <span>수입 | 지출 내역 추가</span>
                 </a>
@@ -87,5 +87,27 @@
             </div>
         </ul>
         <!-- End of Sidebar -->
+        
+        <!-- script -->
+        <script type="text/javascript">
+        	$('#addItemBtn').on('click', function(){
+        		const date = new Date();
+
+        		let year = date.getFullYear();
+        		let month = date.getMonth() + 1; 
+        		let day = date.getDate(); 
+        		let hours = date.getHours();
+    			let minutes = date.getMinutes();
+    			
+    			month = month < 10 ? "0" + month : month;
+    			day = day < 10 ? "0" + day : day;
+    			hours = hours < 10 ? "0" + hours : hours;
+    			minutes = minutes < 10 ? "0" + minutes : minutes;
+    			
+    			let dateTime = year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
+        		
+    			location.href = "/accountBook/add/" + dateTime; // 내역 입력 페이지 이동
+        	})
+        </script>
 	</body>
 </html>
