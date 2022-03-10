@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.AourZ.PayStory.model.FileUtils;
 import com.AourZ.PayStory.model.accountBook.AccountBookBudgetVO;
 import com.AourZ.PayStory.model.accountBook.AccountBookVO;
 import com.AourZ.PayStory.model.accountBook.DateVO;
@@ -380,7 +381,40 @@ public class AccountBookController {
 
 		return "accountBook/addItemForm";
 	}
-
+	
+	// 챗봇에서 영수증 등록 페이지로 값 넘기면서 페이지 이동
+	@RequestMapping("/accountBook/add/chat/{date}/{source}/{totalAmount}/{data}")
+	public String resultChatOCR(@PathVariable("date") String date,
+							    @PathVariable("source") String source,
+							    @PathVariable("totalAmount") String totalAmount,
+							    @PathVariable("data") String data, Model model) {
+		
+		
+		
+		ExpenditureItemVO vo = new ExpenditureItemVO();
+		
+		ArrayList<ExpenditureItemVO> itemsList = new ArrayList<ExpenditureItemVO>();
+		
+		String[] items = data.substring(0, data.length()-1).split(",");
+		for(int i=0; i<items.length; i++) {
+			if(i==0) {
+				vo.setExpenditureItemName(items[i].split("=")[1]);
+			} else if(i==1) {
+				vo.setExpenditureItemPrice(Integer.parseInt(items[i].split("=")[1]));
+			}
+			System.out.println("400" + items[i].split("=")[0]);
+			System.out.println("401" + items[i].split("=")[1]);
+			itemsList.add(vo);
+		}
+		
+		model.addAttribute("date", date);
+		model.addAttribute("source", source);
+		model.addAttribute("totalAmount", totalAmount);
+		model.addAttribute("itemsList", itemsList);
+		return "accountBook/addItemForm";
+		
+	}
+	
 	/* 대시보드 조회 */
 	@RequestMapping("/accountBook/detailView")
 	public String detailView(HttpServletRequest request, Model model) {
@@ -493,15 +527,24 @@ public class AccountBookController {
 
 	/* 대시보드 조회 - 내역 삭제 */
 	@RequestMapping("/accountBook/detailViewList/delete")
-	public void accountBookDataDelete(@RequestParam HashMap<String, Object> param) {
+	public void accountBookDataDelete(@RequestParam HashMap<String, Object> param, HttpSession session) throws IOException {
 		// map 정보 가져오기
 		String condition = (String) param.get("condition"); // 수입 / 지출 구분
 		int dataNo = Integer.parseInt((String) param.get("dataNo")); // 내역 번호
+		String receiptImage = (String) param.get("receiptImage"); // 영수증 이미지
+		
+		// accountBookNo 정보 가져오기
+		int accountBookNo = (int) session.getAttribute("accountBookNo");
 
+		// 지출 내역 삭제시 서버에서 영수증 이미지 삭제
+		if(condition.equals("expenditure")) {
+			FileUtils.removeReceipt(accountBookNo, receiptImage);
+		}
+		
 		accountBookService.deleteItem(condition, dataNo);
 	}
 
-	/* 지출,수입 내역 추가 form */
+	/* 지출,수입 내역 추가 form으로 이동 */
 	@RequestMapping("/accountBook/add")
 	public String addItemForm() {
 		return "accountBook/addItemForm";
@@ -529,13 +572,7 @@ public class AccountBookController {
 		// session에서 accountBookNo, memberNo 가져오기
 		expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
 
-		// 파일 없을 때 예외 처리하기
-		System.out.println();
-		if (!expenditureVO.getExpenditureImage().equals("")) {
-			String fileName = session.getAttribute("memberNo") + "_" + session.getAttribute("accountBookNo") + "_"
-					+ expenditureVO.getExpenditureImage();
-			expenditureVO.setExpenditureImage(fileName);
-		}
+		System.out.println(expenditureVO.getExpenditureImage());
 
 		accountBookService.insertExpenditure(expenditureVO);
 

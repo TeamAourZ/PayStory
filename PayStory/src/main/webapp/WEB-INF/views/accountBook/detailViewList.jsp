@@ -118,6 +118,7 @@
 										<%-- 삭제 이벤트를 위한 데이터 적재 --%>
 										<input type="hidden" value="${detailViewItem.condition}"> <%-- condition --%>
 										<input type="hidden" value="${detailViewItem.dataNo}"> <%-- dataNo --%>
+										<input type="hidden" value="${detailViewItem.receiptImage}"> <!-- receiptImage -->
 									</i>
 								</div>
 								<div class="d-flex h-100 align-self-end align-items-center">

@@ -52,24 +52,36 @@
 											<c:choose>
 												<c:when test="${ board.boardCategoryNo eq 'bc002' }">
 													<option disabled value="">카테고리를 선택해주세요.</option>
+													<c:if test="${ sessionScope.memberRank eq '3' }">
+														<option value="bc001">공지사항</option>
+													</c:if>
 													<option selected value="bc002">질문</option>
 													<option value="bc003">정보공유</option>
 													<option value="bc004">자유게시판</option>
 												</c:when>
 												<c:when test="${ board.boardCategoryNo eq 'bc003' }">
 													<option disabled value="">카테고리를 선택해주세요.</option>
+													<c:if test="${ sessionScope.memberRank eq '3' }">
+														<option value="bc001">공지사항</option>
+													</c:if>
 													<option value="bc002">질문</option>
 													<option selected value="bc003">정보공유</option>
 													<option value="bc004">자유게시판</option>
 												</c:when>
 												<c:when test="${ board.boardCategoryNo eq 'bc004' }">
 													<option disabled value="">카테고리를 선택해주세요.</option>
+													<c:if test="${ sessionScope.memberRank eq '3' }">
+														<option value="bc001">공지사항</option>
+													</c:if>
 													<option value="bc002">질문</option>
 													<option value="bc003">정보공유</option>
 													<option selected value="bc004">자유게시판</option>
 												</c:when>
 												<c:otherwise>
 													<option selected disabled value="">카테고리를 선택해주세요.</option>
+													<c:if test="${ sessionScope.memberRank eq '3' }">
+														<option value="bc001">공지사항</option>
+													</c:if>
 													<option value="bc002">질문</option>
 													<option value="bc003">정보공유</option>
 													<option value="bc004">자유게시판</option>

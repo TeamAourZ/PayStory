@@ -35,9 +35,7 @@
 		</nav>
 		<section>
 			<article class="section">
-				<input type="radio" name="slide" id="slide01" checked> <input
-					type="radio" name="slide" id="slide02">
-
+				<input type="radio" name="slide" id="slide01" checked> <input type="radio" name="slide" id="slide02">
 				<div class="slidwrap">
 					<ul class="slidelist">
 						<li><a> <label for="slide02" class="left"></label> <img
@@ -57,7 +55,6 @@
 			<article class="main_text">
 				<h1>Pay Story</h1>
 				<div class="contents">Pay Story는 공유가계부, 대시보드, AI기능이 탑재됐습니다.</div>
-
 				<ul class="fn">
 					<li>
 						<div class="fn_img">
@@ -96,19 +93,19 @@
 					<div class="css-bjn8wh e14wovf12">
 						<div class="css-awfxon">
 							<h1 class="css-1kclp9l e1b3da522">공유가계부</h1>
-							<h2 class="css-1iw59sv e1b3da521">가족이나 모임에서<br>다 같이 예산관리를<br>해봐요!</h2>
+							<h2 class="css-1iw59sv e1b3da521">가족이나 모임에서<br>다 같이 예산관리를<br>해봐요</h2>
 						</div>
 						<div class="css-v5945b e984jyk0">
 							<div colspan="2" style="flex-basis: calc(100% - 30px); max-width: calc(100% - 30px);" class="css-r7qaja e1gj2pfq0">
 								<div class="css-1qjyiud"> 
 									<div class="css-rgylcs e14wovf11">
 										<div class="css-1foy5fx e14wovf10">
-											<img src="<c:url value='main/images/indexTest3.png'/>">
+											<img src="<c:url value='main/images/contents1.png'/>">
 										</div>
 									</div>
 									<p class="css-u4tc6t">
 									같이 예산관리를 하고 싶다고<br>생각하신적은 없나요?<br><br>
-									<span class="css-1smue61">PayStory에서 가능합니다!</span>
+									<span class="css-1smue61">PayStory에서 가능합니다</span>
 									</p>
 								</div>
 							</div>
@@ -116,8 +113,7 @@
 					</div>
 				</div>
 			</div>
-		</section>
-		
+		</section>	
 		<!-- 대시보드 소개란 -->
 		<section class="css-1i7bcd8 e7dsxmo0">
 			<div class="p-container p-container--default css-1ot8705">
@@ -125,27 +121,24 @@
 					<div class="css-1w1coa0 e1prhvo15">
 						<div class="css-udln85">
 							<h1 class="css-1kclp9l e1b3da522">대시보드</h1>
-							<h2 class="css-csrb5e e1b3da521">지출 부터 수입까지<br>대시보드로 한 눈에!</h2>
+							<h2 class="css-csrb5e e1b3da521">지출 부터 수입까지<br>대시보드로 한 눈에</h2>
 						</div>
 						<div style class="css-ymgzel e1prhvo14">
 							<div class="e1prhvo11 css-lkoukj ey5meut2">
-								<img src="<c:url value='main/images/indexTest4.png'/>" class="css-i8161j ey5meut0">
-								<img src="<c:url value='main/images/indexTest5.png'/>" class="css-zxsb69 ey5meut1">
-							</div>						
+								<img src="<c:url value='main/images/contents2.png'/>" class="css-i8161j ey5meut0">
+							</div>					
 						</div>
 						<p class="css-lk5fic e1prhvo10">
-						<!-- 수입, 지출 상세내역을 한눈에 보고 자신의 자금의 흐름을 파악하세요 -->
-						자신의 수입, 지출을 한 눈에!<br>그래프와 달력을 통해 어느날 소비와 소득이 있는지 보고<br>
+						자신의 수입, 지출을 한 눈에<br>그래프와 달력을 통해 어느날 소비와 소득이 있는지 보고<br>
 						상세보기를 통해 더 자세히 조회를 해봐요
 						</p>
 					</div>
 				</div>
 			</div>
-		</section>
-		
-		
+		</section>	
 		<!-- AI 소개란 -->
-		<section class="css-1i7bcd8 e7dsxmo0">
+		<section class="css-vjuko2 e7dsxmo0">
+			<img src="<c:url value='main/images/contents3.png'/>" class="background-image1">
 			<div class="p-container p-container--default css-1ot8705">
 				<div class="p-container__inner">
 					<div class="css-1w1coa0 e1prhvo15">
@@ -154,18 +147,28 @@
 							<h2 class="css-csrb5e e1b3da521">AI기능으로<br>영수증을 기입만 하면<br>자동으로입력해줘요</h2>
 						</div>
 						<div style class="css-ymgzel e1prhvo14">
-							<div class="e1prhvo11 css-lkoukj ey5meut2">
-								<img src="<c:url value='main/images/indexTest7.png'/>" class="css-i8161jj ey5meut0">
+							<div class="e1prhvo11 css-lkoukjj ey5meut2">
+								<img src="<c:url value='main/images/contents4.png'/>" class="css-i8161jj ey5meut0">
 							</div>						
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
-		
+		</section>		
 		<!-- end -->
-		<section>
-			<h1 class="end-text">이제 페이스토리를 작성해볼까요?</h1>
+		<section class="end-top">
+			<div class="p-container p-container--default css-1ot8705">
+				<h1 class="end-text">이제 자신만에 <span class="end-text1">PayStory</span> 를 작성해볼까요?</h1>
+				<div class="st-btnW">				
+					<button class="st-btn2" onclick = "location.href = '<c:url value='/member/registerView'/>'">시작하기</button>
+				</div>
+				<h1 class="end-text2">PayStory</h1>
+			</div>
+		</section>
+		<section class="end-bottem">
+			<div class="p-container p-container--default css-1ot8705">
+				<h1 class="end-text3">Team<br><span class="end-text4">AourZ</span></h1>
+			</div>
 		</section>
 	</div>
 </body>

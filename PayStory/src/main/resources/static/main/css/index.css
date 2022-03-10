@@ -1,8 +1,8 @@
 @charset "UTF-8";
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-
 /* *********공통******** */
+
 *{
 	list-style: none;
 	text-decoration: none;
@@ -214,7 +214,7 @@
 }
 
 .css-8vb2wj {
-    padding: 250px 0;
+    padding: 98px 0 177px 0;
 }
 
 .p-container--default>.p-container__inner {
@@ -231,9 +231,7 @@
 }
 
 .css-awfxon {
-    /* opacity: 0; */
     transform: translate3d(0px, 50px, 0px);
-    animation: 0.5s ease-in-out 0s 1 normal forwards running animation-1x3fevv;
 }
 
 .css-1kclp9l {
@@ -257,9 +255,7 @@
     flex-wrap: wrap;
     width: calc(100% + 30px);
     margin: 0px -30px -30px 0px;
-   /*  opacity: 0; */
     transform: translate3d(0px, 50px, 0px);
-    animation: 1s ease-in-out 0.5s 1 normal forwards running animation-1x3fevv;
 }
 
 .css-r7qaja {
@@ -284,18 +280,19 @@
 .css-rgylcs {
     position: absolute;
     top: 0px;
-    right: 78px;
+    right: 123px;
     transform: translate3d(0px, 50px, 0px);
-    animation: 1s ease-in-out 1s 1 normal forwards running animation-1x3fevv;
 }
 
+@media screen and (max-width: 1320px) { .css-rgylcs { display: none; } }
+
 .css-1foy5fx {
-    width: 798px;
+    width: 590px;
 }
 
 .css-1foy5fx img {
     width: 100%;
-    height: 403px;
+    height: 413px;
 }
 
 .css-u4tc6t {
@@ -304,7 +301,6 @@
     line-height: 1.4;
     color: rgb(176, 184, 193);
     transform: translate3d(0px, 50px, 0px);
-    animation: 1s ease-in-out 0.5s 1 normal forwards running animation-1x3fevv;
 }
 
 .css-1smue61 {
@@ -319,7 +315,7 @@
 }
 
 .css-1ot8705 {
-    padding: 250px 0 165px 0;
+    padding: 98px 0 57px 0;
 }
 
 .p-container--default {
@@ -341,7 +337,6 @@
     position: relative;
     z-index: 1;
     transform: translate3d(0px, 50px, 0px);
-    animation: 0.5s ease-in-out 0s 1 normal forwards running animation-1x3fevv;
 }
 
 .css-csrb5e {
@@ -352,20 +347,20 @@
 }
 
 .css-lkoukj {
-    width: 600px;
+    width: 109%;
     height: 936px;
     position: absolute;
     top: 0px;
     right: -104px;
     transform: translate3d(0px, 50px, 0px);
-    animation: 0.5s ease-in-out 0.5s 1 normal forwards running animation-1x3fevv;
+    overflow: hidden;
 }
 
 .css-i8161j {
     position: absolute;
-    top: 31%;
-    left: -83%;
-    width: 158%;
+    top: 8%;
+    right: 230px;
+    width: 77%;
     height: auto;
 }
 
@@ -376,19 +371,33 @@
 }
 
 .css-lk5fic {
-    font-size: 23px;
+    font-size: 26px;
     font-weight: 600;
     line-height: 1.5;
     color: rgb(51, 61, 75);
     position: absolute;
     right: 435px;
-    bottom: 347px;
+    bottom: 210px;
     transform: translate3d(0px, 50px, 0px);
-    animation: 0.5s ease-in-out 1.5s 1 normal forwards running animation-1x3fevv;
+    text-align: center;
 }
 
 
 /* AI */
+.css-vjuko2 {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: #f9fafb;
+}
+
+.background-image1 {
+    position: absolute;
+    width: 103%;
+    height: -webkit-fill-available;
+    right: -28px;
+}
+
 .css-1kclp9ll {
     font-size: 40px;
     font-weight: 700;
@@ -397,24 +406,89 @@
     margin-bottom: 20px;
 }
 
-.css-i8161jj  {
+.css-i8161jj {
     position: absolute;
-    top: -2%;
-    left: -61%;
-    width: 128%;
+    top: 13%;
+    width: 49%;
     height: auto;
+    right: 457px;
+}
+
+.css-lkoukjj {
+    width: 109%;
+    height: 1279px;
+    position: absolute;
+    top: 0px;
+    right: -104px;
+    transform: translate3d(0px, 50px, 0px);
+    overflow: hidden;
 }
 
 /* end */
+.end-top {
+	background-color: #0d6efd;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
 .end-text {
     margin: 0 auto;
     max-width: 56%;
-    margin-bottom: 133px;
+    margin-bottom: 71px;
     text-align: center;
     font-size: 40px;
-    color: #0d6efd;
+    color: #fff;
 }
 
+.end-text1 {
+    color: #ffb500;
+}
 
+.end-text2 {
+    text-align: center;
+    margin-top: 38px;
+    font-size: 50px;
+    font-weight: 800;
+    color: #83a6f4;
+}
 
+.st-btnW{
+	text-align: center;
+}
 
+.st-btn2{
+    background-color: rgb(46 45 45 / 70%);
+    border: 2px solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    padding: 20px 50px;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    transition: all .4s;
+    font-size: 25px;
+} 
+
+.st-btn2:hover{
+    background-color: #f08a37;
+}
+
+.end-bottem {
+	background-color: #191f28;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.end-text3 {
+    text-align: center;
+    margin-top: -3px;
+    font-size: 65px;
+    font-weight: 800;
+    color: #444c5d;
+}
+
+.end-text4 {
+	font-size: 200px;
+	color: #444c5d;
+}
