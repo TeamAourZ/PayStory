@@ -272,7 +272,7 @@
 			processData: false,
     		contentType: false,
 			success: function(result) {
-				// console.log(result)
+				var openNewWindow = window.open("about:blank");
 				// 날짜 
 				let date = result.expenditureDate;
 				// 주소
@@ -302,7 +302,7 @@
 				}
 				receiveChat += '<tr><th>총 지출 금액</th><td colspan="2">'+ totalAmount + '원</td><tr></table>'+
 							   '<br><br> 이 결과를 가계부에 저장하시겠습니까? (네: 1, 아니오: 0)</span></span></div>';
-
+				openNewWindow.location.href = "/accountBook/add/chat/" + date + "/" + source + "/" + totalAmount + "/" + data;
         $('#chatBox').append(receiveChat);
 				
 			},
