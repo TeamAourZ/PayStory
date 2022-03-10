@@ -73,8 +73,8 @@
 												<label for="expenditureDate">날짜</label>
 												<input type="datetime-local" id="expenditureDate" name="expenditureDate" class="form-control shadow-none" required>
 												<%-- 대시보드 메인 - 달력에서 날짜 선택 후 + 버튼 눌렀을 때 --%>
-												<c:if test="${not empty date}">
-													<input type="hidden" id="temp" value="${date}">
+												<c:if test="${not empty dateTime}">
+													<input type="hidden" id="temp" value="${dateTime}">
 													<script type="text/javascript">
 														$('#expenditureDate').val($('#temp').val());
 														$('#temp').remove(); // 삭제
