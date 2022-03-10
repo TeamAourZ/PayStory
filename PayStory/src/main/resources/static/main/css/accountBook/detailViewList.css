@@ -1,13 +1,16 @@
 @charset "UTF-8";
 
 .incomeData {
-	border-radius: 5px;
-	border: 1px solid #2768fa;
+	border: 1px solid #2768fa !important;
 }
 
 .expenditureData {
-	border-radius: 5px;
-	border: 1px solid #ffb500;
+	border: 1px solid #ffb500 !important;
+}
+
+.sourceDate {
+	top: 0%;
+	left: 0.2%;
 }
 
 .side {

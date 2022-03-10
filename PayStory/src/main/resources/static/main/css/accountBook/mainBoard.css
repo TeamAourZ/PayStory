@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
-#boardCategoryBox {
-	gap: 10px;
-}
-
 .boardCategory.selected {
 	text-decoration: underline;
+}
+
+.postItem:hover {
+	color: #4e73df;
 }

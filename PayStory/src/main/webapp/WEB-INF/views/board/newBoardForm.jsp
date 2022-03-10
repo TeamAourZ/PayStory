@@ -36,48 +36,41 @@
                     
                     <!-- 게시글 작성 form -->
 					<div class="formWrap p-4 bg-white rounded">
-						<form id="newBoardForm" class="px-4" action="/board/register" method="post">
-							<%--<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" /> --%>		              		
+						<form id="newBoardForm" class="px-4">
 		              		<div class="form-row">
 		              			<!-- 제목 -->
 			              		<div class="form-group col-8">
 			              			<label>제목</label>
-			              			<input class="title form-control shadow-none" name="title">
+			              			<input class="title form-control shadow-none" name="boardTitle">
 			              		</div>
 			              		<!-- 카테고리 -->
 			              		<div class="form-group col-4">
 				              		<label>카테고리</label>
 				              		<select id="boardCategoryNo" name="boardCategoryNo" class="form-control shadow-none" required>
 										<option selected disabled value="">카테고리를 선택해주세요.</option>
-										<option value="1">질문</option>
-										<option value="2">정보공유</option>
-										<option value="3">자유게시판</option>
+										<c:if test="${ sessionScope.memberRank eq '3' }">
+											<option value="bc001">공지사항</option>
+										</c:if>
+										<option value="bc002">질문</option>
+										<option value="bc003">정보공유</option>
+										<option value="bc004">자유게시판</option>
 									</select>
 				              	</div>
 		              		</div>
 			              	<!-- 첨부파일 -->
 			              	<label for="uploadFile">첨부 파일</label>
 							<div class="custom-file mb-3"> 
-								<input type="file" id="uploadFile" name="uploadFile" class="custom-file-input shadow-none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadFile">
+								<input type="file" id="uploadFile" name="boardFile" class="custom-file-input shadow-none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadFile">
 								<label class="custom-file-label shadow-none" for="uploadFile">파일 선택</label>
 							</div>
-						    <!-- <div class="row">
-						        <div class="col-lg-12">
-						            <div class="card mb-4">
-						                <div class="card-body uploadResult">
-						                	<ul></ul>
-						                </div>
-						            </div>
-						        </div>
-						    </div> -->
 			              	<!-- 내용 -->
 		              		<div class="form-group">
 			              		<label>내용</label>
-			              		<textarea class="content form-control shadow-none" rows="10" name="content"></textarea>
+			              		<textarea class="content form-control shadow-none" rows="10" name="boardContents"></textarea>
 			              	</div>
 			              	<div class="d-flex align-items-center justify-content-center mt-3">
 								<button type="submit" class="btn btn-primary w-25 mr-3 shadow-none">등록</button>
-								<button type="button" class="btn btn-primary w-25 shadow-none">취소</button>
+								<button type="button" class="listBtn btn btn-primary w-25 shadow-none">취소</button>
 							</div>
 	              		</form>
 					</div>

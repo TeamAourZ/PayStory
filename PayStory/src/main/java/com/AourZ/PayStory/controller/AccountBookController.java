@@ -3,8 +3,10 @@ package com.AourZ.PayStory.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,19 +25,19 @@ import com.AourZ.PayStory.model.accountBook.AccountBookVO;
 import com.AourZ.PayStory.model.accountBook.DateVO;
 import com.AourZ.PayStory.model.accountBook.DetailViewItemComparator;
 import com.AourZ.PayStory.model.accountBook.DetailViewItemVO;
-import com.AourZ.PayStory.model.accountBook.ExpenditureItemComparator;
 import com.AourZ.PayStory.model.accountBook.ExpenditureItemVO;
 import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
 import com.AourZ.PayStory.model.accountBook.IncomeVO;
 import com.AourZ.PayStory.model.accountBook.MainBoardVO;
 import com.AourZ.PayStory.model.accountBook.ShareAccountBookVO;
 import com.AourZ.PayStory.model.accountBook.ShareBudgetVO;
+import com.AourZ.PayStory.model.accountBook.ShareMainVO;
 import com.AourZ.PayStory.model.accountBook.TagTotalVO;
 import com.AourZ.PayStory.model.board.BoardVO;
 import com.AourZ.PayStory.model.member.MemberVO;
 import com.AourZ.PayStory.model.member.ShareMemberVO;
 import com.AourZ.PayStory.service.accountBook.AccountBookService;
-import com.AourZ.PayStory.service.accountBook.AccountCreateService;
+import com.AourZ.PayStory.service.accountBook.ShareAccountService;
 
 @Controller
 public class AccountBookController {
@@ -43,7 +45,7 @@ public class AccountBookController {
 	private AccountBookService accountBookService;
 
 	@Autowired
-	private AccountCreateService createService;
+	private ShareAccountService shareAccountService;
 
 	@Autowired
 	private AccountBookMethod methodList;
@@ -86,6 +88,9 @@ public class AccountBookController {
 		model.addAttribute("accountBookTitle", accountBookTitle);
 		model.addAttribute("isShared", isShared);
 
+		// session 정보 등록
+		session.setAttribute("isShared", isShared);
+
 		return "accountBook/main";
 	}
 
@@ -104,6 +109,9 @@ public class AccountBookController {
 
 		model.addAttribute("accountBookTitle", accountBookTitle);
 		model.addAttribute("isShared", isShared);
+
+		// session 정보 갱신
+		session.setAttribute("isShared", isShared);
 
 		// 소유자, 참여자 조회
 		ArrayList<ShareAccountBookVO> tempList = accountBookService.selectShareMemberList(accountBookNo);
@@ -144,7 +152,7 @@ public class AccountBookController {
 	@RequestMapping("/accountBook/chart")
 	public String chart(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
 		// map 정보 가져오기
-		int year = Integer.parseInt((String) param.get("year")); // 년
+		String year = (String) param.get("year"); // 년
 		int month = Integer.parseInt((String) param.get("month")); // 월
 		int day = -1;
 		int lastDate = Integer.parseInt((String) param.get("lastDate")); // 달의 마지막 날
@@ -168,10 +176,10 @@ public class AccountBookController {
 
 		// DB SELECT 기준 설정
 		String monthText = methodList.zeroFill(month); // 월
-		String date = Integer.toString(year) + "-" + monthText; // 년-월
+		String date = year + "-" + monthText; // 년-월
 
 		if (chartType.equals("y")) {
-			date = Integer.toString(year);
+			date = year;
 		} else if (chartType.equals("m")) {
 			// 당월 월별 태그별 총 건수, 총 금액
 			ArrayList<TagTotalVO> dataList = accountBookService.selectAccountBookTotalDataList(chartTab, accountBookNo,
@@ -198,7 +206,7 @@ public class AccountBookController {
 	@RequestMapping("/accountBook/budgetStatus")
 	public String budget(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
 		// map 정보 가져오기
-		int year = Integer.parseInt((String) param.get("year")); // 년
+		String year = (String) param.get("year"); // 년
 		int month = Integer.parseInt((String) param.get("month")); // 월
 
 		model.addAttribute("year", year);
@@ -210,7 +218,7 @@ public class AccountBookController {
 
 		// DB SELECT 기준 설정
 		String monthText = methodList.zeroFill(month); // 월
-		String date = Integer.toString(year) + "-" + monthText; // 년-월
+		String date = year + "-" + monthText; // 년-월
 
 		// 예산
 		AccountBookBudgetVO budget = accountBookService.selectAccountBookBudget(accountBookNo, date);
@@ -237,18 +245,11 @@ public class AccountBookController {
 
 	/* 대시보드 메인 - 게시판 */
 	@RequestMapping("/accountBook/board")
-	public String board(@RequestParam("boardTab") int boardTab, HttpServletRequest request, Model model) {
-		// session 정보 가져오기
-		HttpSession session = request.getSession();
-		String signInMemberNo = (String) session.getAttribute("memberNo"); // 회원 번호
-
-		String boardCategoryNo = "c1000";
+	public String board(@RequestParam("boardTab") int boardTab, Model model) {
+		String boardCategoryNo = "bc001";
 
 		// 게시글 조회
 		ArrayList<BoardVO> originalBoardList = accountBookService.selectBoardList(boardTab, boardCategoryNo);
-
-		// 회원 정보 조회
-		MemberVO member = accountBookService.selectMemberInfo("memberNo", signInMemberNo);
 
 		// 게시글 리스트
 		ArrayList<MainBoardVO> boardList = new ArrayList<MainBoardVO>();
@@ -256,10 +257,16 @@ public class AccountBookController {
 		for (BoardVO board : originalBoardList) {
 			MainBoardVO vo = new MainBoardVO();
 
+			int boardNo = board.getBoardNo();
 			String boardCategoryName = methodList.replaceCategory(board.getBoardCategoryNo()); // 카테고리 번호 to 카테고리 이름
 			String boardTitle = board.getBoardTitle();
+
+			// 회원 정보 조회
+			MemberVO member = accountBookService.selectMemberInfo("memberNo", board.getMemberNo());
+
 			String memberName = member.getMemberName();
 
+			vo.setBoardNo(boardNo);
 			vo.setBoardCategoryName(boardCategoryName);
 			vo.setBoardTitle(boardTitle);
 			vo.setMemberName(memberName);
@@ -277,7 +284,7 @@ public class AccountBookController {
 	public String mainCalendar(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
 		// map 정보 가져오기
 		String calendarType = (String) param.get("calendarType"); // 가계부 타입
-		int year = Integer.parseInt((String) param.get("year")); // 년
+		String year = (String) param.get("year"); // 년
 		int month = Integer.parseInt((String) param.get("month")); // 월
 		int firstDay = Integer.parseInt((String) param.get("firstDay")); // 달의 시작 요일 번호
 		int lastDate = Integer.parseInt((String) param.get("lastDate")); // 달의 마지막 날
@@ -301,7 +308,7 @@ public class AccountBookController {
 		for (int i = 1; i <= lastDate; i++) {
 			String dayText = methodList.zeroFill(i);
 
-			String date = Integer.toString(year) + "-" + monthText + "-" + dayText; // 날짜별 class data
+			String date = year + "-" + monthText + "-" + dayText; // 날짜별 class data
 
 			DateVO vo = new DateVO();
 
@@ -316,7 +323,7 @@ public class AccountBookController {
 		/* ---------------- dateList ---------------- */
 
 		// 그룹 조건 - 년-월
-		String date = Integer.toString(year) + "-" + monthText; // 년-월
+		String date = year + "-" + monthText; // 년-월
 
 		ArrayList<TagTotalVO> tempList = null;
 
@@ -393,7 +400,17 @@ public class AccountBookController {
 
 	/* 대시보드 조회 - 상세 내역 */
 	@RequestMapping("/accountBook/detailViewList")
-	public String detailViewList(HttpServletRequest request, Model model) {
+	public String detailViewList(@RequestParam HashMap<String, Object> param, HttpServletRequest request, Model model) {
+		// map 정보 가져오기
+		String year = (String) param.get("year"); // 년
+		int month = Integer.parseInt((String) param.get("month")); // 월
+		int day = Integer.parseInt((String) param.get("day")); // 일
+
+		// DB SELECT 기준 설정
+		String monthText = methodList.zeroFill(month);
+		String dayText = methodList.zeroFill(day);
+		String date = year + "-" + monthText + "-" + dayText;
+
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
@@ -402,7 +419,7 @@ public class AccountBookController {
 		ArrayList<DetailViewItemVO> detailViewItemList = new ArrayList<DetailViewItemVO>();
 
 		// 수입 내역 조회
-		ArrayList<IncomeVO> incomeList = accountBookService.selectIncomeList(accountBookNo);
+		ArrayList<IncomeVO> incomeList = accountBookService.selectIncomeList(accountBookNo, date);
 
 		// 수입 내역 리스트에 추가
 		for (IncomeVO income : incomeList) {
@@ -421,7 +438,7 @@ public class AccountBookController {
 		}
 
 		// 지출 내역 조회
-		ArrayList<ExpenditureVO> expenditureList = accountBookService.selectExpenditureList(accountBookNo);
+		ArrayList<ExpenditureVO> expenditureList = accountBookService.selectExpenditureList(accountBookNo, date);
 
 		// 지출 내역 리스트에 추가
 		for (ExpenditureVO expenditure : expenditureList) {
@@ -440,27 +457,48 @@ public class AccountBookController {
 			detailViewItemList.add(vo);
 		}
 
-		Collections.sort(detailViewItemList, new DetailViewItemComparator()); // 날짜를 기준으로 오름차순 정렬
+		if (detailViewItemList != null && detailViewItemList.size() > 0) {
+			Collections.sort(detailViewItemList, new DetailViewItemComparator()); // 날짜를 기준으로 오름차순 정렬
 
-		model.addAttribute("detailViewItemList", detailViewItemList);
+			model.addAttribute("detailViewItemList", detailViewItemList);
+		}
 
 		// 지출 상세 항목 리스트
-		ArrayList<ArrayList<ExpenditureItemVO>> expenditureItemList = new ArrayList<ArrayList<ExpenditureItemVO>>();
+		Map<Integer, ArrayList<ExpenditureItemVO>> expenditureItemList = new HashMap<Integer, ArrayList<ExpenditureItemVO>>();
 
 		for (int i = 0; i < expenditureList.size(); i++) {
 			ArrayList<ExpenditureItemVO> voList = accountBookService
 					.selectExpenditureItem(expenditureList.get(i).getExpenditureNo());
 
-			if (voList != null) {
-				expenditureItemList.add(voList);
+			if (voList != null && voList.size() > 0) {
+				expenditureItemList.put(voList.get(0).getExpenditureNo(), voList);
 			}
 		}
 
-		Collections.sort(expenditureItemList, new ExpenditureItemComparator()); // 지출 번호를 기준으로 오름차순 정렬
+		if (expenditureItemList != null && expenditureItemList.size() > 0) {
+			Object[] keyList = expenditureItemList.keySet().toArray();
+			Arrays.sort(keyList); // key 값(지출 번호)을 기준으로 오름차순 정렬
 
-		model.addAttribute("expenditureItemList", expenditureItemList);
+			model.addAttribute("expenditureItemList", expenditureItemList);
+		}
 
 		return "accountBook/detailViewList";
+	}
+
+	/* 대시보드 조회 - 내역 수정 */
+	@RequestMapping("/accountBook/detailViewList/edit")
+	public String accountBookDataEdit() {
+		return "";
+	}
+
+	/* 대시보드 조회 - 내역 삭제 */
+	@RequestMapping("/accountBook/detailViewList/delete")
+	public void accountBookDataDelete(@RequestParam HashMap<String, Object> param) {
+		// map 정보 가져오기
+		String condition = (String) param.get("condition"); // 수입 / 지출 구분
+		int dataNo = Integer.parseInt((String) param.get("dataNo")); // 내역 번호
+
+		accountBookService.deleteItem(condition, dataNo);
 	}
 
 	/* 지출,수입 내역 추가 form */
@@ -488,8 +526,16 @@ public class AccountBookController {
 	public int addExpenditure(ExpenditureVO expenditureVO, @RequestParam("expenditureItemPrice") int[] priceArray,
 			@RequestParam("expenditureItemName") String[] nameArray, HttpSession session) {
 
-		// session에서 accountBookNo 가져오기
+		// session에서 accountBookNo, memberNo 가져오기
 		expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
+
+		// 파일 없을 때 예외 처리하기
+		System.out.println();
+		if (!expenditureVO.getExpenditureImage().equals("")) {
+			String fileName = session.getAttribute("memberNo") + "_" + session.getAttribute("accountBookNo") + "_"
+					+ expenditureVO.getExpenditureImage();
+			expenditureVO.setExpenditureImage(fileName);
+		}
 
 		accountBookService.insertExpenditure(expenditureVO);
 
@@ -511,14 +557,71 @@ public class AccountBookController {
 		return expenitureNo;
 	}
 
+	
 	/****** 공유 가계부 ******/
 
 	// 공유가계부 메인
-
 	@RequestMapping("/accountBook/public/main")
-	public String movePublicMain() {
+	public String movePublicMain(Model model, HttpSession httpSession) {
+
+		
+				// main view 페이지에 전달할 모델
+				ArrayList<ShareMainVO> shareMainVOList = new ArrayList<ShareMainVO>();
+				
+				// 로그인한 회원 No
+				String memberNo = (String) httpSession.getAttribute("memberNo"); 
+				
+				// 참여중인 공유가계부 데이터 가져오기
+				ArrayList<AccountBookVO> accountBookVO = shareAccountService.selectShareAccountBookNo(memberNo);
+				
+				for(int i = 0; i < accountBookVO.size(); i++) {
+					// 공유가계부 owner 데이터 가져오기
+					MemberVO ownerVO = shareAccountService.selectShareAccountOwner(accountBookVO.get(i).getAccountBookNo()); 
+					// 공유가계부 participant 데이터 가져오기
+					ArrayList<MemberVO> participantVO = shareAccountService.selectShareAccountParticipant(accountBookVO.get(i).getAccountBookNo());
+					
+					// participant image담을 배열 생성
+					String participant[] = new String[3];
+					String participantNo[] = new String[3];
+					
+					// participant image, memberNo담기
+					for(int z = 0; z < participantVO.size(); z++) {	//participantVO.size() 질문
+						participant[z]=participantVO.get(z).getMemberImage();
+						participantNo[z]=participantVO.get(z).getMemberNo();
+					}
+					
+					ShareMainVO shareMainVO = new ShareMainVO();
+					
+					//원하는 정보만 빼내서 shareMainVO에 넣기
+					shareMainVO.setAccountBookTitle(accountBookVO.get(i).getAccountBookTitle());
+					shareMainVO.setOwnerNo(ownerVO.getMemberNo());
+					shareMainVO.setOwnerImage(ownerVO.getMemberImage());
+					shareMainVO.setOwnerName(ownerVO.getMemberName());
+					shareMainVO.setParticipantImage(participant);
+					shareMainVO.setParticipantNo(participantNo);
+					shareMainVO.setAccountBookNo(accountBookVO.get(i).getAccountBookNo());
+					
+					
+					//shareMainVOList에 shareMainVO넣기
+					shareMainVOList.add(shareMainVO);
+				}
+					model.addAttribute("shareMainVOList", shareMainVOList);
+		
 
 		return "accountBook/public/main";
+
+	}
+
+
+	
+	//공유가계부 메인화면에서 공유가계부 클릭시 accountBookNo 세션에 저장후 대시보드-공유가계부 페이지로
+
+	@RequestMapping("/accountBook/public/setAccountNo")
+	public String movePublicDetail(HttpSession httpSession, @RequestParam Integer num) {
+
+		httpSession.setAttribute("accountBookNo", num);
+
+		return "redirect:../shareMain";
 	}
 
 	// 공유가계부 생성화면
@@ -535,11 +638,11 @@ public class AccountBookController {
 		// 가계부 데이터 등록(공유가계부 전용)
 		accountBook.setIsShared(true);
 		accountBook.setMemberNo((String) httpSession.getAttribute("memberNo"));
-		createService.createAccountBook(accountBook);
+		shareAccountService.createAccountBook(accountBook);
 
 		// 예산 등록(공유가계부 전용)
 		ShareBudget.setOwner((String) httpSession.getAttribute("memberNo"));
-		createService.createShareBudget(ShareBudget);
+		shareAccountService.createShareBudget(ShareBudget);
 
 		// 공유가계부 데이터 등록(공유가계부 전용)
 		shareAccountBook.setOwner((String) httpSession.getAttribute("memberNo"));
@@ -551,7 +654,7 @@ public class AccountBookController {
 				continue;
 			}
 			shareAccountBook.setParticipant(participant);
-			createService.createShareAccountBook(shareAccountBook);
+			shareAccountService.createShareAccountBook(shareAccountBook);
 		}
 
 		return "redirect:../main";
@@ -560,6 +663,7 @@ public class AccountBookController {
 	// 공유가계부 참여자 등록,삭제
 	@RequestMapping("/accountBook/public/registerParticipant")
 	public String moveRegisterParticipant() {
+
 		return "accountBook/public/registerParticipant";
 	}
 }

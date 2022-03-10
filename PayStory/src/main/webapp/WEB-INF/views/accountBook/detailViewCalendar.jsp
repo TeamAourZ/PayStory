@@ -8,7 +8,7 @@
 			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 				<div class="row">
 					<div class="col-sm-12">
-						<table class="table mb-0">
+						<table class="table mb-0 isScroll">
 							<thead class="daySel">
 								<tr class="text-center">
 									<th style="width: 14%;">SUN</th>

@@ -12,7 +12,7 @@
 		<link href="<c:url value='/bootstrap/css/sb-admin-2.css' />" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 		<!-------- CSS : Custom -------->
-		<link href="<c:url value='/main/css/board/newBoardForm.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/board/updateBoardForm.css' />" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<div id="wrapper">
@@ -34,56 +34,89 @@
                 	<!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800 ml-5">게시글 수정</h1>
                     
-					<div class="formWrap p-4 bg-white rounded">
-						<form id="newBoardForm" class="px-4" action="/board/register" method="post">
-	              			<%-- <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" /> --%>
-		              		<div class="form-row">
-		              			<!-- 제목 -->
-			              		<div class="form-group col-8">
-			              			<label>제목</label>
-			              			<input class="form-control shadow-none" name="title">
+					<!-- 게시글 form  -->
+					<c:if test="${ not empty board }">
+						<div class="formWrap p-4 bg-white rounded">
+							<form id="updateBoardForm" class="px-4">
+								<!-- boardNo -->
+								<input type="hidden" class="boardNo" value="${ board.boardNo }" />
+			              		<div class="form-row">
+			              			<!-- 제목 -->
+				              		<div class="form-group col-8">
+				              			<label>제목</label>
+				              			<input class="title form-control shadow-none" name="boardTitle" value="${ board.boardTitle }">
+				              		</div>
+				              		<div class="form-group col-4">
+					              		<label>카테고리</label>
+					              		<select id="boardCategoryNo" name="boardCategoryNo" class="form-control shadow-none" required>
+											<c:choose>
+												<c:when test="${ board.boardCategoryNo eq 'bc002' }">
+													<option disabled value="">카테고리를 선택해주세요.</option>
+													<c:if test="${ sessionScope.memberRank eq '3' }">
+														<option value="bc001">공지사항</option>
+													</c:if>
+													<option selected value="bc002">질문</option>
+													<option value="bc003">정보공유</option>
+													<option value="bc004">자유게시판</option>
+												</c:when>
+												<c:when test="${ board.boardCategoryNo eq 'bc003' }">
+													<option disabled value="">카테고리를 선택해주세요.</option>
+													<c:if test="${ sessionScope.memberRank eq '3' }">
+														<option value="bc001">공지사항</option>
+													</c:if>
+													<option value="bc002">질문</option>
+													<option selected value="bc003">정보공유</option>
+													<option value="bc004">자유게시판</option>
+												</c:when>
+												<c:when test="${ board.boardCategoryNo eq 'bc004' }">
+													<option disabled value="">카테고리를 선택해주세요.</option>
+													<c:if test="${ sessionScope.memberRank eq '3' }">
+														<option value="bc001">공지사항</option>
+													</c:if>
+													<option value="bc002">질문</option>
+													<option value="bc003">정보공유</option>
+													<option selected value="bc004">자유게시판</option>
+												</c:when>
+												<c:otherwise>
+													<option selected disabled value="">카테고리를 선택해주세요.</option>
+													<c:if test="${ sessionScope.memberRank eq '3' }">
+														<option value="bc001">공지사항</option>
+													</c:if>
+													<option value="bc002">질문</option>
+													<option value="bc003">정보공유</option>
+													<option value="bc004">자유게시판</option>
+												</c:otherwise>
+											</c:choose>
+										</select>
+					              	</div>
 			              		</div>
-			              		<!-- 카테고리 -->
-			              		<div class="form-group col-4">
-				              		<label>카테고리</label>
-				              		<select id="incomeTags" name="tagNo" class="form-control shadow-none" required>
-										<option selected disabled value="">카테고리를 선택해주세요.</option>
-										<option value="1">질문</option>
-										<option value="2">정보공유</option>
-										<option value="3">자유게시판</option>
-									</select>
+				              	<!-- 첨부파일 -->
+				              	<label for="uploadFile">첨부 파일</label>
+								<div class="custom-file mb-3"> 
+									<input type="file" id="uploadFile" name="boardFile" class="custom-file-input shadow-none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadFile">
+									<label class="custom-file-label shadow-none" for="uploadFile">파일 선택</label>
+								</div>
+								<c:if test="${ not empty board.boardFile }">
+									<input type="hidden" class="boardFileInDB" value="${board.boardFile}"/>
+				              		<div class="card">
+									  <img src="/images/board/${board.memberNo}/${board.boardFile}" class="card-img">
+									  <div class="card-img-overlay">
+									  	<i class="deleteBtn hidden fa far fa-times-circle" data-toggle="tooltip" data-placement="bottom" title="삭제"></i>
+									  </div>
+									</div>
+				              	</c:if>
+				              	<!-- 내용 -->
+			              		<div class="form-group">
+				              		<label>내용</label>
+				              		<textarea class="content form-control shadow-none" rows="10" name="content">${board.boardContents}</textarea>
 				              	</div>
-		              		</div>
-			              	<!-- 첨부파일 -->
-			              	<label for="uploadFile">첨부 파일</label>
-							<div class="custom-file mb-3"> 
-								<input type="file" id="uploadFile" name="uploadFile" class="custom-file-input shadow-none" accept=".png, .jpg, .jpeg, .svg" aria-describedby="uploadFile">
-								<label class="custom-file-label shadow-none" for="uploadFile">파일 선택</label>
-							</div>
-						    <div class="row">
-						        <div class="col-lg-12">
-						            <div class="card mb-4">
-						                <div class="card-body uploadResult">
-						                	<ul></ul>
-						                </div>
-						            </div>
-						        </div>
-						    </div>
-		              		<%-- <div class="form-group">
-			              		<label>Writer</label>
-			              		<input class="form-control" name="writer" value='<sec:authentication property="principal.username"/>' readonly="readonly">
-			              	</div> --%>
-			              	<!-- 내용 -->
-		              		<div class="form-group">
-			              		<label>내용</label>
-			              		<textarea class="form-control shadow-none" rows="10" name="content"></textarea>
-			              	</div>
-			              	<div class="d-flex align-items-center justify-content-center mt-3">
-								<button type="submit" class="btn btn-primary w-25 mr-3 shadow-none">수정</button>
-								<button type="reset" class="btn btn-primary w-25 shadow-none">취소</button>
-							</div>
-	              		</form>
-					</div>
+				              	<div class="d-flex align-items-center justify-content-center mt-3">
+									<button type="submit" class="btn btn-primary w-25 mr-3 shadow-none">수정</button>
+									<button type="reset" class="listBtn btn btn-primary w-25 shadow-none">취소</button>
+								</div>
+		              		</form>
+						</div>
+					</c:if>
                 </div>
 			</div>
         </div>
@@ -99,6 +132,6 @@
 	<script src="<c:url value='/bootstrap/vendor/chart.js/Chart.min.js' />"></script>
 
 	<!-------- JS : Custom -------->
-	<script src="<c:url value='/main/js/board/newBoardForm.js' />"></script>
+	<script src="<c:url value='/main/js/board/updateBoardForm.js' />"></script>
 </body>
 </html>

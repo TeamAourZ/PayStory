@@ -91,7 +91,7 @@
 	</select>
 	
 	<!-- 프로필수정 -->
-	<update id="infoUpdate">
+	<update id="infoUpdate" parameterType="com.AourZ.PayStory.model.member.MemberVO">
 		update member set memberName = #{memberName} where memberEmail = #{memberEmail}
 	</update>
 	
@@ -108,6 +108,10 @@
 		update member set memberImage = #{memberImage} where memberEmail = #{memberEmail}
 	</update>
 	
+	<!-- 회원탈퇴 -->
+	<delete id="memberDelete">
+		delete from member where memberEmail = #{memberEmail}
+	</delete>
 	
 	<!-- ********관리자******* -->
 	

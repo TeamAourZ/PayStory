@@ -5,28 +5,23 @@ var nowMonth = date.getMonth(); // 0~11까지
 var nowDay = date.getDate(); // 오늘 날짜
 
 $(function() {
-	/* 달력 B 스크롤바 생성 */
-	if ((1183 < getWidth() && getWidth() < 1643) || (getWidth() < 620)) {
-		$('table').eq(0).addClass('table-responsive');
-	}
-
 	$('#selectedDate').text(nowYear + "년 " + (nowMonth + 1) + "월 " + nowDay + "일");
 
 	calendarAjax("C", nowYear, nowMonth); // 달력
 	chartAjax(nowYear, nowMonth, nowDay); // 차트
 	budgetStatusAjax(nowYear, nowMonth); // 예산 현황
-	detailViewListAjax($('#selectedDate').text()); // 상세 내역
+	detailViewListAjax(nowYear, nowMonth, nowDay); // 상세 내역
 
 	/* 페이지 크기 변화 감지 */
 	$(window).resize(function() {
 		let width = getWidth();
 
 		if (1183 < width && width < 1643) {
-			$('table').eq(0).addClass('table-responsive');
+			$('.isScroll').addClass('table-responsive');
 		} else if (width >= 620) {
-			$('table').eq(0).removeClass('table-responsive');
+			$('.isScroll').removeClass('table-responsive');
 		} else if (width < 620) {
-			$('table').eq(0).addClass('table-responsive');
+			$('.isScroll').addClass('table-responsive');
 		}
 	});
 
@@ -95,7 +90,7 @@ $(function() {
 		$('#selectedDate').text(nowYear + "년 " + (nowMonth + 1) + "월 " + nowDay + "일");
 
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
-		detailViewListAjax($('#selectedDate').text()); // 상세 내역
+		detailViewListAjax(nowYear, nowMonth, nowDay); // 상세 내역
 	});
 
 	/* detailBox 닫기 - 월별 예산 현황 */
@@ -124,5 +119,27 @@ $(function() {
 		$(this).addClass('font-weight-bold text-primary selected');
 
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
+	});
+
+	/* 수정 버튼 클릭 */
+	$(document).on('click', '.dataEdit', function(e) {
+		e.stopImmediatePropagation();
+
+	});
+
+	/* 삭제 버튼 클릭 */
+	$(document).on('click', '.dataDelete', function(e) {
+		e.stopImmediatePropagation();
+
+		if (confirm("해당 내역을 삭제하시겠습니까?")) {
+			let condition = $(this).children('input:first-child').val(); // 수입 / 지출 구분
+			let dataNo = $(this).children('input:last-child').val(); // 수입 / 지출 내역 번호
+
+			deleteItemAjax(condition, dataNo, nowYear, nowMonth, nowDay);
+
+			alert("삭제가 완료되었습니다.");
+		} else {
+
+		}
 	});
 });

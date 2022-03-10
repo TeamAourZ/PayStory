@@ -32,6 +32,8 @@
 		<script src="<c:url value='/main/js/ajax/chartAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/budgetStatusAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/detailViewListAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/deleteItemAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/editItemAjax.js' />" type="text/javascript"></script>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -75,7 +77,7 @@
 									<%-- Card Header --%>
 									<div class="card-header p-3">
 										<div class="d-flex justify-content-between">
-											<div id="chartMainTagBox" class="d-flex">
+											<div id="chartMainTagBox" class="d-flex flex-gap-2">
 												<input type="hidden" id="chartType" value="d">
 												<h6 id="chartTab1"  class="chartTab m-0 pointer-cursor font-weight-bold text-primary selected">수입</h6>
 												<h6 id="chartTab2"  class="chartTab m-0 pointer-cursor">지출</h6>
@@ -121,7 +123,7 @@
 																					<c:choose>
 																						<c:when test="${status.index eq 0}">
 																							<td>
-																								<div class="profileImage rounded-circle border-color-yellow">
+																								<div class="profile-image rounded-circle border-color-yellow">
 																									<%--
 																									
 																										이미지 경로 확인 필요
@@ -133,7 +135,7 @@
 																						</c:when>
 																						<c:otherwise>
 																							<td>
-																								<div class="profileImage rounded-circle border-color-blue">
+																								<div class="profile-image rounded-circle border-color-blue">
 																									<%--
 																									
 																										이미지 경로 확인 필요
@@ -159,7 +161,7 @@
 											</c:if>
 										</c:if>
 									</div>
-									<div id="detailViewListBox" class="card-body d-flex flex-column align-items-center">
+									<div id="detailViewListBox" class="card-body d-flex flex-column flex-gap-2 align-items-center">
 										<%-- ajax --%>
 									</div>
 								</div>

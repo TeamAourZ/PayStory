@@ -18,6 +18,7 @@
         rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/main/css/board/boardView.css" rel="stylesheet">
 
 </head>
 
@@ -37,46 +38,78 @@
 				<!-- Top Menu Bar  -->
                 <jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />
 				
-				<!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800 ml-5">게시글 조회</h1>
-				
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-	               	<div class="formWrap p-4 bg-white rounded">
-		                <form class="my-4">
-		                	<div class="form-row">
-	                			<div class="form-group col-8">
-									<div class="col-auto">
-								    	<label class="col-form-label">제목</label>
+					<!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800 ml-5">게시글 조회</h1>
+                    
+                    <!-- 게시글 -->
+                    <c:if test="${ not empty board }">
+                    	<div class="boardWrap p-4 bg-white rounded">
+						 <div class="px-4">
+	              			<!-- boardNo -->
+	              			<input type="hidden" class="boardNo" value="${ board.boardNo }"/>
+		              		<div class="row">
+		              			<!-- 제목 -->
+			              		<div class="form-group col-8">
+			              			<label>제목</label>
+			              			<input type="text" class="form-control shadow-none" value="${ board.boardTitle }" readonly/>
+			              		</div>
+			              		<!-- 작성자 -->
+			              		<div class="form-group col-3">
+			              			<label>작성자</label>
+			              			<input type="text" class="form-control shadow-none" value="${ board.memberName }" readonly/>
+			              		</div>
+		              		</div>
+		              		<div class="row">
+		              			<!-- 카테고리 -->
+			              		<div class="form-group col-4">
+				              		<label>카테고리</label>
+				              		<input type="text" class="form-control shadow-none" value="${ board.boardCategoryName }" readonly/>
+				              	</div>
+			              		<!-- 작성일  -->
+			              		<div class="form-group col-4">
+			              			<label>작성일</label>
+			              			<input type="text" class="form-control shadow-none" value="${ board.boardDate }" readonly/>
+			              		</div>
+			              		<!-- 조회수 -->
+			              		<div class="form-group col-3">
+				              		<label>조회 수</label>
+				              		<input type="text" class="form-control shadow-none text-right" value="${ board.boardViews }" readonly/>
+				              	</div>
+		              		</div>
+			              	<!-- 첨부파일 -->
+			              	<div class="form-group">
+				              	<label>첨부 파일</label>
+				              	<c:if test="${ not empty board.boardFile }">
+				              		<div class="card" style="">
+									  <img src="/images/board/${board.memberNo}/${board.boardFile}" class="card-img">
+									  <div class="card-img-overlay">
+									  	<!-- 확대보기 또는 다운로드 -->
+									  </div>
 									</div>
-									<div class="col-auto">
-								    	<input type="text" id="inputTitle" class="form-control" aria-describedby="titleHelpInline" value="{title}" readonly>
-								    	
-									</div>
-								</div>
-								<div class="form-group col-4">
-									<div class="col-auto">
-								    	<label class="col-form-label">카테고리</label>
-									</div>
-									<div class="col-auto">
-								    	<input type="text" id="inputCtg" class="form-control" aria-describedby="ctgHelpInline" value="{category}" readonly>
-									</div>
-								</div>
-					 
-							</div><br>
-							<div class="form-group col-12">
-								<label for="floatingTextarea">내용</label>
-							  	<textarea class="form-control" cols="8" rows="10" id="floatingTextarea" readonly>{content}</textarea>
-							  
-							</div><br>
-							<div class="d-flex align-items-center justify-content-center mt-3">
-								<button type="button" class="updateBtn btn btn-primary w-25 mr-3 shadow-none">수정</button>
-								<button type="button" class="listBtn btn btn-primary w-25 shadow-none">목록</button>
+				              	</c:if>
+			              	</div>
+			              	<!-- 내용 -->
+		              		<div class="form-group">
+			              		<label>내용</label>
+			              		<textarea class="content form-control shadow-none" rows="10" readonly>${ board.boardContents }</textarea>
+			              	</div>
+			              	<div class="d-flex align-items-center justify-content-center mt-3">
+			              		<c:choose>
+									<c:when test="${ board.memberNo eq sessionScope.memberNo }">
+										<button type="button" class="updateBtn btn btn-primary w-25 mr-3 shadow-none">수정</button>
+										<button type="button" class="deleteBtn btn btn-primary w-25 mr-3 shadow-none">삭제</button>
+										<button type="button" class="listBtn btn btn-primary w-25 shadow-none">목록</button>
+									</c:when>
+									<c:otherwise>
+						              	<button type="button" class="listBtn btn btn-primary w-25 shadow-none">목록</button>
+									</c:otherwise>
+				              	</c:choose>
 							</div>
-						</form> 
-						
-					</div>
-					
+	              		</div>                   	
+                    </div>
+                    </c:if>
                 </div>	<!-- container-fluid end -->
 			</div>	<!-- Content end -->
         </div>

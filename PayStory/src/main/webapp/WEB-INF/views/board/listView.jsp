@@ -46,13 +46,54 @@
                         <div class="card-header py-3 d-flex justify-content-between">
                         	<!-- 게시판 header : 글쓰기 버튼, 카테고리, 검색 -->
                         	<nav class="nav boardCategory">
-							  <a class="nav-link active" data-ctgNo="*">전체</a>
-							  <a class="nav-link" data-ctgNo="bc001">공지</a>
-							  <a class="nav-link" data-ctgNo="bc002">질문</a>
-							  <a class="nav-link" data-ctgNo="bc003">정보공유</a>
-							  <a class="nav-link" data-ctgNo="bc004">자유게시판</a>
+                        		<c:choose>
+                        			<c:when test="${ ctgNo eq 'bc001' }">
+	                       				<a class="nav-link" data-ctgNo="*">전체</a>
+									 	<a class="nav-link active" data-ctgNo="bc001">공지사항</a>
+									 	<a class="nav-link" data-ctgNo="bc002">질문</a>
+									 	<a class="nav-link" data-ctgNo="bc003">정보공유</a>
+									 	<a class="nav-link" data-ctgNo="bc004">자유게시판</a>
+								 	</c:when>
+                        			<c:when test="${ ctgNo eq 'bc002' }">
+	                       				<a class="nav-link" data-ctgNo="*">전체</a>
+									 	<a class="nav-link" data-ctgNo="bc001">공지사항</a>
+									 	<a class="nav-link active" data-ctgNo="bc002">질문</a>
+									 	<a class="nav-link" data-ctgNo="bc003">정보공유</a>
+									 	<a class="nav-link" data-ctgNo="bc004">자유게시판</a>
+								 	</c:when>
+                        			<c:when test="${ ctgNo eq 'bc003' }">
+	                       				<a class="nav-link" data-ctgNo="*">전체</a>
+									 	<a class="nav-link" data-ctgNo="bc001">공지사항</a>
+									 	<a class="nav-link" data-ctgNo="bc002">질문</a>
+									 	<a class="nav-link active" data-ctgNo="bc003">정보공유</a>
+									 	<a class="nav-link" data-ctgNo="bc004">자유게시판</a>
+								 	</c:when>
+                        			<c:when test="${ ctgNo eq 'bc004' }">
+	                       				<a class="nav-link" data-ctgNo="*">전체</a>
+									 	<a class="nav-link" data-ctgNo="bc001">공지사항</a>
+									 	<a class="nav-link" data-ctgNo="bc002">질문</a>
+									 	<a class="nav-link" data-ctgNo="bc003">정보공유</a>
+									 	<a class="nav-link active" data-ctgNo="bc004">자유게시판</a>
+								 	</c:when>
+                        			<c:otherwise>
+	                       				<a class="nav-link active" data-ctgNo="*">전체</a>
+									 	<a class="nav-link" data-ctgNo="bc001">공지사항</a>
+									 	<a class="nav-link" data-ctgNo="bc002">질문</a>
+									 	<a class="nav-link" data-ctgNo="bc003">정보공유</a>
+									 	<a class="nav-link" data-ctgNo="bc004">자유게시판</a>
+								 	</c:otherwise>
+                        		</c:choose>
 							</nav>
-                        	<a href="<c:url value='/board/write'/>" class="btn btn-primary" >글쓰기</a>	
+                        	<c:choose>
+                        		<c:when test="${ ctgNo ne 'bc001' }">
+	                        		<a href="<c:url value='/board/write'/>" class="btn btn-primary" >글쓰기</a>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<c:if test="${ sessionScope.memberRank eq '3' }">
+		                        		<a href="<c:url value='/board/write'/>" class="btn btn-primary" >글쓰기</a>
+                        			</c:if>
+                        		</c:otherwise>
+                        	</c:choose>	
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" style="overflow: hidden;">
@@ -66,32 +107,31 @@
 			                                            <th>카테고리</th>
 			                                            <th>제목</th>
 			                                            <th>작성자</th>
-			                                            <th>조회</th>
 			                                            <th>날짜</th>
+			                                            <th>조회</th>
 			                                        </tr>
 			                                    </thead>
 			                                    <tbody>
-			                                    
-                                            <!-- 공지사항 -->		
-												<c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
-		        									<tr class="boardList">
-		        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/></td>
-	        											<td>공지사항</td>
-										        		<td>[공지]  ${noticeBoardList.boardTitle}</td>
-										        		<td>PayStory 관리자</td>
-										        		<td>${noticeBoardList.boardViews}</td>
-										        		<td>${noticeBoardList.boardDate}</td>
-													</tr>
-												</c:forEach>
+                                            		<!-- 상단 공지사항 -->		
+													<c:forEach var="noticeBoardList" items="${noticeBoardList}" varStatus="status" >															
+			        									<tr class="boardList">
+			        										<td><input type="hidden" value='${noticeBoardList.boardNo}'/></td>
+		        											<td>공지사항</td>
+											        		<td>[공지]  ${noticeBoardList.boardTitle}</td>
+											        		<td>PayStory 관리자</td>
+											        		<td>${noticeBoardList.boardDate}</td>
+											        		<td>${noticeBoardList.boardViews}</td>
+														</tr>
+													</c:forEach>
 				                                    
-                                            <c:forEach var="list" items="${boardList}" varStatus="status">
+                                            		<c:forEach var="list" items="${boardList}" varStatus="status">
 			        									<tr class="boardList">
 		        											<td><input type="hidden" value='${list.boardNo}'/>${status.count}</td>
-											        		<td>${list.boardCategoryNo}</td>
+											        		<td>${list.boardCategoryName}</td>
 											        		<td>${list.boardTitle}</td>
-											        		<td>${list.memberNo}</td>
-											        		<td>${list.boardViews}</td>
+											        		<td>${list.memberName}</td>
 											        		<td>${list.boardDate}</td>
+											        		<td><input type="hidden" value='${list.boardViews}'/>${list.boardViews}</td>
 														</tr>
 													</c:forEach>
 			                                    </tbody>
