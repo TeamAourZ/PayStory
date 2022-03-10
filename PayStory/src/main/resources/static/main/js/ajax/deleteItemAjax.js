@@ -1,11 +1,12 @@
 /* 페이지 로드 - 내역 삭제 */
-function deleteItemAjax(condition, dataNo, year, month, day) {
+function deleteItemAjax(condition, dataNo, receiptImage, year, month, day) {
 	$.ajax({
 		type: 'post',
 		url: "/accountBook/detailViewList/delete",
 		data: {
 			"condition": condition,
-			"dataNo": dataNo
+			"dataNo": dataNo,
+			"receiptImage": receiptImage
 		},
 		success: function() {
 		},

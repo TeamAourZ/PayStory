@@ -215,7 +215,7 @@
 				$('#expenditureDate').val(date);
 				// 주소
 				let address = result.expenditureAddress;
-				$('#address').val(address);
+				$('#expenditureAddress').val(address);
 				// 사용처 
 				let source = result.expenditureSource;
 				$('#expenditureSource').val(source);
@@ -261,6 +261,8 @@
 		let amount = parseInt(withoutComma($('#incomeAmount').val()));
 		let memo = $('#incomeMemo').val() || "";
 		
+		let isShared = $('#isShared').val();
+		
 		$.ajax({
 			type:"post",	
 			url: "/accountBook/income", 	
@@ -274,7 +276,11 @@
 			success: function(result) {
 				if(result != 0){
 					alert("수입 내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
-					location.href = "/accountBook/myMain";
+					if(isShared == 0){
+						location.href = "/accountBook/myMain";
+					}else{
+						location.href = "/accountBook/shareMain";
+					}
 				}
 			},
 			error: function(err){
@@ -299,6 +305,8 @@
 			if(!isNaN(price)) itemPriceArray[i] = price;
 		});
 		
+		let isShared = $('#isShared').val();
+		
 		const formData = new FormData();
 		console.log($('#uploadReceipt').val())
   		formData.append("expenditureImage", $('#imageValue').val());
@@ -310,7 +318,7 @@
   		formData.append("expenditureMemo", $('#expenditureMemo').val());
   		formData.append("expenditureItemPrice", itemPriceArray);
   		formData.append("expenditureItemName", itemNameArray);
-			
+		
 		$.ajax({
 			type:"post",
 			url: "/accountBook/expenditure", 	
@@ -320,7 +328,11 @@
 			success: function(result) {
 				if(result != 0){
 					alert("지출 내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
-					location.href = "/accountBook/myMain";
+					if(isShared == 0){
+						location.href = "/accountBook/myMain";
+					}else{
+						location.href = "/accountBook/shareMain";
+					}
 				}
 			},
 			error: function(err){

@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/images/**")
-		// .addResourceLocations("file:///C:/PayStory/images/");
+		.addResourceLocations("file:///C:/PayStory/images/")
 		.addResourceLocations("file:///usr/local/tomcat9/webapps/ROOT/WEB-INF/classes/static/paystory/images/")
 		.addResourceLocations("file:///upload/");
 		

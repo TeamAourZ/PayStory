@@ -38,6 +38,7 @@
 										<img class="profile" onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"' src="/images/member/${login.memberNo}/${login.memberImage}">
 									</div> 
 									<input type="file" name="file" style="display: none" class="input-css">
+									<input type="hidden" name="memberImageInDB" id="memberImageInDB" value="${login.memberImage}" class="input-css">
 									<input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}" class="input-css">
 									<button class="btn btn-primary btn-block" id="imgC">사진변경</button>
 								</a>

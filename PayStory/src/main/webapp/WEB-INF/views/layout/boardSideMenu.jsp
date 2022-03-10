@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	
+		<script src="<c:url value='/main/js/sideMenu.js'/>"></script>
 	</head>
 	<body>
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -21,7 +21,8 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/accountBook/myMain'/>">
+            	<input type="hidden" id="isShared" value="${ sessionScope.isShared }">
+                <a class="nav-link" id="dashBoard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>대시보드</span></a>
             </li>
@@ -44,7 +45,7 @@
 
             <!-- Nav Item - 수입 | 지출 내역 추가 -->
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/accountBook/add'/>">
+                <a class="nav-link" id="addItemBtn">
                     <i class="fas fa-plus-circle"></i>
                     <span>수입 | 지출 내역 추가</span>
                 </a>
