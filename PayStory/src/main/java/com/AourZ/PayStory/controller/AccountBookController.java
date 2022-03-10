@@ -381,7 +381,36 @@ public class AccountBookController {
 
 		return "accountBook/addItemForm";
 	}
-
+	
+	// 챗봇에서 영수증 등록 페이지로 값 넘기면서 페이지 이동
+	@RequestMapping("/accountBook/add/chat/{date}/{source}/{totalAmount}/{data}")
+	public String resultChatOCR(@PathVariable("date") String date,
+							    @PathVariable("source") String source,
+							    @PathVariable("totalAmount") String totalAmount,
+							    @PathVariable("data") String data, Model model) {
+		
+		ExpenditureItemVO vo = new ExpenditureItemVO();
+		
+		ArrayList<ExpenditureItemVO> itemsList = new ArrayList<ExpenditureItemVO>();
+		
+		String[] items = data.substring(0, data.length()-1).split(",");
+		for(int i=0; i<items.length; i++) {
+			if(i==0) {
+				vo.setExpenditureItemName(items[i].split("=")[1]);
+			} else if(i==1) {
+				vo.setExpenditureItemPrice(Integer.parseInt(items[i].split("=")[1]));
+			}
+			itemsList.add(vo);
+		}
+		
+		model.addAttribute("date", date);
+		model.addAttribute("source", source);
+		model.addAttribute("totalAmount", totalAmount);
+		model.addAttribute("itemsList", itemsList);
+		return "accountBook/addItemForm";
+		
+	}
+	
 	/* 대시보드 조회 */
 	@RequestMapping("/accountBook/detailView")
 	public String detailView(HttpServletRequest request, Model model) {
@@ -664,10 +693,42 @@ public class AccountBookController {
 		return "redirect:../main";
 	}
 
-	// 공유가계부 참여자 등록,삭제
-	@RequestMapping("/accountBook/public/registerParticipant")
-	public String moveRegisterParticipant() {
-
-		return "accountBook/public/registerParticipant";
+	
+	
+	// 공유가계부 참여자 편집
+	@RequestMapping("/accountBook/public/editParticipant")
+	public String moveRegisterParticipant(Model model, @RequestParam Integer num, HttpSession httpSession) {
+		
+		//수정할 accountBookNo 세션에 저장
+		httpSession.setAttribute("accountBookNo", num);
+		
+		// 공유가계부 owner 데이터 가져오기
+		MemberVO ownerVO = shareAccountService.selectShareAccountOwner(num); 
+		// 공유가계부 participant 데이터 가져오기
+		ArrayList<MemberVO> participantVO = shareAccountService.selectShareAccountParticipant(num);
+		
+		// participant image담을 배열 생성
+		String participant[] = new String[3];
+		String participantNo[] = new String[3];
+		
+		// participant image, memberNo담기
+		for(int z = 0; z < participantVO.size(); z++) {	//participantVO.size() 질문
+			participant[z]=participantVO.get(z).getMemberImage();
+			participantNo[z]=participantVO.get(z).getMemberNo();
+		}
+		
+		ShareMainVO shareMainVO = new ShareMainVO();
+		
+		//원하는 정보만 빼내서 shareMainVO에 넣기
+		shareMainVO.setOwnerNo(ownerVO.getMemberNo());
+		shareMainVO.setOwnerImage(ownerVO.getMemberImage());
+		shareMainVO.setOwnerName(ownerVO.getMemberName());
+		shareMainVO.setParticipantImage(participant);
+		shareMainVO.setParticipantNo(participantNo);
+		
+		//보내기
+		model.addAttribute("shareMainVO", shareMainVO);
+		
+		return "accountBook/public/editParticipant";
 	}
 }

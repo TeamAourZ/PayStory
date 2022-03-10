@@ -272,7 +272,7 @@
 			processData: false,
     		contentType: false,
 			success: function(result) {
-				// console.log(result)
+				var openNewWindow = window.open("about:blank");
 				// 날짜 
 				let date = result.expenditureDate;
 				// 주소
@@ -285,7 +285,8 @@
 				let itemList = result.itemList;
 				// 영수증 이미지
 				let image = result.expenditureImage;
-				
+				// 데이터 문자열 변환
+				let data = ""
 				// 값 입력
 				let receiveChat = '<div class="msgBox receive"><span id="in">PayStory 챗봇' + '<br>AI 인식 결과입니다.<br><br>' +
 								  '<table border="1" class="text-center"><tr><th>사용처</th><td colspan="2">'+source+'</td></tr>'+
@@ -301,8 +302,15 @@
 					receiveChat += '</tr>';
 				}
 				receiveChat += '<tr><th>총 지출 금액</th><td colspan="2">'+ totalAmount + '원</td><tr></table>'+
-							   '<br><br> 이 결과를 가계부에 저장하시겠습니까? (네: 1, 아니오: 0)</span></span></div>';
-
+							   '<br><br> 가계부 등록 페이지로 이동합니다. </span></span></div>';
+				for(var i=0; i<itemList.length; i++) {
+					for (key in itemList[i]) {
+						data += key + "=" + itemList[i][key] + ",";
+					}
+				}
+				
+				openNewWindow.location.href = "/accountBook/add/chat/" + date + "/" + source + "/" + totalAmount + "/" + data;
+				
         $('#chatBox').append(receiveChat);
 				
 			},
