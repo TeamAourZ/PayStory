@@ -217,7 +217,7 @@
 									</div>
 									<div class="d-flex align-items-center justify-content-center mt-3">
 										<button type="submit" class="btn btn-primary w-25 mr-3 shadow-none">등록</button>
-										<button type="reset" class="btn btn-primary w-25 shadow-none">취소</button>
+										<button type="button" class="cancelBtn btn btn-primary w-25 shadow-none">취소</button>
 									</div>
 								</form>
 							</div>
@@ -276,7 +276,7 @@
 									</div>
 									<div class="d-flex align-items-center justify-content-center mt-3">
 										<button type="submit" class="btn btn-primary w-25 mr-3 shadow-none">등록</button>
-										<button type="reset" class="btn btn-primary w-25 shadow-none">취소</button>
+										<button type="button" class="cancelBtn btn btn-primary w-25 shadow-none">취소</button>
 									</div>
 								</form>
 							</div>

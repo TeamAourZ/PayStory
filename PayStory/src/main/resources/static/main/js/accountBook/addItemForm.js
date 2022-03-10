@@ -193,6 +193,18 @@
 		} 
 	});
 	
+	/***** 취소 버튼 클릭 *****/
+	$('.cancelBtn').on('click', function(){
+		let answer = confirm('작성을 취소하시겠습니까?');
+		if(answer) {
+			alert('가계부 메인 페이지로 이동합니다.');
+			if(isShared == 0){
+				location.href = "/accountBook/myMain";
+			}else{
+				location.href = "/accountBook/shareMain";
+			}
+		}
+	});
 	
 	/******** Ajax ********/
 	
