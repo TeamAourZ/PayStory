@@ -61,6 +61,15 @@
 		<result property="memberNo" column="memberNo" />
 		<result property="boardCategoryNo" column="boardCategoryNo" />
 	</resultMap>
+	
+	<!-- 수정자 -->
+	<resultMap type="com.AourZ.PayStory.model.accountBook.EditorVO" id="editorList">
+		<result property="editDate" column="editDate" />
+		<result property="memberNo" column="memberNo" />
+		<result property="accountBookNo" column="accountBookNo" />
+		<result property="incomeNo" column="incomeNo" />
+		<result property="expenditureNo" column="expenditureNo" />
+	</resultMap>
 	<!-- ─────────────────────────── resultMap ─────────────────────────── -->
 	
 	<!-- 일반 가계부 생성 -->
@@ -216,6 +225,40 @@
 		)
 		VALUES (#{memberNo}, #{accountBookNo}, #{dataNo})
 	</insert>
+	
+	<!-- 내역 수정 데이터 번호 조회 -->
+	<select id="selectEditorDataNoList" parameterType="HashMap" resultType="int">
+		<choose>
+			<when test="condition.equals('income')">
+				SELECT DISTINCT incomeNo
+				FROM editor
+				WHERE accountBookNo = #{accountBookNo} AND incomeNo IS NOT NULL
+				ORDER BY incomeNo ASC
+			</when>
+			<when test="condition.equals('expenditure')">
+				SELECT DISTINCT expenditureNo
+				FROM editor
+				WHERE accountBookNo = #{accountBookNo} AND expenditureNo IS NOT NULL
+				ORDER BY expenditureNo ASC
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 내역 수정자 조회 -->
+	<select id="selectEditorList" parameterType="HashMap" resultMap="editorList">
+		SELECT *
+		FROM editor
+		WHERE accountBookNo = #{accountBookNo} AND
+		<choose>
+			<when test="condition.equals('income')">
+				incomeNo = #{dataNo}
+			</when>
+			<when test="condition.equals('expenditure')">
+				expenditureNo = #{dataNo}
+			</when>
+		</choose>
+		ORDER BY editDate DESC
+	</select>
 	
 	<!-- 수입 / 지출 - 총 개수, 총 금액 조회 -->
 	<select id="selectAccountBookTotalDataList" parameterType="HashMap" resultMap="tagTotalList">

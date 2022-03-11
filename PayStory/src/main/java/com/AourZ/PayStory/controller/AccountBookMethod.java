@@ -1,10 +1,13 @@
 package com.AourZ.PayStory.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.AourZ.PayStory.model.accountBook.EditorVO;
 import com.AourZ.PayStory.model.accountBook.ShareAccountBookVO;
 import com.AourZ.PayStory.model.accountBook.TagTotalVO;
 import com.AourZ.PayStory.model.member.MemberVO;
@@ -107,6 +110,24 @@ public class AccountBookMethod {
 		}
 
 		return shareMemberInfoList;
+	}
+
+	/* 수정자 조회 */
+	Map<Integer, ArrayList<EditorVO>> selectEditorList(String condition, int accountBookNo) {
+		ArrayList<Integer> editDataNoList = accountBookService.selectEditorDataNoList(condition, accountBookNo);
+
+		Map<Integer, ArrayList<EditorVO>> editorList = new HashMap<Integer, ArrayList<EditorVO>>();
+
+		for (int i = 0; i < editDataNoList.size(); i++) {
+			ArrayList<EditorVO> temp = accountBookService.selectEditorList(condition, accountBookNo,
+					editDataNoList.get(i));
+
+			if (temp != null && temp.size() > 0) {
+				editorList.put(editDataNoList.get(i), temp);
+			}
+		}
+
+		return editorList;
 	}
 
 	/* 태그 번호 to 태그 이름 */

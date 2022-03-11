@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.AourZ.PayStory.model.accountBook.AccountBookBudgetVO;
 import com.AourZ.PayStory.model.accountBook.AccountBookVO;
+import com.AourZ.PayStory.model.accountBook.EditorVO;
 import com.AourZ.PayStory.model.accountBook.ExpenditureItemVO;
 import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
 import com.AourZ.PayStory.model.accountBook.IncomeVO;
@@ -35,7 +36,9 @@ public interface IAccountBookService {
 	void updateItem(HashMap<String, Object> map);	// 내역 수정
 	void deleteDetailItem(int expenditureNo);				// 지출 내역 상세 항목 삭제
 	
-	void insertEditor(String memberNo, int accountBookNo, String condition, int dataNo); // 내역 수정자 추가
+	void insertEditor(String memberNo, int accountBookNo, String condition, int dataNo);	// 내역 수정자 추가
+	ArrayList<Integer> selectEditorDataNoList(String condition, int accountBookNo);			// 내역 수정 데이터 번호 조회
+	ArrayList<EditorVO> selectEditorList(String condition, int accountBookNo, int dataNo);	// 내역 수정자 조회
 	
 	ArrayList<BoardVO> selectBoardList(int boardTab, String boardCategoryNo);	// 게시판 게시글 리스트
 	String selectBoardCategoryName(String boardCategoryNo);							// 게시판 카테고리 이름 조회

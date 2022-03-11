@@ -26,6 +26,7 @@ import com.AourZ.PayStory.model.accountBook.AccountBookVO;
 import com.AourZ.PayStory.model.accountBook.DateVO;
 import com.AourZ.PayStory.model.accountBook.DetailViewItemComparator;
 import com.AourZ.PayStory.model.accountBook.DetailViewItemVO;
+import com.AourZ.PayStory.model.accountBook.EditorVO;
 import com.AourZ.PayStory.model.accountBook.ExpenditureItemVO;
 import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
 import com.AourZ.PayStory.model.accountBook.IncomeVO;
@@ -534,6 +535,19 @@ public class AccountBookController {
 		model.addAttribute("amount", amount);
 		/* ---------------- 예산 ---------------- */
 
+		/* ---------------- 수정자 ---------------- */
+		// 수입
+		Map<Integer, ArrayList<EditorVO>> incomeEditorList = methodList.selectEditorList("income", accountBookNo);
+
+		model.addAttribute("incomeEditorList", incomeEditorList);
+
+		// 지출
+		Map<Integer, ArrayList<EditorVO>> expenditureEditorList = methodList.selectEditorList("expenditure",
+				accountBookNo);
+
+		model.addAttribute("expenditureEditorList", expenditureEditorList);
+		/* ---------------- 수정자 ---------------- */
+
 		return "accountBook/detailViewList";
 	}
 
@@ -734,8 +748,8 @@ public class AccountBookController {
 					.selectShareAccountParticipant(accountBookVO.get(i).getAccountBookNo());
 
 			// participant image담을 배열 생성
-			String participant[] = new String[20];
-			String participantNo[] = new String[20];
+			String participant[] = new String[3];
+			String participantNo[] = new String[3];
 
 			// participant image, memberNo담기
 			for (int z = 0; z < participantVO.size(); z++) { // participantVO.size() 질문

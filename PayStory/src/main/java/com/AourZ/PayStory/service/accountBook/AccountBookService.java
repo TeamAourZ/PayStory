@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.AourZ.PayStory.dao.IAccountBookDAO;
 import com.AourZ.PayStory.model.accountBook.AccountBookBudgetVO;
 import com.AourZ.PayStory.model.accountBook.AccountBookVO;
+import com.AourZ.PayStory.model.accountBook.EditorVO;
 import com.AourZ.PayStory.model.accountBook.ExpenditureItemVO;
 import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
 import com.AourZ.PayStory.model.accountBook.IncomeVO;
@@ -182,8 +183,29 @@ public class AccountBookService implements IAccountBookService {
 		map.put("accountBookNo", accountBookNo);
 		map.put("condition", condition);
 		map.put("dataNo", dataNo);
-		
+
 		dao.insertEditor(map);
+	}
+
+	/* 내역 수정 데이터 번호 조회 */
+	public ArrayList<Integer> selectEditorDataNoList(String condition, int accountBookNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("condition", condition);
+		map.put("accountBookNo", accountBookNo);
+
+		return dao.selectEditorDataNoList(map);
+	}
+
+	/* 내역 수정자 조회 */
+	public ArrayList<EditorVO> selectEditorList(String condition, int accountBookNo, int dataNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("condition", condition);
+		map.put("accountBookNo", accountBookNo);
+		map.put("dataNo", dataNo);
+
+		return dao.selectEditorList(map);
 	}
 
 	/* 게시판 게시글 리스트 */
