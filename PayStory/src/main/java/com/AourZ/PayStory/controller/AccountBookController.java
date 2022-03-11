@@ -734,8 +734,8 @@ public class AccountBookController {
 					.selectShareAccountParticipant(accountBookVO.get(i).getAccountBookNo());
 
 			// participant image담을 배열 생성
-			String participant[] = new String[3];
-			String participantNo[] = new String[3];
+			String participant[] = new String[20];
+			String participantNo[] = new String[20];
 
 			// participant image, memberNo담기
 			for (int z = 0; z < participantVO.size(); z++) { // participantVO.size() 질문
@@ -822,8 +822,8 @@ public class AccountBookController {
 		ArrayList<MemberVO> participantVO = shareAccountService.selectShareAccountParticipant(num);
 
 		// participant image담을 배열 생성
-		String participant[] = new String[3];
-		String participantNo[] = new String[3];
+		String participant[] = new String[20];
+		String participantNo[] = new String[20];
 
 		// participant image, memberNo담기
 		for (int z = 0; z < participantVO.size(); z++) { // participantVO.size() 질문
