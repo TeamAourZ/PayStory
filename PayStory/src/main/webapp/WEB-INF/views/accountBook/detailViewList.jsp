@@ -52,10 +52,14 @@
 										<div class="dataAmount">
 											<c:choose>
 												<c:when test="${detailViewItem.amount > 0}">
-													<fmt:formatNumber value="${detailViewItem.amount}" pattern="#,###" />
+													<div class="income-color">
+														<fmt:formatNumber value="${detailViewItem.amount}" pattern="#,###" />
+													</div>
 												</c:when>
 												<c:otherwise>
-													<fmt:formatNumber value="${detailViewItem.amount * -1}" pattern="#,###" />
+													<div class="expenditure-color">
+														<fmt:formatNumber value="${detailViewItem.amount * -1}" pattern="#,###" />
+													</div>
 												</c:otherwise>
 											</c:choose>
 										</div>
@@ -119,7 +123,18 @@
 							<%-- 내용 2 --%>
 							<div class="col-2 d-flex flex-column flex-gap-2">
 								<div class="d-flex justify-content-end flex-gap-1">
-									<i class="dataEditHistory fas fa-history fa-lg pointer-cursor"></i>
+									<%-- 수정자 데이터 --%>
+									<c:choose>
+										<c:when test="${detailViewItem.condition eq 'income' && detailViewItem.dataNo eq incomeEditorList.key}">
+											<i class="dataEditHistory fas fa-history fa-lg pointer-cursor"></i>
+											
+										</c:when>
+										<c:when test="${detailViewItem.condition eq 'expenditure' && detailViewItem.dataNo eq expenditureEditorList.key}">
+											<i class="dataEditHistory fas fa-history fa-lg pointer-cursor"></i>
+											
+										</c:when>
+									</c:choose>
+									
 									<i class="dataEdit far fa-edit fa-lg pointer-cursor"></i>
 									<i class="dataDelete far fa-trash-alt fa-lg pointer-cursor"></i>
 									<%-- 삭제 이벤트를 위한 데이터 적재 --%>
