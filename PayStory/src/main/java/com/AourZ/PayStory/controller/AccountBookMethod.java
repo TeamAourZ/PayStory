@@ -1,8 +1,11 @@
 package com.AourZ.PayStory.controller;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,6 +21,23 @@ import com.AourZ.PayStory.service.accountBook.AccountBookService;
 public class AccountBookMethod {
 	@Autowired
 	private AccountBookService accountBookService;
+
+	/* 로그인 정보 확인 */
+	void sessionCheck(Object obj, HttpServletResponse response) {
+		try {
+			if (obj == null) {
+				response.setContentType("text/html; charset=UTF-8");
+
+				PrintWriter out = response.getWriter();
+
+				out.println("<script>alert('로그인 정보가 정확하지 않습니다.'); location.href='/index';</script>");
+
+				out.flush();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/* 숫자 0 채우기 */
 	String zeroFill(int num) {
@@ -121,7 +141,7 @@ public class AccountBookMethod {
 		for (int i = 0; i < editDataNoList.size(); i++) {
 			ArrayList<EditorVO> temp = accountBookService.selectEditorList(condition, accountBookNo,
 					editDataNoList.get(i));
-			
+
 			for (int j = 0; j < temp.size(); j++) {
 				temp.get(j).setMember(replaceMember("name", temp.get(j).getMember())); // 회원 번호 to 회원 이름
 			}

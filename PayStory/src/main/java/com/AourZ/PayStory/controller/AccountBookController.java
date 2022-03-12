@@ -1,7 +1,6 @@
 package com.AourZ.PayStory.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -57,24 +56,8 @@ public class AccountBookController {
 	public String myMain(HttpServletRequest request, HttpServletResponse response, Model model) {
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
+		methodList.sessionCheck(session.getAttribute("memberNo"), response); // session 상태 체크
 		String signInMemberNo = (String) session.getAttribute("memberNo"); // 회원 번호
-
-		try {
-			// 로그인 정보 확인
-			if (signInMemberNo == null) {
-				response.setContentType("text/html; charset=UTF-8");
-
-				PrintWriter out = response.getWriter();
-
-				out.println("<script>alert('로그인 정보가 정확하지 않습니다.'); location.href='/index';</script>");
-
-				out.flush();
-
-				return "index";
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		// 가계부 정보 가져오기
 		AccountBookVO accountBookInfo = accountBookService.selectMyAccountBook(signInMemberNo, false);
@@ -98,9 +81,10 @@ public class AccountBookController {
 
 	/* 대시보드 메인 - 공유 가계부 */
 	@RequestMapping("/accountBook/shareMain")
-	public String shareMain(HttpServletRequest request, Model model) {
+	public String shareMain(HttpServletRequest request, HttpServletResponse response, Model model) {
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
+		methodList.sessionCheck(session.getAttribute("accountBookNo"), response); // session 상태 체크
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
 
 		// 가계부 정보 가져오기
@@ -387,9 +371,10 @@ public class AccountBookController {
 
 	/* 대시보드 조회 */
 	@RequestMapping("/accountBook/detailView")
-	public String detailView(HttpServletRequest request, Model model) {
+	public String detailView(HttpServletRequest request, HttpServletResponse response, Model model) {
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
+		methodList.sessionCheck(session.getAttribute("accountBookNo"), response); // session 상태 체크
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
 
 		// 가계부 정보 가져오기
