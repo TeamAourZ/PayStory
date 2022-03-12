@@ -20,6 +20,7 @@ public interface IAccountBookService {
 	AccountBookVO selectShareAccountBook(int accountBookNo);								// 공유 가계부 조회
 	AccountBookBudgetVO selectAccountBookBudget(int accountBookNo, String date);	// 가계부 예산 조회
 	ArrayList<ShareAccountBookVO> selectShareMemberList(int accountBookNo);			// 공유 가계부 소유자, 참여자 조회
+	
 	MemberVO selectMemberInfo(String condition, Object value);								// 회원 정보 조회
 	
 	IncomeVO selectIncome(int accountBookNo, String dataNo);				// 수입 내역 조회 (단일)
@@ -36,9 +37,10 @@ public interface IAccountBookService {
 	void updateItem(HashMap<String, Object> map);	// 내역 수정
 	void deleteDetailItem(int expenditureNo);				// 지출 내역 상세 항목 삭제
 	
-	void insertEditor(String memberNo, int accountBookNo, String condition, int dataNo);	// 내역 수정자 추가
-	ArrayList<Integer> selectEditorDataNoList(String condition, int accountBookNo);			// 내역 수정 데이터 번호 조회
-	ArrayList<EditorVO> selectEditorList(String condition, int accountBookNo, int dataNo);	// 내역 수정자 조회
+	void insertEditor(String condition, String dataDate, String memberNo, int accountBookNo, int dataNo);	// 내역 수정자 추가
+	void updateDataDate(String condition, String dataDate, int dataNo);													// 내역 데이터 날짜 수정
+	ArrayList<Integer> selectEditorDataNoList(String condition, int accountBookNo, String date);				// 내역 수정 데이터 번호 조회
+	ArrayList<EditorVO> selectEditorList(String condition, int accountBookNo, int dataNo);							// 내역 수정자 조회
 	
 	ArrayList<BoardVO> selectBoardList(int boardTab, String boardCategoryNo);	// 게시판 게시글 리스트
 	String selectBoardCategoryName(String boardCategoryNo);							// 게시판 카테고리 이름 조회

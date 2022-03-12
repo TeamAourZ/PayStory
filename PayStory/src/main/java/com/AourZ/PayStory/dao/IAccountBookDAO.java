@@ -20,6 +20,7 @@ public interface IAccountBookDAO {
 	AccountBookVO selectShareAccountBook(int accountBookNo);								// 공유 가계부 조회
 	AccountBookBudgetVO selectAccountBookBudget(HashMap<String, Object> map);	// 가계부 예산 조회
 	ArrayList<ShareAccountBookVO> selectShareMemberList(int accountBookNo);			// 공유 가계부 소유자, 참여자 조회
+	
 	MemberVO selectMemberInfo(HashMap<String, Object> map);								// 회원 정보 조회
 	
 	IncomeVO selectIncome(HashMap<String, Object> map);				// 수입 내역 조회 (단일)
@@ -36,6 +37,7 @@ public interface IAccountBookDAO {
 	void deleteDetailItem(int expenditureNo);				// 지출 내역 상세 항목 삭제
 	
 	void insertEditor(HashMap<String, Object> map); 										// 내역 수정자 추가
+	void updateDataDate(HashMap<String, Object> map); 								// 내역 데이터 날짜 수정
 	ArrayList<Integer> selectEditorDataNoList(HashMap<String, Object> map);	// 내역 수정 데이터 번호 조회
 	ArrayList<EditorVO> selectEditorList(HashMap<String, Object> map);			// 내역 수정자 조회
 	

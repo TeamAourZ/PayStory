@@ -113,14 +113,18 @@ public class AccountBookMethod {
 	}
 
 	/* 수정자 조회 */
-	Map<Integer, ArrayList<EditorVO>> selectEditorList(String condition, int accountBookNo) {
-		ArrayList<Integer> editDataNoList = accountBookService.selectEditorDataNoList(condition, accountBookNo);
+	Map<Integer, ArrayList<EditorVO>> selectEditorList(String condition, int accountBookNo, String date) {
+		ArrayList<Integer> editDataNoList = accountBookService.selectEditorDataNoList(condition, accountBookNo, date);
 
 		Map<Integer, ArrayList<EditorVO>> editorList = new HashMap<Integer, ArrayList<EditorVO>>();
 
 		for (int i = 0; i < editDataNoList.size(); i++) {
 			ArrayList<EditorVO> temp = accountBookService.selectEditorList(condition, accountBookNo,
 					editDataNoList.get(i));
+			
+			for (int j = 0; j < temp.size(); j++) {
+				temp.get(j).setMember(replaceMember("name", temp.get(j).getMember())); // 회원 번호 to 회원 이름
+			}
 
 			if (temp != null && temp.size() > 0) {
 				editorList.put(editDataNoList.get(i), temp);
@@ -128,6 +132,21 @@ public class AccountBookMethod {
 		}
 
 		return editorList;
+	}
+
+	/* 회원 번호 to 회원 @ */
+	String replaceMember(String condition, String memberNo) {
+		MemberVO memberInfo = accountBookService.selectMemberInfo("memberNo", memberNo);
+
+		String result = "";
+
+		if (condition.equals("name")) {
+			result = memberInfo.getMemberName();
+		} else if (condition.equals("email")) {
+			result = memberInfo.getMemberEmail();
+		}
+
+		return result;
 	}
 
 	/* 태그 번호 to 태그 이름 */

@@ -176,23 +176,36 @@ public class AccountBookService implements IAccountBookService {
 	}
 
 	/* 내역 수정자 추가 */
-	public void insertEditor(String memberNo, int accountBookNo, String condition, int dataNo) {
+	public void insertEditor(String condition, String dataDate, String memberNo, int accountBookNo, int dataNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
+		map.put("condition", condition);
+		map.put("dataDate", dataDate);
 		map.put("memberNo", memberNo);
 		map.put("accountBookNo", accountBookNo);
-		map.put("condition", condition);
 		map.put("dataNo", dataNo);
 
 		dao.insertEditor(map);
 	}
 
+	/* 내역 데이터 날짜 수정 */
+	public void updateDataDate(String condition, String dataDate, int dataNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("condition", condition);
+		map.put("dataDate", dataDate);
+		map.put("dataNo", dataNo);
+
+		dao.updateDataDate(map);
+	}
+
 	/* 내역 수정 데이터 번호 조회 */
-	public ArrayList<Integer> selectEditorDataNoList(String condition, int accountBookNo) {
+	public ArrayList<Integer> selectEditorDataNoList(String condition, int accountBookNo, String date) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		map.put("condition", condition);
 		map.put("accountBookNo", accountBookNo);
+		map.put("date", date);
 
 		return dao.selectEditorDataNoList(map);
 	}

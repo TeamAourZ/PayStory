@@ -64,8 +64,9 @@
 	
 	<!-- 수정자 -->
 	<resultMap type="com.AourZ.PayStory.model.accountBook.EditorVO" id="editorList">
+		<result property="dataDate" column="dataDate" />
 		<result property="editDate" column="editDate" />
-		<result property="memberNo" column="memberNo" />
+		<result property="member" column="memberNo" />
 		<result property="accountBookNo" column="accountBookNo" />
 		<result property="incomeNo" column="incomeNo" />
 		<result property="expenditureNo" column="expenditureNo" />
@@ -116,9 +117,9 @@
 			<when test="condition.equals('memberEmail')">
 				WHERE memberEmail = #{value}
 			</when>
-			<otherwise> <!-- memberNo -->
+			<when test="condition.equals('memberNo')">
 				WHERE memberNo = #{value}
-			</otherwise>
+			</when>
 		</choose>
 	</select>
 	
@@ -213,7 +214,7 @@
 	<insert id="insertEditor" parameterType="HashMap">
 		INSERT INTO editor
 		(
-			memberNo, accountBookNo,
+			dataDate, memberNo, accountBookNo,
 			<choose>
 				<when test="condition.equals('income')">
 					incomeNo
@@ -223,8 +224,23 @@
 				</when>
 			</choose>
 		)
-		VALUES (#{memberNo}, #{accountBookNo}, #{dataNo})
+		VALUES (#{dataDate}, #{memberNo}, #{accountBookNo}, #{dataNo})
 	</insert>
+	
+	<!-- 내역 데이터 날짜 수정 -->
+	<update id="updateDataDate" parameterType="HashMap">
+		UPDATE editor
+		SET
+			dataDate = #{dataDate}
+		<choose>
+			<when test="condition.equals('income')">
+				WHERE incomeNo = #{dataNo}
+			</when>
+			<when test="condition.equals('expenditure')">
+				WHERE expenditureNo = #{dataNo}
+			</when>
+		</choose>
+	</update>
 	
 	<!-- 내역 수정 데이터 번호 조회 -->
 	<select id="selectEditorDataNoList" parameterType="HashMap" resultType="int">
@@ -232,13 +248,13 @@
 			<when test="condition.equals('income')">
 				SELECT DISTINCT incomeNo
 				FROM editor
-				WHERE accountBookNo = #{accountBookNo} AND incomeNo IS NOT NULL
+				WHERE accountBookNo = #{accountBookNo} AND incomeNo IS NOT NULL AND dataDate LIKE CONCAT(#{date}, '%')
 				ORDER BY incomeNo ASC
 			</when>
 			<when test="condition.equals('expenditure')">
 				SELECT DISTINCT expenditureNo
 				FROM editor
-				WHERE accountBookNo = #{accountBookNo} AND expenditureNo IS NOT NULL
+				WHERE accountBookNo = #{accountBookNo} AND expenditureNo IS NOT NULL AND dataDate LIKE CONCAT(#{date}, '%')
 				ORDER BY expenditureNo ASC
 			</when>
 		</choose>

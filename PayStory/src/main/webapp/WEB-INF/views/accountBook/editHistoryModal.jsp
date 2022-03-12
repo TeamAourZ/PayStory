@@ -14,10 +14,27 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-secondary" type="button" data-dismiss="modal">확인</button>
+						<div id="editMemberBox">
+							<div class="table mb-0">
+								<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+									<div class="row">
+										<div class="col-sm-12">
+											<table class="table mb-0">
+												<thead>
+													<tr class="text-center">
+														<th>회원</th>
+														<th>수정 날짜</th>
+													</tr>
+												</thead>
+												<tbody class="editMember">
+													
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

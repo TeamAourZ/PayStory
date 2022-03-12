@@ -536,14 +536,17 @@ public class AccountBookController {
 		/* ---------------- 예산 ---------------- */
 
 		/* ---------------- 수정자 ---------------- */
+		// DB SELECT 기준 설정
+		date = year + "-" + monthText + "-" + dayText;
+
 		// 수입
-		Map<Integer, ArrayList<EditorVO>> incomeEditorList = methodList.selectEditorList("income", accountBookNo);
+		Map<Integer, ArrayList<EditorVO>> incomeEditorList = methodList.selectEditorList("income", accountBookNo, date);
 
 		model.addAttribute("incomeEditorList", incomeEditorList);
 
 		// 지출
 		Map<Integer, ArrayList<EditorVO>> expenditureEditorList = methodList.selectEditorList("expenditure",
-				accountBookNo);
+				accountBookNo, date);
 
 		model.addAttribute("expenditureEditorList", expenditureEditorList);
 		/* ---------------- 수정자 ---------------- */
@@ -606,7 +609,11 @@ public class AccountBookController {
 		accountBookService.updateItem(map);
 
 		// 수정자 추가
-		accountBookService.insertEditor(memberNo, accountBookNo, condition, dataNo);
+		String[] splitDate = incomeVO.getIncomeDate().split(" ");
+		accountBookService.insertEditor(condition, splitDate[0], memberNo, accountBookNo, dataNo);
+
+		// 데이터 입력 날짜 업데이트 (변경 유무 확인 X)
+		accountBookService.updateDataDate(condition, splitDate[0], dataNo);
 
 		return -1;
 	}
@@ -650,12 +657,17 @@ public class AccountBookController {
 		accountBookService.insertExpenditureItem(expenditureItemList);
 
 		// 수정자 추가
-		accountBookService.insertEditor(memberNo, accountBookNo, condition, dataNo);
+		String[] splitDate = expenditureVO.getExpenditureDate().split(" ");
+		accountBookService.insertEditor(condition, splitDate[0], memberNo, accountBookNo, dataNo);
+
+		// 데이터 입력 날짜 업데이트 (변경 유무 확인 X)
+		accountBookService.updateDataDate(condition, splitDate[0], dataNo);
 
 		return -1;
 	}
 
 	/* 대시보드 조회 - 내역 삭제 */
+	@ResponseBody
 	@RequestMapping("/accountBook/detailViewList/delete")
 	public void accountBookDataDelete(@RequestParam HashMap<String, Object> param, HttpSession session)
 			throws IOException {
@@ -748,8 +760,8 @@ public class AccountBookController {
 					.selectShareAccountParticipant(accountBookVO.get(i).getAccountBookNo());
 
 			// participant image담을 배열 생성
-			String participant[] = new String[3];
-			String participantNo[] = new String[3];
+			String participant[] = new String[20];
+			String participantNo[] = new String[20];
 
 			// participant image, memberNo담기
 			for (int z = 0; z < participantVO.size(); z++) { // participantVO.size() 질문
@@ -859,4 +871,5 @@ public class AccountBookController {
 
 		return "accountBook/public/editParticipant";
 	}
+
 }
