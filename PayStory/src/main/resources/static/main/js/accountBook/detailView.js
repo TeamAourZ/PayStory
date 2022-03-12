@@ -7,7 +7,7 @@ var nowDay = date.getDate(); // 오늘 날짜
 $(function() {
 	$('#selectedDate').text(nowYear + "년 " + (nowMonth + 1) + "월 " + nowDay + "일");
 
-	calendarAjax("C", nowYear, nowMonth); // 달력
+	calendarAjax("C", nowYear, nowMonth, -1); // 달력
 	chartAjax(nowYear, nowMonth, nowDay); // 차트
 	budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	detailViewListAjax(nowYear, nowMonth, nowDay); // 상세 내역
@@ -35,7 +35,7 @@ $(function() {
 
 		nowDay = -1;
 
-		calendarAjax("C", nowYear, nowMonth); // 달력
+		calendarAjax("C", nowYear, nowMonth, -1); // 달력
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
 		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	});
@@ -50,7 +50,7 @@ $(function() {
 
 		nowDay = -1;
 
-		calendarAjax("C", nowYear, nowMonth); // 달력
+		calendarAjax("C", nowYear, nowMonth, -1); // 달력
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
 		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	});
@@ -63,7 +63,7 @@ $(function() {
 		nowMonth = date.getMonth();
 		nowDay = date.getDate();
 
-		calendarAjax("C", nowYear, nowMonth); // 달력
+		calendarAjax("C", nowYear, nowMonth, -1); // 달력
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
 		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	});
@@ -81,9 +81,6 @@ $(function() {
 
 		$(this).addClass('border-color-black');
 		$(this).children('div.dateBox').children('div.date').addClass('selected');
-
-		$('.viewOn').addClass('d-none');
-		$('.viewOn').removeClass('viewOn');
 
 		nowDay = $('.date.selected').text();
 
@@ -121,10 +118,34 @@ $(function() {
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
 	});
 
-	/* 기록 버튼 클릭 */
+	/* 공유 회원 목록 */
+	$(document).on('click', '.shareMemberBoxToggle', function(e) {
+		e.stopImmediatePropagation();
+
+		$('#shareMemberBox').toggleClass('d-none');
+	});
+
+	/* 기록(수정자 조회) 버튼 클릭 */
 	$(document).on('click', '.dataEditHistory', function(e) {
 		e.stopImmediatePropagation();
 
+		let dataList = $(this).children('input').val(); // 수정자 목록 원본
+
+		let editorList = dataList.split("━"); // 수정자 목록
+		editorList.shift(); // 첫 요소(공백) 제거
+
+		console.log(editorList);
+
+		for (let i = 0; i < editorList.length; i++) {
+			let editor = editorList[i].split("┃"); // 수정자 데이터
+
+			$('.editMember').append(`
+				<tr class="text-center">
+					<td>${editor[0]}</td>
+					<td>${editor[1]}</td>
+				</tr>
+			`);
+		}
 	});
 
 	/* 수정 버튼 클릭 */
@@ -151,8 +172,6 @@ $(function() {
 			deleteItemAjax(condition, dataNo, receiptImage, nowYear, nowMonth, nowDay);
 
 			alert("삭제가 완료되었습니다.");
-		} else {
-
 		}
 	});
 
@@ -160,6 +179,6 @@ $(function() {
 	$(document).on('click', '.receiptImageShow', function(e) {
 		e.stopImmediatePropagation();
 
-		$('#receiptImgModal').attr('src', '/images/receipt/' + accountBookNo + '/' + $(this).next('input').val());
+		$('#receiptImgModal').attr('src', '/images/receipt/' + accountBookNo + '/' + $(this).next('input').val()).addClass('w-100');
 	});
 });

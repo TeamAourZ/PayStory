@@ -30,6 +30,26 @@ function checkToday() {
 	});
 }
 
+/* 갱신 시 날짜 선택 스타일 유지 */
+function maintainDay(year, month, day) {
+	let date = year + '-' + zeroFill(month + 1) + '-' + zeroFill(day);
+
+	console.log(date);
+
+	$('.infoBox').each(function() {
+		if ($(this).hasClass('border-color-black')) {
+			console.log("진입 1");
+			$(this).removeClass('border-color-black');
+			$(this).children('div.dateBox').children('div.date').removeClass('selected');
+		}
+		if ($(this).children('div.dateBox').children('div.date').hasClass(date)) {
+			console.log("진입 2");
+			$(this).addClass('border-color-black');
+			$(this).children('div.dateBox').children('div.date').addClass('selected');
+		}
+	});
+}
+
 /* 대시보드 메인 - 달력 (A, B) 상세 박스 선택 */
 function detailBoxSelect(obj, isType, isTag) {
 	let detailBox;
@@ -70,4 +90,9 @@ function detailBoxHide() {
 			return;
 		}
 	});
+}
+
+/* 숫자 0 채우기 */
+function zeroFill(num) {
+	return num < 10 ? "0" + num : num;
 }

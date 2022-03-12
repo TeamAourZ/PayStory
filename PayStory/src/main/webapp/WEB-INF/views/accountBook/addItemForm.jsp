@@ -232,6 +232,18 @@
 												<p>클릭하여 이미지 크게 보기</p>
 											</div>
 											<img id="receiptImg" />
+											<c:if test="${isEdit && not empty expenditure.expenditureImage}">
+												<input type="hidden" id="receiptImage" value="${expenditure.expenditureImage}">
+												<script type="text/javascript">
+													$('#.receiptImg').attr('src', $('#receiptImage').val()).css('width', '100%').css('height', '95%'); // 이미지 삽입
+													$('#imgArea').addClass('hasImage');
+													$('.hasImage').attr({
+														'data-toggle': 'modal',
+														'data-target': '#receiptModal'
+													}); // 이미지 영역 속성 변경
+													$('#receiptImage').remove(); // 삭제
+												</script>
+											</c:if>
 										</div>
 									</div>
 									<div class="d-flex align-items-center justify-content-center mt-3">
