@@ -14,7 +14,7 @@ $(function() {
 		isType = "B";
 	}
 
-	calendarAjax(isType, nowYear, nowMonth); // 달력
+	calendarAjax(isType, nowYear, nowMonth, -1); // 달력
 	chartAjax(nowYear, nowMonth, nowDay); // 차트
 	budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	mainBoardAjax(); // 게시판
@@ -25,10 +25,10 @@ $(function() {
 
 		if (width >= 1374 && isType == "B") {
 			isType = "A";
-			calendarAjax(isType, nowYear, nowMonth); // 달력
+			calendarAjax(isType, nowYear, nowMonth, -1); // 달력
 		} else if (width < 1374 && isType == "A") {
 			isType = "B";
-			calendarAjax(isType, nowYear, nowMonth); // 달력
+			calendarAjax(isType, nowYear, nowMonth, -1); // 달력
 		} else if (width >= 620 && isType == "B") {
 			$('.isScroll').removeClass('table-responsive');
 		} else if (width < 620 && isType == "B") {
@@ -46,7 +46,7 @@ $(function() {
 
 		nowDay = -1;
 
-		calendarAjax(isType, nowYear, nowMonth); // 달력
+		calendarAjax(isType, nowYear, nowMonth, -1); // 달력
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
 		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	});
@@ -61,7 +61,7 @@ $(function() {
 
 		nowDay = -1;
 
-		calendarAjax(isType, nowYear, nowMonth); // 달력
+		calendarAjax(isType, nowYear, nowMonth, -1); // 달력
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
 		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	});
@@ -74,7 +74,7 @@ $(function() {
 		nowMonth = date.getMonth();
 		nowDay = date.getDate();
 
-		calendarAjax(isType, nowYear, nowMonth); // 달력
+		calendarAjax(isType, nowYear, nowMonth, -1); // 달력
 		chartAjax(nowYear, nowMonth, nowDay); // 차트
 		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	});
@@ -191,7 +191,7 @@ $(function() {
 		mainBoardAjax(); // 게시판
 	});
 
-	/* 게시판 호버 */
+	/* 게시글 클릭 */
 	$(document).on('click', '.postItem', function(e) {
 		e.stopImmediatePropagation();
 

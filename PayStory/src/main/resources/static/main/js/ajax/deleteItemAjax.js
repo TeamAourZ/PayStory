@@ -13,7 +13,7 @@ function deleteItemAjax(condition, dataNo, receiptImage, year, month, day) {
 		error: function() {
 			console.log("error");
 		}, complete: function() {
-			calendarAjax("C", year, month); // 달력
+			calendarAjax("C", year, month, day); // 달력
 			chartAjax(year, month, day); // 차트
 			budgetStatusAjax(year, month); // 예산 현황
 			detailViewListAjax(year, month, day); // 상세 내역
