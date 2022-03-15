@@ -39,9 +39,9 @@ function calendarAjax(calendarType, year, month, day) {
 				dayColor(year, month); // 요일별 색상 지정
 
 				checkToday(); // 오늘 날짜
-				
+
 				if (day != -1) {
-					maintainDay(year, month, day);
+					maintainDay(year, month, day); // 내역 삭제 후 선택된 날짜 재선택
 				}
 			}
 		},

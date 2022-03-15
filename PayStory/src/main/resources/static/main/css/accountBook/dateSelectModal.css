@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+#dateSelectBox {
+	max-height: 300px;
+}
+
+#modalYearBox {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+}
+#modalYearBox div {
+	min-width: 60px;
+	min-height: 60px;
+	line-height: 60px;
+}
+
+#modalMonthBox {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+}
+#modalMonthBox div {
+	min-width: 50px;
+	min-height: 50px;
+	line-height: 50px;
+}
+
+#modalDayBox {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+}
+#modalDayBox div {
+	min-width: 40px;
+	min-height: 40px;
+	line-height: 40px;
+}
+
+.modalYear:hover, .modalMonth:hover, .modalDay:hover {
+	font-weight: bold;
+	color: white;
+	border: 1px solid gray !important;
+	background: silver;
+}

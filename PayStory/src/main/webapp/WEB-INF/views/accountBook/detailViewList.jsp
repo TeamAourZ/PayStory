@@ -183,10 +183,10 @@
 			</c:otherwise>
 		</c:choose>
 		
-		<%-- 영수증 이미지 Modal --%>
+		<%-- 영수증 이미지 모달 --%>
 		<jsp:include page="/WEB-INF/views/accountBook/receiptImageModal.jsp" flush="true" />
 		
-		<%-- 수정자 조회 Modal --%>
+		<%-- 수정자 조회 모달 --%>
 		<jsp:include page="/WEB-INF/views/accountBook/editHistoryModal.jsp" flush="true" />
 	</body>
 </html>
