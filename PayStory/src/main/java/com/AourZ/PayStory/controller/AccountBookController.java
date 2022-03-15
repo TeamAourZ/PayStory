@@ -258,6 +258,10 @@ public class AccountBookController {
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
+		
+		// session 정보 등록
+		session.setAttribute("curYear", Integer.parseInt(year));
+		session.setAttribute("curMontLastDate", lastDate);
 
 		// A, B, C 공통
 		/* ---------------- dateList ---------------- */

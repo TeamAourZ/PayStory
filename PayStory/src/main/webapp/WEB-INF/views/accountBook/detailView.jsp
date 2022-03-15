@@ -16,6 +16,7 @@
 		<link href="<c:url value='/main/css/accountBook/chart.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/color.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/detailViewList.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/dateSelectModal.css' />" rel="stylesheet" type="text/css">
 		
 		<%-------- CSS : Bootstrap --------%>
 		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -55,12 +56,12 @@
 									<%-- Card Header --%>
 									<div class="card-header p-3">
 										<div id="calendarBtnBox" class="d-flex justify-content-between mr-3 ml-3">
-											<div id="prevNextBox" class="d-flex justify-content-between align-items-center">
+											<div id="prevNextBox" class="d-flex justify-content-between align-items-center flex-gap-3">
 												<i id="prevMonthBtn" class="fas fa-angle-left fa-lg pointer-cursor"></i>
-												<h6 id="yearMonth" class="font-weight-bold text-primary m-0 mr-3 ml-3"></h6>
+												<h6 id="yearMonth" class="font-weight-bold text-primary m-0 pointer-cursor" data-toggle="modal" data-target="#dateSelectModal"></h6>
 												<i id="nextMonthBtn" class="fas fa-angle-right fa-lg pointer-cursor"></i>
 											</div>
-											<div id="otherBtnBox" class="d-flex align-items-center">
+											<div id="otherBtnBox" class="d-flex align-items-center flex-gap-1">
 												<i id="todayBtn" class="far fa-calendar fa-lg pointer-cursor"></i>
 											</div>
 										</div>
@@ -101,7 +102,7 @@
 								<div class="card shadow mb-4">
 									<%-- Card Header --%>
 									<div class="card-header d-flex justify-content-between p-3">
-										<h6 id="selectedDate" class="m-0 font-weight-bold text-primary">asd</h6>
+										<h6 id="selectedDate" class="m-0 font-weight-bold text-primary"></h6>
 										<c:if test="${isShared eq true}">
 											<c:if test="${fn:length(shareMemberInfoList) gt 1}">
 												<div id="shareMemberBox" class="position-absolute d-none">
@@ -122,14 +123,14 @@
 																					<c:choose>
 																						<c:when test="${status.index eq 0}">
 																							<td>
-																								<div class="profile-image rounded-circle border-color-yellow">
+																								<div class="profile-image-box rounded-circle border-color-yellow">
 																									<img src="/images/member/${member.memberNo}/${member.memberImage}">
 																								</div>
 																							</td>
 																						</c:when>
 																						<c:otherwise>
 																							<td>
-																								<div class="profile-image rounded-circle border-color-blue">
+																								<div class="profile-image-box rounded-circle border-color-blue">
 																									<img src="/images/member/${member.memberNo}/${member.memberImage}">
 																								</div>
 																							</td>
@@ -160,6 +161,9 @@
 				</div>
 			</div>
 		</div>
+		
+		<%-- 날짜 선택 모달 --%>
+		<jsp:include page="/WEB-INF/views/accountBook/dateSelectModal.jsp" flush="true" />
 		
 		<%-------- JS : Bootstrap --------%>
 		<script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js' />"></script>

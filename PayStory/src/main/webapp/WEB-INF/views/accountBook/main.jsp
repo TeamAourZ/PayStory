@@ -16,6 +16,7 @@
 		<link href="<c:url value='/main/css/accountBook/color.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/mainBoard.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/calendar.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/dateSelectModal.css' />" rel="stylesheet" type="text/css">
 		
 		<%-------- CSS : Bootstrap --------%>
 		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -109,71 +110,77 @@
 												<h6 class="m-0 font-weight-bold text-primary">${accountBookTitle}</h6>
 											</c:otherwise>
 										</c:choose>
-										<c:if test="${isShared eq true}">
-											<c:if test="${fn:length(shareMemberInfoList) gt 1}">
-												<div id="shareMemberBox" class="position-absolute d-none">
-													<div class="table mb-0">
-														<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-															<div class="row">
-																<div class="col-sm-12">
-																	<i class="detailBoxClose re-position-1 fas fa-times position-absolute pointer-cursor"></i>
-																	<table class="table mb-0">
-																		<thead>
-																			<tr class="text-center">
-																				<th colspan="3">목록</th>
-																			</tr>
-																		</thead>
-																		<tbody class="shareMember">
-																			<c:forEach var="member" items="${shareMemberInfoList}" varStatus="status">
+										<div class="d-flex flex-gap-2">
+											<c:if test="${isShared eq true}">
+												<c:if test="${fn:length(shareMemberInfoList) gt 1}">
+													<div id="shareMemberBox" class="position-absolute d-none">
+														<div class="table mb-0">
+															<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+																<div class="row">
+																	<div class="col-sm-12">
+																		<i class="detailBoxClose re-position-1 fas fa-times position-absolute pointer-cursor"></i>
+																		<table class="table mb-0">
+																			<thead>
 																				<tr class="text-center">
-																					<c:choose>
-																						<c:when test="${status.index eq 0}">
-																							<td>
-																								<div class="profile-image rounded-circle border-color-yellow">
-																									<img src="/images/member/${member.memberNo}/${member.memberImage}">
-																								</div>
-																							</td>
-																						</c:when>
-																						<c:otherwise>
-																							<td>
-																								<div class="profile-image rounded-circle border-color-blue">
-																									<img src="/images/member/${member.memberNo}/${member.memberImage}">
-																								</div>
-																							</td>
-																						</c:otherwise>
-																					</c:choose>
-																					<td class="align-middle">${member.memberName}</td>
-																					<td class="align-middle">${member.memberEmail}</td>
+																					<th colspan="3">목록</th>
 																				</tr>
-																			</c:forEach>
-																		</tbody>
-																	</table>
+																			</thead>
+																			<tbody class="shareMember">
+																				<c:forEach var="member" items="${shareMemberInfoList}" varStatus="status">
+																					<tr class="text-center">
+																						<c:choose>
+																							<c:when test="${status.index eq 0}">
+																								<td>
+																									<div class="profile-image-box rounded-circle border-color-yellow">
+																										<img src="/images/member/${member.memberNo}/${member.memberImage}">
+																									</div>
+																								</td>
+																							</c:when>
+																							<c:otherwise>
+																								<td>
+																									<div class="profile-image-box rounded-circle border-color-blue">
+																										<img src="/images/member/${member.memberNo}/${member.memberImage}">
+																									</div>
+																								</td>
+																							</c:otherwise>
+																						</c:choose>
+																						<td class="align-middle">${member.memberName}</td>
+																						<td class="align-middle">${member.memberEmail}</td>
+																					</tr>
+																				</c:forEach>
+																			</tbody>
+																		</table>
+																	</div>
 																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<i class="shareMemberBoxToggle fas fa-user-friends fa-lg pointer-cursor"></i>
+													<i class="shareMemberBoxToggle fas fa-user-friends fa-lg pointer-cursor"></i>
+												</c:if>
 											</c:if>
-										</c:if>
+											<i class="calendarSettings fas fa-cog fa-lg pointer-cursor"></i>
+											<%--
+												
+												모달 달아야 함
+												
+											 --%>
+										</div>
 									</div>
 									<%-- Card Body --%>
 									<div id="calendarBox" class="card-body">
-										<div id="calendarBtnBox"
-											class="d-flex justify-content-between mr-3 ml-3">
-											<div id="prevNextBox"
-												class="d-flex justify-content-between align-items-center">
+										<div id="calendarBtnBox" class="d-flex justify-content-between mr-3 ml-3">
+											<div id="prevNextBox" class="d-flex justify-content-between align-items-center flex-gap-3">
 												<i id="prevMonthBtn" class="fas fa-angle-left fa-2x pointer-cursor"></i>
-												<span id="yearMonth" class="text-lg font-weight-bold mr-3 ml-3"></span>
+												<span id="yearMonth" class="text-lg font-weight-bold pointer-cursor" data-toggle="modal" data-target="#dateSelectModal"></span>
 												<i id="nextMonthBtn" class="fas fa-angle-right fa-2x pointer-cursor"></i>
 											</div>
-											<div id="otherBtnBox" class="d-flex flex-column align-items-end">
-												<div>
-													<i id="selectDayAddDataBtn" class="fas fa-plus fa-2x pointer-cursor"></i>&nbsp;&nbsp;
+											<div id="otherBtnBox" class="d-flex flex-column align-items-end flex-gap-1">
+												<div class="d-flex flex-gap-2">
+													<i id="selectDayAddDataBtn" class="fas fa-plus fa-2x pointer-cursor"></i>
 													<i id="todayBtn" class="far fa-calendar fa-2x pointer-cursor"></i>
 												</div>
-												<div>
-													<i class="far fa-circle non-cursor" style="color: #2768fa;"> : 수입</i>&nbsp;
+												<div class="d-flex flex-gap-2">
+													<i class="far fa-circle non-cursor" style="color: #2768fa;"> : 수입</i>
 													<i class="far fa-circle non-cursor" style="color: #ffb500;"> : 지출</i>
 												</div>
 											</div>
@@ -189,6 +196,9 @@
 				</div>
 			</div>
 		</div>
+		
+		<%-- 날짜 선택 모달 --%>
+		<jsp:include page="/WEB-INF/views/accountBook/dateSelectModal.jsp" flush="true" />
 	
 		<%-------- JS : Bootstrap --------%>
 		<script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js' />"></script>
