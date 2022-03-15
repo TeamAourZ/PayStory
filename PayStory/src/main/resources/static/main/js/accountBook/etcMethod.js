@@ -34,16 +34,12 @@ function checkToday() {
 function maintainDay(year, month, day) {
 	let date = year + '-' + zeroFill(month + 1) + '-' + zeroFill(day);
 
-	console.log(date);
-
 	$('.infoBox').each(function() {
 		if ($(this).hasClass('border-color-black')) {
-			console.log("진입 1");
 			$(this).removeClass('border-color-black');
 			$(this).children('div.dateBox').children('div.date').removeClass('selected');
 		}
 		if ($(this).children('div.dateBox').children('div.date').hasClass(date)) {
-			console.log("진입 2");
 			$(this).addClass('border-color-black');
 			$(this).children('div.dateBox').children('div.date').addClass('selected');
 		}
