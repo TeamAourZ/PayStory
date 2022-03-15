@@ -1,7 +1,6 @@
 package com.AourZ.PayStory.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,6 +25,7 @@ import com.AourZ.PayStory.model.accountBook.AccountBookVO;
 import com.AourZ.PayStory.model.accountBook.DateVO;
 import com.AourZ.PayStory.model.accountBook.DetailViewItemComparator;
 import com.AourZ.PayStory.model.accountBook.DetailViewItemVO;
+import com.AourZ.PayStory.model.accountBook.EditorVO;
 import com.AourZ.PayStory.model.accountBook.ExpenditureItemVO;
 import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
 import com.AourZ.PayStory.model.accountBook.IncomeVO;
@@ -56,24 +56,8 @@ public class AccountBookController {
 	public String myMain(HttpServletRequest request, HttpServletResponse response, Model model) {
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
+		methodList.sessionCheck(session.getAttribute("memberNo"), response); // session 상태 체크
 		String signInMemberNo = (String) session.getAttribute("memberNo"); // 회원 번호
-
-		try {
-			// 로그인 정보 확인
-			if (signInMemberNo == null) {
-				response.setContentType("text/html; charset=UTF-8");
-
-				PrintWriter out = response.getWriter();
-
-				out.println("<script>alert('로그인 정보가 정확하지 않습니다.'); location.href='/index';</script>");
-
-				out.flush();
-
-				return "index";
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		// 가계부 정보 가져오기
 		AccountBookVO accountBookInfo = accountBookService.selectMyAccountBook(signInMemberNo, false);
@@ -97,9 +81,10 @@ public class AccountBookController {
 
 	/* 대시보드 메인 - 공유 가계부 */
 	@RequestMapping("/accountBook/shareMain")
-	public String shareMain(HttpServletRequest request, Model model) {
+	public String shareMain(HttpServletRequest request, HttpServletResponse response, Model model) {
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
+		methodList.sessionCheck(session.getAttribute("accountBookNo"), response); // session 상태 체크
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
 
 		// 가계부 정보 가져오기
@@ -386,9 +371,10 @@ public class AccountBookController {
 
 	/* 대시보드 조회 */
 	@RequestMapping("/accountBook/detailView")
-	public String detailView(HttpServletRequest request, Model model) {
+	public String detailView(HttpServletRequest request, HttpServletResponse response, Model model) {
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
+		methodList.sessionCheck(session.getAttribute("accountBookNo"), response); // session 상태 체크
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
 
 		// 가계부 정보 가져오기
@@ -534,6 +520,22 @@ public class AccountBookController {
 		model.addAttribute("amount", amount);
 		/* ---------------- 예산 ---------------- */
 
+		/* ---------------- 수정자 ---------------- */
+		// DB SELECT 기준 설정
+		date = year + "-" + monthText + "-" + dayText;
+
+		// 수입
+		Map<Integer, ArrayList<EditorVO>> incomeEditorList = methodList.selectEditorList("income", accountBookNo, date);
+
+		model.addAttribute("incomeEditorList", incomeEditorList);
+
+		// 지출
+		Map<Integer, ArrayList<EditorVO>> expenditureEditorList = methodList.selectEditorList("expenditure",
+				accountBookNo, date);
+
+		model.addAttribute("expenditureEditorList", expenditureEditorList);
+		/* ---------------- 수정자 ---------------- */
+
 		return "accountBook/detailViewList";
 	}
 
@@ -592,7 +594,11 @@ public class AccountBookController {
 		accountBookService.updateItem(map);
 
 		// 수정자 추가
-		accountBookService.insertEditor(memberNo, accountBookNo, condition, dataNo);
+		String[] splitDate = incomeVO.getIncomeDate().split(" ");
+		accountBookService.insertEditor(condition, splitDate[0], memberNo, accountBookNo, dataNo);
+
+		// 데이터 입력 날짜 업데이트 (변경 유무 확인 X)
+		accountBookService.updateDataDate(condition, splitDate[0], dataNo);
 
 		return -1;
 	}
@@ -636,12 +642,17 @@ public class AccountBookController {
 		accountBookService.insertExpenditureItem(expenditureItemList);
 
 		// 수정자 추가
-		accountBookService.insertEditor(memberNo, accountBookNo, condition, dataNo);
+		String[] splitDate = expenditureVO.getExpenditureDate().split(" ");
+		accountBookService.insertEditor(condition, splitDate[0], memberNo, accountBookNo, dataNo);
+
+		// 데이터 입력 날짜 업데이트 (변경 유무 확인 X)
+		accountBookService.updateDataDate(condition, splitDate[0], dataNo);
 
 		return -1;
 	}
 
 	/* 대시보드 조회 - 내역 삭제 */
+	@ResponseBody
 	@RequestMapping("/accountBook/detailViewList/delete")
 	public void accountBookDataDelete(@RequestParam HashMap<String, Object> param, HttpSession session)
 			throws IOException {
@@ -734,8 +745,8 @@ public class AccountBookController {
 					.selectShareAccountParticipant(accountBookVO.get(i).getAccountBookNo());
 
 			// participant image담을 배열 생성
-			String participant[] = new String[3];
-			String participantNo[] = new String[3];
+			String participant[] = new String[20];
+			String participantNo[] = new String[20];
 
 			// participant image, memberNo담기
 			for (int z = 0; z < participantVO.size(); z++) { // participantVO.size() 질문
@@ -822,8 +833,8 @@ public class AccountBookController {
 		ArrayList<MemberVO> participantVO = shareAccountService.selectShareAccountParticipant(num);
 
 		// participant image담을 배열 생성
-		String participant[] = new String[3];
-		String participantNo[] = new String[3];
+		String participant[] = new String[20];
+		String participantNo[] = new String[20];
 
 		// participant image, memberNo담기
 		for (int z = 0; z < participantVO.size(); z++) { // participantVO.size() 질문
@@ -845,4 +856,5 @@ public class AccountBookController {
 
 		return "accountBook/public/editParticipant";
 	}
+
 }

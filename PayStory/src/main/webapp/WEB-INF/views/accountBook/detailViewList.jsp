@@ -52,10 +52,14 @@
 										<div class="dataAmount">
 											<c:choose>
 												<c:when test="${detailViewItem.amount > 0}">
-													<fmt:formatNumber value="${detailViewItem.amount}" pattern="#,###" />
+													<div class="income-color">
+														<fmt:formatNumber value="${detailViewItem.amount}" pattern="#,###" />
+													</div>
 												</c:when>
 												<c:otherwise>
-													<fmt:formatNumber value="${detailViewItem.amount * -1}" pattern="#,###" />
+													<div class="expenditure-color">
+														<fmt:formatNumber value="${detailViewItem.amount * -1}" pattern="#,###" />
+													</div>
 												</c:otherwise>
 											</c:choose>
 										</div>
@@ -119,7 +123,46 @@
 							<%-- 내용 2 --%>
 							<div class="col-2 d-flex flex-column flex-gap-2">
 								<div class="d-flex justify-content-end flex-gap-1">
-									<i class="dataEditHistory fas fa-history fa-lg pointer-cursor"></i>
+									<%-- 수정자 데이터 --%>
+									<c:choose>
+										<c:when test="${detailViewItem.condition eq 'income'}">
+											<c:set var="breakValue" value="false" /> <%-- break --%>
+											<c:forEach var="income" items="${incomeEditorList}">
+												<c:if test="${(not breakValue) && (detailViewItem.dataNo eq income.key)}">
+													<i class="dataEditHistory fas fa-history fa-lg pointer-cursor" data-toggle="modal" data-target="#editHistoryModal">
+														<%-- 수정자 리스트 --%>
+														<c:set var="editorList" value="" />
+														<c:forEach var="editor" items="${income.value}">
+															<c:set var="editorList" value="${editorList}━${editor.member}┃${editor.editDate}" />
+														</c:forEach>
+														<input type="hidden" value="${editorList}">
+													</i>
+													
+													<%-- break 처리 --%>
+													<c:set var="breakValue" value="true" />
+												</c:if>
+											</c:forEach>
+										</c:when>
+										<c:when test="${detailViewItem.condition eq 'expenditure'}">
+											<c:set var="breakValue" value="false" /> <%-- break --%>
+											<c:forEach var="expenditure" items="${expenditureEditorList}">
+												<c:if test="${(not breakValue) && (detailViewItem.dataNo eq expenditure.key)}">
+													<i class="dataEditHistory fas fa-history fa-lg pointer-cursor" data-toggle="modal" data-target="#editHistoryModal">
+														<%-- 수정자 리스트 --%>
+														<c:set var="editorList" value="" />
+														<c:forEach var="editor" items="${expenditure.value}">
+															<c:set var="editorList" value="${editorList}━${editor.member}┃${editor.editDate}" />
+														</c:forEach>
+														<input type="hidden" value="${editorList}">
+													</i>
+													
+													<%-- break 처리 --%>
+													<c:set var="breakValue" value="true" />
+												</c:if>
+											</c:forEach>
+										</c:when>
+									</c:choose>
+									
 									<i class="dataEdit far fa-edit fa-lg pointer-cursor"></i>
 									<i class="dataDelete far fa-trash-alt fa-lg pointer-cursor"></i>
 									<%-- 삭제 이벤트를 위한 데이터 적재 --%>
@@ -142,5 +185,8 @@
 		
 		<%-- 영수증 이미지 Modal --%>
 		<jsp:include page="/WEB-INF/views/accountBook/receiptImageModal.jsp" flush="true" />
+		
+		<%-- 수정자 조회 Modal --%>
+		<jsp:include page="/WEB-INF/views/accountBook/editHistoryModal.jsp" flush="true" />
 	</body>
 </html>

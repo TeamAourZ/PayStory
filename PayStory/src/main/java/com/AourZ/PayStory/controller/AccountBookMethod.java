@@ -1,10 +1,16 @@
 package com.AourZ.PayStory.controller;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.AourZ.PayStory.model.accountBook.EditorVO;
 import com.AourZ.PayStory.model.accountBook.ShareAccountBookVO;
 import com.AourZ.PayStory.model.accountBook.TagTotalVO;
 import com.AourZ.PayStory.model.member.MemberVO;
@@ -15,6 +21,23 @@ import com.AourZ.PayStory.service.accountBook.AccountBookService;
 public class AccountBookMethod {
 	@Autowired
 	private AccountBookService accountBookService;
+
+	/* 로그인 정보 확인 */
+	void sessionCheck(Object obj, HttpServletResponse response) {
+		try {
+			if (obj == null) {
+				response.setContentType("text/html; charset=UTF-8");
+
+				PrintWriter out = response.getWriter();
+
+				out.println("<script>alert('로그인 정보가 정확하지 않습니다.'); location.href='/index';</script>");
+
+				out.flush();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/* 숫자 0 채우기 */
 	String zeroFill(int num) {
@@ -107,6 +130,43 @@ public class AccountBookMethod {
 		}
 
 		return shareMemberInfoList;
+	}
+
+	/* 수정자 조회 */
+	Map<Integer, ArrayList<EditorVO>> selectEditorList(String condition, int accountBookNo, String date) {
+		ArrayList<Integer> editDataNoList = accountBookService.selectEditorDataNoList(condition, accountBookNo, date);
+
+		Map<Integer, ArrayList<EditorVO>> editorList = new HashMap<Integer, ArrayList<EditorVO>>();
+
+		for (int i = 0; i < editDataNoList.size(); i++) {
+			ArrayList<EditorVO> temp = accountBookService.selectEditorList(condition, accountBookNo,
+					editDataNoList.get(i));
+
+			for (int j = 0; j < temp.size(); j++) {
+				temp.get(j).setMember(replaceMember("name", temp.get(j).getMember())); // 회원 번호 to 회원 이름
+			}
+
+			if (temp != null && temp.size() > 0) {
+				editorList.put(editDataNoList.get(i), temp);
+			}
+		}
+
+		return editorList;
+	}
+
+	/* 회원 번호 to 회원 @ */
+	String replaceMember(String condition, String memberNo) {
+		MemberVO memberInfo = accountBookService.selectMemberInfo("memberNo", memberNo);
+
+		String result = "";
+
+		if (condition.equals("name")) {
+			result = memberInfo.getMemberName();
+		} else if (condition.equals("email")) {
+			result = memberInfo.getMemberEmail();
+		}
+
+		return result;
 	}
 
 	/* 태그 번호 to 태그 이름 */

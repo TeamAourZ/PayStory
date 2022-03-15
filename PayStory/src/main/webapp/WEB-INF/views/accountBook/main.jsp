@@ -130,14 +130,14 @@
 																						<c:when test="${status.index eq 0}">
 																							<td>
 																								<div class="profile-image rounded-circle border-color-yellow">
-																									<img src="/images/${member.memberNo}/${member.memberImage}">
+																									<img src="/images/member/${member.memberNo}/${member.memberImage}">
 																								</div>
 																							</td>
 																						</c:when>
 																						<c:otherwise>
 																							<td>
 																								<div class="profile-image rounded-circle border-color-blue">
-																									<img src="/images/${member.memberNo}/${member.memberImage}">
+																									<img src="/images/member/${member.memberNo}/${member.memberImage}">
 																								</div>
 																							</td>
 																						</c:otherwise>
