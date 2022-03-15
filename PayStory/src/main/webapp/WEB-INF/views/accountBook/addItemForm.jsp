@@ -235,7 +235,7 @@
 											<c:if test="${isEdit && not empty expenditure.expenditureImage}">
 												<input type="hidden" id="receiptImage" value="${expenditure.expenditureImage}">
 												<script type="text/javascript">
-													$('#.receiptImg').attr('src', $('#receiptImage').val()).css('width', '100%').css('height', '95%'); // 이미지 삽입
+													$('#receiptImg').attr('src', $('#receiptImage').val()).css('width', '100%').css('height', '95%'); // 이미지 삽입
 													$('#imgArea').addClass('hasImage');
 													$('.hasImage').attr({
 														'data-toggle': 'modal',
