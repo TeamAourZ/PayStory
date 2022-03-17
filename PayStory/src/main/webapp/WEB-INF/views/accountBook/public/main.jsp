@@ -75,7 +75,9 @@
 											<c:when test="${shareMain.ownerImage == null}">
 												<img class="profile" src="<c:url value='/main/images/blankprofile.png'></c:url>" alt="">
 											</c:when>
-											
+											<c:when test="${shareMain.ownerImage == ''}">
+												<img class="profile" src="<c:url value='/main/images/blankprofile.png'></c:url>" alt="">
+											</c:when>
 											<c:otherwise>
 											    <img class="profile" src="<c:url value='/images/member/${shareMain.ownerNo}/${shareMain.ownerImage}'></c:url>"alt="">
 										    </c:otherwise>
