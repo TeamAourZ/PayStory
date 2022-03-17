@@ -55,15 +55,15 @@
                            	<input id="accountBookTitle" type="text" name="accountBookTitle" class="inputbox" placeholder="제목" size="50">
                             <input id="budgetAmount" type="text" name="budgetAmount" class="inputbox" placeholder="예산(원)" size="50">
                             <input id="participant_list[0]" type="text" name="participant_list[0]" class="inputbox plusbox" placeholder="초대할 이메일주소" size="50">
-
                             <button type="button" id="plusbtn" class="plusbtn plusbox btn1"><i class="fa-solid fa-plus fa plusImage"></i></button>
                             
                             <div class="clearboth"></div>
                             <div class="choice">
                             <button type="submit" id="submitbtn1" class="btn1">생성</button>
-                            <button type="reset" id="resetbtn1" class="btn1">취소</button>
                             </div>
-                       	 </form>
+                       </form>
+                            <button onclick="location.href='/accountBook/public/main'" id="resetbtn1" class="btn1">취소</button>
+                            
                         </div>
                
 
