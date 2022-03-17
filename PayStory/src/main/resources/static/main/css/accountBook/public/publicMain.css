@@ -180,3 +180,11 @@ h5{
 	font-size: large;
 }
 
+.clickbox{
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+#shareClickSpan{
+	cursor: pointer;
+}
