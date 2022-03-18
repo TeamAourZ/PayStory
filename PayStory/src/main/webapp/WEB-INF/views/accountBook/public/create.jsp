@@ -24,8 +24,9 @@
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/main/css/accountBook/public/publicCreate.css">
+    <script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
     <script src="https://kit.fontawesome.com/7031b090f1.js" crossorigin="anonymous"></script>
-    
+    <script src="<c:url value='/main/js/accountBook/public/createPublicCheck.js'/>"></script>
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -130,8 +131,8 @@
     
     <!-- <script src="https://naver.github.io/egjs-infinitegrid/release/latest/dist/infinitegrid.min.js" crossorigin="anonymous"></script> -->
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script src="/main/js/createPublicCheck.js"></script>
-    <script src="/main/js/createPublicAccount.js"></script>
+    
+   
     <script type="text/javascript">
     var emailIndex = 0;
     /* var emailList = ['email1']; */
