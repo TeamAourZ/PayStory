@@ -64,18 +64,20 @@
 
 						<c:forEach items="${shareMainVOList}" var="shareMain">
 							<div class="publicAccountBox" style="display: inline-block;">
-								<span onclick="location.href='/accountBook/public/editParticipant?num=${shareMain.accountBookNo}'"
+								<span id="shareClickSpan" onclick="location.href='/accountBook/public/editParticipant?num=${shareMain.accountBookNo}'"
 									style="margin: -15px; height: 25px; width: 25px; width: 25px; float: right; padding-top: 5px;">
 									<i class="far fa-edit"></i>
 								</span>
-								<div onclick="location.href='/accountBook/public/setAccountNo?num=${shareMain.accountBookNo}'">
+								<div class="clickbox" onclick="location.href='/accountBook/public/setAccountNo?num=${shareMain.accountBookNo}'">
 									<span class="ellipsis">${shareMain.accountBookTitle}</span>
 									<div class="box" style="background: #BDBDBD;">
 										<c:choose>
 											<c:when test="${shareMain.ownerImage == null}">
 												<img class="profile" src="<c:url value='/main/images/blankprofile.png'></c:url>" alt="">
 											</c:when>
-											
+											<c:when test="${shareMain.ownerImage == ''}">
+												<img class="profile" src="<c:url value='/main/images/blankprofile.png'></c:url>" alt="">
+											</c:when>
 											<c:otherwise>
 											    <img class="profile" src="<c:url value='/images/member/${shareMain.ownerNo}/${shareMain.ownerImage}'></c:url>"alt="">
 										    </c:otherwise>
@@ -129,7 +131,7 @@
 						<!--박스 추가 버튼-->
 
 						<div class="publicAccountBox" style="display: inline-block;">
-							<span class="ellipsisplus1">임시</span>
+							<span class="ellipsisplus1 clickbox">임시</span>
 							<div class="plusbox1" style="background: #BDBDBD;">
 								<a href="create"><button type="button" id="mainPlusBtn">
 										<i class="fa-solid fa-plus fa plusimage"></i>
