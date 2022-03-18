@@ -3,9 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="<c:url value='/main/js/sideMenu.js'/>"></script>
-	</head>
 	<body>
 		<input type="hidden" id="isShared" value="${ sessionScope.isShared }">	
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -89,5 +86,6 @@
             </div>
         </ul>
         <!-- End of Sidebar -->
+        <script src="<c:url value='/main/js/sideMenu.js'/>"></script>
 	</body>
 </html>

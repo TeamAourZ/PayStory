@@ -5,7 +5,6 @@
 	/***** 대시보드, 로고 클릭 *****/
 	$('#dashBoard, #logo').on('click', function(){
 		let isShared = $('#isShared').val();
-		console.log( $.type(isShared))
 		
 		if(isShared === 'true'){
 			location.href = "/accountBook/shareMain";

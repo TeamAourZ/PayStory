@@ -24,13 +24,13 @@
 	<body>
 		<div id="wrapper">
 			<%-- Side Bar --%>
-			<jsp:include page="/WEB-INF/views/layout/boardSideMenu.jsp" flush="true" />	
+			<jsp:include page="/WEB-INF/views/layout/sideMenu.jsp" flush="true" />	
 			<%-- Content Wrapper --%>
 			<div id="content-wrapper" class="d-flex flex-column">
 				<%-- Main Content --%>
 				<div id="content">
 					<%-- Top Menu Bar  --%>
-					<jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />					
+					<jsp:include page="/WEB-INF/views/layout/topMenu.jsp" flush="true" />					
 										
 					<div class="container-fluid">
 					<h1 class="h3 mb-23 text-gray-800">회원정지/해제</h1>

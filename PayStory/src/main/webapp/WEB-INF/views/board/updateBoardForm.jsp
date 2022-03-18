@@ -13,12 +13,14 @@
 		<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/board/updateBoardForm.css' />" rel="stylesheet" type="text/css">
+	
+		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>	
 	</head>
 	<body>
 		<div id="wrapper">
 
        <!-- Side Bar -->
-       <jsp:include page="/WEB-INF/views/layout/boardSideMenu.jsp"  flush="true" />
+       <jsp:include page="/WEB-INF/views/layout/sideMenu.jsp"  flush="true" />
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -27,7 +29,7 @@
             <div id="content">
 				
 				<!-- Top Menu Bar  -->
-                <jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />
+                <jsp:include page="/WEB-INF/views/layout/topMenu.jsp" flush="true" />
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -125,7 +127,6 @@
 
 
 	<!-------- JS : Bootstrap -------->
-	<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
 	<script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js' />"></script>
 	<script src="<c:url value='/bootstrap/vendor/jquery-easing/jquery.easing.min.js' />"></script>
 	<script src="<c:url value='/bootstrap/js/sb-admin-2.min.js' />"></script>
