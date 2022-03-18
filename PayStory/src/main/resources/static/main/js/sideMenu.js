@@ -2,14 +2,15 @@
  * sideMenu.js
  */
  $(function(){
-	/***** 수입/ 지출 버튼 클릭 *****/
-	$('#dashBoard').on('click', function(){
+	/***** 대시보드, 로고 클릭 *****/
+	$('#dashBoard, #logo').on('click', function(){
 		let isShared = $('#isShared').val();
+		console.log( $.type(isShared))
 		
-		if(isShared == 0){
-			location.href = "/accountBook/myMain";
-		}else{
+		if(isShared === 'true'){
 			location.href = "/accountBook/shareMain";
+		}else{
+			location.href = "/accountBook/myMain";
 		}
 	});
 	
