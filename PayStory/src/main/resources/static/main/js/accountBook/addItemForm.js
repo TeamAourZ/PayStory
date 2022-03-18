@@ -340,7 +340,7 @@ $(function() {
 		formData.append("expenditureImage", $('#imageValue').val());
 		formData.append("expenditureDate", $('#expenditureDate').val());
 		formData.append("expenditureSource", $('#expenditureSource').val());
-		formData.append("expenditureAddress", $('#address').val());
+		formData.append("expenditureAddress", $('#expenditureAddress').val());
 		formData.append("expenditureAmount", parseInt(withoutComma($('#expenditureTotalAmount').val())));
 		formData.append("tagNo", $('#expenditureTags option:selected').val());
 		formData.append("expenditureMemo", $('#expenditureMemo').val());
