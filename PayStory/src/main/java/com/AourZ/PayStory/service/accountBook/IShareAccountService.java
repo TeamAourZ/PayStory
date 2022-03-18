@@ -19,6 +19,6 @@ public interface IShareAccountService {
 	ArrayList<AccountBookVO> selectShareAccountBookNo(String memberNo);				// 로그인한 유저가 참여하는 공유가계부 NO 값 조회
 	MemberVO selectShareAccountOwner(int accountBookNo);			// 찾은 공유가계부No로 owner 이름, 이미지 조회
 	ArrayList<MemberVO> selectShareAccountParticipant(int accountBookNo);		// 찾은 공유가계부No로 participant 이름, 이미지 조회
-	
+	String existParticipant(String participantNo);		//공유가계부 생성화면에서 참여자 이메일 입력시 회원가입된 사람인지.
 	
 }

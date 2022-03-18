@@ -116,6 +116,9 @@
 		)
 	</insert>
 
+	<select id="existParticipant" parameterType="String" resultType="String">
+		SELECT memberNo FROM member WHERE memberEmail=#{participantNo}
+	</select>
 
 	<!-- <select id="" resultMap="createAccountBook" resultType=""></select> -->
 
