@@ -21,4 +21,5 @@ public interface IShareAccountDAO {
 	ArrayList<AccountBookVO> selectShareAccountBookNo(String memberNo);
 	MemberVO selectShareAccountOwner(int accountBookNo);
 	ArrayList<MemberVO> selectShareAccountParticipant(int accountBookNo);
+	String existParticipant(String participantNo);
 }
