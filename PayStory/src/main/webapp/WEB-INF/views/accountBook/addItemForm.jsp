@@ -5,20 +5,24 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Pay Story 가계부 - 수입/지출 내역 추가">
-	<meta name="author" content="AourZ">
-	<title>[가계부] 수입 | 지출 내역 추가</title>
-	
-	<!-- CSS : Bootstrap -->
-	<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-	<link href="<c:url value='/bootstrap/css/sb-admin-2.css'/>" rel="stylesheet">
-	
-	<!-- CSS : Main -->
-	<link href="<c:url value='/main/css/accountBook/addItemForm.css'/>" rel="stylesheet">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Pay Story 가계부 - 수입/지출 내역 추가">
+		<meta name="author" content="AourZ">
+		<title>[가계부] 수입 | 지출 내역 추가</title>
+		
+		<!-- CSS : Bootstrap -->
+		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+		<link href="<c:url value='/bootstrap/css/sb-admin-2.css'/>" rel="stylesheet">
+		
+		<!-- CSS : Main -->
+		<link href="<c:url value='/main/css/accountBook/addItemForm.css'/>" rel="stylesheet">
+		
+		<script type="text/javascript">
+			var accountBookNo = '<%= session.getAttribute("accountBookNo") %>';
+		</script>
 	</head>
 	<body id="page-top">
 		<!-- Page Wrapper -->
@@ -242,7 +246,7 @@
 											<c:if test="${isEdit && not empty expenditure.expenditureImage}">
 												<input type="hidden" id="receiptImage" value="${expenditure.expenditureImage}">
 												<script type="text/javascript">
-													$('#receiptImg').attr('src', $('#receiptImage').val()).css('width', '100%').css('height', '95%'); // 이미지 삽입
+													$('#receiptImg').attr('src', '/images/receipt/' + accountBookNo + '/' + $('#receiptImage').val()).css('width', '100%').css('height', '95%'); // 이미지 삽입
 													$('#imgArea').addClass('hasImage');
 													$('.hasImage').attr({
 														'data-toggle': 'modal',
