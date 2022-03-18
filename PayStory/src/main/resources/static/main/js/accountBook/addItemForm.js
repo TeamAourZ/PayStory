@@ -198,21 +198,21 @@ $(function() {
 		let answer = confirm('작성을 취소하시겠습니까?');
 		if (answer) {
 			alert('가계부 메인 페이지로 이동합니다.');
-			if (isShared == 0) {
-				location.href = "/accountBook/myMain";
-			} else {
+			if (isShared === 'true') {
 				location.href = "/accountBook/shareMain";
+			} else {
+				location.href = "/accountBook/myMain";
 			}
 		}
 	});
 
 	/******** Ajax ********/
-
+	
 	/* OCR */
 	$('#uploadReceipt').on('change', function() {
 		const formData = new FormData();
 		formData.append("receiptImage", $(this)[0].files[0]);
-
+		
 		$.ajax({
 			type: "post",
 			enctype: 'multipart/form-data',
@@ -222,6 +222,7 @@ $(function() {
 			contentType: false,
 			success: function(result) {
 				// console.log(result)
+				
 				// 날짜 
 				let date = result.expenditureDate;
 				$('#expenditureDate').val(date);
@@ -336,7 +337,6 @@ $(function() {
 		let isShared = $('#isShared').val();
 
 		const formData = new FormData();
-		console.log($('#uploadReceipt').val())
 		formData.append("expenditureImage", $('#imageValue').val());
 		formData.append("expenditureDate", $('#expenditureDate').val());
 		formData.append("expenditureSource", $('#expenditureSource').val());
