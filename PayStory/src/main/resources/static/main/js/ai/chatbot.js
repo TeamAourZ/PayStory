@@ -309,7 +309,7 @@
 					}
 				}
 				
-				openNewWindow.location.href = "/accountBook/add/chat/" + dateTime + "/" + source + "/" + totalAmount + "/" + data;
+				openNewWindow.location.href = "/accountBook/add/chat/" + dateTime + "/" + source + "/" + address + "/" + totalAmount + "/" + data + "/" + image;
 				
         $('#chatBox').append(receiveChat);
 				

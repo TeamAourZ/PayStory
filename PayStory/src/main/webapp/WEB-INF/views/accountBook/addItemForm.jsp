@@ -116,6 +116,13 @@
 											<div class="form-group">
 												<label for="expenditureAddress">주소</label>
 												<input type="text" id="expenditureAddress" name="expenditureAddress" class="form-control form-control-sm shadow-none">
+												<c:if test="${not empty address}">
+													<input type="hidden" id="temp" value="${address}">
+													<script type="text/javascript">
+														$('#expenditureAddress').val($('#temp').val());
+														$('#temp').remove(); // 삭제
+													</script>
+												</c:if>
 											</div>
 											<!-- 아이템 아코디언 -->
 											<div class="accordion" id="itemAccordian">
@@ -235,7 +242,7 @@
 											<c:if test="${isEdit && not empty expenditure.expenditureImage}">
 												<input type="hidden" id="receiptImage" value="${expenditure.expenditureImage}">
 												<script type="text/javascript">
-													$('#.receiptImg').attr('src', $('#receiptImage').val()).css('width', '100%').css('height', '95%'); // 이미지 삽입
+													$('#receiptImg').attr('src', $('#receiptImage').val()).css('width', '100%').css('height', '95%'); // 이미지 삽입
 													$('#imgArea').addClass('hasImage');
 													$('.hasImage').attr({
 														'data-toggle': 'modal',
