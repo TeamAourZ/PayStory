@@ -207,7 +207,6 @@ $(function() {
 	});
 
 	/******** Ajax ********/
-	
 	/* OCR */
 	$('#uploadReceipt').on('change', function() {
 		const formData = new FormData();
@@ -218,10 +217,16 @@ $(function() {
 			enctype: 'multipart/form-data',
 			url: "/OCR",
 			data: formData,
+			beforeSend : function(request){
+				// Performed before calling Ajax
+				$(".ajaxSpinner").css("visibility", "visible");;
+			},
 			processData: false,
 			contentType: false,
 			success: function(result) {
 				// console.log(result)
+				
+				$(".ajaxSpinner").css("visibility", "hidden");
 				
 				// 날짜 
 				let date = result.expenditureDate;
