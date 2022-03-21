@@ -28,12 +28,20 @@
   </tr>
 </table>
 
+<br/>
 
 ## 💰 프로젝트 소개
 자금 관리의 기초 가계부 이제 AI로 쉽게 관리해보세요!
 - **기술 스택**
    - **FRONT** : HTML, CSS, JavaScript, jQuery, BootStrap, Ajax
-   - **BACK** : Java, Spring Boot, MyBatis, MySQL, Naver Cloud Server
+   - **BACK** : Java, Spring Boot, MyBatis, MySQL, Naver Cloud Server(Jenkins)
    - **AI** : Naver Cloud AI (OCR, ChatBot, TTS, STT)
    - **협업 툴** : Git, GitHub, Allo 
+
+- **와이어 프레임** : [와이어 프레임 보러가기](https://allo.io/cb4a54bf436a5400e9d774635433)
+- **ERD** : [ERD 보러가기](https://www.erdcloud.com/d/WTjPEK6PSJL5ZCqM2)
+
+<br/>
+
+## 🔨 기능 구현
 
