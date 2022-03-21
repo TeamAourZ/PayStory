@@ -1,12 +1,10 @@
 @charset "UTF-8";
 
-#dateSelectBox {
-	max-height: 300px;
-}
-
 #modalYearBox {
+	max-height: 300px;
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
+	overflow: auto;
 }
 #modalYearBox div {
 	min-width: 60px;
@@ -34,7 +32,8 @@
 	line-height: 40px;
 }
 
-.modalYear:hover, .modalMonth:hover, .modalDay:hover {
+.modalYear:hover, .modalMonth:hover, .modalDay:hover,
+.modalYear.selected, .modalMonth.selected, .modalDay.selected {
 	font-weight: bold;
 	color: white;
 	border: 1px solid gray !important;

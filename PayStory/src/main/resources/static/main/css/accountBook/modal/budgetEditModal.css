@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+#budgetEditModal {
+	z-index: 1060;
+}
+
+#backToModalBtn1 {
+	line-height: 1;
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #000;
+	text-shadow: 0 1px 0 #fff;
+	background-color: transparent;
+	padding: 1rem 1rem 1rem 0;
+	margin: -1rem 0 -1rem 0;
+	border: 0;
+	opacity: .5;
+}
+
+#backToModalBtn1:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
+	opacity: .75;
+}
