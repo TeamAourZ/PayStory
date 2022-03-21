@@ -20,6 +20,9 @@ import com.AourZ.PayStory.service.ai.TTSService;
 
 @RestController
 public class AIController {
+	private static final String filePath = "/upload/"; // 파일이 저장될 서버 위치
+//	private static final String filePath = "C:/upload/"; // 파일이 저장될 서버 위치
+	
 	@Autowired
 	private STTService sttService;
 
@@ -36,7 +39,7 @@ public class AIController {
 
 		try {
 			// 1. 파일 저장 경로 설정 : 실제 서비스되는 위치로 (프로젝트 외부에 저장)
-			String uploadPath = "C:/upload/";
+			String uploadPath = filePath;
 
 			// 2. 원본 파일 이름 알아오기
 			String originalFileName = file.getOriginalFilename();
@@ -67,7 +70,7 @@ public class AIController {
 
 		try {
 			// 1. 파일 저장 경로 설정 : 실제 서비스되는 위치로 (프로젝트 외부에 저장)
-			String uploadPath = "C:/upload/";
+			String uploadPath = filePath;
 
 			// 2. 원본 파일 이름 알아오기
 			String originalFileName = file.getOriginalFilename();
@@ -98,7 +101,7 @@ public class AIController {
 
 		try {
 			// 1. 파일 저장 경로 설정 : 실제 서비스되는 위치로 (프로젝트 외부에 저장)
-			String uploadPath = "C:/upload/";
+			String uploadPath = filePath;
 
 			// 2. 원본 파일 이름 알아오기
 			String originalFileName = file.getOriginalFilename();
