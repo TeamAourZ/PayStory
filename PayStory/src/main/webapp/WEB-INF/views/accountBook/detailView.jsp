@@ -34,6 +34,9 @@
 		<script src="<c:url value='/main/js/ajax/budgetStatusAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/detailViewListAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/deleteItemAjax.js' />" type="text/javascript"></script>
+		
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
 	</head>
 	<body>
 		<div id="wrapper">

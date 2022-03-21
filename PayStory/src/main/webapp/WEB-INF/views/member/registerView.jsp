@@ -20,6 +20,9 @@
     <script src="<c:url value='/main/js/member/nameCnt.js'/>"></script>
     <script src="<c:url value='/main/js/member/emailCnt.js'/>"></script>
     
+    <!-- Favicon -->
+	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+    
 </head>
 <body class="bg-gradient-primary">
     <div class="container">

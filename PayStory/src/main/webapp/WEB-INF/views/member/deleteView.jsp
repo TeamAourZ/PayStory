@@ -18,6 +18,9 @@
 	   	
 	   	<style type="text/css">.btn-primary{margin-left:191px;}</style>
 	   	
+	   	<!-- Favicon -->
+		<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+	   	
 	   	<!-------- JS-------->
 	   	<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
 	   	<script src="<c:url value='/main/js/member/pwUpdateView.js'/>"></script>

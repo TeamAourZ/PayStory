@@ -13,6 +13,9 @@
 	rel="stylesheet">
 <link href="<c:url value='main/css/index.css'/>" rel="stylesheet"
 	type="text/css">
+	
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
 </head>
 <body>
 	<div id="wrap">

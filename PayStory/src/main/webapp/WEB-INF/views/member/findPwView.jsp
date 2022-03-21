@@ -18,6 +18,9 @@
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<c:url value='/main/css/member/findPw.css'/>" rel="stylesheet" type="text/css">
+    
+    <!-- Favicon -->
+	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
 	</head>
 	
 	

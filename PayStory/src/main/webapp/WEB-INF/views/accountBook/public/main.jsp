@@ -26,6 +26,9 @@
 	<!-- Custom styles for this template-->
 	<link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/main/css/accountBook/public/publicMain.css">
+	
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
 </head>
 
 <body id="page-top">

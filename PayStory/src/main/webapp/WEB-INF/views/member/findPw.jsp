@@ -17,6 +17,9 @@
         rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
 	</head>
 <body class="bg-gradient-primary">
 	<div class="container">

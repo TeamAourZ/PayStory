@@ -20,6 +20,9 @@
 		<!-- CSS : Main -->
 		<link href="<c:url value='/main/css/accountBook/addItemForm.css'/>" rel="stylesheet">
 		
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+		
 		<script type="text/javascript">
 			var accountBookNo = '<%= session.getAttribute("accountBookNo") %>';
 		</script>
