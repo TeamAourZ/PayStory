@@ -65,10 +65,13 @@
 
 						<c:forEach items="${shareMainVOList}" var="shareMain">
 							<div class="publicAccountBox" style="display: inline-block;">
-								<span id="shareClickSpan" onclick="location.href='/accountBook/public/editParticipant?num=${shareMain.accountBookNo}'"
-									style="margin: -15px; height: 25px; width: 25px; width: 25px; float: right; padding-top: 5px;">
-									<i class="far fa-edit"></i>
-								</span>
+								<c:if test="${memberNo == shareMain.ownerNo}">
+									<span id="shareClickSpan"
+										onclick="location.href='/accountBook/public/editParticipant?num=${shareMain.accountBookNo}'"
+										style="margin: -15px; height: 25px; width: 25px; width: 25px; float: right; padding-top: 5px;">
+										<i class="far fa-edit"></i>
+									</span>
+								</c:if>
 								<div class="clickbox" onclick="location.href='/accountBook/public/setAccountNo?num=${shareMain.accountBookNo}'">
 									<span class="ellipsis">${shareMain.accountBookTitle}</span>
 									<div class="box" style="background: #BDBDBD;">
