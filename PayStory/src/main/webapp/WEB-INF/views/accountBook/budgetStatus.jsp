@@ -9,11 +9,13 @@
 			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 				<div class="row">
 					<div class="col-sm-12">
-						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 						<table class="table mb-0">
 							<thead>
 								<tr class="text-center">
-									<th colspan="2">${year}년&nbsp;${month}월</th>
+									<th colspan="2">
+										${year}년&nbsp;${month}월
+										<i class="detailBoxClose fas fa-times pointer-cursor"></i>
+									</th>
 								</tr>
 							</thead>
 							<tbody class="budgetStatus">

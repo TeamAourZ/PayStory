@@ -26,9 +26,12 @@
 	<!-- Custom styles for this template-->
 	<link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/main/css/accountBook/public/publicMain.css">
-	
+
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+
+		<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -36,7 +39,7 @@
 	<div id="wrapper">
 
 		<!-- Side Bar -->
-		<jsp:include page="/WEB-INF/views/layout/boardSideMenu.jsp"
+		<jsp:include page="/WEB-INF/views/layout/sideMenu.jsp"
 			flush="true" />
 
 		<!-- Content Wrapper -->
@@ -46,7 +49,7 @@
 			<div id="content">
 
 				<!-- Top Menu Bar  -->
-				<jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp"
+				<jsp:include page="/WEB-INF/views/layout/topMenu.jsp"
 					flush="true" />
 
 				<!-- Begin Page Content -->
@@ -200,7 +203,6 @@
 	</div>
 
 	<!-- Bootstrap core JavaScript-->
-	<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
 	<script src="/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Core plugin JavaScript-->

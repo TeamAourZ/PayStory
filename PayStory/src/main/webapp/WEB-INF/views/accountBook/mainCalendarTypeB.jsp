@@ -21,7 +21,7 @@
 									<th style="width: 14%;">SAT</th>
 								</tr>
 							</thead>
-							<tbody class="dateSel">
+							<tbody class="dateSel typeB">
 								<%-- 당월 날짜 index --%>
 								<c:set var="dateIndex" value="0" />
 								
@@ -53,11 +53,17 @@
 															<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
 																<%-- 수입 --%>
 																<c:if test="${dateIncomeList[dateIndex].count ne 0 && not empty dateIncomeList[dateIndex].count}">
-																	<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
+																	<div class="incomeCount help-cursor rounded-circle p-0"
+																		data-toggle="tooltip" data-placement="bottom" title="수입 상세 태그 조회">
+																		${dateIncomeList[dateIndex].count}
+																	</div>
 																</c:if>
 																<%-- 지출 --%>
 																<c:if test="${dateExpenditureList[dateIndex].count ne 0 && not empty dateExpenditureList[dateIndex].count}">
-																	<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
+																	<div class="expenditureCount help-cursor rounded-circle p-0"
+																		data-toggle="tooltip" data-placement="bottom" title="지출 상세 태그 조회">
+																		${dateExpenditureList[dateIndex].count}
+																	</div>
 																</c:if>
 															</div>
 														</div>
@@ -82,11 +88,17 @@
 															<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
 																<%-- 수입 --%>
 																<c:if test="${dateIncomeList[dateIndex].count ne 0 && not empty dateIncomeList[dateIndex].count}">
-																	<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
+																	<div class="incomeCount help-cursor rounded-circle p-0"
+																		data-toggle="tooltip" data-placement="bottom" title="수입 상세 태그 조회">
+																		${dateIncomeList[dateIndex].count}
+																	</div>
 																</c:if>
 																<%-- 지출 --%>
 																<c:if test="${dateExpenditureList[dateIndex].count ne 0 && not empty dateExpenditureList[dateIndex].count}">
-																	<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
+																	<div class="expenditureCount help-cursor rounded-circle p-0"
+																		data-toggle="tooltip" data-placement="bottom" title="지출 상세 태그 조회">
+																		${dateExpenditureList[dateIndex].count}
+																	</div>
 																</c:if>
 															</div>
 															<%-- 일별 상세 - 태그별 건수, 총 금액 --%>
@@ -98,13 +110,15 @@
 																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 																				<div class="row">
 																					<div class="col-sm-12">
-																						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 																						<table class="table mb-0">
 																							<thead>
 																								<tr class="text-center">
 																									<th>구분</th>
 																									<th>건수</th>
-																									<th>금액</th>
+																									<th>
+																										금액
+																										<i class="detailBoxClose fas fa-times pointer-cursor"></i>
+																									</th>
 																								</tr>
 																							</thead>
 																							<tbody class="tagIncome">
@@ -130,13 +144,15 @@
 																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 																				<div class="row">
 																					<div class="col-sm-12">
-																						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 																						<table class="table mb-0">
 																							<thead>
 																								<tr class="text-center">
 																									<th>구분</th>
 																									<th>건수</th>
-																									<th>금액</th>
+																									<th>
+																										금액
+																										<i class="detailBoxClose fas fa-times pointer-cursor"></i>
+																									</th>
 																								</tr>
 																							</thead>
 																							<tbody class="tagExpenditure">
@@ -178,11 +194,17 @@
 															<div class="countBox d-flex justify-content-evenly mr-1 mb-1 ml-1 align-items-center text-center">
 																<%-- 수입 --%>
 																<c:if test="${dateIncomeList[dateIndex].count ne 0 && not empty dateIncomeList[dateIndex].count}">
-																	<div class="incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateIndex].count}</div>
+																	<div class="incomeCount help-cursor rounded-circle p-0"
+																		data-toggle="tooltip" data-placement="bottom" title="수입 상세 태그 조회">
+																		${dateIncomeList[dateIndex].count}
+																	</div>
 																</c:if>
 																<%-- 지출 --%>
 																<c:if test="${dateExpenditureList[dateIndex].count ne 0 && not empty dateExpenditureList[dateIndex].count}">
-																	<div class="expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateIndex].count}</div>
+																	<div class="expenditureCount help-cursor rounded-circle p-0"
+																		data-toggle="tooltip" data-placement="bottom" title="지출 상세 태그 조회">
+																		${dateExpenditureList[dateIndex].count}
+																	</div>
 																</c:if>
 															</div>
 															<%-- 일별 상세 - 태그별 건수, 총 금액 --%>
@@ -194,13 +216,15 @@
 																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 																				<div class="row">
 																					<div class="col-sm-12">
-																						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 																						<table class="table mb-0">
 																							<thead>
 																								<tr class="text-center">
 																									<th>구분</th>
 																									<th>건수</th>
-																									<th>금액</th>
+																									<th>
+																										금액
+																										<i class="detailBoxClose fas fa-times pointer-cursor"></i>
+																									</th>
 																								</tr>
 																							</thead>
 																							<tbody class="tagIncome">
@@ -226,13 +250,15 @@
 																			<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 																				<div class="row">
 																					<div class="col-sm-12">
-																						<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 																						<table class="table mb-0">
 																							<thead>
 																								<tr class="text-center">
 																									<th>구분</th>
 																									<th>건수</th>
-																									<th>금액</th>
+																									<th>
+																										금액
+																										<i class="detailBoxClose fas fa-times pointer-cursor"></i>
+																									</th>
 																								</tr>
 																							</thead>
 																							<tbody class="tagExpenditure">

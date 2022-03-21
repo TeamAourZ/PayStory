@@ -20,8 +20,11 @@
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
     <link href="/main/css/board/boardView.css" rel="stylesheet">
     
+
     <!-- Favicon -->
-	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+	  <link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+
+    <script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
 
 </head>
 
@@ -30,7 +33,7 @@
     <div id="wrapper">
 
        <!-- Side Bar -->
-       <jsp:include page="/WEB-INF/views/layout/boardSideMenu.jsp"  flush="true" />
+       <jsp:include page="/WEB-INF/views/layout/sideMenu.jsp"  flush="true" />
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -39,7 +42,7 @@
             <div id="content">
 				
 				<!-- Top Menu Bar  -->
-                <jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />
+                <jsp:include page="/WEB-INF/views/layout/topMenu.jsp" flush="true" />
 				
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -129,7 +132,6 @@
     <jsp:include page="/WEB-INF/views/layout/logoutModal.jsp" flush="true"/>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
     <script src="/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->

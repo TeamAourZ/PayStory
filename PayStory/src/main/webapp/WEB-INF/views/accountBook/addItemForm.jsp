@@ -23,6 +23,8 @@
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
 		
+		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js'/>"></script>
+
 		<script type="text/javascript">
 			var accountBookNo = '<%= session.getAttribute("accountBookNo") %>';
 		</script>
@@ -32,7 +34,7 @@
 		<div id="wrapper">
 			
 			<!-- Side Bar -->
-			<jsp:include page="/WEB-INF/views/layout/boardSideMenu.jsp" flush="true" />
+			<jsp:include page="/WEB-INF/views/layout/sideMenu.jsp" flush="true" />
 			
 			<!-- Content Wrapper -->
 			<div id="content-wrapper" class="d-flex flex-column">
@@ -41,7 +43,7 @@
 				<div id="content">
 					
 					<!-- Top Menu Bar  -->
-					<jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />
+					<jsp:include page="/WEB-INF/views/layout/topMenu.jsp" flush="true" />
 						
 					<!-- Begin Page Content -->
 					<div class="container-fluid">
@@ -65,7 +67,15 @@
 							<div class="tab-pane fade in show active" id="expenditure" role="tabpanel">
 								<!--지출 Form-->
 								<form id="expenditureForm" class="my-4">
-									<div class="form-row px-3">
+									<div class="form-row px-3 position-relative">
+										<!-- Loading Spinner --> 
+										<div class="ajaxSpinner">
+											<div>
+												<h3>영수증을 인식하고 있습니다.</h3>
+												<h3>잠시만 기다려주세요.</h3>
+												<img src="<c:url value='/main/images/spinner.gif' />" class="spinner" />
+											</div>
+										</div>
 										<!-- Form 영역 -->
 										<div class="formArea col-lg-8">
 											<!-- 영수증 등록 -->
@@ -441,7 +451,6 @@
 		<jsp:include page="/WEB-INF/views/layout/logoutModal.jsp" flush="true" />
 		
 		<!-- JS : Bootstrap -->
-		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js'/>"></script>
 		<script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
 		<script src="<c:url value='/bootstrap/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
 		<script src="<c:url value='/bootstrap/js/sb-admin-2.min.js'/>"></script>

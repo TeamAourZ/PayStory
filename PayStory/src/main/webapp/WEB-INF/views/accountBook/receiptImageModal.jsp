@@ -8,8 +8,8 @@
 			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="receiptModalLabel">영수증 이미지</h5>
-						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<h5 id="receiptModalLabel" class="modal-title font-weight-bold text-primary text-lg">영수증 이미지</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					    	<span aria-hidden="true">×</span>
 						</button>
 					</div>
@@ -17,7 +17,7 @@
 						<img id="receiptImgModal" />
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-secondary" type="button" data-dismiss="modal">확인</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
 					</div>
 				</div>
 			</div>

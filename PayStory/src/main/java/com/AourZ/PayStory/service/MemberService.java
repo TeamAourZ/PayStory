@@ -169,4 +169,9 @@ public class MemberService implements IMemberService {
 		memberDAO.deleteNotice(boardNo);
 	}
 	
+	@Override
+	public List<BoardVO> noticeList() {
+		return memberDAO.noticeList();
+	}
+	
 }	

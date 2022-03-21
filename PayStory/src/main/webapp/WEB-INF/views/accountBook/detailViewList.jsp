@@ -87,7 +87,10 @@
 															</h2>
 															<div class="side text-center">
 																<c:if test="${not empty detailViewItem.receiptImage}">
-																	<i class="receiptImageShow far fa-image fa-lg pointer-cursor" data-toggle="modal" data-target="#receiptModal"></i>
+																	<i class="receiptImageShow far fa-image fa-lg pointer-cursor"
+																		data-toggle="modal" data-target="#receiptModal" <%-- 모달 --%>
+																		data-toggle="tooltip" data-placement="bottom" title="영수증 이미지 보기"> <%-- 툴팁 --%>
+																	</i>
 																	<input type="hidden" value="${detailViewItem.receiptImage}">
 																</c:if>
 															</div>
@@ -129,7 +132,9 @@
 											<c:set var="breakValue" value="false" /> <%-- break --%>
 											<c:forEach var="income" items="${incomeEditorList}">
 												<c:if test="${(not breakValue) && (detailViewItem.dataNo eq income.key)}">
-													<i class="dataEditHistory fas fa-history fa-lg pointer-cursor" data-toggle="modal" data-target="#editHistoryModal">
+													<i class="dataEditHistory fas fa-history fa-lg pointer-cursor"
+														data-toggle="modal" data-target="#editHistoryModal" <%-- 모달 --%>
+														data-toggle="tooltip" data-placement="bottom" title="수정 내역 조회"> <%-- 툴팁 --%>
 														<%-- 수정자 리스트 --%>
 														<c:set var="editorList" value="" />
 														<c:forEach var="editor" items="${income.value}">
@@ -147,7 +152,9 @@
 											<c:set var="breakValue" value="false" /> <%-- break --%>
 											<c:forEach var="expenditure" items="${expenditureEditorList}">
 												<c:if test="${(not breakValue) && (detailViewItem.dataNo eq expenditure.key)}">
-													<i class="dataEditHistory fas fa-history fa-lg pointer-cursor" data-toggle="modal" data-target="#editHistoryModal">
+													<i class="dataEditHistory fas fa-history fa-lg pointer-cursor"
+														data-toggle="modal" data-target="#editHistoryModal" <%-- 모달 --%>
+														data-toggle="tooltip" data-placement="bottom" title="수정 내역 조회"> <%-- 툴팁 --%>
 														<%-- 수정자 리스트 --%>
 														<c:set var="editorList" value="" />
 														<c:forEach var="editor" items="${expenditure.value}">
@@ -163,8 +170,12 @@
 										</c:when>
 									</c:choose>
 									
-									<i class="dataEdit far fa-edit fa-lg pointer-cursor"></i>
-									<i class="dataDelete far fa-trash-alt fa-lg pointer-cursor"></i>
+									<i class="dataEdit far fa-edit fa-lg pointer-cursor"
+										data-toggle="tooltip" data-placement="bottom" title="내역 수정">
+									</i>
+									<i class="dataDelete far fa-trash-alt fa-lg pointer-cursor"
+										data-toggle="tooltip" data-placement="bottom" title="내역 삭제">
+									</i>
 									<%-- 삭제 이벤트를 위한 데이터 적재 --%>
 									<input type="hidden" value="${detailViewItem.condition}"> <%-- condition --%>
 									<input type="hidden" value="${detailViewItem.dataNo}"> <%-- dataNo --%>
@@ -187,6 +198,6 @@
 		<jsp:include page="/WEB-INF/views/accountBook/receiptImageModal.jsp" flush="true" />
 		
 		<%-- 수정자 조회 모달 --%>
-		<jsp:include page="/WEB-INF/views/accountBook/editHistoryModal.jsp" flush="true" />
+		<jsp:include page="/WEB-INF/views/accountBook/modal/editHistoryModal.jsp" flush="true" />
 	</body>
 </html>

@@ -56,7 +56,9 @@ public class AccountBookController {
 	public String myMain(HttpServletRequest request, HttpServletResponse response, Model model) {
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
-		methodList.sessionCheck(session.getAttribute("memberNo"), response); // session 상태 체크
+		if (!methodList.sessionCheck(session.getAttribute("memberNo"), response)) { // session 상태 체크
+			return "index";
+		}
 		String signInMemberNo = (String) session.getAttribute("memberNo"); // 회원 번호
 
 		// 가계부 정보 가져오기
@@ -84,7 +86,9 @@ public class AccountBookController {
 	public String shareMain(HttpServletRequest request, HttpServletResponse response, Model model) {
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
-		methodList.sessionCheck(session.getAttribute("accountBookNo"), response); // session 상태 체크
+		if (!methodList.sessionCheck(session.getAttribute("accountBookNo"), response)) { // session 상태 체크
+			return "index";
+		}
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
 
 		// 가계부 정보 가져오기
@@ -260,7 +264,7 @@ public class AccountBookController {
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
 		
 		// session 정보 등록
-		session.setAttribute("curYear", Integer.parseInt(year));
+		session.setAttribute("curYear", year);
 		session.setAttribute("curMontLastDate", lastDate);
 
 		// A, B, C 공통
@@ -381,7 +385,9 @@ public class AccountBookController {
 	public String detailView(HttpServletRequest request, HttpServletResponse response, Model model) {
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
-		methodList.sessionCheck(session.getAttribute("accountBookNo"), response); // session 상태 체크
+		if (!methodList.sessionCheck(session.getAttribute("accountBookNo"), response)) { // session 상태 체크
+			return "index";
+		}
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
 
 		// 가계부 정보 가져오기
@@ -707,7 +713,7 @@ public class AccountBookController {
 		// session에서 accountBookNo, memberNo 가져오기
 		expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
 
-		System.out.println(expenditureVO.getExpenditureImage());
+		// System.out.println(expenditureVO.getExpenditureImage());
 
 		accountBookService.insertExpenditure(expenditureVO);
 
@@ -863,6 +869,18 @@ public class AccountBookController {
 
 		return "accountBook/public/editParticipant";
 	}
-
+	// 공유가계부 생성시 회원인지 아닌지
+		@ResponseBody
+		@RequestMapping("/accountBook/public/checkParticipant")
+		public String checkParticipant(Model model, @RequestParam("No") String participantNo, HttpSession httpSession) {
+			
+			String testP=shareAccountService.existParticipant(participantNo);
+			if(testP==null || testP =="") {
+				return "nope";
+			}
+			else{
+				return "exist";
+			}
+	}
 	
 }

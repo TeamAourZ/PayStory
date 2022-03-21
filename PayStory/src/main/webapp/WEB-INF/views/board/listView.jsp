@@ -21,22 +21,26 @@
     <link href="<c:url value='/main/css/board/listView.css'/>" rel="stylesheet">
     <style>.noticeBoardList{cursor:pointer;}</style>
     
+
     <!-- Favicon -->
-	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+	  <link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+
+    <script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js'/>"></script>
+
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
        
        <!-- Side Bar -->
-       <jsp:include page="/WEB-INF/views/layout/boardSideMenu.jsp"  flush="true" />
+       <jsp:include page="/WEB-INF/views/layout/sideMenu.jsp"  flush="true" />
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
             <!-- Main Content -->
             <div id="content">
                 <!-- Top Menu Bar  -->
-                <jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />
+                <jsp:include page="/WEB-INF/views/layout/topMenu.jsp" flush="true" />
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -161,7 +165,6 @@
     <jsp:include page="/WEB-INF/views/layout/logoutModal.jsp" flush="true"/>
     
     <!-- JS : Bootstrap -->
-    <script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js'/>"></script>
     <script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
     <script src="<c:url value='/bootstrap/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
     <script src="<c:url value='/bootstrap/js/sb-admin-2.min.js'/>"></script>

@@ -27,13 +27,13 @@
 	<body>
 		<div id="wrapper">
 			<%-- Side Bar --%>
-			<jsp:include page="/WEB-INF/views/layout/boardSideMenu.jsp" flush="true" />	
+			<jsp:include page="/WEB-INF/views/layout/sideMenu.jsp" flush="true" />	
 			<%-- Content Wrapper --%>
 			<div id="content-wrapper" class="d-flex flex-column">
 				<%-- Main Content --%>
 				<div id="content">
 					<%-- Top Menu Bar  --%>
-					<jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />					
+					<jsp:include page="/WEB-INF/views/layout/topMenu.jsp" flush="true" />					
 										
 					<div class="container-fluid">
 					<h1 class="h3 mb-23 text-gray-800">회원정지/해제</h1>
@@ -164,8 +164,41 @@
 					</div>	
 					<hr>
 					<hr>		
-					<div class="container-fluid">
-					<h1 class="h3 mb-23 text-gray-800">공지사항설정/해제</h1>
+					<div class="container-fluid">				
+						<div class="container-fluid">
+	                    	<h1 class="h3 mb-2 text-gray-800">공지사항 전체 리스트</h1>
+	                    	<div class="card shadow mb-4">                       
+	                        	<div class="card-body">
+	                            	<div class="table-responsive" style="overflow: hidden;">
+	                                	<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+	                                		<div class="row">
+	                                			<div class="col-sm-12">                           				                                					                     	
+		                                			<table class="table table-bordered" id="dataTable">
+					                                    <thead>
+					                                        <tr>
+					                                        	<th>번호</th>
+					                                            <th>제목</th>
+					                                            <th>날짜</th>
+					                                        </tr>
+					                                    </thead>
+					                                    <tbody>
+						                                    <c:forEach var="noticeList" items="${noticeList}" varStatus="status">
+					        									<tr class="noticeList">
+				        											<td>${noticeList.boardNo}</td>
+													        		<td>${noticeList.boardTitle}</td>
+													        		<td>${noticeList.boardDate}</td>
+																</tr> 
+															</c:forEach>
+					                                    </tbody>
+	                                				</table>                                		                             					
+                                				</div>
+                            				</div>
+                        				</div>
+                    				</div>
+               					 </div>				
+                			</div>  							
+						</div>						
+						<h1 class="h3 mb-23 text-gray-800">공지사항설정/해제</h1>
 						<div class="row1">				
 							<div class="col-lg-6">
 	                           	<div class="card shadow mb-4">
@@ -182,7 +215,7 @@
 							            </form>
 							         </div>
 								</div>
-							</div>								
+							</div>										
 							<div class="col-lg-6">
 	                           	<div class="card shadow mb-4">
 	                               	<div class="card-header py-3">
@@ -199,9 +232,7 @@
 							         </div>
 								</div>
 							</div>
-						</div>
-					
-					
+						</div>			
 						<div class="container-fluid">
 							<h1 class="h3 mb-23 text-gray-800">공지사항리스트</h1>
 	                    	<div class="card shadow mb-4">                       

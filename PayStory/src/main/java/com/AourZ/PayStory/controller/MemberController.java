@@ -286,6 +286,7 @@ public class MemberController {
 		
 		model.addAttribute("memberList",memberList);
 		model.addAttribute("noticeBoardList",memberService.noticeBoardList());
+		model.addAttribute("noticeList",memberService.noticeList());
 		return "/member/master";
 	}
 	
