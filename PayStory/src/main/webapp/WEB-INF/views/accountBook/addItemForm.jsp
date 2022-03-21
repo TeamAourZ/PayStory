@@ -246,8 +246,16 @@
 												<p>클릭하여 이미지 크게 보기</p>
 											</div>
 											<img id="receiptImg" />
-											<c:if test="${isEdit && not empty expenditure.expenditureImage}">
-												<input type="hidden" id="receiptImage" value="${expenditure.expenditureImage}">
+											<c:if test="${(isEdit && not empty expenditure.expenditureImage) || not empty image}">
+												<c:choose>
+													<c:when test="${not empty expenditure.expenditureImage}">
+														<input type="hidden" id="receiptImage" value="${expenditure.expenditureImage}">
+													</c:when>
+													<c:when test="${not empty image}">
+														<input type="hidden" id="receiptImage" value="${image}">
+													</c:when>
+												</c:choose>
+												
 												<script type="text/javascript">
 													$('#receiptImg').attr('src', '/images/receipt/' + accountBookNo + '/' + $('#receiptImage').val()).css('width', '100%').css('height', '95%'); // 이미지 삽입
 													$('#imgArea').addClass('hasImage');
