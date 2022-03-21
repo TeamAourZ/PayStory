@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.AourZ.PayStory.model.FileUtils;
+import com.AourZ.PayStory.FileUtils;
 import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
 import com.AourZ.PayStory.service.ai.ChatbotService;
 import com.AourZ.PayStory.service.ai.OCRService;
@@ -150,7 +150,7 @@ public class AIController {
 		String[] fileResult = FileUtils.uploadReceipt(file, session);
 		String filePathName = fileResult[0];
 		String uploadFileName = fileResult[1];
-		System.out.println(filePathName);
+		// System.out.println(filePathName);
 		
 		ExpenditureVO result =  OCRService.clovaOCRService(filePathName);
 		result.setExpenditureImage(uploadFileName);
