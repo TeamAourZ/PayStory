@@ -120,6 +120,13 @@
 											<div class="form-group">
 												<label for="expenditureAddress">주소</label>
 												<input type="text" id="expenditureAddress" name="expenditureAddress" class="form-control form-control-sm shadow-none">
+												<c:if test="${not empty address}">
+													<input type="hidden" id="temp" value="${address}">
+													<script type="text/javascript">
+														$('#expenditureAddress').val($('#temp').val());
+														$('#temp').remove(); // 삭제
+													</script>
+												</c:if>
 											</div>
 											<!-- 아이템 아코디언 -->
 											<div class="accordion" id="itemAccordian">

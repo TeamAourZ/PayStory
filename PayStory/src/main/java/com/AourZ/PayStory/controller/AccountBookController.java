@@ -347,9 +347,10 @@ public class AccountBookController {
 	}
 
 	// 챗봇에서 영수증 등록 페이지로 값 넘기면서 페이지 이동
-	@RequestMapping("/accountBook/add/chat/{dateTime}/{source}/{totalAmount}/{data}")
+	@RequestMapping("/accountBook/add/chat/{dateTime}/{source}/{address}/{totalAmount}/{data}/{image}")
 	public String resultChatOCR(@PathVariable("dateTime") String dateTime, @PathVariable("source") String source,
-			@PathVariable("totalAmount") String totalAmount, @PathVariable("data") String data, Model model) {
+			@PathVariable("address") String address, @PathVariable("totalAmount") String totalAmount, 
+			@PathVariable("data") String data, @PathVariable("image") String image, Model model) {
 
 		ExpenditureItemVO vo = new ExpenditureItemVO();
 
@@ -367,8 +368,10 @@ public class AccountBookController {
 
 		model.addAttribute("dateTime", dateTime);
 		model.addAttribute("source", source);
+		model.addAttribute("address", address);
 		model.addAttribute("totalAmount", totalAmount);
 		model.addAttribute("itemsList", itemsList);
+		model.addAttribute("image", image);
 
 		return "accountBook/addItemForm";
 	}
