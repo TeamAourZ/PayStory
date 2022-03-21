@@ -260,7 +260,7 @@
 												<c:choose>
 													<c:when test="${not empty expenditure.expenditureImage}">
 														<input type="hidden" id="receiptImage" value="${expenditure.expenditureImage}">
-													</c:when>
+													</c:when>z
 													<c:when test="${not empty image}">
 														<input type="hidden" id="receiptImage" value="${image}">
 													</c:when>
@@ -273,6 +273,7 @@
 														'data-toggle': 'modal',
 														'data-target': '#receiptModal'
 													}); // 이미지 영역 속성 변경
+													$('#imageValue').val($('#receiptImage').val());
 													$('#receiptImage').remove(); // 삭제
 												</script>
 											</c:if>
@@ -406,6 +407,7 @@
 						<input type="hidden" value="${expenditureItemNameList}"> <%-- 상세 항목 : 이름 --%>
 						<input type="hidden" value="${expenditureItemPriceList}"> <%-- 상세 항목 : 금액 --%>
 						<input type="hidden" value="${fn:length(expenditureItemList)}"> <%-- 상세 항목 길이 --%>
+						<input type="hidden" value="${expenditure.expenditureAmount}"> <%-- 총 합계 --%>
 						<input type="hidden" value="${expenditure.expenditureMemo}"> <%-- 메모 --%>
 						<input type="hidden" value="${expenditure.expenditureNo}"> <%-- 지출 번호 --%>
 					</div>
@@ -421,7 +423,8 @@
 						$('#expenditureTags').val($('#hiddenExpenditureData').children('input').eq(1).val()); // 태그
 						$('#expenditureSource').val($('#hiddenExpenditureData').children('input').eq(2).val()); // 상호명
 						$('#expenditureAddress').val($('#hiddenExpenditureData').children('input').eq(3).val()); // 주소
-						$('#expenditureMemo').val($('#hiddenExpenditureData').children('input').eq(7).val()); // 메모
+						$('#expenditureTotalAmount').val($('#hiddenExpenditureData').children('input').eq(7).val()); // 총 합계
+						$('#expenditureMemo').val($('#hiddenExpenditureData').children('input').eq(8).val()); // 메모
 						
 						let nameList = $('#hiddenExpenditureData').children('input').eq(4).val().split('━'); // 상세 항목 이름
 						nameList.shift(); // 맨 앞 요소 꺼내기 (삭제)
