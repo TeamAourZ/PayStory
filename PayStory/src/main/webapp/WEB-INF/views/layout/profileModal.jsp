@@ -11,9 +11,6 @@
 <!-------- JS-------->
 <script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
 <script src="<c:url value='/main/js/member/infoView.js'/>"></script>
-<script>
-	#input {visibility:hidden;}
-</script>
 </head>
 <body>
 	<div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
