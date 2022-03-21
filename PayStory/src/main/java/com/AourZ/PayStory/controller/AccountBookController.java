@@ -773,6 +773,7 @@ public class AccountBookController {
 			shareMainVOList.add(shareMainVO);
 		}
 		model.addAttribute("shareMainVOList", shareMainVOList);
+		model.addAttribute("memberNo", memberNo);
 
 		return "accountBook/public/main";
 
