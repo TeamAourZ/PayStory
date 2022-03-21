@@ -423,7 +423,7 @@
 						$('#expenditureTags').val($('#hiddenExpenditureData').children('input').eq(1).val()); // 태그
 						$('#expenditureSource').val($('#hiddenExpenditureData').children('input').eq(2).val()); // 상호명
 						$('#expenditureAddress').val($('#hiddenExpenditureData').children('input').eq(3).val()); // 주소
-						$('#expenditureTotalAmount').val($('#hiddenExpenditureData').children('input').eq(7).val()); // 총 합계
+						$('#expenditureTotalAmount').val($('#hiddenExpenditureData').children('input').eq(7).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')); // 총 합계
 						$('#expenditureMemo').val($('#hiddenExpenditureData').children('input').eq(8).val()); // 메모
 						
 						let nameList = $('#hiddenExpenditureData').children('input').eq(4).val().split('━'); // 상세 항목 이름
@@ -446,6 +446,8 @@
 						});
 						if ($('#hiddenExpenditureData').children('input').eq(6).val() != 0) {
 							$('#expenditureTotalAmount').val(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+						} else {
+							setTimeout(() => $('.showItem').click(), 0); // 상세 내역 접기
 						}
 					</script>
 				</c:when>
