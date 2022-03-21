@@ -391,8 +391,6 @@ public class AccountBookController {
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
 		boolean isShared = (boolean) session.getAttribute("isShared"); // 가계부 구분
 
-		System.out.println(isShared);
-
 		model.addAttribute("isShared", isShared);
 
 		// 소유자, 참여자 조회
