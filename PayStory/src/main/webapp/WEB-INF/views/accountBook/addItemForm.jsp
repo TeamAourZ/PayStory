@@ -260,7 +260,7 @@
 												<c:choose>
 													<c:when test="${not empty expenditure.expenditureImage}">
 														<input type="hidden" id="receiptImage" value="${expenditure.expenditureImage}">
-													</c:when>z
+													</c:when>
 													<c:when test="${not empty image}">
 														<input type="hidden" id="receiptImage" value="${image}">
 													</c:when>
