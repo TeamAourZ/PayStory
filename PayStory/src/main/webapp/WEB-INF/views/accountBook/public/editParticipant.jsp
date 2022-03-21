@@ -35,9 +35,11 @@
 	href="/main/css/accountBook/public/publicCreate.css">
 <link rel="stylesheet" type="text/css"
 	href="/main/css/accountBook/public/publicMain.css">
-	
+
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+
+	<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
 
 </head>
 <body id="page-top">
@@ -45,8 +47,7 @@
 	<div id="wrapper">
 
 		<!-- Side Bar -->
-		<jsp:include page="/WEB-INF/views/layout/boardSideMenu.jsp"
-			flush="true" />
+		<jsp:include page="/WEB-INF/views/layout/sideMenu.jsp" flush="true" />
 
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
@@ -55,7 +56,7 @@
 			<div id="content">
 
 				<!-- Top Menu Bar  -->
-				<jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp"
+				<jsp:include page="/WEB-INF/views/layout/topMenu.jsp"
 					flush="true" />
 
 				<!-- Begin Page Content -->
@@ -76,8 +77,8 @@
 
 
 					<!----------------------- 추가 ---------------------------->
-					
-					
+
+
 					<div class="tab-content p-4 bg-white rounded">
 						<div class="tab-pane fade in show active" id="expenditure"
 							role="tabpanel">
@@ -97,7 +98,7 @@
 									</div>
 									<div class=profileBox2>강성우</div>
 								</div>
-								
+
 								<div class="participantPagePerson">
 									<div align="right" class=profileBox>
 										<img class="profileImage"
@@ -111,7 +112,7 @@
 										<i class='fa-solid fa-xmark delImage'></i>
 									</button>
 								</div>
-								
+
 								<div class="participantPagePerson">
 									<div align="right" class=profileBox>
 										<img class="profileImage"
@@ -128,13 +129,12 @@
 
 							</div>
 						</div>
-					
-					
-					<!----------------------- 삭제 ---------------------------->
-					
-					
-					<div class="tab-pane fade in show" id="income"
-							role="tabpanel">
+
+
+						<!----------------------- 삭제 ---------------------------->
+
+
+						<div class="tab-pane fade in show" id="income" role="tabpanel">
 
 							<div class="publicBox shadow">
 								<div class="card-header">
@@ -180,8 +180,8 @@
 
 							</div>
 						</div>
-					
-					
+
+
 					</div>
 
 
@@ -209,7 +209,7 @@
 			<!-- End of Main Content -->
 
 			<!-- Footer -->
-		
+
 			<!-- End of Footer -->
 
 		</div>
@@ -247,7 +247,6 @@
 	</div>
 
 	<!-- Bootstrap core JavaScript-->
-	<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
 	<script src="/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Core plugin JavaScript-->

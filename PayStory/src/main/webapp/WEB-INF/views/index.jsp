@@ -31,7 +31,8 @@
 					</c:if>
 					<c:if test="${not empty login}">
 					 ${login.memberName}	
-					<li class="itemBox"><a href="${path}/member/logout">로그아웃</a></li>
+					<li class="itemBox"><a href="${path}/member/logout">로그아웃</a></li>|
+					<li class="itemBox"><a href="<c:url value='/accountBook/myMain'/>">가계부로 가기</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -53,7 +54,7 @@
 				</div>
 			</article>
 		</section>
-		<section>
+		<section class="css-vjuko2 e7dsxmo0">
 <!-- 상세 -->
 			<article class="main_text">
 				<h1>Pay Story</h1>
@@ -129,12 +130,14 @@
 						<div style class="css-ymgzel e1prhvo14">
 							<div class="e1prhvo11 css-lkoukj ey5meut2">
 								<img src="<c:url value='main/images/contents2.png'/>" class="css-i8161j ey5meut0">
-							</div>					
+							</div>			
 						</div>
-						<p class="css-lk5fic e1prhvo10">
-						자신의 수입, 지출을 한 눈에<br>그래프와 달력을 통해 어느날 소비와 소득이 있는지 보고<br>
-						상세보기를 통해 더 자세히 조회를 해봐요
-						</p>
+						<div class="css-c6i2rq">
+					<p class="css-lk5fic e1prhvo10">
+					자신의 수입, 지출을 한 눈에<br>그래프와 달력을 통해 어느날 소비와 소득이 있는지 보고<br>
+					상세보기를 통해 더 자세히 조회를 해봐요
+					</p>
+				</div>	
 					</div>
 				</div>
 			</div>
@@ -169,8 +172,38 @@
 			</div>
 		</section>
 		<section class="end-bottem">
-			<div class="p-container p-container--default css-1ot8705">
-				<h1 class="end-text3">Team<br><span class="end-text4">AourZ</span></h1>
+			<h1 class="end-text3">Team  AourZ</h1>
+			<div class="footer_inner">
+				<div class="footer_site-group-list">
+					<ul class="footer_site-group">
+						<li><div class="footer-title">서비스</div></li>
+						<li class="footer_item"><a href="#">서비스 소개</a></li>
+						<li class="footer_item"><a href="#">도움말</a></li>
+						<li class="footer_item"><a href="#">공지사항</a></li>
+						<li class="footer_item"><a href="#">자주 묻는 질문</a></li>
+					</ul>
+					<ul class="footer_site-group">
+						<li><div class="footer-title">회사</div></li>
+						<li class="footer_item"><a href="#">회사 소개</a></li>
+						<li class="footer_item"><a href="#">서비스 소개</a></li>
+						<li class="footer_item"><a href="#">블로그</a></li>
+					</ul>
+					<ul class="footer_site-group">
+						<li><div class="footer-title">문의</div></li>
+						<li class="footer_item"><a href="#">광고문의</a></li>
+					</ul>
+					<ul class="footer_site-group">
+						<li><div class="footer-title">고객센터</div></li>
+						<li class="footer_item"><a href="#">전화: 0000-0000</a></li>
+						<li class="footer_item"><a href="#">이메일: paystory.aourz@gmail.com</a></li>
+					</ul>
+				</div>
+				<address class="footer_address">
+					<strong class="footer_address-name">㈜PayStory</strong>
+					사업자 등록번호 : xxx-xx-xxxxx | 공동대표 : AourZ<br>
+					서울특별시 xx구 xx로 158-1 5층 (xx동)<br>
+					고객센터 : 서울특별시 xx구 xx로 158-1 3층 (xx동)
+				</address>
 			</div>
 		</section>
 	</div>

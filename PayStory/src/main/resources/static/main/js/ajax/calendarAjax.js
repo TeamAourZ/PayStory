@@ -1,8 +1,8 @@
 /* 페이지 로드 - 달력 */
 function calendarAjax(calendarType, year, month, day) {
-	let firstDay = new Date(year, month, 1).getDay(); // 달의 시작 요일 번호
-	let lastDate = new Date(year, month + 1, 0).getDate(); // 달의 마지막 날
-	let lastDay = new Date(year, month + 1, 0).getDay(); // 달의 마지막 요일 번호
+	firstDay = new Date(year, month, 1).getDay(); // 달의 시작 요일 번호
+	lastDate = new Date(year, month + 1, 0).getDate(); // 달의 마지막 날
+	lastDay = new Date(year, month + 1, 0).getDay(); // 달의 마지막 요일 번호
 
 	let week = (firstDay + lastDate + (6 - lastDay)) / 7;
 
@@ -41,7 +41,7 @@ function calendarAjax(calendarType, year, month, day) {
 				checkToday(); // 오늘 날짜
 
 				if (day != -1) {
-					maintainDay(year, month, day); // 내역 삭제 후 선택된 날짜 재선택
+					maintainDay(year, month, day); // 날짜 재선택
 				}
 			}
 		},
