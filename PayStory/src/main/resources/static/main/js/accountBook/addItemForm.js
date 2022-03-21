@@ -196,6 +196,7 @@ $(function() {
 	/***** 취소 버튼 클릭 *****/
 	$('.cancelBtn').on('click', function() {
 		let answer = confirm('작성을 취소하시겠습니까?');
+		let isShared = $('#isShared').val();
 		if (answer) {
 			alert('가계부 메인 페이지로 이동합니다.');
 			if (isShared === 'true') {
@@ -310,7 +311,7 @@ $(function() {
 						alert("수입 내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
 					}
 
-					if (isShared == 0) {
+					if (isShared === 'false') {
 						location.href = "/accountBook/myMain";
 					} else {
 						location.href = "/accountBook/shareMain";
@@ -377,7 +378,7 @@ $(function() {
 						alert("지출 내역을 정상적으로 등록했습니다.\n가계부 메인 페이지로 이동합니다.");
 					}
 
-					if (isShared == 0) {
+					if (isShared === 'false') {
 						location.href = "/accountBook/myMain";
 					} else {
 						location.href = "/accountBook/shareMain";
