@@ -11,7 +11,9 @@
 <!-------- JS-------->
 <script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
 <script src="<c:url value='/main/js/member/infoView.js'/>"></script>
-
+<script>
+	#input {visibility:hidden;}
+</script>
 </head>
 <body>
 	<div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
@@ -32,14 +34,33 @@
 						<ul class="m-img">
 							<li class="li-img">
 								<a class="a-img">
-									<div class="screen" onclick="onclick=document.all.file.click()">
+									<div class="screen" id="screen" onclick="onClickUpload()">
 										<div class="imageTextTop">프로필 이미지 수정</div>
 										<div class="imageTextBottom">클릭해주세요</div>
-										<img class="profile" onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"' src="/images/member/${login.memberNo}/${login.memberImage}">
+										<img class="profile" id="profile" onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"' src="/images/member/${login.memberNo}/${login.memberImage}">
+										<img class="profile" id="img2" src="">
 									</div> 
-									<input type="file" name="file" style="display: none" class="input-css">
-									<input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}" class="input-css">
-									<button class="btn btn-primary btn-block" id="imgC">사진변경</button>
+									<input type="file" name="file" style="display: none" class="input-css" id="input-css">
+									<input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}" class="input">
+									<button class="btn btn-primary btn-block" id="imgC">사진변경 완료하기</button>
+									<script type="text/javascript">
+										function onClickUpload() {
+											let input = document.getElementById("input-css");
+											input.click();
+										}
+	
+								        const reader = new FileReader();
+
+								        reader.onload = (readerEvent) => {
+								            document.querySelector("#profile").setAttribute("src", readerEvent.target.result);
+								        };
+
+								        document.querySelector("#input-css").addEventListener("change", (changeEvent) => {
+
+								            const imgFile = changeEvent.target.files[0];
+								            reader.readAsDataURL(imgFile);
+								        })	    
+									</script>
 								</a>
 							</li>
 						</ul>

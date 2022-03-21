@@ -30,4 +30,5 @@ public interface IMemberService {
 	public List<BoardVO> noticeBoardList();
 	public void insertNotice(int boardNo)throws Exception;
 	public void deleteNotice(int boardNo)throws Exception;
+	public List<BoardVO> noticeList();
 }	

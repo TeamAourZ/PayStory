@@ -178,4 +178,9 @@ public class MemberDAO implements IMemberDAO {
 		sqlsession.update("com.AourZ.PayStory.dao.IMemberDAO.deleteNotice", map);
 	}
 	
+	@Override
+	public List<BoardVO> noticeList(){
+		return sqlsession.selectList("com.AourZ.PayStory.dao.IMemberDAO.noticeList");
+	}
+	
 }
