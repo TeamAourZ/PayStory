@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class STTService {
+	private static final String filePath = "/upload/"; // 파일이 저장될 서버 위치
+//	private static final String filePath = "C:/upload/"; // 파일이 저장될 서버 위치
+	
 	public String clovaSpeechToText(String filePathName) {
 		String clientId = "wd9vedste4";             // Application Client ID";
         String clientSecret = "UrWKa6K7bLb64ENXo1vrWZADKp2Yh1jmvBkcNZkn";     // Application Client Secret";
@@ -158,7 +161,7 @@ public class STTService {
 	public void resultToFileSave(String result) {
 		try {
 			String fileName = Long.valueOf(new Date().getTime()).toString();
-			String filePathName = "C:/upload/" + "stt_" + fileName + ".txt";
+			String filePathName = filePath + "stt_" + fileName + ".txt";
 			
 			FileWriter fw = new FileWriter(filePathName);
 			fw.write(result);
