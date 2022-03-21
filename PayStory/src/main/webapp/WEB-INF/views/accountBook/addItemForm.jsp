@@ -447,7 +447,7 @@
 						if ($('#hiddenExpenditureData').children('input').eq(6).val() != 0) {
 							$('#expenditureTotalAmount').val(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 						} else {
-							setTimeout(() => $('.showItem').click(), 0); // 상세 내역 접기
+							setTimeout(() => $('.showItem').click(), 100); // 상세 내역 접기
 						}
 					</script>
 				</c:when>
