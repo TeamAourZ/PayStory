@@ -390,8 +390,6 @@ public class AccountBookController {
 		}
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
 		boolean isShared = (boolean) session.getAttribute("isShared"); // 가계부 구분
-		
-		System.out.println(isShared);
 
 		model.addAttribute("isShared", isShared);
 
@@ -650,7 +648,9 @@ public class AccountBookController {
 			expenditureItemList.add(ItemVO);
 		}
 
-		accountBookService.insertExpenditureItem(expenditureItemList);
+		if (expenditureItemList != null && expenditureItemList.size() > 0) {
+			accountBookService.insertExpenditureItem(expenditureItemList);
+		}
 
 		// 수정자 추가
 		String[] splitDate = expenditureVO.getExpenditureDate().split(" ");

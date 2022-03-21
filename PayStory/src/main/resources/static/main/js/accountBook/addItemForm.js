@@ -358,9 +358,11 @@ $(function() {
 		// 내역 수정 시
 		if ($('#isEdit').val()) {
 			let condition = $('#condition').val();
-			let dataNo = $('#hiddenExpenditureData').children('input').eq(8).val();
+			let dataNo = $('#hiddenExpenditureData').children('input').eq(9).val();
 
 			address = "/expenditure/" + condition + "/" + dataNo;
+			
+			alert(address);
 		}
 
 		$.ajax({
