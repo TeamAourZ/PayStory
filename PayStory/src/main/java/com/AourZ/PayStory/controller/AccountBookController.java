@@ -62,7 +62,7 @@ public class AccountBookController {
 		String signInMemberNo = (String) session.getAttribute("memberNo"); // 회원 번호
 
 		// 가계부 정보 가져오기
-		AccountBookVO accountBookInfo = accountBookService.selectMyAccountBook(signInMemberNo, false);
+		AccountBookVO accountBookInfo = accountBookService.selectAccountBook("member", signInMemberNo, false);
 
 		// session 업데이트 (가계부 번호 추가)
 		int accountBookNo = accountBookInfo.getAccountBookNo(); // 가계부 번호
@@ -92,7 +92,7 @@ public class AccountBookController {
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
 
 		// 가계부 정보 가져오기
-		AccountBookVO accountBookInfo = accountBookService.selectShareAccountBook(accountBookNo);
+		AccountBookVO accountBookInfo = accountBookService.selectAccountBook("accountBook", accountBookNo, true);
 
 		String accountBookTitle = accountBookInfo.getAccountBookTitle(); // 가계부 타이틀
 		boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분 - 공유 가계부
@@ -262,7 +262,7 @@ public class AccountBookController {
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
-		
+
 		// session 정보 등록
 		session.setAttribute("curYear", year);
 		session.setAttribute("curMontLastDate", lastDate);
@@ -353,7 +353,7 @@ public class AccountBookController {
 	// 챗봇에서 영수증 등록 페이지로 값 넘기면서 페이지 이동
 	@RequestMapping("/accountBook/add/chat/{dateTime}/{source}/{address}/{totalAmount}/{data}/{image}")
 	public String resultChatOCR(@PathVariable("dateTime") String dateTime, @PathVariable("source") String source,
-			@PathVariable("address") String address, @PathVariable("totalAmount") String totalAmount, 
+			@PathVariable("address") String address, @PathVariable("totalAmount") String totalAmount,
 			@PathVariable("data") String data, @PathVariable("image") String image, Model model) {
 
 		ExpenditureItemVO vo = new ExpenditureItemVO();
@@ -391,7 +391,7 @@ public class AccountBookController {
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
 
 		// 가계부 정보 가져오기
-		AccountBookVO accountBookInfo = accountBookService.selectShareAccountBook(accountBookNo);
+		AccountBookVO accountBookInfo = accountBookService.selectAccountBook("accountBook", accountBookNo, true);
 
 		boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분
 
@@ -685,7 +685,24 @@ public class AccountBookController {
 		accountBookService.deleteItem(condition, dataNo);
 	}
 
-	/* 지출,수입 내역 추가 form으로 이동 */
+	/* 대시보드 메인 - 가계부 정보 모달 - 조회 */
+//	@ResponseBody
+//	@RequestMapping("/accountBook/modal/selectInfo")
+//	public Map<String, String> selectAccountBookInfo(@RequestParam HashMap<String, Object> param,
+//			HttpServletRequest request) {
+//		// map 정보 가져오기
+//		String year = (String) param.get("year"); // 년
+//		int month = Integer.parseInt((String) param.get("month")); // 월
+//		String day = "01";
+//
+//		// session 정보 가져오기
+//		HttpSession session = request.getSession();
+//		int accountBookNo = (int) session.getAttribute("accountBookNo");
+//		
+//		AccountBookVO accountBook = accountBookService.sele
+//	}
+
+	/* 지출, 수입 내역 추가 form으로 이동 */
 	@RequestMapping("/accountBook/add")
 	public String addItemForm() {
 		return "accountBook/addItemForm";
@@ -870,18 +887,18 @@ public class AccountBookController {
 
 		return "accountBook/public/editParticipant";
 	}
+
 	// 공유가계부 생성시 회원인지 아닌지
-		@ResponseBody
-		@RequestMapping("/accountBook/public/checkParticipant")
-		public String checkParticipant(Model model, @RequestParam("No") String participantNo, HttpSession httpSession) {
-			
-			String testP=shareAccountService.existParticipant(participantNo);
-			if(testP==null || testP =="") {
-				return "nope";
-			}
-			else{
-				return "exist";
-			}
+	@ResponseBody
+	@RequestMapping("/accountBook/public/checkParticipant")
+	public String checkParticipant(Model model, @RequestParam("No") String participantNo, HttpSession httpSession) {
+
+		String testP = shareAccountService.existParticipant(participantNo);
+		if (testP == null || testP == "") {
+			return "nope";
+		} else {
+			return "exist";
+		}
 	}
-	
+
 }

@@ -81,18 +81,18 @@
 		(0, #{memberNo})
 	</insert>
 	
-	<!-- 일반 가계부 조회 -->
-	<select id="selectMyAccountBook" parameterType="HashMap" resultType="com.AourZ.PayStory.model.accountBook.AccountBookVO">
+	<!-- 가계부 조회 -->
+	<select id="selectAccountBook" parameterType="HashMap" resultType="com.AourZ.PayStory.model.accountBook.AccountBookVO">
 		SELECT *
 		FROM account_book
-		WHERE memberNo = #{memberNo} AND isShared = #{isShared}
-	</select>
-	
-	<!-- 공유 가계부 조회 -->
-	<select id="selectShareAccountBook" parameterType="int" resultType="com.AourZ.PayStory.model.accountBook.AccountBookVO">
-		SELECT *
-		FROM account_book
-		WHERE accountBookNo = #{accountBookNo}
+		<choose>
+			<when test="condition.equals('member')">
+				WHERE memberNo = #{value} AND isShared = #{isShared}
+			</when>
+			<when test="condition.equals('accountBook')">
+				WHERE accountBookNo = #{value} AND isShared = #{isShared}
+			</when>
+		</choose>
 	</select>
 	
 	<!-- 가계부 예산 조회 -->
