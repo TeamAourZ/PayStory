@@ -444,7 +444,9 @@
 								sum += parseInt(itemAmount.toString().replace(/,/g, ''));
 							}
 						});
-						$('#expenditureTotalAmount').val(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+						if ($('#hiddenExpenditureData').children('input').eq(6).val() != 0) {
+							$('#expenditureTotalAmount').val(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+						}
 					</script>
 				</c:when>
 			</c:choose>
