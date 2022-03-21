@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TTSService {
+	private static final String filePath = "/upload/"; // 파일이 저장될 서버 위치
+//	private static final String filePath = "C:/upload/"; // 파일이 저장될 서버 위치
+	
 	public void clovaTextToSpeech(String filePathName) {
 		String clientId = "wd9vedste4";//애플리케이션 클라이언트 아이디값";
         String clientSecret = "UrWKa6K7bLb64ENXo1vrWZADKp2Yh1jmvBkcNZkn";//애플리케이션 클라이언트 시크릿값";
@@ -51,7 +54,7 @@ public class TTSService {
                 // 랜덤한 이름으로 mp3 파일 생성
                 String tempname = Long.valueOf(new Date().getTime()).toString();
 //                File f = new File(tempname + ".mp3");
-                File f = new File("C:/upload/" + "TTS_" + tempname + ".mp3");
+                File f = new File(filePath + "TTS_" + tempname + ".mp3");
                 f.createNewFile();
                 OutputStream outputStream = new FileOutputStream(f);
                 while ((read =is.read(bytes)) != -1) {
@@ -112,7 +115,7 @@ public class TTSService {
 //                File f = new File(tempname + ".mp3");
                 
                 voiceFileName = "tts_" + tempname + ".mp3";
-                File f = new File("C:/upload/" + voiceFileName);
+                File f = new File(filePath + voiceFileName);
                 f.createNewFile();
                 
                 OutputStream outputStream = new FileOutputStream(f);
@@ -169,7 +172,7 @@ public class TTSService {
 //                File f = new File(tempname + ".mp3");
                 
                 voiceFileName = "tts_" + tempname + ".mp3";
-                File f = new File("C:/upload/" + voiceFileName);
+                File f = new File(filePath + voiceFileName);
                 f.createNewFile();
                 
                 OutputStream outputStream = new FileOutputStream(f);
