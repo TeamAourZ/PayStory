@@ -20,7 +20,10 @@
     <link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
     <!-- Chatbot CSS -->
     <link rel="stylesheet" type="text/css" href="/main/css/ai/chatbot.css">
-    <link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+    
+    <!-- Favicon -->
+	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+	
     <script src="/main/js/ai/jquery-3.6.0.min.js"></script>
 	
 </head>

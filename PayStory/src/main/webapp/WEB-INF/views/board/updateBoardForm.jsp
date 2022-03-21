@@ -13,8 +13,12 @@
 		<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/board/updateBoardForm.css' />" rel="stylesheet" type="text/css">
-	
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+
 		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>	
+
 	</head>
 	<body>
 		<div id="wrapper">

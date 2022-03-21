@@ -14,7 +14,12 @@
 		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/board/newBoardForm.css' />" rel="stylesheet" type="text/css">
 		
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+
 		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
+
 	</head>
 	<body>
 		<div id="wrapper">

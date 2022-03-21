@@ -19,7 +19,10 @@
 			.control-labell{display: inline-block; margin-bottom: 0.5rem;}
 			.row1{display: flex; flex-wrap: wrap; margin-right: 0.8rem; margin-left: 0.8rem;}
 			.mb-23{margin-bottom: 0.5rem !important; margin-left: 27px;}
-		</style>		
+		</style>
+		
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
 	</head>
 	<body>
 		<div id="wrapper">

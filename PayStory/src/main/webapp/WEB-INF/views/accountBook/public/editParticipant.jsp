@@ -35,7 +35,12 @@
 	href="/main/css/accountBook/public/publicCreate.css">
 <link rel="stylesheet" type="text/css"
 	href="/main/css/accountBook/public/publicMain.css">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+
 	<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
+
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
