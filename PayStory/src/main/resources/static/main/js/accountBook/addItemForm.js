@@ -361,6 +361,8 @@ $(function() {
 			let dataNo = $('#hiddenExpenditureData').children('input').eq(9).val();
 
 			address = "/expenditure/" + condition + "/" + dataNo;
+			
+			alert(address);
 		}
 
 		$.ajax({

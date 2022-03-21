@@ -55,8 +55,8 @@ $(function() {
 	/* 수정 버튼 클릭 */
 	$(document).on('click', '.dataEdit', function() {
 		if (confirm("해당 내역을 수정하시겠습니까?")) {
-			let condition = $(this).parent('div').children('input').eq(0).val();	// 수입 / 지출 구분
-			let dataNo = $(this).parent('div').children('input').eq(1).val();	// 수입 / 지출 내역 번호
+			let condition = $(this).parent('div').children('input').eq(1).val();	// 수입 / 지출 구분
+			let dataNo = $(this).parent('div').children('input').eq(2).val();	// 수입 / 지출 내역 번호
 
 			location.href = "/accountBook/detailViewList/edit/" + condition + "/" + dataNo; // 수정 페이지 이동 (수입 / 지출 입력 페이지 활용)
 		}
