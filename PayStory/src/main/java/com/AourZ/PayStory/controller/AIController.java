@@ -147,7 +147,7 @@ public class AIController {
 		String[] fileResult = FileUtils.uploadReceipt(file, session);
 		String filePathName = fileResult[0];
 		String uploadFileName = fileResult[1];
-		System.out.println(filePathName);
+		// System.out.println(filePathName);
 		
 		ExpenditureVO result =  OCRService.clovaOCRService(filePathName);
 		result.setExpenditureImage(uploadFileName);
