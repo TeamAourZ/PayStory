@@ -170,5 +170,9 @@
 		select * from board where notice = 'Y' 
 		limit 0,2
 	</select>
+	
+	<select id="noticeList" resultMap="BoardVOResultMap">
+		SELECT * FROM board ORDER BY boardCategoryNo = 'bc001'
+	</select>  
 		
 </mapper>

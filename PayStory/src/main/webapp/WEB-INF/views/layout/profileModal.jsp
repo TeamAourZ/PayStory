@@ -3,44 +3,68 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<!-------- CSS-------->
-		<link href="<c:url value='/main/css/member/profile.css'/>" rel="stylesheet" type="text/css">
-		
-		<!-------- JS-------->
-		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
-		<script src="<c:url value='/main/js/member/infoView.js'/>"></script>
-	</head>
-	<body>
-		<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 id="profileModalLabel" class="modal-title font-weight-bold text-primary text-lg">프로필</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-					<div class="modal-body"></div>
-					<form action="/member/updateImg" method="post" enctype="multipart/form-data">
-						<div class="imageBox">
-							<ul class="m-img">
-								<li class="li-img">
-									<a class="a-img">
-										<div class="screen" onclick="onclick=document.all.file.click()">
-											<div class="imageTextTop">프로필 이미지 수정</div>
-											<div class="imageTextBottom">클릭해주세요</div>
-											<img class="profile" onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"'
-																							src="/images/member/${login.memberNo}/${login.memberImage}">
-										</div>
-										<input type="file" name="file" style="display: none" class="input-css">
-										<input type="hidden" name="memberImageInDB" id="memberImageInDB" value="${login.memberImage}" class="input-css">
-										<input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}" class="input-css">
-										<button class="btn btn-primary btn-block" id="imgC">사진변경</button>
-									</a>
-								</li>
-							</ul>
-						</div>
+
+<head>
+<!-------- CSS-------->
+<link href="<c:url value='/main/css/member/profile.css'/>"
+	rel="stylesheet" type="text/css">
+<!-------- JS-------->
+<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
+<script src="<c:url value='/main/js/member/infoView.js'/>"></script>
+<script>
+	#input {visibility:hidden;}
+</script>
+</head>
+<body>
+	<div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">프로필수정</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body"></div>
+				<form action="/member/updateImg" method="post"
+					enctype="multipart/form-data">
+					<div class="imageBox">
+              <ul class="m-img">
+                <li class="li-img">
+                  <a class="a-img">
+                    <div class="screen" id="screen" onclick="onClickUpload()">
+                      <div class="imageTextTop">프로필 이미지 수정</div>
+                      <div class="imageTextBottom">클릭해주세요</div>
+                      <img class="profile" id="profile" onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"' src="/images/member/${login.memberNo}/${login.memberImage}">
+                      <img class="profile" id="img2" src="">
+                    </div> 
+                    <input type="file" name="file" style="display: none" class="input-css" id="input-css">
+                    <input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}" class="input">
+                    <button class="btn btn-primary btn-block" id="imgC">사진변경 완료하기</button>
+                    <script type="text/javascript">
+                      function onClickUpload() {
+                        let input = document.getElementById("input-css");
+                        input.click();
+                      }
+
+                          const reader = new FileReader();
+
+                          reader.onload = (readerEvent) => {
+                              document.querySelector("#profile").setAttribute("src", readerEvent.target.result);
+                          };
+
+                          document.querySelector("#input-css").addEventListener("change", (changeEvent) => {
+
+                              const imgFile = changeEvent.target.files[0];
+                              reader.readAsDataURL(imgFile);
+                          })	    
+                    </script>
+                  </a>
+                </li>
+              </ul>
+            </div>
 					</form>
 					<form id="infoView" action="/member/infoUpdate" method="POST" class="form-signup form-user panel-body" autocomplete="off">
 						<input type="hidden" id="memberNameCheck" name="memberNameCheck" value="N" class="input-css" />
