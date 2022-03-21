@@ -36,7 +36,10 @@
 							<%-- 수입 --%>
 							<div class="row pl-3 mb-1">
 								<c:if test="${dateIncomeList[dateStatus.index].count ne 0 && not empty dateIncomeList[dateStatus.index].count}">
-									<div class="col-2 incomeCount help-cursor rounded-circle p-0">${dateIncomeList[dateStatus.index].count}</div>
+									<div class="col-2 incomeCount help-cursor rounded-circle p-0"
+										data-toggle="tooltip" data-placement="bottom" title="수입 상세 태그 조회">
+										${dateIncomeList[dateStatus.index].count}
+									</div>
 									<div class="col-md-9 incomeValue text-left text-truncate mr-1 ml-1 p-0">
 										<fmt:formatNumber value="${dateIncomeList[dateStatus.index].sum}" pattern="#,###" />
 									</div>
@@ -45,7 +48,10 @@
 							<%-- 지출 --%>
 							<div class="row pl-3">
 								<c:if test="${dateExpenditureList[dateStatus.index].count ne 0 && not empty dateExpenditureList[dateStatus.index].count}">
-									<div class="col-2 expenditureCount help-cursor rounded-circle p-0">${dateExpenditureList[dateStatus.index].count}</div>
+									<div class="col-2 expenditureCount help-cursor rounded-circle p-0"
+										data-toggle="tooltip" data-placement="bottom" title="지출 상세 태그 조회">
+										${dateExpenditureList[dateStatus.index].count}
+									</div>
 									<div class="col-md-9 expenditureValue text-left text-truncate mr-1 ml-1 p-0">
 										<fmt:formatNumber value="${dateExpenditureList[dateStatus.index].sum}" pattern="#,###" />
 									</div>
@@ -61,13 +67,15 @@
 										<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 											<div class="row">
 												<div class="col-sm-12">
-													<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 													<table class="table mb-0">
 														<thead>
 															<tr class="text-center">
 																<th>구분</th>
 																<th>건수</th>
-																<th>금액</th>
+																<th>
+																	금액
+																	<i class="detailBoxClose fas fa-times pointer-cursor"></i>
+																</th>
 															</tr>
 														</thead>
 														<tbody class="tagIncome">
@@ -93,13 +101,15 @@
 										<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 											<div class="row">
 												<div class="col-sm-12">
-													<i class="detailBoxClose fas fa-times position-absolute pointer-cursor"></i>
 													<table class="table mb-0">
 														<thead>
 															<tr class="text-center">
 																<th>구분</th>
 																<th>건수</th>
-																<th>금액</th>
+																<th>
+																	금액
+																	<i class="detailBoxClose fas fa-times pointer-cursor"></i>
+																</th>
 															</tr>
 														</thead>
 														<tbody class="tagExpenditure">
