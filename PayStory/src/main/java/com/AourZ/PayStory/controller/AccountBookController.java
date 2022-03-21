@@ -707,7 +707,7 @@ public class AccountBookController {
 		// session에서 accountBookNo, memberNo 가져오기
 		expenditureVO.setAccountBookNo((int) session.getAttribute("accountBookNo"));
 
-		System.out.println(expenditureVO.getExpenditureImage());
+		// System.out.println(expenditureVO.getExpenditureImage());
 
 		accountBookService.insertExpenditure(expenditureVO);
 
