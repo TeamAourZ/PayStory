@@ -2,7 +2,6 @@
 
 /* 공통 / A, B */
 .dateSel div.infoBox, .dateSel div.emptyBox {
-    min-height: 90px;
     font-size: 13pt;
     font-weight: bold;
     border-radius: 5px;
@@ -76,6 +75,9 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 }
+.dateSel.typeA div.infoBox, .dateSel.typeA div.emptyBox {
+    min-height: 85px;
+}
 
 .date.typeA {
 	width: 24px;
@@ -95,6 +97,10 @@
     border-radius: 15px;
     background: #2768fa;
     text-align: center;
+}
+
+.dateSel.typeB div.infoBox, .dateSel.typeB div.emptyBox {
+    min-height: 60px;
 }
 
 .date.typeB {

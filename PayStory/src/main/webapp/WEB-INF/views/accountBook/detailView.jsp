@@ -16,7 +16,7 @@
 		<link href="<c:url value='/main/css/accountBook/chart.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/color.css' />" rel="stylesheet" type="text/css">
 		<link href="<c:url value='/main/css/accountBook/detailViewList.css' />" rel="stylesheet" type="text/css">
-		<link href="<c:url value='/main/css/accountBook/dateSelectModal.css' />" rel="stylesheet" type="text/css">
+		<link href="<c:url value='/main/css/accountBook/modal/dateSelectModal.css' />" rel="stylesheet" type="text/css">
 		
 		<%-------- CSS : Bootstrap --------%>
 		<link href="<c:url value='/bootstrap/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -29,6 +29,7 @@
 		<%-------- JS : Custom ------%>
 		<script src="<c:url value='/main/js/accountBook/etcMethod.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/accountBook/detailView.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/accountBook/common.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/calendarAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/chartAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/budgetStatusAjax.js' />" type="text/javascript"></script>
@@ -57,12 +58,21 @@
 									<div class="card-header p-3">
 										<div id="calendarBtnBox" class="d-flex justify-content-between mr-3 ml-3">
 											<div id="prevNextBox" class="d-flex justify-content-between align-items-center flex-gap-3">
-												<i id="prevMonthBtn" class="fas fa-angle-left fa-lg pointer-cursor"></i>
-												<h6 id="yearMonth" class="font-weight-bold text-primary m-0 pointer-cursor" data-toggle="modal" data-target="#dateSelectModal"></h6>
-												<i id="nextMonthBtn" class="fas fa-angle-right fa-lg pointer-cursor"></i>
+												<i id="prevMonthBtn" class="fas fa-angle-left fa-lg pointer-cursor"
+													data-toggle="tooltip" data-placement="bottom" title="이전 달">
+												</i>
+												<h6 id="yearMonth" class="font-weight-bold text-primary m-0 pointer-cursor"
+													data-toggle="modal" data-target="#dateSelectModal" <%-- 모달 --%>
+													data-toggle="tooltip" data-placement="bottom" title="날짜 이동"> <%-- 툴팁 --%>
+												</h6>
+												<i id="nextMonthBtn" class="fas fa-angle-right fa-lg pointer-cursor"
+													data-toggle="tooltip" data-placement="bottom" title="다음 달">
+												</i>
 											</div>
 											<div id="otherBtnBox" class="d-flex align-items-center flex-gap-1">
-												<i id="todayBtn" class="far fa-calendar fa-lg pointer-cursor"></i>
+												<i id="todayBtn" class="far fa-calendar fa-lg pointer-cursor"
+													data-toggle="tooltip" data-placement="bottom" title="오늘 날짜 이동">
+												</i>
 											</div>
 										</div>
 									</div>
@@ -85,7 +95,9 @@
 											<div id="budgetStatusBox" class="position-absolute d-none">
 												<%-- ajax --%>
 											</div>
-											<i class="budgetStatusBoxToggle fas fa-info-circle fa-lg pointer-cursor"></i>
+											<i class="budgetStatusBoxToggle fas fa-info-circle fa-lg pointer-cursor"
+												data-toggle="tooltip" data-placement="bottom" title="당월 예산 현황">
+											</i>
 										</div>
 									</div>
 									<%-- Card Body --%>
@@ -110,11 +122,13 @@
 														<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 															<div class="row">
 																<div class="col-sm-12">
-																	<i class="detailBoxClose re-position-1 fas fa-times position-absolute pointer-cursor"></i>
 																	<table class="table mb-0">
 																		<thead>
 																			<tr class="text-center">
-																				<th colspan="3">목록</th>
+																				<th colspan="3">
+																					목록
+																					<i class="detailBoxClose fas fa-times pointer-cursor"></i>
+																				</th>
 																			</tr>
 																		</thead>
 																		<tbody class="shareMember">
@@ -124,14 +138,16 @@
 																						<c:when test="${status.index eq 0}">
 																							<td>
 																								<div class="profile-image-box rounded-circle border-color-yellow">
-																									<img src="/images/member/${member.memberNo}/${member.memberImage}">
+																									<img onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"'
+																																src="/images/member/${member.memberNo}/${member.memberImage}">
 																								</div>
 																							</td>
 																						</c:when>
 																						<c:otherwise>
 																							<td>
 																								<div class="profile-image-box rounded-circle border-color-blue">
-																									<img src="/images/member/${member.memberNo}/${member.memberImage}">
+																									<img onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"'
+																																src="/images/member/${member.memberNo}/${member.memberImage}">
 																								</div>
 																							</td>
 																						</c:otherwise>
@@ -147,7 +163,9 @@
 														</div>
 													</div>
 												</div>
-												<i class="shareMemberBoxToggle fas fa-user-friends fa-lg pointer-cursor"></i>
+												<i class="shareMemberBoxToggle fas fa-user-friends fa-lg pointer-cursor"
+													data-toggle="tooltip" data-placement="bottom" title="공유 회원 목록">
+												</i>
 											</c:if>
 										</c:if>
 									</div>
@@ -163,7 +181,7 @@
 		</div>
 		
 		<%-- 날짜 선택 모달 --%>
-		<jsp:include page="/WEB-INF/views/accountBook/dateSelectModal.jsp" flush="true" />
+		<jsp:include page="/WEB-INF/views/accountBook/modal/dateSelectModal.jsp" flush="true" />
 		
 		<%-------- JS : Bootstrap --------%>
 		<script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js' />"></script>

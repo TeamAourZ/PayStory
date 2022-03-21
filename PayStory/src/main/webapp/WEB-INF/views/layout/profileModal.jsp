@@ -1,84 +1,78 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
-
 <html>
-<head>
-<!-------- CSS-------->
-<link href="<c:url value='/main/css/member/profile.css'/>"
-	rel="stylesheet" type="text/css">
-<!-------- JS-------->
-<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
-<script src="<c:url value='/main/js/member/infoView.js'/>"></script>
-
-</head>
-<body>
-	<div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">프로필수정</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body"></div>
-				<form action="/member/updateImg" method="post"
-					enctype="multipart/form-data">
-					<div class="imageBox">
-						<ul class="m-img">
-							<li class="li-img">
-								<a class="a-img">
-									<div class="screen" onclick="onclick=document.all.file.click()">
-										<div class="imageTextTop">프로필 이미지 수정</div>
-										<div class="imageTextBottom">클릭해주세요</div>
-										<img class="profile" onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"' src="/images/member/${login.memberNo}/${login.memberImage}">
-									</div> 
-									<input type="file" name="file" style="display: none" class="input-css">
-									<input type="hidden" name="memberImageInDB" id="memberImageInDB" value="${login.memberImage}" class="input-css">
-									<input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}" class="input-css">
-									<button class="btn btn-primary btn-block" id="imgC">사진변경</button>
-								</a>
-							</li>
-						</ul>
+	<head>
+		<!-------- CSS-------->
+		<link href="<c:url value='/main/css/member/profile.css'/>" rel="stylesheet" type="text/css">
+		
+		<!-------- JS-------->
+		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
+		<script src="<c:url value='/main/js/member/infoView.js'/>"></script>
+	</head>
+	<body>
+		<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 id="profileModalLabel" class="modal-title font-weight-bold text-primary text-lg">프로필</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
 					</div>
-				</form>
-				<form id="infoView" action="/member/infoUpdate" method="POST"
-					class="form-signup form-user panel-body" autocomplete="off">
-					<input type="hidden" id="memberNameCheck" name="memberNameCheck" value="N" class="input-css"/>
-					<fieldset>
-						
-						<!-- 이메일, 닉네임 --><!-- class="form-control -->
-						<div class="form-group">
-							<label class="control-label" for="fullName">이메일</label> 
-							<input type="text" name="memberEmail" class="input-css2" value="${login.memberEmail}" id="memberEmail" readonly>
+					<div class="modal-body"></div>
+					<form action="/member/updateImg" method="post" enctype="multipart/form-data">
+						<div class="imageBox">
+							<ul class="m-img">
+								<li class="li-img">
+									<a class="a-img">
+										<div class="screen" onclick="onclick=document.all.file.click()">
+											<div class="imageTextTop">프로필 이미지 수정</div>
+											<div class="imageTextBottom">클릭해주세요</div>
+											<img class="profile" onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"'
+																							src="/images/member/${login.memberNo}/${login.memberImage}">
+										</div>
+										<input type="file" name="file" style="display: none" class="input-css">
+										<input type="hidden" name="memberImageInDB" id="memberImageInDB" value="${login.memberImage}" class="input-css">
+										<input type="hidden" name="memberEmail" id="memberEmail" value="${login.memberEmail}" class="input-css">
+										<button class="btn btn-primary btn-block" id="imgC">사진변경</button>
+									</a>
+								</li>
+							</ul>
 						</div>
-						<div class="form-group">
-							<label class="control-label" for="nickname">닉네임</label> 
-							<a href="#" class="btn btn-outline-dark btn-icon-split" style="text-align: center;" onclick="duplicate(); return false;">
-								<span class="icon text-white-30"> 
-									<i class="fas fa-check"></i>
-								</span> 
-								<span class="text">중복체크</span>
-							</a> 
-							<input type="text" name="memberName" class="input-css" placeholder="닉네임" value="${login.memberName}" id="memberName">		
-						</div>
-					</fieldset>
-					<button type="submit" class="btn btn-primary btn-block" onclick="fnSubmit(); return false;">정보 수정</button>
-				</form>
-				<div class="card-body">
-					<a href="<c:url value='/member/pwUpdateView'/>"
-						class="btn btn-info btn-block">비밀번호 변경</a> 
-					<a href="<c:url value='/member/deleteView'/>" class="btn btn-default btn-block">회원 탈퇴</a>
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">취소하기</button>
+					</form>
+					<form id="infoView" action="/member/infoUpdate" method="POST" class="form-signup form-user panel-body" autocomplete="off">
+						<input type="hidden" id="memberNameCheck" name="memberNameCheck" value="N" class="input-css" />
+						<fieldset>
+							<!-- 이메일, 닉네임 -->
+							<!-- class="form-control -->
+							<div class="form-group">
+								<label class="control-label" for="fullName">이메일</label>
+								<input type="text" name="memberEmail" class="input-css2" value="${login.memberEmail}" id="memberEmail" readonly>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="nickname">닉네임</label>
+									<a href="#" class="btn btn-outline-dark btn-icon-split" style="text-align: center;" onclick="duplicate(); return false;">
+										<span class="icon text-white-30">
+											<i class="fas fa-check"></i>
+										</span>
+										<span class="text">중복체크</span>
+									</a>
+									<input type="text" name="memberName" class="input-css" placeholder="닉네임" value="${login.memberName}" id="memberName">
+							</div>
+						</fieldset>
+						<button type="submit" class="btn btn-primary btn-block" onclick="fnSubmit(); return false;">정보 수정</button>
+					</form>
+					<div class="card-body">
+						<a href="<c:url value='/member/pwUpdateView'/>" class="btn btn-info btn-block">비밀번호 변경</a>
+						<a href="<c:url value='/member/deleteView'/>" class="btn btn-default btn-block">회원 탈퇴</a>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 </html>

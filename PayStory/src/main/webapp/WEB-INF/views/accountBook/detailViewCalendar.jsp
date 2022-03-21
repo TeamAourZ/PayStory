@@ -20,7 +20,7 @@
 									<th style="width: 14%;">SAT</th>
 								</tr>
 							</thead>
-							<tbody class="dateSel">
+							<tbody class="dateSel typeB">
 								<%-- 당월 날짜 index --%>
 								<c:set var="dateIndex" value="0" />
 								
