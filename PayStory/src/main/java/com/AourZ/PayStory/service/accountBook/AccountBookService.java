@@ -31,21 +31,16 @@ public class AccountBookService implements IAccountBookService {
 		dao.createMyAccountBook(memberNo);
 	}
 
-	/* 일반 가계부 조회 */
+	/* 가계부 조회 */
 	@Override
-	public AccountBookVO selectMyAccountBook(String memberNo, boolean isShared) {
+	public AccountBookVO selectAccountBook(String condition, Object value, boolean isShared) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
-		map.put("memberNo", memberNo);
+		map.put("condition", condition);
+		map.put("value", value);
 		map.put("isShared", isShared);
 
-		return dao.selectMyAccountBook(map);
-	}
-
-	/* 공유 가계부 조회 */
-	@Override
-	public AccountBookVO selectShareAccountBook(int accountBookNo) {
-		return dao.selectShareAccountBook(accountBookNo);
+		return dao.selectAccountBook(map);
 	}
 
 	/* 가계부 예산 조회 */

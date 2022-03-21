@@ -448,7 +448,7 @@
 		</c:if>
 		
 		<!-- 영수증 이미지 Modal-->
-		<jsp:include page="/WEB-INF/views/accountBook/receiptImageModal.jsp" flush="true" />
+		<jsp:include page="/WEB-INF/views/accountBook/modal/receiptImageModal.jsp" flush="true" />
 		
 		<!-- Scroll to Top Button-->
 		<a class="scroll-to-top rounded" href="#page-top">

@@ -195,7 +195,7 @@
 		</c:choose>
 		
 		<%-- 영수증 이미지 모달 --%>
-		<jsp:include page="/WEB-INF/views/accountBook/receiptImageModal.jsp" flush="true" />
+		<jsp:include page="/WEB-INF/views/accountBook/modal/receiptImageModal.jsp" flush="true" />
 		
 		<%-- 수정자 조회 모달 --%>
 		<jsp:include page="/WEB-INF/views/accountBook/modal/editHistoryModal.jsp" flush="true" />
