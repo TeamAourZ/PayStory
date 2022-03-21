@@ -23,7 +23,7 @@ public class AccountBookMethod {
 	private AccountBookService accountBookService;
 
 	/* 로그인 정보 확인 */
-	void sessionCheck(Object obj, HttpServletResponse response) {
+	boolean sessionCheck(Object obj, HttpServletResponse response) {
 		try {
 			if (obj == null) {
 				response.setContentType("text/html; charset=UTF-8");
@@ -33,10 +33,14 @@ public class AccountBookMethod {
 				out.println("<script>alert('로그인 정보가 정확하지 않습니다.'); location.href='/index';</script>");
 
 				out.flush();
+				
+				return false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return true;
 	}
 
 	/* 숫자 0 채우기 */
