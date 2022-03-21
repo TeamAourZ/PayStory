@@ -70,7 +70,7 @@ public class AccountBookController {
 		session.setAttribute("accountBookNo", accountBookNo);
 
 		String accountBookTitle = accountBookInfo.getAccountBookTitle(); // 가계부 타이틀
-		boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분 - 일반 가계부
+		boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분
 
 		model.addAttribute("accountBookTitle", accountBookTitle);
 		model.addAttribute("isShared", isShared);
@@ -389,11 +389,9 @@ public class AccountBookController {
 			return "index";
 		}
 		int accountBookNo = (int) session.getAttribute("accountBookNo"); // 가계부 번호
-
-		// 가계부 정보 가져오기
-		AccountBookVO accountBookInfo = accountBookService.selectAccountBook("accountBook", accountBookNo, true);
-
-		boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분
+		boolean isShared = (boolean) session.getAttribute("isShared"); // 가계부 구분
+		
+		System.out.println(isShared);
 
 		model.addAttribute("isShared", isShared);
 
@@ -698,8 +696,9 @@ public class AccountBookController {
 //		// session 정보 가져오기
 //		HttpSession session = request.getSession();
 //		int accountBookNo = (int) session.getAttribute("accountBookNo");
-//		
-//		AccountBookVO accountBook = accountBookService.sele
+//		boolean isShared = (boolean) session.getAttribute("isShared");
+//
+//		AccountBookVO accountBook = accountBookService.selectAccountBook("accountBook", accountBookNo, isShared);
 //	}
 
 	/* 지출, 수입 내역 추가 form으로 이동 */
