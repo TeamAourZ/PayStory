@@ -13,12 +13,14 @@
 		<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 		<!-------- CSS : Custom -------->
 		<link href="<c:url value='/main/css/board/updateBoardForm.css' />" rel="stylesheet" type="text/css">
+	
+		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>	
 	</head>
 	<body>
 		<div id="wrapper">
 
        <!-- Side Bar -->
-       <jsp:include page="/WEB-INF/views/layout/boardSideMenu.jsp"  flush="true" />
+       <jsp:include page="/WEB-INF/views/layout/sideMenu.jsp"  flush="true" />
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -27,7 +29,7 @@
             <div id="content">
 				
 				<!-- Top Menu Bar  -->
-                <jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />
+                <jsp:include page="/WEB-INF/views/layout/topMenu.jsp" flush="true" />
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -52,24 +54,36 @@
 											<c:choose>
 												<c:when test="${ board.boardCategoryNo eq 'bc002' }">
 													<option disabled value="">카테고리를 선택해주세요.</option>
+													<c:if test="${ sessionScope.memberRank eq '3' }">
+														<option value="bc001">공지사항</option>
+													</c:if>
 													<option selected value="bc002">질문</option>
 													<option value="bc003">정보공유</option>
 													<option value="bc004">자유게시판</option>
 												</c:when>
 												<c:when test="${ board.boardCategoryNo eq 'bc003' }">
 													<option disabled value="">카테고리를 선택해주세요.</option>
+													<c:if test="${ sessionScope.memberRank eq '3' }">
+														<option value="bc001">공지사항</option>
+													</c:if>
 													<option value="bc002">질문</option>
 													<option selected value="bc003">정보공유</option>
 													<option value="bc004">자유게시판</option>
 												</c:when>
 												<c:when test="${ board.boardCategoryNo eq 'bc004' }">
 													<option disabled value="">카테고리를 선택해주세요.</option>
+													<c:if test="${ sessionScope.memberRank eq '3' }">
+														<option value="bc001">공지사항</option>
+													</c:if>
 													<option value="bc002">질문</option>
 													<option value="bc003">정보공유</option>
 													<option selected value="bc004">자유게시판</option>
 												</c:when>
 												<c:otherwise>
 													<option selected disabled value="">카테고리를 선택해주세요.</option>
+													<c:if test="${ sessionScope.memberRank eq '3' }">
+														<option value="bc001">공지사항</option>
+													</c:if>
 													<option value="bc002">질문</option>
 													<option value="bc003">정보공유</option>
 													<option value="bc004">자유게시판</option>
@@ -113,7 +127,6 @@
 
 
 	<!-------- JS : Bootstrap -------->
-	<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
 	<script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js' />"></script>
 	<script src="<c:url value='/bootstrap/vendor/jquery-easing/jquery.easing.min.js' />"></script>
 	<script src="<c:url value='/bootstrap/js/sb-admin-2.min.js' />"></script>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.AourZ.PayStory.dao.IAccountBookDAO;
 import com.AourZ.PayStory.model.accountBook.AccountBookBudgetVO;
 import com.AourZ.PayStory.model.accountBook.AccountBookVO;
+import com.AourZ.PayStory.model.accountBook.EditorVO;
 import com.AourZ.PayStory.model.accountBook.ExpenditureItemVO;
 import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
 import com.AourZ.PayStory.model.accountBook.IncomeVO;
@@ -75,6 +76,28 @@ public class AccountBookService implements IAccountBookService {
 		return dao.selectMemberInfo(map);
 	}
 
+	/* 수입 내역 조회 (단일) */
+	@Override
+	public IncomeVO selectIncome(int accountBookNo, String dataNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("accountBookNo", accountBookNo);
+		map.put("dataNo", dataNo);
+
+		return dao.selectIncome(map);
+	}
+
+	/* 지출 내역 조회 (단일) */
+	@Override
+	public ExpenditureVO selectExpenditure(int accountBookNo, String dataNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("accountBookNo", accountBookNo);
+		map.put("dataNo", dataNo);
+
+		return dao.selectExpenditure(map);
+	}
+
 	/* 수입 내역 조회 */
 	@Override
 	public ArrayList<IncomeVO> selectIncomeList(int accountBookNo, String date) {
@@ -95,17 +118,6 @@ public class AccountBookService implements IAccountBookService {
 		map.put("date", date);
 
 		return dao.selectExpenditureList(map);
-	}
-	
-	/* 내역 삭제 */
-	@Override
-	public void deleteItem(String condition, int dataNo) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-
-		map.put("condition", condition);
-		map.put("dataNo", dataNo);
-		
-		dao.deleteItem(map);
 	}
 
 	/* 지출 상세 항목 조회 */
@@ -130,10 +142,83 @@ public class AccountBookService implements IAccountBookService {
 		return dao.selectAccountBookTotalDataList(map);
 	}
 
-	/* 태그 이름 조회 */
+	/* 태그 번호 / 이름 조회 */
 	@Override
-	public String selectTagName(String tagNo) {
-		return dao.selectTagName(tagNo);
+	public String selectTagInfo(String condition, String tag) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("condition", condition);
+		map.put("tag", tag);
+
+		return dao.selectTagInfo(map);
+	}
+
+	/* 내역 삭제 */
+	@Override
+	public void deleteItem(String condition, int dataNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("condition", condition);
+		map.put("dataNo", dataNo);
+
+		dao.deleteItem(map);
+	}
+
+	/* 내역 수정 */
+	@Override
+	public void updateItem(HashMap<String, Object> map) {
+		dao.updateItem(map);
+	}
+
+	/* 지출 내역 상세 항목 삭제 */
+	public void deleteDetailItem(int expenditureNo) {
+		dao.deleteDetailItem(expenditureNo);
+	}
+
+	/* 내역 수정자 추가 */
+	public void insertEditor(String condition, String dataDate, String memberNo, int accountBookNo, int dataNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("condition", condition);
+		map.put("dataDate", dataDate);
+		map.put("memberNo", memberNo);
+		map.put("accountBookNo", accountBookNo);
+		map.put("dataNo", dataNo);
+
+		dao.insertEditor(map);
+	}
+
+	/* 내역 데이터 날짜 수정 */
+	public void updateDataDate(String condition, String dataDate, int dataNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("condition", condition);
+		map.put("dataDate", dataDate);
+		map.put("dataNo", dataNo);
+
+		dao.updateDataDate(map);
+	}
+
+	/* 내역 수정 데이터 번호 조회 */
+	public ArrayList<Integer> selectEditorDataNoList(String condition, int accountBookNo, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("condition", condition);
+		map.put("accountBookNo", accountBookNo);
+		map.put("date", date);
+
+		return dao.selectEditorDataNoList(map);
+	}
+
+	/* 내역 수정자 조회 */
+	public ArrayList<EditorVO> selectEditorList(String condition, int accountBookNo, int dataNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("condition", condition);
+		map.put("accountBookNo", accountBookNo);
+		map.put("dataNo", dataNo);
+
+		return dao.selectEditorList(map);
 	}
 
 	/* 게시판 게시글 리스트 */

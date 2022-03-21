@@ -13,31 +13,28 @@
 }
 </style>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>PayStory 공유 가계부</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>PayStory 공유 가계부</title>
 
-<!-- Custom fonts for this template-->
-<link href="/bootstrap/vendor/fontawesome-free/css/all.min.css"
-	rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
-<!-- Custom styles for this template-->
-<link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="/main/css/accountBook/public/publicMain.css">
+	<!-- Custom fonts for this template-->
+	<link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	<!-- Custom styles for this template-->
+	<link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/main/css/accountBook/public/publicMain.css">
+		<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
 </head>
+
 <body id="page-top">
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 
 		<!-- Side Bar -->
-		<jsp:include page="/WEB-INF/views/layout/boardSideMenu.jsp"
+		<jsp:include page="/WEB-INF/views/layout/sideMenu.jsp"
 			flush="true" />
 
 		<!-- Content Wrapper -->
@@ -47,7 +44,7 @@
 			<div id="content">
 
 				<!-- Top Menu Bar  -->
-				<jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp"
+				<jsp:include page="/WEB-INF/views/layout/topMenu.jsp"
 					flush="true" />
 
 				<!-- Begin Page Content -->
@@ -68,20 +65,22 @@
 
 						<c:forEach items="${shareMainVOList}" var="shareMain">
 							<div class="publicAccountBox" style="display: inline-block;">
-								<span
+								<span id="shareClickSpan" onclick="location.href='/accountBook/public/editParticipant?num=${shareMain.accountBookNo}'"
 									style="margin: -15px; height: 25px; width: 25px; width: 25px; float: right; padding-top: 5px;">
 									<i class="far fa-edit"></i>
 								</span>
-								<div onclick="location.href='/accountBook/public/setAccountNo?num=${shareMain.accountBookNo}'">
+								<div class="clickbox" onclick="location.href='/accountBook/public/setAccountNo?num=${shareMain.accountBookNo}'">
 									<span class="ellipsis">${shareMain.accountBookTitle}</span>
 									<div class="box" style="background: #BDBDBD;">
 										<c:choose>
 											<c:when test="${shareMain.ownerImage == null}">
 												<img class="profile" src="<c:url value='/main/images/blankprofile.png'></c:url>" alt="">
 											</c:when>
-											
+											<c:when test="${shareMain.ownerImage == ''}">
+												<img class="profile" src="<c:url value='/main/images/blankprofile.png'></c:url>" alt="">
+											</c:when>
 											<c:otherwise>
-											    <img class="profile" src=<c:url value='/images/${shareMain.ownerImage}.jpg'/>alt="">
+											    <img class="profile" src="<c:url value='/images/member/${shareMain.ownerNo}/${shareMain.ownerImage}'></c:url>"alt="">
 										    </c:otherwise>
 										</c:choose>
 
@@ -96,7 +95,7 @@
 											    </c:when>
 											   
 											    <c:otherwise>
-											        <img class="profile" src=<c:url value='/images/member/${shareMain.participantNo[0]}/${shareMain.participantImage[0]}'></c:url> width="50px" height="50px" alt="">
+											        <img class="profile" src="<c:url value='/images/member/${shareMain.participantNo[0]}/${shareMain.participantImage[0]}'></c:url>" width="50px" height="50px" alt="">
 											    </c:otherwise>
 											</c:choose>
 									</div>
@@ -108,7 +107,7 @@
 											    </c:when>
 											   
 											    <c:otherwise>
-											        <img class="profile" src=<c:url value='/images/member/${shareMain.participantNo[1]}/${shareMain.participantImage[1]}'></c:url> width="50px" height="50px" alt="">
+											        <img class="profile" src="<c:url value='/images/member/${shareMain.participantNo[1]}/${shareMain.participantImage[1]}'></c:url>" width="50px" height="50px" alt="">
 											    </c:otherwise>
 										</c:choose>
 									</div>
@@ -120,7 +119,7 @@
 											    </c:when>
 											   
 											    <c:otherwise>
-											        <img class="profile" src=<c:url value='/images/member/${shareMain.participantNo[2]}/${shareMain.participantImage[2]}'></c:url> width="50px" height="50px" alt="">
+											        <img class="profile" src="<c:url value='/images/member/${shareMain.participantNo[2]}/${shareMain.participantImage[2]}'></c:url>" width="50px" height="50px" alt="">
 											    </c:otherwise>
 										</c:choose>
 									</div>
@@ -133,7 +132,7 @@
 						<!--박스 추가 버튼-->
 
 						<div class="publicAccountBox" style="display: inline-block;">
-							<span class="ellipsisplus1">임시</span>
+							<span class="ellipsisplus1 clickbox">임시</span>
 							<div class="plusbox1" style="background: #BDBDBD;">
 								<a href="create"><button type="button" id="mainPlusBtn">
 										<i class="fa-solid fa-plus fa plusimage"></i>
@@ -199,7 +198,6 @@
 	</div>
 
 	<!-- Bootstrap core JavaScript-->
-	<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
 	<script src="/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Core plugin JavaScript-->

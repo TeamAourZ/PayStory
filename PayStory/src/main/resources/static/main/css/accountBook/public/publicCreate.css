@@ -50,6 +50,9 @@ h5{
 	align-content: center;
     width: 40%;
     margin: 0 auto;
+    display: inline-block;
+    text-align: right;
+    float: left;
 }
 
 #createPublicForm {
@@ -80,6 +83,15 @@ h5{
     border-radius: 10px;
     overflow: hidden;
     margin: 4px;
+   
+}
+
+.P-delbtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 13px;
    
 }
 

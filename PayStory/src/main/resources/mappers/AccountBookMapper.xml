@@ -61,6 +61,16 @@
 		<result property="memberNo" column="memberNo" />
 		<result property="boardCategoryNo" column="boardCategoryNo" />
 	</resultMap>
+	
+	<!-- 수정자 -->
+	<resultMap type="com.AourZ.PayStory.model.accountBook.EditorVO" id="editorList">
+		<result property="dataDate" column="dataDate" />
+		<result property="editDate" column="editDate" />
+		<result property="member" column="memberNo" />
+		<result property="accountBookNo" column="accountBookNo" />
+		<result property="incomeNo" column="incomeNo" />
+		<result property="expenditureNo" column="expenditureNo" />
+	</resultMap>
 	<!-- ─────────────────────────── resultMap ─────────────────────────── -->
 	
 	<!-- 일반 가계부 생성 -->
@@ -107,10 +117,24 @@
 			<when test="condition.equals('memberEmail')">
 				WHERE memberEmail = #{value}
 			</when>
-			<otherwise> <!-- memberNo -->
+			<when test="condition.equals('memberNo')">
 				WHERE memberNo = #{value}
-			</otherwise>
+			</when>
 		</choose>
+	</select>
+	
+	<!-- 수입 내역 조회 (단일) -->
+	<select id="selectIncome" parameterType="HashMap" resultType="com.AourZ.PayStory.model.accountBook.IncomeVO">
+		SELECT *
+		FROM income
+		WHERE accountBookNo = #{accountBookNo} AND incomeNo = #{dataNo}
+	</select>
+	
+	<!-- 지출 내역 조회 (단일) -->
+	<select id="selectExpenditure" parameterType="HashMap" resultType="com.AourZ.PayStory.model.accountBook.ExpenditureVO">
+		SELECT *
+		FROM expenditure
+		WHERE accountBookNo = #{accountBookNo} AND expenditureNo = #{dataNo}
 	</select>
 	
 	<!-- 수입 내역 조회 -->
@@ -129,6 +153,13 @@
 		ORDER BY expenditureDate ASC
 	</select>
 	
+	<!-- 지출 상세 항목 조회 -->
+	<select id="selectExpenditureItem" parameterType="int" resultMap="expenditureItemList">
+		SELECT *
+		FROM expenditure_item
+		WHERE expenditureNo = #{expenditureNo}
+	</select>
+	
 	<!-- 내역 삭제 -->
 	<delete id="deleteItem" parameterType="HashMap">
 		DELETE
@@ -144,11 +175,105 @@
 		</choose>
 	</delete>
 	
-	<!-- 지출 상세 항목 조회 -->
-	<select id="selectExpenditureItem" parameterType="int" resultMap="expenditureItemList">
-		SELECT *
+	<!-- 내역 수정 -->
+	<update id="updateItem" parameterType="HashMap">
+		<choose>
+			<when test="condition.equals('income')">
+				UPDATE income
+				SET
+					incomeDate = #{income.incomeDate},
+					incomeSource = #{income.incomeSource},
+					incomeMemo = #{income.incomeMemo},
+					incomeAmount = #{income.incomeAmount},
+					tagNo = #{income.tagNo}
+				WHERE incomeNo = #{dataNo}
+			</when>
+			<when test="condition.equals('expenditure')">
+				UPDATE expenditure
+				SET
+					expenditureDate = #{expenditureVO.expenditureDate},
+					expenditureImage = #{expenditureVO.expenditureImage},
+					expenditureSource = #{expenditureVO.expenditureSource},
+					expenditureMemo = #{expenditureVO.expenditureMemo},
+					expenditureAddress = #{expenditureVO.expenditureAddress},
+					expenditureAmount = #{expenditureVO.expenditureAmount},
+					tagNo = #{expenditureVO.tagNo}
+				WHERE expenditureNo = #{dataNo}
+			</when>
+		</choose>
+	</update>
+	
+	<!-- 지출 내역 상세 항목 삭제 -->
+	<delete id="deleteDetailItem" parameterType="int">
+		DELETE
 		FROM expenditure_item
 		WHERE expenditureNo = #{expenditureNo}
+	</delete>
+	
+	<!-- 내역 수정자 추가 -->
+	<insert id="insertEditor" parameterType="HashMap">
+		INSERT INTO editor
+		(
+			dataDate, memberNo, accountBookNo,
+			<choose>
+				<when test="condition.equals('income')">
+					incomeNo
+				</when>
+				<when test="condition.equals('expenditure')">
+					expenditureNo
+				</when>
+			</choose>
+		)
+		VALUES (#{dataDate}, #{memberNo}, #{accountBookNo}, #{dataNo})
+	</insert>
+	
+	<!-- 내역 데이터 날짜 수정 -->
+	<update id="updateDataDate" parameterType="HashMap">
+		UPDATE editor
+		SET
+			dataDate = #{dataDate}
+		<choose>
+			<when test="condition.equals('income')">
+				WHERE incomeNo = #{dataNo}
+			</when>
+			<when test="condition.equals('expenditure')">
+				WHERE expenditureNo = #{dataNo}
+			</when>
+		</choose>
+	</update>
+	
+	<!-- 내역 수정 데이터 번호 조회 -->
+	<select id="selectEditorDataNoList" parameterType="HashMap" resultType="int">
+		<choose>
+			<when test="condition.equals('income')">
+				SELECT DISTINCT incomeNo
+				FROM editor
+				WHERE accountBookNo = #{accountBookNo} AND incomeNo IS NOT NULL AND dataDate LIKE CONCAT(#{date}, '%')
+				ORDER BY incomeNo ASC
+			</when>
+			<when test="condition.equals('expenditure')">
+				SELECT DISTINCT expenditureNo
+				FROM editor
+				WHERE accountBookNo = #{accountBookNo} AND expenditureNo IS NOT NULL AND dataDate LIKE CONCAT(#{date}, '%')
+				ORDER BY expenditureNo ASC
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 내역 수정자 조회 -->
+	<select id="selectEditorList" parameterType="HashMap" resultMap="editorList">
+		SELECT *
+		FROM editor
+		WHERE accountBookNo = #{accountBookNo} AND
+		<choose>
+			<when test="condition.equals('income')">
+				incomeNo = #{dataNo}
+			</when>
+			<when test="condition.equals('expenditure')">
+				expenditureNo = #{dataNo}
+			</when>
+		</choose>
+		ORDER BY editDate DESC
 	</select>
 	
 	<!-- 수입 / 지출 - 총 개수, 총 금액 조회 -->
@@ -177,11 +302,20 @@
 		ORDER BY fDate ASC
 	</select>
 	
-	<!-- 태그명 조회 -->
-	<select id="selectTagName" parameterType="String" resultType="String">
-		SELECT tagName
-		FROM tag
-		WHERE tagNo = #{tagNo}
+	<!-- 태그 번호 / 이름 조회 -->
+	<select id="selectTagInfo" parameterType="HashMap" resultType="String">
+		<choose>
+			<when test="condition.equals('no')">
+				SELECT tagNo
+				FROM tag
+				WHERE tagName = #{tag}
+			</when>
+			<when test="condition.equals('name')">
+				SELECT tagName
+				FROM tag
+				WHERE tagNo = #{tag}
+			</when>
+		</choose>
 	</select>
 	
 	<!-- 게시글 목록 조회 -->

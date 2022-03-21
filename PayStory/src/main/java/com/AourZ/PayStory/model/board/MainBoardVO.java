@@ -1,4 +1,4 @@
-package com.AourZ.PayStory.model.accountBook;
+package com.AourZ.PayStory.model.board;
 
 public class MainBoardVO {
 	private Integer boardNo;					// 게시글 번호

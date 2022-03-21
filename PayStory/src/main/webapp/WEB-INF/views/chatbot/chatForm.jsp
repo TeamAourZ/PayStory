@@ -30,7 +30,7 @@
     <div id="wrapper">
 
        <!-- Side Bar -->
-       <jsp:include page="/WEB-INF/views/layout/boardSideMenu.jsp"  flush="true" />
+       <jsp:include page="/WEB-INF/views/layout/sideMenu.jsp"  flush="true" />
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -39,7 +39,7 @@
             <div id="content">
 				
 				<!-- Top Menu Bar  -->
-                <jsp:include page="/WEB-INF/views/layout/boardTopMenu.jsp" flush="true" />
+                <jsp:include page="/WEB-INF/views/layout/topMenu.jsp" flush="true" />
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -50,7 +50,7 @@
 				            <!-- header -->
 				            <div class="header">
 				                <div class="userimg">
-				                    <img src="<c:url value="/images/member/${login.memberNo}/${login.memberImage}" />" class="cover">
+				                    <img onerror='this.src="<c:url value='/main/images/blankprofile.png'></c:url>"' src="/images/member/${login.memberNo}/${login.memberImage}" class="cover">
 				                </div>
 				                <ul class="nav_icons">
 				                    <li>
@@ -79,7 +79,7 @@
 				            <div class="chatlist">
 				                <div class="block active">
 				                    <div class="imgbox">
-				                        <img src="<c:url value='/images/logo.png' />" class="cover">
+				                        <img src="<c:url value='/main/images/logo.png' />" class="cover">
 				                    </div>
 				                    <div class="details">
 				                        <div class="listHead">
@@ -93,7 +93,7 @@
 				                </div>
 				                <div class="block unread">
 				                    <div class="imgbox">
-				                        <img src="<c:url value='/images/jang.jpg' />" class="cover">
+				                        <img src="<c:url value='/main/images/chat/jang.jpg' />" class="cover">
 				                    </div>
 				                    <div class="details">
 				                        <div class="listHead">
@@ -101,13 +101,14 @@
 				                            <p class="time">10:56</p>
 				                        </div>
 				                        <div class="message_p">
-				                            <p>Hello~?</p>
-				                            <b>1</b>
+				                            <p>하...</p>
+				                            <b>4</b>
 				                        </div>
 				                    </div>
-				                </div><div class="block unread">
+				                </div>
+				                <div class="block unread">
 				                    <div class="imgbox">
-				                        <img src="<c:url value='/images/ma.jpg' />" class="cover">
+				                        <img src="<c:url value='/main/images/chat/ma.jpg' />" class="cover">
 				                    </div>
 				                    <div class="details">
 				                        <div class="listHead">
@@ -115,8 +116,113 @@
 				                            <p class="time">10:56</p>
 				                        </div>
 				                        <div class="message_p">
-				                            <p>Hello~?</p>
+				                            <p>까꿍</p>
 				                            <b>1</b>
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class="block unread">
+				                    <div class="imgbox">
+				                        <img src="<c:url value='/main/images/chat/bin.jpg' />" class="cover">
+				                    </div>
+				                    <div class="details">
+				                        <div class="listHead">
+				                            <h4>원빈</h4>
+				                            <p class="time">02:26</p>
+				                        </div>
+				                        <div class="message_p">
+				                            <p>금이빨 빼고 모조리 다 씹어 먹어줄게</p>
+				                            <b>2</b>
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class="block unread">
+				                    <div class="imgbox">
+				                        <img src="<c:url value='/main/images/chat/hyun.jpg' />" class="cover">
+				                    </div>
+				                    <div class="details">
+				                        <div class="listHead">
+				                            <h4>안보현</h4>
+				                            <p class="time">00:00</p>
+				                        </div>
+				                        <div class="message_p">
+				                            <p>도베르만 내가 바로 미친개</p>
+				                            <b>1</b>
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class="block unread">
+				                    <div class="imgbox">
+				                        <img src="<c:url value='/main/images/chat/iu.jpg' />" class="cover">
+				                    </div>
+				                    <div class="details">
+				                        <div class="listHead">
+				                            <h4>iu</h4>
+				                            <p class="time">08:24</p>
+				                        </div>
+				                        <div class="message_p">
+				                            <p>나는요 오빠가 좋은걸~</p>
+				                            <b>14</b>
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class="block unread">
+				                    <div class="imgbox">
+				                        <img src="<c:url value='/main/images/chat/jun.jpg' />" class="cover">
+				                    </div>
+				                    <div class="details">
+				                        <div class="listHead">
+				                            <h4>위하준</h4>
+				                            <p class="time">01:51</p>
+				                        </div>
+				                        <div class="message_p">
+				                            <p>정신 똑바로 안차려?</p>
+				                            <b>6</b>
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class="block unread">
+				                    <div class="imgbox">
+				                        <img src="<c:url value='/main/images/chat/sick.jpg' />" class="cover">
+				                    </div>
+				                    <div class="details">
+				                        <div class="listHead">
+				                            <h4>최우식</h4>
+				                            <p class="time">05:05</p>
+				                        </div>
+				                        <div class="message_p">
+				                            <p>야 김다미 어디가</p>
+				                            <b>1</b>
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class="block unread">
+				                    <div class="imgbox">
+				                        <img src="<c:url value='/main/images/chat/son.jpg' />" class="cover">
+				                    </div>
+				                    <div class="details">
+				                        <div class="listHead">
+				                            <h4>손예진</h4>
+				                            <p class="time">10:56</p>
+				                        </div>
+				                        <div class="message_p">
+				                            <p>내가? 언제? 좀 예쁘긴 해</p>
+				                            <b>2</b>
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class="block unread">
+				                    <div class="imgbox">
+				                        <img src="<c:url value='/main/images/chat/suk.jpg' />" class="cover">
+				                    </div>
+				                    <div class="details">
+				                        <div class="listHead">
+				                            <h4>김민석</h4>
+				                            <p class="time">12:56</p>
+				                        </div>
+				                        <div class="message_p">
+				                            <p>하준이형 그때 너무 아프더라..</p>
+				                            <b>3</b>
 				                        </div>
 				                    </div>
 				                </div>
@@ -127,7 +233,7 @@
 				            <div class="header">
 				                <div class="imgText">
 				                    <div class="userimg">
-				                        <img src="<c:url value='/images/logo.png' />" class="cover">
+				                        <img src="<c:url value='/main/images/logo.png' />" class="cover">
 				                    </div>
 				                    <h4>PayStory 챗봇<br><span>online</span></h4>
 				                </div>

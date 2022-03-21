@@ -30,6 +30,22 @@ function checkToday() {
 	});
 }
 
+/* 갱신 시 날짜 선택 스타일 유지 */
+function maintainDay(year, month, day) {
+	let date = year + '-' + zeroFill(month + 1) + '-' + zeroFill(day);
+
+	$('.infoBox').each(function() {
+		if ($(this).hasClass('border-color-black')) {
+			$(this).removeClass('border-color-black');
+			$(this).children('div.dateBox').children('div.date').removeClass('selected');
+		}
+		if ($(this).children('div.dateBox').children('div.date').hasClass(date)) {
+			$(this).addClass('border-color-black');
+			$(this).children('div.dateBox').children('div.date').addClass('selected');
+		}
+	});
+}
+
 /* 대시보드 메인 - 달력 (A, B) 상세 박스 선택 */
 function detailBoxSelect(obj, isType, isTag) {
 	let detailBox;
@@ -70,4 +86,95 @@ function detailBoxHide() {
 			return;
 		}
 	});
+}
+
+/* 숫자 0 채우기 */
+function zeroFill(num) {
+	return num < 10 ? "0" + num : num;
+}
+
+/* 달력 이동 년, 월, 일 전환 */
+function tabChange(before, after) {
+	before.removeClass('active show');
+	before.addClass('d-none');
+
+	after.removeClass('d-none');
+	after.addClass('active show');
+}
+
+/* 달력 이동 초기화 */
+function tabReset(year, month, day) {
+	$('#modalYearBox').addClass('active show');
+	$('#modalMonthBox').removeClass('active show');
+	$('#modalDayBox').removeClass('active show');
+
+	$('#modalYearBox').removeClass('d-none');
+	$('#modalMonthBox').addClass('d-none');
+	$('#modalDayBox').addClass('d-none');
+
+	resetSelected(year);
+	resetSelected(month);
+	resetSelected(day);
+
+	$('#dateMoveBtn').attr('disabled', true);
+	$('#dateMoveBtn').removeClass('btn-primary');
+	$('#dateMoveBtn').addClass('btn-danger disabled');
+
+	init($('.modalYear'), $('.modalMonth'), $('.modalDay'));
+}
+
+/* 달력 이동 현재 날짜 선택 */
+function addSelected(obj, value) {
+	obj.each(function() {
+		if ($(this).text() == value) {
+			$(this).addClass('selected');
+		}
+	});
+}
+
+/* 달력 이동 날짜 선택 초기화 */
+function resetSelected(obj) {
+	obj.each(function() {
+		if ($(this).hasClass('selected')) {
+			$(this).removeClass('selected');
+		}
+	});
+}
+
+/* 달력 이동 출력 텍스트 변경 */
+function changeText(year, month, day) {
+	$('#selectDate').text(
+		(year != -1 ? year + "년 " : "") +
+		(month != -1 ? month + "월 " : "") +
+		(day != -1 ? day + "일" : "")
+	);
+}
+
+/* 달력 이동 초기화 (현재 날짜) */
+function init(yearObj, monthObj, dayObj) {
+	addSelected(yearObj, date.getFullYear());
+	addId(date.getFullYear());
+
+	addSelected(monthObj, date.getMonth() + 1);
+
+	addSelected(dayObj, date.getDate());
+
+	changeText(date.getFullYear(), date.getMonth() + 1, date.getDate());
+}
+
+/* 현재 년도 id 추가 (scrollspy) */
+function addId(value) {
+	$('.modalYear').each(function() {
+		if ($(this).text() == value) {
+			$(this).attr({
+				id: 'nowYear'
+			})
+		}
+	});
+}
+
+/* 모달 전환 */
+function switchModal(before, after) {
+	after.modal('show');
+	before.modal('hide');
 }

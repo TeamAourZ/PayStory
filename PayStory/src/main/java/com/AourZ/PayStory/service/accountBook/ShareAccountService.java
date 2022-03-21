@@ -55,6 +55,12 @@ public class ShareAccountService implements IShareAccountService {
 	public ArrayList<MemberVO> selectShareAccountParticipant(int accountBookNo) {
 		return dao.selectShareAccountParticipant(accountBookNo);
 	}
+
+	@Override
+	public String existParticipant(String participantNo) {
+		return dao.existParticipant(participantNo);
+		
+	}
 	
 	
 }

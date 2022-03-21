@@ -4,6 +4,10 @@ var nowYear = date.getFullYear();
 var nowMonth = date.getMonth(); // 0~11까지
 var nowDay = date.getDate(); // 오늘 날짜
 
+var firstDay = new Date(nowYear, nowMonth, 1).getDay(); // 달의 시작 요일 번호
+var lastDate = new Date(nowYear, nowMonth + 1, 0).getDate(); // 달의 마지막 날
+var lastDay = new Date(nowYear, nowMonth + 1, 0).getDay(); // 달의 마지막 요일 번호
+
 var isType = ""; // 달력 타입
 
 $(function() {
@@ -14,7 +18,16 @@ $(function() {
 		isType = "B";
 	}
 
-	calendarAjax(isType, nowYear, nowMonth); // 달력
+	// 순서 설정
+	if (getWidth() < 1183) {
+		$('#chartAndBoardCard').css('order', '1');
+		$('#calendarCard').css('order', '0');
+	} else {
+		$('#chartAndBoardCard').css('order', '0');
+		$('#calendarCard').css('order', '1');
+	}
+
+	calendarAjax(isType, nowYear, nowMonth, -1); // 달력
 	chartAjax(nowYear, nowMonth, nowDay); // 차트
 	budgetStatusAjax(nowYear, nowMonth); // 예산 현황
 	mainBoardAjax(); // 게시판
@@ -23,87 +36,34 @@ $(function() {
 	$(window).resize(function() {
 		let width = getWidth();
 
+		// 달력 설정
 		if (width >= 1374 && isType == "B") {
 			isType = "A";
-			calendarAjax(isType, nowYear, nowMonth); // 달력
+			calendarAjax(isType, nowYear, nowMonth, -1); // 달력
 		} else if (width < 1374 && isType == "A") {
 			isType = "B";
-			calendarAjax(isType, nowYear, nowMonth); // 달력
+			calendarAjax(isType, nowYear, nowMonth, -1); // 달력
 		} else if (width >= 620 && isType == "B") {
 			$('.isScroll').removeClass('table-responsive');
 		} else if (width < 620 && isType == "B") {
 			$('.isScroll').addClass('table-responsive');
 		}
-	});
 
-	/* 이전 버튼 클릭 */
-	$('#prevMonthBtn').on('click', () => {
-		nowMonth--;
-		if (nowMonth === -1) { // 0월이 되면 이전 연도 12월로 변경
-			nowYear--;
-			nowMonth += 12;
+		// 순서 설정
+		if (width < 1183) {
+			$('#chartAndBoardCard').css('order', '1');
+			$('#calendarCard').css('order', '0');
+		} else {
+			$('#chartAndBoardCard').css('order', '0');
+			$('#calendarCard').css('order', '1');
 		}
-
-		nowDay = -1;
-
-		calendarAjax(isType, nowYear, nowMonth); // 달력
-		chartAjax(nowYear, nowMonth, nowDay); // 차트
-		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
-	});
-
-	/* 다음 버튼 클릭 */
-	$('#nextMonthBtn').on('click', () => {
-		nowMonth++;
-		if (nowMonth === 12) { // 13월이 되면 다음 연도 1월로 변경
-			nowYear++;
-			nowMonth -= 12;
-		}
-
-		nowDay = -1;
-
-		calendarAjax(isType, nowYear, nowMonth); // 달력
-		chartAjax(nowYear, nowMonth, nowDay); // 차트
-		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
-	});
-
-	/* today 버튼 클릭 */
-	$('#todayBtn').on('click', () => {
-		const date = new Date();
-
-		nowYear = date.getFullYear();
-		nowMonth = date.getMonth();
-		nowDay = date.getDate();
-
-		calendarAjax(isType, nowYear, nowMonth); // 달력
-		chartAjax(nowYear, nowMonth, nowDay); // 차트
-		budgetStatusAjax(nowYear, nowMonth); // 예산 현황
-	});
-
-	/* 달력 클릭 이벤트 */
-	$(document).on('click', '.infoBox', function(e) {
-		e.stopImmediatePropagation();
-
-		$('.infoBox').each(function() {
-			if ($(this).hasClass('border-color-black')) {
-				$(this).removeClass('border-color-black');
-				$(this).children('div.dateBox').children('div.date').removeClass('selected');
-			}
-		});
-
-		$(this).addClass('border-color-black');
-		$(this).children('div.dateBox').children('div.date').addClass('selected');
-
-		$('.viewOn').addClass('d-none');
-		$('.viewOn').removeClass('viewOn');
-
-		nowDay = $('.date.selected').text();
 	});
 
 	/* 달력 + 버튼 클릭 이벤트 */
 	$('#selectDayAddDataBtn').on('click', function() {
 		if (0 < nowDay && nowDay <= 31) {
 			let year = nowYear;
-			let month = nowMonth + 1;
+			let month = (nowMonth * 1) + 1;
 			let day = nowDay;
 			let hours = date.getHours();
 			let minutes = date.getMinutes();
@@ -151,34 +111,6 @@ $(function() {
 		detailBox.parent('div.detailBox').css('margin-top', '-4.2em');
 	});
 
-	/* detailBox 닫기 - 수입 상세 태그 / 지출 상세 태그 / 월별 예산 현황 / 공유 회원 목록 */
-	$(document).on('click', '.detailBoxClose', function(e) {
-		e.stopImmediatePropagation();
-
-		$(this).parent().parent().parent().parent().parent().addClass('d-none');
-	});
-
-	/* 당월 예산, 남은 예산, 총 수입금, 총 지출금 */
-	$(document).on('click', '.budgetStatusBoxToggle', function(e) {
-		e.stopImmediatePropagation();
-
-		$('#budgetStatusBox').toggleClass('d-none');
-	});
-
-	/* 차트 태그 선택 */
-	$(document).on('click', '.chartTab', function(e) {
-		e.stopImmediatePropagation();
-
-		$('.chartTab').each(function() {
-			if ($(this).hasClass('selected')) {
-				$(this).removeClass('font-weight-bold text-primary selected');
-			}
-		});
-		$(this).addClass('font-weight-bold text-primary selected');
-
-		chartAjax(nowYear, nowMonth, nowDay); // 차트
-	});
-
 	/* 게시판 카테고리 선택 (전체, 공지사항) */
 	$('.boardCategory').on('click', function() {
 		$('.boardCategory').each(function() {
@@ -191,19 +123,15 @@ $(function() {
 		mainBoardAjax(); // 게시판
 	});
 
-	/* 게시판 호버 */
-	$(document).on('click', '.postItem', function(e) {
-		e.stopImmediatePropagation();
-
+	/* 게시글 클릭 */
+	$(document).on('click', '.postItem', function() {
 		let boardNo = $(this).children('input').val();
 
 		location.href = '/board/view/' + boardNo;
 	});
-
-	/* 공유 회원 목록 */
-	$(document).on('click', '.shareMemberBoxToggle', function(e) {
-		e.stopImmediatePropagation();
-
-		$('#shareMemberBox').toggleClass('d-none');
+	
+	/* 가계부 설정 클릭 */
+	$('#accountBookSettings').on('click', function() {
+		$('#accountBookInfoModal').modal('show');
 	});
 });
