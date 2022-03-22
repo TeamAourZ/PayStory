@@ -63,11 +63,28 @@
 
 					<div class="tab-content p-4 bg-white rounded">
 						<!----------------------- 추가 ---------------------------->
-
 						<div class="publicBox shadow">
 							<div class="card-header">
 								<center>
-									<h5>참여자 수정</h5>
+									<h5>참여자 추가</h5>
+								</center>
+							</div>
+							<form id="addParticipantForm" name="addParticipantForm"
+								action="<c:url value='/accountBook/public/addParticipant'/>">
+								<div align="right" class=profileBox>
+									<img class="profileImage"src="<c:url value='/main/images/blankprofile.png'></c:url>" alt="">
+								</div>
+								<input id="participant" type="text" name="participant"
+									class="participantinputbox" placeholder="초대할 이메일주소" size="50">
+									<button type="submit" id="submitbtn1" class="ShareAddParticipantBtn">추가</button>
+								
+							</form>
+						</div>
+						
+						<div class="publicBox shadow">
+							<div class="card-header">
+								<center>
+									<h5>참여자 삭제</h5>
 								</center>
 							</div>
 
@@ -122,25 +139,17 @@
 									</div>
 									<div class=profileBox2>${shareMainVO.participantName[status.index]}</div>
 									<button type='button' id='delbtn"+emailIndex+"'
-										class='P-delbtn delbox btn1'
+										class='ShareAddParticipantBtn'
 										onclick='delParticipant("${shareMainVO.participantNo[status.index]}", "${fn:length(shareMainVO.participantNo)}")'>
-										<i class='fa-solid fa-xmark delImage'></i>
+										삭제
 									</button>
 								</div>
 
 							</c:forEach>
 
-							<form id="addParticipantForm" name="addParticipantForm"
-								action="<c:url value='/accountBook/public/addParticipant'/>">
-								<input id="participant" type="text" name="participant"
-									class="inputbox plusbox" placeholder="초대할 이메일주소" size="50">
-								<div class="clearboth"></div>
-								<div class="choice">
-									<button type="submit" id="submitbtn1" class="btn1">추가</button>
-								</div>
-							</form>
+							
 						</div>
-
+					
 					</div>
 
 				</div>

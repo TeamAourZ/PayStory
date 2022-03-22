@@ -990,9 +990,6 @@ public class AccountBookController {
 	@RequestMapping("/accountBook/public/addParticipant")
 	public String addParticipant(ShareAccountBookVO shareAccountBook,  HttpSession httpSession) {
 		
-		//@RequestParam("participantNo") String participantNO,
-		
-		//String currentMemberNo = (String) httpSession.getAttribute("memberNo");
 		int currentAccountBookNo = (int) httpSession.getAttribute("accountBookNo");
 		
 		shareAccountBook.setOwner((String) httpSession.getAttribute("memberNo"));
