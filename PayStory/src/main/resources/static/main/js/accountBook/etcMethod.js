@@ -178,3 +178,13 @@ function switchModal(before, after) {
 	after.modal('show');
 	before.modal('hide');
 }
+
+/* 금액 천단위 콤마 생성 */
+function withComma(num) {
+	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+/* 금액 콤마 해제 */
+function withoutComma(num) {
+	return num.toString().replace(/,/g, '');
+}

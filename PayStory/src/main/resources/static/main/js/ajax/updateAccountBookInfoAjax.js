@@ -1,11 +1,14 @@
 /* 가계부 정보 모달 - 수정 */
-function updateAccountBookInfoAjax() {
+function updateAccountBookInfoAjax(title, describe) {
 	$.ajax({
 		type: 'post',
-		url: "/accountBook/modal/updateInfo",
+		url: "/accountBook/modal/updateAccountBookInfo",
 		data: {
+			"title": title,
+			"describe": describe
 		},
-		success: function(result) {
+		success: function() {
+			alert("수정 내역이 반영되었습니다.");
 		},
 		error: function() {
 			console.log("error");

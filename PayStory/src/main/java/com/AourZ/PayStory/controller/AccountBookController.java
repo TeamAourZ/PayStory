@@ -65,14 +65,12 @@ public class AccountBookController {
 		AccountBookVO accountBookInfo = accountBookService.selectAccountBook("member", signInMemberNo, false);
 
 		// session 업데이트 (가계부 번호 추가)
-		int accountBookNo = accountBookInfo.getAccountBookNo(); // 가계부 번호
+		session.setAttribute("accountBookNo", accountBookInfo.getAccountBookNo()); // 가계부 번호
 
-		session.setAttribute("accountBookNo", accountBookNo);
+		model.addAttribute("accountBookTitle", accountBookInfo.getAccountBookTitle()); // 가계부 타이틀
 
-		String accountBookTitle = accountBookInfo.getAccountBookTitle(); // 가계부 타이틀
 		boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분
 
-		model.addAttribute("accountBookTitle", accountBookTitle);
 		model.addAttribute("isShared", isShared);
 
 		// session 정보 등록
@@ -94,10 +92,10 @@ public class AccountBookController {
 		// 가계부 정보 가져오기
 		AccountBookVO accountBookInfo = accountBookService.selectAccountBook("accountBook", accountBookNo, true);
 
-		String accountBookTitle = accountBookInfo.getAccountBookTitle(); // 가계부 타이틀
-		boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분 - 공유 가계부
+		model.addAttribute("accountBookTitle", accountBookInfo.getAccountBookTitle()); // 가계부 타이틀
 
-		model.addAttribute("accountBookTitle", accountBookTitle);
+		boolean isShared = accountBookInfo.getIsShared(); // 가계부 구분
+
 		model.addAttribute("isShared", isShared);
 
 		// session 정보 갱신
@@ -271,7 +269,7 @@ public class AccountBookController {
 		/* ---------------- dateList ---------------- */
 		ArrayList<DateVO> dateList = new ArrayList<DateVO>();
 
-		String monthText = methodList.zeroFill(month);
+		String monthText = methodList.zeroFill(month); // 월
 		for (int i = 1; i <= lastDate; i++) {
 			String dayText = methodList.zeroFill(i);
 
@@ -410,9 +408,9 @@ public class AccountBookController {
 		int day = Integer.parseInt((String) param.get("day")); // 일
 
 		// DB SELECT 기준 설정
-		String monthText = methodList.zeroFill(month);
-		String dayText = methodList.zeroFill(day);
-		String date = year + "-" + monthText + "-" + dayText;
+		String monthText = methodList.zeroFill(month); // 월
+		String dayText = methodList.zeroFill(day); // 일
+		String date = year + "-" + monthText + "-" + dayText; // 년-월-일
 
 		// session 정보 가져오기
 		HttpSession session = request.getSession();
@@ -489,7 +487,7 @@ public class AccountBookController {
 
 		/* ---------------- 예산 ---------------- */
 		// DB SELECT 기준 설정
-		date = year + "-" + monthText;
+		date = year + "-" + monthText; // 년-월
 
 		// 선택일 이전까지의 합 (예산 + 수입 + (-지출))
 		int amount = 0;
@@ -531,7 +529,7 @@ public class AccountBookController {
 
 		/* ---------------- 수정자 ---------------- */
 		// DB SELECT 기준 설정
-		date = year + "-" + monthText + "-" + dayText;
+		date = year + "-" + monthText + "-" + dayText; // 년-월-일
 
 		// 수입
 		Map<Integer, ArrayList<EditorVO>> incomeEditorList = methodList.selectEditorList("income", accountBookNo, date);
@@ -665,17 +663,18 @@ public class AccountBookController {
 	/* 대시보드 조회 - 내역 삭제 */
 	@ResponseBody
 	@RequestMapping("/accountBook/detailViewList/delete")
-	public void accountBookDataDelete(@RequestParam HashMap<String, Object> param, HttpSession session)
+	public void accountBookDataDelete(@RequestParam HashMap<String, Object> param, HttpServletRequest request)
 			throws IOException {
 		// map 정보 가져오기
 		String condition = (String) param.get("condition"); // 수입 / 지출 구분
 		int dataNo = Integer.parseInt((String) param.get("dataNo")); // 내역 번호
 		String receiptImage = (String) param.get("receiptImage"); // 영수증 이미지
 
-		// accountBookNo 정보 가져오기
+		// session 정보 가져오기
+		HttpSession session = request.getSession();
 		int accountBookNo = (int) session.getAttribute("accountBookNo");
 
-		// 지출 내역 삭제시 서버에서 영수증 이미지 삭제
+		// 지출 내역 삭제 시 서버에서 영수증 이미지 삭제
 		if (condition.equals("expenditure")) {
 			FileUtils.removeReceipt(accountBookNo, receiptImage);
 		}
@@ -683,23 +682,90 @@ public class AccountBookController {
 		accountBookService.deleteItem(condition, dataNo);
 	}
 
-	/* 대시보드 메인 - 가계부 정보 모달 - 조회 */
-//	@ResponseBody
-//	@RequestMapping("/accountBook/modal/selectInfo")
-//	public Map<String, String> selectAccountBookInfo(@RequestParam HashMap<String, Object> param,
-//			HttpServletRequest request) {
-//		// map 정보 가져오기
-//		String year = (String) param.get("year"); // 년ㅜ
-//		int month = Integer.parseInt((String) param.get("month")); // 월
-//		String day = "01";
-//
-//		// session 정보 가져오기
-//		HttpSession session = request.getSession();
-//		int accountBookNo = (int) session.getAttribute("accountBookNo");
-//		boolean isShared = (boolean) session.getAttribute("isShared");
-//
-//		AccountBookVO accountBook = accountBookService.selectAccountBook("accountBook", accountBookNo, isShared);
-//	}
+	/* 대시보드 메인 - 가계부 정보 모달 - 가계부 정보 조회 */
+	@ResponseBody
+	@RequestMapping("/accountBook/modal/selectAccountBookInfo")
+	public Map<String, Object> selectAccountBookInfo(HttpServletRequest request, Model model) {
+		// session 정보 가져오기
+		HttpSession session = request.getSession();
+		int accountBookNo = (int) session.getAttribute("accountBookNo");
+		boolean isShared = (boolean) session.getAttribute("isShared");
+
+		Map<String, Object> result = new HashMap<String, Object>();
+
+		// 가계부 정보 가져오기
+		AccountBookVO accountBookInfo = accountBookService.selectAccountBook("accountBook", accountBookNo, isShared);
+
+		// 가계부 제목
+		result.put("accountBookTitle", accountBookInfo.getAccountBookTitle());
+
+		// 가계부 설명
+		result.put("accountBookDescribe", accountBookInfo.getAccountBookDescribe());
+
+		return result;
+	}
+
+	/* 대시보드 메인 - 가계부 정보 모달 - 가계부 정보 수정 */
+	@ResponseBody
+	@RequestMapping("/accountBook/modal/updateAccountBookInfo")
+	public void updateAccountBookInfo(@RequestParam HashMap<String, Object> param, HttpServletRequest request) {
+		// map
+		String title = (String) param.get("title");
+		String describe = (String) param.get("describe");
+
+		// session 정보 가져오기
+		HttpSession session = request.getSession();
+		int accountBookNo = (int) session.getAttribute("accountBookNo");
+
+		accountBookService.updateAccountBook(accountBookNo, title, describe);
+	}
+
+	/* 대시보드 메인 - 가계부 정보 모달 - 예산 조회 */
+	@ResponseBody
+	@RequestMapping("/accountBook/modal/selectBudget")
+	public int selectBudget(@RequestParam HashMap<String, Object> param, HttpServletRequest request) {
+		// map 정보 가져오기
+		String year = (String) param.get("year"); // 년
+		int month = Integer.parseInt((String) param.get("month")); // 월
+
+		// DB SELECT 기준 설정
+		String monthText = methodList.zeroFill(month); // 월
+		String date = year + "-" + monthText; // 년-월
+
+		// session 정보 가져오기
+		HttpSession session = request.getSession();
+		int accountBookNo = (int) session.getAttribute("accountBookNo");
+
+		int result = 0;
+
+		AccountBookBudgetVO budget = accountBookService.selectAccountBookBudget(accountBookNo, date);
+		if (budget != null) {
+			result = budget.getBudgetAmount();
+		}
+
+		return result;
+	}
+
+	/* 대시보드 메인 - 예산 설정 모달 - 예산 추가 또는 수정 */
+	@ResponseBody
+	@RequestMapping("/accountBook/modal/budgetSetting")
+	public void budgetSetting(@RequestParam HashMap<String, Object> param, HttpServletRequest request) {
+		// map 정보 가져오기
+		String date = (String) param.get("date");
+		int budget = Integer.parseInt((String) param.get("budget"));
+
+		// session 정보 가져오기
+		HttpSession session = request.getSession();
+		int accountBookNo = (int) session.getAttribute("accountBookNo");
+
+		AccountBookBudgetVO temp = accountBookService.selectAccountBookBudget(accountBookNo, date);
+		if (temp != null) {
+			accountBookService.updateAccountBookBudget(accountBookNo, date, budget);
+		} else {
+			date += "-01";
+			accountBookService.insertAccountBookBudget(accountBookNo, date, budget);
+		}
+	}
 
 	/* 지출, 수입 내역 추가 form으로 이동 */
 	@RequestMapping("/accountBook/add")
