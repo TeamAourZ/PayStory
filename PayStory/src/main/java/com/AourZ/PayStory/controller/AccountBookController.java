@@ -906,7 +906,7 @@ public class AccountBookController {
 
 		for (int i = 0; i < shareAccountBook.getParticipant_list().length; i++) {
 			participant = shareAccountBook.getParticipant_list()[i];
-			if (participant == null) {
+			if (participant == null || participant == "") {
 				continue;
 			}
 			shareAccountBook.setParticipant(participant);
