@@ -166,7 +166,6 @@
 											data-toggle="modal" data-target="#receiptModal" <%-- 모달 --%>
 											data-toggle="tooltip" data-placement="bottom" title="영수증 이미지 보기"> <%-- 툴팁 --%>
 										</i>
-										<input type="hidden" value="${detailViewItem.receiptImage}">
 									</c:if>
 									
 									<%-- 내역 수정 --%>
