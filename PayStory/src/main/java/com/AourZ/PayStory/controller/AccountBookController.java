@@ -870,7 +870,7 @@ public class AccountBookController {
 
 		return "accountBook/public/editParticipant";
 	}
-	// 공유가계부 생성시 회원인지 아닌지
+	// 공유가계부 참여자 추가시 회원인지 아닌지
 		@ResponseBody
 		@RequestMapping("/accountBook/public/checkParticipant")
 		public String checkParticipant(Model model, @RequestParam("No") String participantNo, HttpSession httpSession) {

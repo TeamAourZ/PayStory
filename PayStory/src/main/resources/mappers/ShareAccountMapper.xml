@@ -116,6 +116,10 @@
 		)
 	</insert>
 
+
+
+
+	<!-- 회원가입되어 있는 참여자인지 확인 -->
 	<select id="existParticipant" parameterType="String" resultType="String">
 		SELECT memberNo FROM member WHERE memberEmail=#{participantNo}
 	</select>
