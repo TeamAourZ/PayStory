@@ -54,7 +54,7 @@ $(document).ready(function() {
 	            //alert(res);
 	            if(res=="nope"){
 					checkFlag = false; 
-					alert("참여자 이메일이 잘못 되었습니다");
+					alert("기재하신 이메일은 페이스토리 회원이 아닙니다");
 					
 				}else{
 	            	checkFlag = true;
