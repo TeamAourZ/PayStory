@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -35,12 +36,9 @@
 	href="/main/css/accountBook/public/publicCreate.css">
 <link rel="stylesheet" type="text/css"
 	href="/main/css/accountBook/public/publicMain.css">
-
-	<!-- Favicon -->
-	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
-
-	<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
-
+<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
+<script
+	src="<c:url value='/main/js/accountBook/public/addParticipantCheck.js'/>"></script>
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -56,161 +54,100 @@
 			<div id="content">
 
 				<!-- Top Menu Bar  -->
-				<jsp:include page="/WEB-INF/views/layout/topMenu.jsp"
-					flush="true" />
+				<jsp:include page="/WEB-INF/views/layout/topMenu.jsp" flush="true" />
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<div class="d-flex align-items-center justify-content-center mb-4">
-						<ul class="nav nav-pills nav-justified w-50">
-							<li class="nav-item mr-4"><a
-								class="nav-link border border-primary active" data-toggle="tab"
-								href="#expenditure" role="tab">추가</a></li>
-							<li class="nav-item"><a
-								class="nav-link border border-primary" data-toggle="tab"
-								href="#income" role="tab">삭제</a></li>
-						</ul>
-					</div>
-
-
-
-					<!----------------------- 추가 ---------------------------->
-
 
 					<div class="tab-content p-4 bg-white rounded">
-						<div class="tab-pane fade in show active" id="expenditure"
-							role="tabpanel">
+						<!----------------------- 추가 ---------------------------->
 
-							<div class="publicBox shadow">
-								<div class="card-header">
-									<center>
-										<h5>참여자 추가</h5>
-									</center>
-								</div>
-
-								<div class="participantPagePerson">
-									<div align="right" class=profileBox>
-										<img class="ownerImage"
-											"<c:url value='/images/member/${shareMain.ownerNo}/${shareMain.ownerImage}'></c:url>"
-											alt="">
-									</div>
-									<div class=profileBox2>강성우</div>
-								</div>
-
-								<div class="participantPagePerson">
-									<div align="right" class=profileBox>
-										<img class="profileImage"
-											src="<c:url value='/main/images/blankprofile.png'></c:url>"
-											alt="">
-									</div>
-									<div class=profileBox2>박하영</div>
-									<button type='button' id='delbtn"+emailIndex+"'
-										class='P-delbtn delbox btn1'
-										onclick='delParticipant("+emailIndex+")'>
-										<i class='fa-solid fa-xmark delImage'></i>
-									</button>
-								</div>
-
-								<div class="participantPagePerson">
-									<div align="right" class=profileBox>
-										<img class="profileImage"
-											src="<c:url value='/main/images/blankprofile.png'></c:url>"
-											alt="">
-									</div>
-									<div class=profileBox2>박하영</div>
-									<button type='button' id='delbtn"+emailIndex+"'
-										class='P-delbtn delbox btn1'
-										onclick='delParticipant("+emailIndex+")'>
-										<i class='fa-solid fa-xmark delImage'></i>
-									</button>
-								</div>
-
+						<div class="publicBox shadow">
+							<div class="card-header">
+								<center>
+									<h5>참여자 수정</h5>
+								</center>
 							</div>
-						</div>
 
+							<div class="participantPagePerson">
+								<div align="right" class=profileBox>
 
-						<!----------------------- 삭제 ---------------------------->
-
-
-						<div class="tab-pane fade in show" id="income" role="tabpanel">
-
-							<div class="publicBox shadow">
-								<div class="card-header">
-									<center>
-										<h5>참여자 삭제</h5>
-									</center>
+									<c:choose>
+										<c:when test="${shareMainVO.ownerImage == null}">
+											<img class="ownerImage"
+												src="<c:url value='/main/images/blankprofile.png'></c:url>"
+												alt="">
+										</c:when>
+										<c:when test="${shareMainVO.ownerImage == ''}">
+											<img class="ownerImage"
+												src="<c:url value='/main/images/blankprofile.png'></c:url>"
+												alt="">
+										</c:when>
+										<c:otherwise>
+											<img class="ownerImage"
+												src="<c:url value='/images/member/${shareMainVO.ownerNo}/${shareMainVO.ownerImage}'></c:url>"
+												alt="">
+										</c:otherwise>
+									</c:choose>
 								</div>
-
-								<div class="participantPagePerson">
-									<div align="right" class=profileBox>
-										<img class="ownerImage"
-											src="<c:url value='/main/images/blankprofile.png'></c:url>"
-											alt="">
-									</div>
-									<div class=profileBox2>강성우</div>
-								</div>
-								<div class="participantPagePerson">
-									<div align="right" class=profileBox>
-										<img class="profileImage"
-											src="<c:url value='/main/images/blankprofile.png'></c:url>"
-											alt="">
-									</div>
-									<div class=profileBox2>박하영</div>
-									<button type='button' id='delbtn"+emailIndex+"'
-										class='P-delbtn delbox btn1'
-										onclick='delParticipant("+emailIndex+")'>
-										<i class='fa-solid fa-xmark delImage'></i>
-									</button>
-								</div>
-								<div class="participantPagePerson">
-									<div align="right" class=profileBox>
-										<img class="profileImage"
-											src="<c:url value='/main/images/blankprofile.png'></c:url>"
-											alt="">
-									</div>
-									<div class=profileBox2>aourz</div>
-									<button type='button' id='delbtn"+emailIndex+"'
-										class='P-delbtn delbox btn1'
-										onclick='delParticipant("+emailIndex+")'>
-										<i class='fa-solid fa-xmark delImage'></i>
-									</button>
-								</div>
-
+								<div class=profileBox2>${shareMainVO.ownerName}</div>
 							</div>
-						</div>
 
+							<c:forEach items="${shareMainVO.participantNo}" var="shareMain"
+								varStatus="status">
+
+								<div class="participantPagePerson">
+									<div align="right" class=profileBox>
+										<c:choose>
+											<c:when
+												test="${shareMainVO.participantImage[status.index] == null}">
+												<img class="profileImage"
+													src="<c:url value='/main/images/blankprofile.png'></c:url>"
+													alt="">
+											</c:when>
+											<c:when
+												test="${shareMainVO.participantImage[status.index] == ''}">
+												<img class="profileImage"
+													src="<c:url value='/main/images/blankprofile.png'></c:url>"
+													alt="">
+											</c:when>
+											<c:otherwise>
+												<img class="profileImage"
+													src="<c:url value='/images/member/${shareMain}/${shareMainVO.participantImage[status.index]}'></c:url>"
+													alt="">
+											</c:otherwise>
+										</c:choose>
+									</div>
+									<div class=profileBox2>${shareMainVO.participantName[status.index]}</div>
+									<button type='button' id='delbtn"+emailIndex+"'
+										class='P-delbtn delbox btn1'
+										onclick='delParticipant("${shareMainVO.participantNo[status.index]}", "${fn:length(shareMainVO.participantNo)}")'>
+										<i class='fa-solid fa-xmark delImage'></i>
+									</button>
+								</div>
+
+							</c:forEach>
+
+							<form id="addParticipantForm" name="addParticipantForm"
+								action="<c:url value='/accountBook/public/addParticipant'/>">
+								<input id="participant" type="text" name="participant"
+									class="inputbox plusbox" placeholder="초대할 이메일주소" size="50">
+								<div class="clearboth"></div>
+								<div class="choice">
+									<button type="submit" id="submitbtn1" class="btn1">추가</button>
+								</div>
+							</form>
+						</div>
 
 					</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-					<!-- Content Row -->
-
-					<!-- Content Row -->
-
-					<!-- Content Row -->
 
 				</div>
 				<!-- /.container-fluid -->
 
 			</div>
 			<!-- End of Main Content -->
-
-			<!-- Footer -->
-
-			<!-- End of Footer -->
 
 		</div>
 		<!-- End of Content Wrapper -->
@@ -247,6 +184,7 @@
 	</div>
 
 	<!-- Bootstrap core JavaScript-->
+	<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
 	<script src="/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Core plugin JavaScript-->
@@ -274,12 +212,25 @@
 			columnWidth : 200
 		});
 
-		function delParticipant() {
+		function delParticipant(index, count) {
 			if (confirm("정말 삭제하시겠습니까??") == true) { //확인
-				location.href = "registerParticipantDo?participantNo=${shareMain.accountBookNo}";
+				location.href = "/accountBook/public/removeParticipantDo?participantNO="
+						+ index + "&participantCount=" + count;
 			} else { //취소
 				return;
 			}
+		}
+
+		function delEmail(index) {
+			$("#participant_list\\[" + index + "\\]").remove();
+			$("#delbtn" + index).remove();
+
+			/* 	if(emailIndex > index && $("#participant_list\\["+emailIndex+"\\]")!=NULL){
+					$("#participant_list\\["+index+"\\]")=$("#participant_list\\["+emailIndex+"\\]");
+					$("#participant_list\\["+emailIndex+"\\]").remove();
+					$("#delbtn"+emailIndex).remove();
+				} */
+
 		}
 	</script>
 </body>

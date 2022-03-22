@@ -21,4 +21,8 @@ public interface IShareAccountService {
 	ArrayList<MemberVO> selectShareAccountParticipant(int accountBookNo);		// 찾은 공유가계부No로 participant 이름, 이미지 조회
 	String existParticipant(String participantNo);		//공유가계부 생성화면에서 참여자 이메일 입력시 회원가입된 사람인지.
 	
+	/* 공유가계부 참여자 삭제추가 */
+	void deleteParticipant(String participantNO);
+	void deleteAccountBookWhenParticipantNull(int accountBookNo);
+	public void addShareAccountParticipant(ShareAccountBookVO shareAccountBook);
 }
