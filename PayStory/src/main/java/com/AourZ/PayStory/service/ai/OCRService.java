@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -73,7 +74,7 @@ public class OCRService {
 			}
 			br.close();
 
-			// System.out.println(response.toString());
+			System.out.println(response.toString());
 			result = jsonToVO(response.toString());
 		} catch (Exception e) {
 			System.out.println(e);
@@ -123,61 +124,74 @@ public class OCRService {
 		JSONObject jsonObj = new JSONObject(jsonResultStr);
 		JSONArray imageArray = (JSONArray) jsonObj.get("images");
 		
-		if(imageArray != null) {
-			JSONObject tempObj = (JSONObject) imageArray.get(0);
-			JSONObject receiptObj = (JSONObject) tempObj.get("receipt");
-			JSONObject resultObj = (JSONObject) receiptObj.get("result");
-			
-			/************ 상호명, 주소 추출 -> VO 저장 **************/
-			JSONObject storeObj = (JSONObject) resultObj.get("storeInfo");
-			
-			// 상호명
-			JSONObject nameObj = (JSONObject) storeObj.get("name");
-			JSONObject formattedNameObj = (JSONObject) nameObj.get("formatted");
-			
-			String expeditureSource = "";		// 상호명
-			
-			// 서브 네임이 있으면
-			if(storeObj.has("subName")) {
-				JSONObject subNameObj = (JSONObject) storeObj.get("subName");
-				JSONObject formattedSubNameObj = (JSONObject) subNameObj.get("formatted");
-				expeditureSource = (String) formattedNameObj.getString("value") + " " + (String) formattedSubNameObj.getString("value") ;
-			}else {
-				expeditureSource = (String) formattedNameObj.getString("value");
-			}
-			// System.out.println("상호 : " + expeditureSource);
-			expenditureVO.setExpenditureSource(expeditureSource);
-			
-			// 주소
-			JSONArray addressArray = (JSONArray) storeObj.get("addresses");
-			String expenditureAddress =  "";	// 주소
-			
-			if(addressArray != null) {
-				JSONObject temp2Obj = (JSONObject) addressArray.get(0);
-				JSONObject formattedAddressObj = (JSONObject) temp2Obj.get("formatted");
-				expenditureAddress = (String) formattedAddressObj.getString("value");
-				// System.out.println("주소: " + expenditureAddress);
-				expenditureVO.setExpenditureAddress(expenditureAddress);
-			}
-			
-			/************ 날짜, 시간 추출 -> VO 저장 **************/
-			JSONObject paymentObj = (JSONObject) resultObj.get("paymentInfo");
-			
-			// 날짜
-			String year, month, day = "";
-			
-			JSONObject dateObj = (JSONObject) paymentObj.get("date");
-			JSONObject formattedDateObj = (JSONObject) dateObj.get("formatted");
-			year = (String) formattedDateObj.getString("year");
-			month = (String) formattedDateObj.getString("month");
-			day = (String) formattedDateObj.getString("day");
-			
-			if(year.equals("") || month.equals("") || day.equals("")) {
-				String dateText = (String) dateObj.getString("text");
-				String[] dateTextArray = dateText.split(" ")[0].split("-");
-				year = 20 + dateTextArray[0];
-				month = dateTextArray[1];
-				day = dateTextArray[2];
+		try {
+			if(imageArray != null) {
+				JSONObject tempObj = (JSONObject) imageArray.get(0);
+				JSONObject receiptObj = (JSONObject) tempObj.get("receipt");
+				JSONObject resultObj = (JSONObject) receiptObj.get("result");
+				
+				/************ 상호명, 주소 추출 -> VO 저장 **************/
+				JSONObject storeObj = (JSONObject) resultObj.get("storeInfo");
+				
+				// 상호명
+				JSONObject nameObj = (JSONObject) storeObj.get("name");
+				JSONObject formattedNameObj = (JSONObject) nameObj.get("formatted");
+				
+				String expeditureSource = "";		// 상호명
+				
+				// 서브 네임이 있으면
+				if(storeObj.has("subName")) {
+					JSONObject subNameObj = (JSONObject) storeObj.get("subName");
+					JSONObject formattedSubNameObj = (JSONObject) subNameObj.get("formatted");
+					expeditureSource = (String) formattedNameObj.getString("value") + " " + (String) formattedSubNameObj.getString("value") ;
+				}else {
+					expeditureSource = (String) formattedNameObj.getString("value");
+				}
+				//System.out.println("상호 : " + expeditureSource);
+				expenditureVO.setExpenditureSource(expeditureSource);
+				
+				// 주소
+				JSONArray addressArray = (JSONArray) storeObj.get("addresses");
+				String expenditureAddress =  "";	// 주소
+				
+				if(addressArray != null) {
+					JSONObject temp2Obj = (JSONObject) addressArray.get(0);
+					JSONObject formattedAddressObj = (JSONObject) temp2Obj.get("formatted");
+					expenditureAddress = (String) formattedAddressObj.getString("value");
+					//System.out.println("주소: " + expenditureAddress);
+					expenditureVO.setExpenditureAddress(expenditureAddress);
+				}
+				
+				/************ 날짜, 시간 추출 -> VO 저장 **************/
+				JSONObject paymentObj = (JSONObject) resultObj.get("paymentInfo");
+				
+				// 날짜
+				String year, month, day = "";
+				
+				JSONObject dateObj = (JSONObject) paymentObj.get("date");
+				JSONObject formattedDateObj = (JSONObject) dateObj.get("formatted");
+				year = (String) formattedDateObj.getString("year");
+				month = (String) formattedDateObj.getString("month");
+				day = (String) formattedDateObj.getString("day");
+				
+				if(year.equals("") || month.equals("") || day.equals("")) {
+					String dateText = (String) dateObj.getString("text");
+					String[] dateTextArray = dateText.split(" ")[0].split("-|/|\\.|\\s");
+					year = 20 + dateTextArray[0];
+					month = dateTextArray[1];
+					day = dateTextArray[2];
+					
+					// 시간 
+					JSONObject timeObj = (JSONObject) paymentObj.get("time");
+					JSONObject formattedTimeObj = (JSONObject) timeObj.get("formatted");
+					String hour = (String) formattedTimeObj.getString("hour");
+					String minute = (String) formattedTimeObj.getString("minute");
+					
+					// 프론트단에서 자동으로 보여주기 위해 (yyyy-MM-ddThh:mm) 포맷으로 저장
+					String expenditureDate = year + "-" + month + "-" + day + "T" + hour + ":" + minute;
+					//System.out.println("일시: " + expenditureDate);
+					expenditureVO.setExpenditureDate(expenditureDate);
+				}
 				
 				// 시간 
 				JSONObject timeObj = (JSONObject) paymentObj.get("time");
@@ -187,72 +201,64 @@ public class OCRService {
 				
 				// 프론트단에서 자동으로 보여주기 위해 (yyyy-MM-ddThh:mm) 포맷으로 저장
 				String expenditureDate = year + "-" + month + "-" + day + "T" + hour + ":" + minute;
-				// System.out.println("일시: " + expenditureDate);
+				//System.out.println("일시: " + expenditureDate);
 				expenditureVO.setExpenditureDate(expenditureDate);
-			}
-			
-			// 시간 
-			JSONObject timeObj = (JSONObject) paymentObj.get("time");
-			JSONObject formattedTimeObj = (JSONObject) timeObj.get("formatted");
-			String hour = (String) formattedTimeObj.getString("hour");
-			String minute = (String) formattedTimeObj.getString("minute");
-			
-			// 프론트단에서 자동으로 보여주기 위해 (yyyy-MM-ddThh:mm) 포맷으로 저장
-			String expenditureDate = year + "-" + month + "-" + day + "T" + hour + ":" + minute;
-			// System.out.println("일시: " + expenditureDate);
-			expenditureVO.setExpenditureDate(expenditureDate);
-			
-			/************ 아이템 추출 -> VO 저장 **************/
-			JSONArray subResultArray = (JSONArray) resultObj.get("subResults");
-			if(subResultArray.length() != 0) {
-				JSONObject temp3Obj = (JSONObject) subResultArray.get(0);
 				
-				JSONArray itemArray = (JSONArray) temp3Obj.get("items");
-				
-				String expenditureItemName = "";
-				int expenditureItemPrice;
-				
-				if(itemArray != null) {
-					ArrayList<ExpenditureItemVO> expenditureItemList = new ArrayList<ExpenditureItemVO>();
-					for(int i=0; i < itemArray.length(); i++) {
-						ExpenditureItemVO itemVO = new ExpenditureItemVO();
-						JSONObject temp4Obj = (JSONObject) itemArray.get(i);
-						
-						if(temp4Obj.has("price")) {
-							// 아이템 이름 추출
-							JSONObject itemNameObj = (JSONObject) temp4Obj.get("name");
-							JSONObject formattedItemNameObj = (JSONObject) itemNameObj.get("formatted");
-							expenditureItemName = (String) formattedItemNameObj.getString("value");
+				/************ 아이템 추출 -> VO 저장 **************/
+				JSONArray subResultArray = (JSONArray) resultObj.get("subResults");
+				if(subResultArray.length() != 0) {
+					JSONObject temp3Obj = (JSONObject) subResultArray.get(0);
+					
+					JSONArray itemArray = (JSONArray) temp3Obj.get("items");
+					
+					String expenditureItemName = "";
+					int expenditureItemPrice;
+					
+					if(itemArray != null) {
+						ArrayList<ExpenditureItemVO> expenditureItemList = new ArrayList<ExpenditureItemVO>();
+						for(int i=0; i < itemArray.length(); i++) {
+							ExpenditureItemVO itemVO = new ExpenditureItemVO();
+							JSONObject temp4Obj = (JSONObject) itemArray.get(i);
 							
-							// 아이템 가격 추출
-							JSONObject priceObj = (JSONObject) temp4Obj.get("price");
-							JSONObject itemPriceObj = (JSONObject) priceObj.get("price");
-							JSONObject formattedPriceNameObj = (JSONObject) itemPriceObj.get("formatted");
-							expenditureItemPrice = Integer.parseInt((String) formattedPriceNameObj.get("value"));
-							
-							// expenditureItemVO에 저장 후 expenditureItemList에 담기
-							itemVO.setExpenditureItemName(expenditureItemName);
-							itemVO.setExpenditureItemPrice(expenditureItemPrice);
-							// System.out.println("상품 번호 "+ (i+1) +" =======================");
-							// System.out.println("내용:" + expenditureItemName + "금액:" + expenditureItemPrice );
-							expenditureItemList.add(itemVO);
+							if(temp4Obj.has("price")) {
+								// 아이템 이름 추출
+								JSONObject itemNameObj = (JSONObject) temp4Obj.get("name");
+								JSONObject formattedItemNameObj = (JSONObject) itemNameObj.get("formatted");
+								expenditureItemName = (String) formattedItemNameObj.getString("value");
+								
+								// 아이템 가격 추출
+								JSONObject priceObj = (JSONObject) temp4Obj.get("price");
+								JSONObject itemPriceObj = (JSONObject) priceObj.get("price");
+								JSONObject formattedPriceNameObj = (JSONObject) itemPriceObj.get("formatted");
+								expenditureItemPrice = Integer.parseInt((String) formattedPriceNameObj.get("value"));
+								
+								// expenditureItemVO에 저장 후 expenditureItemList에 담기
+								itemVO.setExpenditureItemName(expenditureItemName);
+								itemVO.setExpenditureItemPrice(expenditureItemPrice);
+								//System.out.println("상품 번호 "+ (i+1) +" =======================");
+								//System.out.println("내용:" + expenditureItemName + "금액:" + expenditureItemPrice );
+								expenditureItemList.add(itemVO);
+							}
 						}
+						// expenditureVO에 expenditureItemList 추가
+						expenditureVO.setItemList(expenditureItemList);
 					}
-					// expenditureVO에 expenditureItemList 추가
-					expenditureVO.setItemList(expenditureItemList);
 				}
+				
+				/************ 총 금액 추출 -> VO 저장 ************/
+				JSONObject totalPriceObj = (JSONObject) resultObj.get("totalPrice");
+				JSONObject priceObj = (JSONObject) totalPriceObj.get("price");
+				JSONObject formattedPriceObj = (JSONObject) priceObj.get("formatted");
+				
+				int expenditureAmount = Integer.parseInt((String) formattedPriceObj.get("value"));
+				//System.out.println("=========================");
+				//System.out.println("총 금액 : " + expenditureAmount);
+				expenditureVO.setExpenditureAmount(expenditureAmount);
 			}
-			
-			/************ 총 금액 추출 -> VO 저장 ************/
-			JSONObject totalPriceObj = (JSONObject) resultObj.get("totalPrice");
-			JSONObject priceObj = (JSONObject) totalPriceObj.get("price");
-			JSONObject formattedPriceObj = (JSONObject) priceObj.get("formatted");
-			
-			int expenditureAmount = Integer.parseInt((String) formattedPriceObj.get("value"));
-			// System.out.println("=========================");
-			// System.out.println("총 금액 : " + expenditureAmount);
-			expenditureVO.setExpenditureAmount(expenditureAmount);
-		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
 		return expenditureVO;
 	}
 }

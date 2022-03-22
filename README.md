@@ -11,20 +11,12 @@
 - **Members**
 <table>
   <tr>
-    <td align="center"><a href="https://githib.com/Hyeon-2"><b>김현</b></a></td>
-    <td align="center"><a href="https://githib.com/john9256"><b>강성우</b></a></td>
-    <td align="center"><a href="https://githib.com/happai079"><b>박하영</b></a></td>
-    <td align="center"><a href="https://githib.com/reactionj"><b>서정원</b></a></td>
-    <td align="center"><a href="https://githib.com/Jung-Minyoung"><b>정민영</b></a></td>
-    <td align="center"><a href="https://githib.com/YSfallingStar"><b>정유성</b></a></td>
-  </tr>
-  <tr>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
+    <td align="center"><a href="https://github.com/Hyeon-2" target="_blank"><b>김현</b></a></td>
+    <td align="center"><a href="https://github.com/john9256" target="_blank"><b>강성우</b></a></td>
+    <td align="center"><a href="https://github.com/happai079" target="_blank"><b>박하영</b></a></td>
+    <td align="center"><a href="https://github.com/reactionj" target="_blank"><b>서정원</b></a></td>
+    <td align="center"><a href="https://github.com/Jung-Minyoung" target="_blank"><b>정민영</b></a></td>
+    <td align="center"><a href="https://github.com/YSfallingStar" target="_blank"><b>정유성</b></a></td>
   </tr>
 </table>
 
