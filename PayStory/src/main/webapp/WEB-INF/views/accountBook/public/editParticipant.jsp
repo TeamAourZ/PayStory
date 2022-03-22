@@ -222,10 +222,20 @@
 		});
 
 		function delParticipant(index, count) {
-			if (confirm("정말 삭제하시겠습니까??") == true) { //확인
+			if (confirm("정말 삭제하시겠습니까?") == true) { //확인
+				if(count==1){
+					if(confirm("이 공유가계부를 삭제하시겠습니까?") == true){
+						location.href = "/accountBook/public/removeParticipantDo?participantNO="
+							+ index + "&participantCount=" + count;
+					}
+					else{
+						return;
+					}
+				}
 				location.href = "/accountBook/public/removeParticipantDo?participantNO="
 						+ index + "&participantCount=" + count;
-			} else { //취소
+			}
+			else { //취소
 				return;
 			}
 		}
