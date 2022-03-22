@@ -24,7 +24,7 @@
     <!-- Favicon -->
 	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
 	
-    <script src="/main/js/ai/jquery-3.6.0.min.js"></script>
+    <script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
 	
 </head>
 
@@ -126,9 +126,6 @@
     <!-- Bootstrap core JavaScript-->
     <script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
     <script src="/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="/bootstrap/js/sb-admin-2.min.js"></script>
