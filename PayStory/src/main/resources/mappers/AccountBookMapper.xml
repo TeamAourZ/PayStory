@@ -95,12 +95,37 @@
 		</choose>
 	</select>
 	
+	<!-- 가계부 수정 -->
+	<update id="updateAccountBook" parameterType="HashMap">
+		UPDATE account_book
+		SET
+			accountBookTitle = #{title},
+			accountBookDescribe = #{describe}
+		WHERE accountBookNo = #{accountBookNo}
+	</update>
+	
 	<!-- 가계부 예산 조회 -->
 	<select id="selectAccountBookBudget" parameterType="HashMap" resultType="com.AourZ.PayStory.model.accountBook.AccountBookBudgetVO">
 		SELECT budgetAmount
 		FROM account_book_budget
 		WHERE accountBookNo = #{accountBookNo} AND DATE_FORMAT(budgetDate, '%Y-%m') = #{date}
 	</select>
+	
+	<!-- 가계부 예산 추가 -->
+	<insert id="insertAccountBookBudget" parameterType="HashMap">
+		INSERT INTO account_book_budget
+			(budgetDate, budgetAmount, accountBookNo)
+		VALUES
+			(#{date}, #{budget}, #{accountBookNo})
+	</insert>
+	
+	<!-- 가계부 예산 수정 -->
+	<update id="updateAccountBookBudget" parameterType="HashMap">
+		UPDATE account_book_budget
+		SET
+			budgetAmount = #{budget}
+		WHERE accountBookNo = #{accountBookNo} AND DATE_FORMAT(budgetDate, '%Y-%m') = #{date}
+	</update>
 	
 	<!-- 공유 가계부 소유자, 참여자 조회 -->
 	<select id="selectShareMemberList" parameterType="int" resultMap="shareMemberList">

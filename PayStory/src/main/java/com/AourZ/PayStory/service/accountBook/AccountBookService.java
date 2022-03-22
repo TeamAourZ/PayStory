@@ -43,6 +43,17 @@ public class AccountBookService implements IAccountBookService {
 		return dao.selectAccountBook(map);
 	}
 
+	/* 가계부 수정 */
+	public void updateAccountBook(int accountBookNo, String title, String describe) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("accountBookNo", accountBookNo);
+		map.put("title", title);
+		map.put("describe", describe);
+
+		dao.updateAccountBook(map);
+	}
+
 	/* 가계부 예산 조회 */
 	@Override
 	public AccountBookBudgetVO selectAccountBookBudget(int accountBookNo, String date) {
@@ -52,6 +63,28 @@ public class AccountBookService implements IAccountBookService {
 		map.put("date", date);
 
 		return dao.selectAccountBookBudget(map);
+	}
+
+	/* 가계부 예산 추가 */
+	public void insertAccountBookBudget(int accountBookNo, String date, int budget) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("accountBookNo", accountBookNo);
+		map.put("date", date);
+		map.put("budget", budget);
+
+		dao.insertAccountBookBudget(map);
+	}
+
+	/* 가계부 예산 수정 */
+	public void updateAccountBookBudget(int accountBookNo, String date, int budget) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("accountBookNo", accountBookNo);
+		map.put("date", date);
+		map.put("budget", budget);
+
+		dao.updateAccountBookBudget(map);
 	}
 
 	/* 공유 가계부 소유자, 참여자 조회 */
