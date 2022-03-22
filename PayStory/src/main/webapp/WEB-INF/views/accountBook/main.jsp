@@ -113,15 +113,15 @@
 											<c:when test="${accountBookTitle eq null || accountBookTitle eq ''}">
 												<c:choose>
 													<c:when test="${isShared eq false}">
-														<h6 class="m-0 font-weight-bold text-primary">내 가계부</h6>
+														<h6 class="accountBookTitle m-0 font-weight-bold text-primary">내 가계부</h6>
 													</c:when>
 													<c:otherwise>
-														<h6 class="m-0 font-weight-bold text-primary">공유 가계부</h6>
+														<h6 class="accountBookTitle m-0 font-weight-bold text-primary">공유 가계부</h6>
 													</c:otherwise>
 												</c:choose>
 											</c:when>
 											<c:otherwise>
-												<h6 class="m-0 font-weight-bold text-primary">${accountBookTitle}</h6>
+												<h6 class="accountBookTitle m-0 font-weight-bold text-primary">${accountBookTitle}</h6>
 											</c:otherwise>
 										</c:choose>
 										<div class="d-flex flex-gap-2">
