@@ -917,41 +917,43 @@ public class AccountBookController {
 	}
 
 	// 공유가계부 참여자 편집
-	@RequestMapping("/accountBook/public/editParticipant")
-	public String moveRegisterParticipant(Model model, @RequestParam Integer num, HttpSession httpSession) {
+		@RequestMapping("/accountBook/public/editParticipant")
+		public String editParticipant(Model model, @RequestParam Integer num, HttpSession httpSession) {
 
-		// 수정할 accountBookNo 세션에 저장
-		httpSession.setAttribute("accountBookNo", num);
+			// 수정할 accountBookNo 세션에 저장
+			httpSession.setAttribute("accountBookNo", num);
 
-		// 공유가계부 owner 데이터 가져오기
-		MemberVO ownerVO = shareAccountService.selectShareAccountOwner(num);
-		// 공유가계부 participant 데이터 가져오기
-		ArrayList<MemberVO> participantVO = shareAccountService.selectShareAccountParticipant(num);
+			// 공유가계부 owner 데이터 가져오기
+			MemberVO ownerVO = shareAccountService.selectShareAccountOwner(num);
+			// 공유가계부 participant 데이터 가져오기
+			ArrayList<MemberVO> participantVO = shareAccountService.selectShareAccountParticipant(num);
 
-		// participant image담을 배열 생성
-		String participant[] = new String[participantVO.size()];
-		String participantNo[] = new String[participantVO.size()];
+			// participant image담을 배열 생성
+			String participant[] = new String[participantVO.size()];
+			String participantNo[] = new String[participantVO.size()];
+			String participantName[] = new String[participantVO.size()];
 
-		// participant image, memberNo담기
-		for (int z = 0; z < participantVO.size(); z++) { // participantVO.size() 질문
-			participant[z] = participantVO.get(z).getMemberImage();
-			participantNo[z] = participantVO.get(z).getMemberNo();
+			// participant image, memberNo담기
+			for (int z = 0; z < participantVO.size(); z++) { // participantVO.size() 질문
+				participant[z] = participantVO.get(z).getMemberImage();
+				participantNo[z] = participantVO.get(z).getMemberNo();
+				participantName[z] = participantVO.get(z).getMemberName();
+			}
+			ShareMainVO shareMainVO = new ShareMainVO();
+
+			// 원하는 정보만 빼내서 shareMainVO에 넣기
+			shareMainVO.setOwnerNo(ownerVO.getMemberNo());
+			shareMainVO.setOwnerImage(ownerVO.getMemberImage());
+			shareMainVO.setOwnerName(ownerVO.getMemberName());
+			shareMainVO.setParticipantImage(participant);
+			shareMainVO.setParticipantNo(participantNo);
+			shareMainVO.setParticipantName(participantName);
+
+			// 보내기
+			model.addAttribute("shareMainVO", shareMainVO);
+
+			return "accountBook/public/editParticipant";
 		}
-
-		ShareMainVO shareMainVO = new ShareMainVO();
-
-		// 원하는 정보만 빼내서 shareMainVO에 넣기
-		shareMainVO.setOwnerNo(ownerVO.getMemberNo());
-		shareMainVO.setOwnerImage(ownerVO.getMemberImage());
-		shareMainVO.setOwnerName(ownerVO.getMemberName());
-		shareMainVO.setParticipantImage(participant);
-		shareMainVO.setParticipantNo(participantNo);
-
-		// 보내기
-		model.addAttribute("shareMainVO", shareMainVO);
-
-		return "accountBook/public/editParticipant";
-	}
 
 	// 공유가계부 참여자 추가시 회원인지 아닌지
 		@ResponseBody
@@ -967,5 +969,38 @@ public class AccountBookController {
 			}
 
 	}
+	
+	// 공유가계부 참여자 삭제
+	@RequestMapping("/accountBook/public/removeParticipantDo")
+	public String removeParticipant(Model model, @RequestParam String participantNO,
+			@RequestParam String participantCount, HttpSession httpSession) {
+		// 해당 참여자 삭제
+		shareAccountService.deleteParticipant(participantNO);
 
+		// 참여자가 한명 남았는데 삭제 했다면, 가계부 데이터 삭제, main화면으로
+		if (participantCount.equals("1")) {
+			shareAccountService.deleteAccountBookWhenParticipantNull((int) httpSession.getAttribute("accountBookNo"));
+			return "redirect:./main";
+		}
+		int currentAccountBookNo = (int) httpSession.getAttribute("accountBookNo");
+		return "redirect:./editParticipant?num=" + currentAccountBookNo;
+	}
+	
+	// 공유가계부 참여자 추가
+	@RequestMapping("/accountBook/public/addParticipant")
+	public String addParticipant(ShareAccountBookVO shareAccountBook,  HttpSession httpSession) {
+		
+		//@RequestParam("participantNo") String participantNO,
+		
+		//String currentMemberNo = (String) httpSession.getAttribute("memberNo");
+		int currentAccountBookNo = (int) httpSession.getAttribute("accountBookNo");
+		
+		shareAccountBook.setOwner((String) httpSession.getAttribute("memberNo"));
+		shareAccountBook.setAccountBookNo(currentAccountBookNo);
+		
+		shareAccountService.addShareAccountParticipant(shareAccountBook);
+		String participant = "";
+
+		return "redirect:./editParticipant?num=" + currentAccountBookNo;
+	}
 }

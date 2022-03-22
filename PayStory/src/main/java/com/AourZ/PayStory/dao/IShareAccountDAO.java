@@ -22,4 +22,9 @@ public interface IShareAccountDAO {
 	MemberVO selectShareAccountOwner(int accountBookNo);
 	ArrayList<MemberVO> selectShareAccountParticipant(int accountBookNo);
 	String existParticipant(String participantNo);
+	
+	/* 공유가계부 참여자 삭제추가 */
+	void deleteParticipant(String participantNO);
+	void deleteAccountBookWhenParticipantNull(int accountBookNo);
+	public void addShareAccountParticipant(ShareAccountBookVO shareAccountBook);
 }
