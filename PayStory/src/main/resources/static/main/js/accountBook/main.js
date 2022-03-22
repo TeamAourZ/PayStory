@@ -129,9 +129,16 @@ $(function() {
 
 		location.href = '/board/view/' + boardNo;
 	});
-	
+
 	/* 가계부 설정 클릭 */
 	$('#accountBookSettings').on('click', function() {
+		selectAccountBookInfoAjax(); // 가계부 정보 조회
+		selectBudgetAjax(nowYear, nowMonth + 1); // 예산 조회
+
+		let date = nowYear + "-" + zeroFill(nowMonth + 1);
+
+		$('#firstModalDate').val(date);
+
 		$('#accountBookInfoModal').modal('show');
 	});
 });

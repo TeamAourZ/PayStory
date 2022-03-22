@@ -30,8 +30,8 @@
 							<div id="budgetBox">
 								<h6 class="font-weight-bold text-secondary">예산</h6>
 								<div class="input-group">
-									<input type="month" class="form-control">
-									<input type="text" class="form-control" readonly>
+									<input type="month" id="firstModalDate" class="form-control" onchange="firstModalDateChange(event)">
+									<input type="text" id="budget" class="form-control" readonly>
 									<div class="input-group-append">
 										<button type="button" id="budgetSettingBtn" class="btn btn-outline-secondary">
 											<i class="calendarSettings fas fa-cog fa-lg"></i>
@@ -53,7 +53,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary">수정</button>
+						<button type="button" id="accountBookInfoEditBtn" class="btn btn-primary">수정</button>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 					</div>
 				</div>
