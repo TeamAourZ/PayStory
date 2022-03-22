@@ -16,11 +16,19 @@ $(document).ready(function() {
 // 유효성 확인 -----------------------------------------------------------------------------
 	$('#createPublicForm').submit(function(){
 		
+	
+		
 		if($('#accountBookTitle').val() == ""){
 				alert("제목을 입력해주세요");
 				$(this).focus();   
 				return false;
 			}
+			
+		if(($("#accountBookTitle").val()).length > 13 ){
+			alert("제목은 13글자 내로 입력해주세요");
+			$(this).focus();
+			return false;
+		} 
 			
 		if($('#budgetAmount').val() == ""){
 				alert("예산을 입력해주세요");
