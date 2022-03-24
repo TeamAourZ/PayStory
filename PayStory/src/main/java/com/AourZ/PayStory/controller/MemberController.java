@@ -285,8 +285,6 @@ public class MemberController {
 		List<MemberVO> memberList = memberService.memberList();
 		
 		model.addAttribute("memberList",memberList);
-		model.addAttribute("noticeBoardList",memberService.noticeBoardList());
-		model.addAttribute("noticeList",memberService.noticeList());
 		return "/member/master";
 	}
 	
@@ -321,6 +319,20 @@ public class MemberController {
 		
 		return "redirect:/member/master";
 	}
+	
+	// 공지사항
+		@RequestMapping(value="/master2", method=RequestMethod.GET)
+		public String memberSanctionView2(HttpSession session, Model model) throws Exception{
+			MemberVO memberVO = (MemberVO)session.getAttribute("login");
+			
+			if(memberVO.getMemberRank() != 3 || memberVO == null) {
+				session.invalidate();
+				return "/member/loginView";
+			}		
+			model.addAttribute("noticeBoardList",memberService.noticeBoardList());
+			model.addAttribute("noticeList",memberService.noticeList());
+			return "/member/master2";
+		}
 	
 	// 공지사항
 	@RequestMapping(value="/insertNotice", method=RequestMethod.POST)
