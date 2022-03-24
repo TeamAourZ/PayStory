@@ -11,6 +11,7 @@ public class BoardVO {
 	private String memberName;			// 작성자 이름
 	private String boardCategoryNo;		// 게시글 카테고리 번호
 	private String boardCategoryName;	// 카테고리 명
+	private String notice;				// 상단공지사항 고정여부
   
 	public Integer getBoardNo() {
 		return boardNo;
@@ -42,6 +43,10 @@ public class BoardVO {
 
 	public String getBoardCategoryNo() {
 		return boardCategoryNo;
+	}
+	
+	public String getNotice() {
+		return notice;
 	}
 
 	public void setBoardNo(Integer boardNo) {
@@ -90,5 +95,9 @@ public class BoardVO {
 
 	public void setBoardCategoryName(String boardCategoryName) {
 		this.boardCategoryName = boardCategoryName;
+	}
+	
+	public void setNotice(String notice) {
+		this.notice = notice;
 	}
 }

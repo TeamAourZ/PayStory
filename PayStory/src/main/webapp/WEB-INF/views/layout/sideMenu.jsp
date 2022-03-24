@@ -73,7 +73,16 @@
 	            <li class="nav-item">
 	                <a class="nav-link" href="<c:url value='/member/master' />">
 	                    <i class="fas fa-address-book"></i>
-	                    <span>관리자</span>
+	                    <span>관리자-회원</span>
+	                </a>
+	            </li>
+			</c:if>
+			
+			<c:if test="${login.memberRank == 3}">
+	            <li class="nav-item">
+	                <a class="nav-link" href="<c:url value='/member/master2' />">
+	                    <i class="fas fa-address-book"></i>
+	                    <span>관리자-공지</span>
 	                </a>
 	            </li>
 			</c:if>
