@@ -79,21 +79,11 @@
 													<div class="card">
 														<%-- header --%>
 														<div id="itemListCard${detailViewItemStatus.index}" class="card-header p-0 d-flex justify-content-between">
-															<div class="side"></div>
 															<h2 class="btn text-center collapsed w-100 m-0" data-toggle="collapse"
 																	data-target="#collapse${detailViewItemStatus.index}"
 																	aria-expanded="false" aria-controls="collapse${detailViewItemStatus.index}">
 																상세 목록&nbsp;
 															</h2>
-															<div class="side text-center">
-																<c:if test="${not empty detailViewItem.receiptImage}">
-																	<i class="receiptImageShow far fa-image fa-lg pointer-cursor"
-																		data-toggle="modal" data-target="#receiptModal" <%-- 모달 --%>
-																		data-toggle="tooltip" data-placement="bottom" title="영수증 이미지 보기"> <%-- 툴팁 --%>
-																	</i>
-																	<input type="hidden" value="${detailViewItem.receiptImage}">
-																</c:if>
-															</div>
 														</div>
 														<%-- body --%>
 														<div id="collapse${detailViewItemStatus.index}" class="collapse"
@@ -170,12 +160,24 @@
 										</c:when>
 									</c:choose>
 									
+									<%-- 이미지 뷰 --%>
+									<c:if test="${not empty detailViewItem.receiptImage}">
+										<i class="receiptImageShow far fa-image fa-lg pointer-cursor"
+											data-toggle="modal" data-target="#receiptModal" <%-- 모달 --%>
+											data-toggle="tooltip" data-placement="bottom" title="영수증 이미지 보기"> <%-- 툴팁 --%>
+										</i>
+									</c:if>
+									
+									<%-- 내역 수정 --%>
 									<i class="dataEdit far fa-edit fa-lg pointer-cursor"
 										data-toggle="tooltip" data-placement="bottom" title="내역 수정">
 									</i>
+									
+									<%-- 내역 삭제 --%>
 									<i class="dataDelete far fa-trash-alt fa-lg pointer-cursor"
 										data-toggle="tooltip" data-placement="bottom" title="내역 삭제">
 									</i>
+									
 									<%-- 삭제 이벤트를 위한 데이터 적재 --%>
 									<input type="hidden" value="${detailViewItem.condition}"> <%-- condition --%>
 									<input type="hidden" value="${detailViewItem.dataNo}"> <%-- dataNo --%>
@@ -195,7 +197,7 @@
 		</c:choose>
 		
 		<%-- 영수증 이미지 모달 --%>
-		<jsp:include page="/WEB-INF/views/accountBook/receiptImageModal.jsp" flush="true" />
+		<jsp:include page="/WEB-INF/views/accountBook/modal/receiptImageModal.jsp" flush="true" />
 		
 		<%-- 수정자 조회 모달 --%>
 		<jsp:include page="/WEB-INF/views/accountBook/modal/editHistoryModal.jsp" flush="true" />

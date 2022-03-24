@@ -116,9 +116,39 @@
 		)
 	</insert>
 
+
+	<!-- 회원가입되어 있는 참여자인지 확인 -->
 	<select id="existParticipant" parameterType="String" resultType="String">
 		SELECT memberNo FROM member WHERE memberEmail=#{participantNo}
 	</select>
+	
+	<!-- 공유가계부 참여자 삭제 추가 -->
+	<delete id="deleteParticipant" parameterType="String">
+		DELETE FROM share_account_book WHERE participant = #{participantNO}
+	</delete>
+	
+	<!-- 공유가계부 참여자 1명 삭제했을때 가계부도 삭제 -->
+	<delete id="deleteAccountBookWhenParticipantNull" parameterType="int">
+		DELETE FROM account_book WHERE accountBookNo = #{accountBookNo}
+	</delete>
+	
+	<!-- 공유가계부 참여자 추가 -->
+	<insert id="addShareAccountParticipant" parameterType="com.AourZ.PayStory.model.accountBook.ShareAccountBookVO">
+		INSERT INTO share_account_book
+		(
+		owner,
+		participant,
+		accountBookNo
+		)
+		VALUES
+		(
+		#{owner},
+		(SELECT memberNo FROM member WHERE
+		memberEmail=#{participant}),
+		#{accountBookNo}
+		)
+	</insert>
+
 
 	<!-- <select id="" resultMap="createAccountBook" resultType=""></select> -->
 

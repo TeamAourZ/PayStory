@@ -11,29 +11,29 @@
 - **Members**
 <table>
   <tr>
-    <td align="center"><a href="https://githib.com/Hyeon-2"><b>김현</b></a></td>
-    <td align="center"><a href="https://githib.com/john9256"><b>강성우</b></a></td>
-    <td align="center"><a href="https://githib.com/happai079"><b>박하영</b></a></td>
-    <td align="center"><a href="https://githib.com/reactionj"><b>서정원</b></a></td>
-    <td align="center"><a href="https://githib.com/Jung-Minyoung"><b>정민영</b></a></td>
-    <td align="center"><a href="https://githib.com/YSfallingStar"><b>정유성</b></a></td>
-  </tr>
-  <tr>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
-    <td align="center"><b></b></td>
+    <td align="center"><a href="https://github.com/Hyeon-2" target="_blank"><b>김현</b></a></td>
+    <td align="center"><a href="https://github.com/john9256" target="_blank"><b>강성우</b></a></td>
+    <td align="center"><a href="https://github.com/happai079" target="_blank"><b>박하영</b></a></td>
+    <td align="center"><a href="https://github.com/reactionj" target="_blank"><b>서정원</b></a></td>
+    <td align="center"><a href="https://github.com/Jung-Minyoung" target="_blank"><b>정민영</b></a></td>
+    <td align="center"><a href="https://github.com/YSfallingStar" target="_blank"><b>정유성</b></a></td>
   </tr>
 </table>
 
+<br/>
 
 ## 💰 프로젝트 소개
 자금 관리의 기초 가계부 이제 AI로 쉽게 관리해보세요!
 - **기술 스택**
    - **FRONT** : HTML, CSS, JavaScript, jQuery, BootStrap, Ajax
-   - **BACK** : Java, Spring Boot, MyBatis, MySQL, Naver Cloud Server
+   - **BACK** : Java, Spring Boot, MyBatis, MySQL, Naver Cloud Server(Jenkins)
    - **AI** : Naver Cloud AI (OCR, ChatBot, TTS, STT)
    - **협업 툴** : Git, GitHub, Allo 
+
+- **와이어 프레임** : [와이어 프레임 보러가기](https://allo.io/cb4a54bf436a5400e9d774635433)
+- **ERD** : [ERD 보러가기](https://www.erdcloud.com/d/WTjPEK6PSJL5ZCqM2)
+
+<br/>
+
+## 🔨 기능 구현
 

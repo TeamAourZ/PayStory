@@ -20,7 +20,11 @@
 		<!-- CSS : Main -->
 		<link href="<c:url value='/main/css/accountBook/addItemForm.css'/>" rel="stylesheet">
 		
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+		
 		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js'/>"></script>
+
 		<script type="text/javascript">
 			var accountBookNo = '<%= session.getAttribute("accountBookNo") %>';
 		</script>
@@ -252,8 +256,16 @@
 												<p>클릭하여 이미지 크게 보기</p>
 											</div>
 											<img id="receiptImg" />
-											<c:if test="${isEdit && not empty expenditure.expenditureImage}">
-												<input type="hidden" id="receiptImage" value="${expenditure.expenditureImage}">
+											<c:if test="${(isEdit && not empty expenditure.expenditureImage) || not empty image}">
+												<c:choose>
+													<c:when test="${not empty expenditure.expenditureImage}">
+														<input type="hidden" id="receiptImage" value="${expenditure.expenditureImage}">
+													</c:when>
+													<c:when test="${not empty image}">
+														<input type="hidden" id="receiptImage" value="${image}">
+													</c:when>
+												</c:choose>
+												
 												<script type="text/javascript">
 													$('#receiptImg').attr('src', '/images/receipt/' + accountBookNo + '/' + $('#receiptImage').val()).css('width', '100%').css('height', '95%'); // 이미지 삽입
 													$('#imgArea').addClass('hasImage');
@@ -261,6 +273,7 @@
 														'data-toggle': 'modal',
 														'data-target': '#receiptModal'
 													}); // 이미지 영역 속성 변경
+													$('#imageValue').val($('#receiptImage').val());
 													$('#receiptImage').remove(); // 삭제
 												</script>
 											</c:if>
@@ -394,6 +407,7 @@
 						<input type="hidden" value="${expenditureItemNameList}"> <%-- 상세 항목 : 이름 --%>
 						<input type="hidden" value="${expenditureItemPriceList}"> <%-- 상세 항목 : 금액 --%>
 						<input type="hidden" value="${fn:length(expenditureItemList)}"> <%-- 상세 항목 길이 --%>
+						<input type="hidden" value="${expenditure.expenditureAmount}"> <%-- 총 합계 --%>
 						<input type="hidden" value="${expenditure.expenditureMemo}"> <%-- 메모 --%>
 						<input type="hidden" value="${expenditure.expenditureNo}"> <%-- 지출 번호 --%>
 					</div>
@@ -409,7 +423,8 @@
 						$('#expenditureTags').val($('#hiddenExpenditureData').children('input').eq(1).val()); // 태그
 						$('#expenditureSource').val($('#hiddenExpenditureData').children('input').eq(2).val()); // 상호명
 						$('#expenditureAddress').val($('#hiddenExpenditureData').children('input').eq(3).val()); // 주소
-						$('#expenditureMemo').val($('#hiddenExpenditureData').children('input').eq(7).val()); // 메모
+						$('#expenditureTotalAmount').val($('#hiddenExpenditureData').children('input').eq(7).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')); // 총 합계
+						$('#expenditureMemo').val($('#hiddenExpenditureData').children('input').eq(8).val()); // 메모
 						
 						let nameList = $('#hiddenExpenditureData').children('input').eq(4).val().split('━'); // 상세 항목 이름
 						nameList.shift(); // 맨 앞 요소 꺼내기 (삭제)
@@ -429,14 +444,18 @@
 								sum += parseInt(itemAmount.toString().replace(/,/g, ''));
 							}
 						});
-						$('#expenditureTotalAmount').val(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+						if ($('#hiddenExpenditureData').children('input').eq(6).val() != 0) {
+							$('#expenditureTotalAmount').val(sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+						} else {
+							setTimeout(() => $('.showItem').click(), 100); // 상세 내역 접기
+						}
 					</script>
 				</c:when>
 			</c:choose>
 		</c:if>
 		
 		<!-- 영수증 이미지 Modal-->
-		<jsp:include page="/WEB-INF/views/accountBook/receiptImageModal.jsp" flush="true" />
+		<jsp:include page="/WEB-INF/views/accountBook/modal/receiptImageModal.jsp" flush="true" />
 		
 		<!-- Scroll to Top Button-->
 		<a class="scroll-to-top rounded" href="#page-top">

@@ -55,12 +55,32 @@ public class ShareAccountService implements IShareAccountService {
 	public ArrayList<MemberVO> selectShareAccountParticipant(int accountBookNo) {
 		return dao.selectShareAccountParticipant(accountBookNo);
 	}
-
+	
 	@Override
 	public String existParticipant(String participantNo) {
 		return dao.existParticipant(participantNo);
 		
 	}
 	
+	
+	/* ------------공유가계부 참여자 삭제 ------------*/
+	@Override
+	public void deleteParticipant(String participantNO) {
+		dao.deleteParticipant(participantNO);
+		
+	}
+	
+	/* 참여자 없을때 가계부 삭제 */
+	@Override
+	public void deleteAccountBookWhenParticipantNull(int accountBookNo) {
+		dao.deleteAccountBookWhenParticipantNull(accountBookNo);
+		
+	}
+	
+	/* 공유가계부 참여자 추가 */
+	@Override
+	public void addShareAccountParticipant(ShareAccountBookVO shareAccountBook) {
+		dao.addShareAccountParticipant(shareAccountBook);
+	}
 	
 }

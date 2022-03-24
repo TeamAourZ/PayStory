@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.AourZ.PayStory.model.FileUtils;
+import com.AourZ.PayStory.FileUtils;
 import com.AourZ.PayStory.model.accountBook.ExpenditureVO;
 import com.AourZ.PayStory.service.ai.ChatbotService;
 import com.AourZ.PayStory.service.ai.OCRService;
@@ -20,6 +20,9 @@ import com.AourZ.PayStory.service.ai.TTSService;
 
 @RestController
 public class AIController {
+	private static final String filePath = "/upload/"; // 파일이 저장될 서버 위치
+//	private static final String filePath = "C:/upload/"; // 파일이 저장될 서버 위치
+	
 	@Autowired
 	private STTService sttService;
 
@@ -36,7 +39,7 @@ public class AIController {
 
 		try {
 			// 1. 파일 저장 경로 설정 : 실제 서비스되는 위치로 (프로젝트 외부에 저장)
-			String uploadPath = "C:/upload/";
+			String uploadPath = filePath;
 
 			// 2. 원본 파일 이름 알아오기
 			String originalFileName = file.getOriginalFilename();
@@ -67,7 +70,7 @@ public class AIController {
 
 		try {
 			// 1. 파일 저장 경로 설정 : 실제 서비스되는 위치로 (프로젝트 외부에 저장)
-			String uploadPath = "C:/upload/";
+			String uploadPath = filePath;
 
 			// 2. 원본 파일 이름 알아오기
 			String originalFileName = file.getOriginalFilename();
@@ -98,7 +101,7 @@ public class AIController {
 
 		try {
 			// 1. 파일 저장 경로 설정 : 실제 서비스되는 위치로 (프로젝트 외부에 저장)
-			String uploadPath = "C:/upload/";
+			String uploadPath = filePath;
 
 			// 2. 원본 파일 이름 알아오기
 			String originalFileName = file.getOriginalFilename();
@@ -147,7 +150,7 @@ public class AIController {
 		String[] fileResult = FileUtils.uploadReceipt(file, session);
 		String filePathName = fileResult[0];
 		String uploadFileName = fileResult[1];
-		System.out.println(filePathName);
+		// System.out.println(filePathName);
 		
 		ExpenditureVO result =  OCRService.clovaOCRService(filePathName);
 		result.setExpenditureImage(uploadFileName);

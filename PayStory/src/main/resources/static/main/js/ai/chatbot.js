@@ -31,6 +31,7 @@
           
                 record.onclick = () => {
                     mediaRecorder.start();
+			console.log("qweqwe");
                     record.style.background = "";
                     record.style.color = "black";
                 }

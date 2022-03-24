@@ -16,9 +16,11 @@ import com.AourZ.PayStory.model.member.MemberVO;
 
 public interface IAccountBookDAO {
 	void createMyAccountBook(String memberNo);														// 일반 가계부 생성
-	AccountBookVO selectMyAccountBook(HashMap<String, Object> map);					// 일반 가계부 조회
-	AccountBookVO selectShareAccountBook(int accountBookNo);								// 공유 가계부 조회
+	AccountBookVO selectAccountBook(HashMap<String, Object> map);						// 가계부 조회
+	void updateAccountBook(HashMap<String, Object> map);										// 가계부 수정
 	AccountBookBudgetVO selectAccountBookBudget(HashMap<String, Object> map);	// 가계부 예산 조회
+	void insertAccountBookBudget(HashMap<String, Object> map);								// 가계부 예산 추가
+	void updateAccountBookBudget(HashMap<String, Object> map);							// 가계부 예산 수정
 	ArrayList<ShareAccountBookVO> selectShareMemberList(int accountBookNo);			// 공유 가계부 소유자, 참여자 조회
 	
 	MemberVO selectMemberInfo(HashMap<String, Object> map);								// 회원 정보 조회

@@ -13,10 +13,6 @@
 	left: 0.2%;
 }
 
-.side {
-	min-width: 25px;
-}
-
 .card .card-header .btn:after {
 	content: "\f106";
 	font-family: 'Font Awesome 5 Free';

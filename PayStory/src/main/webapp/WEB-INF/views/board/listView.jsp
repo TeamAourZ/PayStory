@@ -21,7 +21,12 @@
     <link href="<c:url value='/main/css/board/listView.css'/>" rel="stylesheet">
     <style>.noticeBoardList{cursor:pointer;}</style>
     
+
+    <!-- Favicon -->
+	  <link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+
     <script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js'/>"></script>
+
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->

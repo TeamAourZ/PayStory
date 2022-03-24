@@ -26,7 +26,12 @@
 	<!-- Custom styles for this template-->
 	<link href="/bootstrap/css/sb-admin-2.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/main/css/accountBook/public/publicMain.css">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
+
 		<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -65,10 +70,16 @@
 
 						<c:forEach items="${shareMainVOList}" var="shareMain">
 							<div class="publicAccountBox" style="display: inline-block;">
-								<span id="shareClickSpan" onclick="location.href='/accountBook/public/editParticipant?num=${shareMain.accountBookNo}'"
-									style="margin: -15px; height: 25px; width: 25px; width: 25px; float: right; padding-top: 5px;">
-									<i class="far fa-edit"></i>
-								</span>
+								<c:if test="${memberNo == shareMain.ownerNo}">
+									<div>
+									<span id="array"><i class="fas fa-crown"></i></span>
+									<span id="shareClickSpan"
+										onclick="location.href='/accountBook/public/editParticipant?num=${shareMain.accountBookNo}'"
+										style="margin: -15px; height: 25px; width: 25px; width: 25px; float: right; padding-top: 5px;">
+										<i class="far fa-edit"></i>
+									</span>
+									</div>
+								</c:if>
 								<div class="clickbox" onclick="location.href='/accountBook/public/setAccountNo?num=${shareMain.accountBookNo}'">
 									<span class="ellipsis">${shareMain.accountBookTitle}</span>
 									<div class="box" style="background: #BDBDBD;">

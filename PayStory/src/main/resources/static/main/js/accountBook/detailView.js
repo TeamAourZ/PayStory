@@ -77,6 +77,6 @@ $(function() {
 
 	/* 이미지 아이콘 클릭 시 영수증 이미지 모달 띄우기 */
 	$(document).on('click', '.receiptImageShow', function() {
-		$('#receiptImgModal').attr('src', '/images/receipt/' + accountBookNo + '/' + $(this).next('input').val()).addClass('w-100');
+		$('#receiptImgModal').attr('src', '/images/receipt/' + accountBookNo + '/' + $(this).parent('div').children('input').eq(2).val()).addClass('w-100');
 	});
 });

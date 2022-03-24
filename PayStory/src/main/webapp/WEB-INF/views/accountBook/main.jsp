@@ -32,10 +32,19 @@
 		<script src="<c:url value='/main/js/accountBook/etcMethod.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/accountBook/main.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/accountBook/common.js' />" type="text/javascript"></script>
+		
+		<%-------- JS : Custom : Ajax ------%>
 		<script src="<c:url value='/main/js/ajax/chartAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/budgetStatusAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/mainBoardAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/calendarAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/selectAccountBookInfoAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/updateAccountBookInfoAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/selectBudgetAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/budgetSettingAjax.js' />" type="text/javascript"></script>
+		
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -104,15 +113,15 @@
 											<c:when test="${accountBookTitle eq null || accountBookTitle eq ''}">
 												<c:choose>
 													<c:when test="${isShared eq false}">
-														<h6 class="m-0 font-weight-bold text-primary">내 가계부</h6>
+														<h6 class="accountBookTitle m-0 font-weight-bold text-primary">내 가계부</h6>
 													</c:when>
 													<c:otherwise>
-														<h6 class="m-0 font-weight-bold text-primary">공유 가계부</h6>
+														<h6 class="accountBookTitle m-0 font-weight-bold text-primary">공유 가계부</h6>
 													</c:otherwise>
 												</c:choose>
 											</c:when>
 											<c:otherwise>
-												<h6 class="m-0 font-weight-bold text-primary">${accountBookTitle}</h6>
+												<h6 class="accountBookTitle m-0 font-weight-bold text-primary">${accountBookTitle}</h6>
 											</c:otherwise>
 										</c:choose>
 										<div class="d-flex flex-gap-2">

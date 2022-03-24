@@ -27,6 +27,9 @@
     <script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js' />"></script>
     <script src="https://kit.fontawesome.com/7031b090f1.js" crossorigin="anonymous"></script>
     <script src="<c:url value='/main/js/accountBook/public/createPublicCheck.js'/>"></script>
+    
+    <!-- Favicon -->
+	<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->

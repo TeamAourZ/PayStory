@@ -7,8 +7,8 @@ public class ShareMainVO {
 	private String ownerNo;				// 회원 memberNo
 	private String participantImage[];			// 참여자 이미지
 	private String participantNo[];			// 참여자 memberNo
-	
-	private Integer accountBookNo;
+	private String participantName[];		// 참여자 이름
+	private Integer accountBookNo;			// 가계부 넘버
 	
 	public String getAccountBookTitle() {
 		return accountBookTitle;
@@ -52,5 +52,10 @@ public class ShareMainVO {
 	public void setOwnerNo(String ownerNo) {
 		this.ownerNo = ownerNo;
 	}
-	
+	public String[] getParticipantName() {
+		return participantName;
+	}
+	public void setParticipantName(String participantName[]) {
+		this.participantName = participantName;
+	}
 }
