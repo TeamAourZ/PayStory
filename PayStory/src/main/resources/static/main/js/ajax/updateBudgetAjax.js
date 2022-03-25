@@ -12,12 +12,12 @@ function budgetSettingAjax(date, budget) {
 
 			if (date === $('#firstModalDate').val()) {
 				$('#budget').val(budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
-
-				budgetStatusAjax(nowYear, nowMonth);
-
-				$('#secondModalDate').val("");
-				$('#inputBudget').val("");
 			}
+
+			budgetStatusAjax(nowYear, nowMonth);
+
+			$('#secondModalDate').val("");
+			$('#inputBudget').val("");
 		},
 		error: function() {
 			console.log("error");
