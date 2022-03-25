@@ -1,5 +1,5 @@
 /* 가계부 정보 모달 - 예산 조회 */
-function selectBudgetAjax(year, month) {
+function selectBudgetAjax(condition, year, month) {
 	$.ajax({
 		type: 'post',
 		url: "/accountBook/modal/selectBudget",
@@ -8,7 +8,11 @@ function selectBudgetAjax(year, month) {
 			"month": month,
 		},
 		success: function(result) {
-			$('#budget').val(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+			if (condition == "first") {
+				$('#budget').val(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+			} else if (condition == "second") {
+				$('#inputBudget').val(result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+			}
 		},
 		error: function() {
 			console.log("error");
@@ -17,13 +21,15 @@ function selectBudgetAjax(year, month) {
 }
 
 function firstModalDateChange(e) {
-	let year = -1;
-	let month = -1;
+	let year = splitDate(e.target.value, "year");
+	let month = splitDate(e.target.value, "month");
 
-	let selectDate = e.target.value.split('-');
+	selectBudgetAjax("first", year, month);
+}
 
-	year = selectDate[0] * 1;
-	month = selectDate[1] * 1;
+function secondModalDateChange(e) {
+	let year = splitDate(e.target.value, "year");
+	let month = splitDate(e.target.value, "month");
 
-	selectBudgetAjax(year, month);
+	selectBudgetAjax("second", year, month);
 }
