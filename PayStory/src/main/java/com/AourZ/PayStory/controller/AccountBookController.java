@@ -748,8 +748,8 @@ public class AccountBookController {
 
 	/* 대시보드 메인 - 예산 설정 모달 - 예산 추가 또는 수정 */
 	@ResponseBody
-	@RequestMapping("/accountBook/modal/budgetSetting")
-	public void budgetSetting(@RequestParam HashMap<String, Object> param, HttpServletRequest request) {
+	@RequestMapping("/accountBook/modal/budgetUpdate")
+	public void budgetUpdate(@RequestParam HashMap<String, Object> param, HttpServletRequest request) {
 		// map 정보 가져오기
 		String date = (String) param.get("date");
 		int budget = Integer.parseInt((String) param.get("budget"));
@@ -917,59 +917,58 @@ public class AccountBookController {
 	}
 
 	// 공유가계부 참여자 편집
-		@RequestMapping("/accountBook/public/editParticipant")
-		public String editParticipant(Model model, @RequestParam Integer num, HttpSession httpSession) {
+	@RequestMapping("/accountBook/public/editParticipant")
+	public String editParticipant(Model model, @RequestParam Integer num, HttpSession httpSession) {
 
-			// 수정할 accountBookNo 세션에 저장
-			httpSession.setAttribute("accountBookNo", num);
+		// 수정할 accountBookNo 세션에 저장
+		httpSession.setAttribute("accountBookNo", num);
 
-			// 공유가계부 owner 데이터 가져오기
-			MemberVO ownerVO = shareAccountService.selectShareAccountOwner(num);
-			// 공유가계부 participant 데이터 가져오기
-			ArrayList<MemberVO> participantVO = shareAccountService.selectShareAccountParticipant(num);
+		// 공유가계부 owner 데이터 가져오기
+		MemberVO ownerVO = shareAccountService.selectShareAccountOwner(num);
+		// 공유가계부 participant 데이터 가져오기
+		ArrayList<MemberVO> participantVO = shareAccountService.selectShareAccountParticipant(num);
 
-			// participant image담을 배열 생성
-			String participant[] = new String[participantVO.size()];
-			String participantNo[] = new String[participantVO.size()];
-			String participantName[] = new String[participantVO.size()];
+		// participant image담을 배열 생성
+		String participant[] = new String[participantVO.size()];
+		String participantNo[] = new String[participantVO.size()];
+		String participantName[] = new String[participantVO.size()];
 
-			// participant image, memberNo담기
-			for (int z = 0; z < participantVO.size(); z++) { // participantVO.size() 질문
-				participant[z] = participantVO.get(z).getMemberImage();
-				participantNo[z] = participantVO.get(z).getMemberNo();
-				participantName[z] = participantVO.get(z).getMemberName();
-			}
-			ShareMainVO shareMainVO = new ShareMainVO();
-
-			// 원하는 정보만 빼내서 shareMainVO에 넣기
-			shareMainVO.setOwnerNo(ownerVO.getMemberNo());
-			shareMainVO.setOwnerImage(ownerVO.getMemberImage());
-			shareMainVO.setOwnerName(ownerVO.getMemberName());
-			shareMainVO.setParticipantImage(participant);
-			shareMainVO.setParticipantNo(participantNo);
-			shareMainVO.setParticipantName(participantName);
-
-			// 보내기
-			model.addAttribute("shareMainVO", shareMainVO);
-
-			return "accountBook/public/editParticipant";
+		// participant image, memberNo담기
+		for (int z = 0; z < participantVO.size(); z++) { // participantVO.size() 질문
+			participant[z] = participantVO.get(z).getMemberImage();
+			participantNo[z] = participantVO.get(z).getMemberNo();
+			participantName[z] = participantVO.get(z).getMemberName();
 		}
+		ShareMainVO shareMainVO = new ShareMainVO();
+
+		// 원하는 정보만 빼내서 shareMainVO에 넣기
+		shareMainVO.setOwnerNo(ownerVO.getMemberNo());
+		shareMainVO.setOwnerImage(ownerVO.getMemberImage());
+		shareMainVO.setOwnerName(ownerVO.getMemberName());
+		shareMainVO.setParticipantImage(participant);
+		shareMainVO.setParticipantNo(participantNo);
+		shareMainVO.setParticipantName(participantName);
+
+		// 보내기
+		model.addAttribute("shareMainVO", shareMainVO);
+
+		return "accountBook/public/editParticipant";
+	}
 
 	// 공유가계부 참여자 추가시 회원인지 아닌지
-		@ResponseBody
-		@RequestMapping("/accountBook/public/checkParticipant")
-		public String checkParticipant(Model model, @RequestParam("No") String participantNo, HttpSession httpSession) {
-			
-			String testP=shareAccountService.existParticipant(participantNo);
-			if(testP==null || testP =="") {
-				return "nope";
-			}
-			else{
-				return "exist";
-			}
+	@ResponseBody
+	@RequestMapping("/accountBook/public/checkParticipant")
+	public String checkParticipant(Model model, @RequestParam("No") String participantNo, HttpSession httpSession) {
+
+		String testP = shareAccountService.existParticipant(participantNo);
+		if (testP == null || testP == "") {
+			return "nope";
+		} else {
+			return "exist";
+		}
 
 	}
-	
+
 	// 공유가계부 참여자 삭제
 	@RequestMapping("/accountBook/public/removeParticipantDo")
 	public String removeParticipant(Model model, @RequestParam String participantNO,
@@ -985,16 +984,16 @@ public class AccountBookController {
 		int currentAccountBookNo = (int) httpSession.getAttribute("accountBookNo");
 		return "redirect:./editParticipant?num=" + currentAccountBookNo;
 	}
-	
+
 	// 공유가계부 참여자 추가
 	@RequestMapping("/accountBook/public/addParticipant")
-	public String addParticipant(ShareAccountBookVO shareAccountBook,  HttpSession httpSession) {
-		
+	public String addParticipant(ShareAccountBookVO shareAccountBook, HttpSession httpSession) {
+
 		int currentAccountBookNo = (int) httpSession.getAttribute("accountBookNo");
-		
+
 		shareAccountBook.setOwner((String) httpSession.getAttribute("memberNo"));
 		shareAccountBook.setAccountBookNo(currentAccountBookNo);
-		
+
 		shareAccountService.addShareAccountParticipant(shareAccountBook);
 		String participant = "";
 

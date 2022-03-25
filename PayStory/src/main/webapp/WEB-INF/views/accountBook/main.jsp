@@ -41,7 +41,7 @@
 		<script src="<c:url value='/main/js/ajax/selectAccountBookInfoAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/updateAccountBookInfoAjax.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/main/js/ajax/selectBudgetAjax.js' />" type="text/javascript"></script>
-		<script src="<c:url value='/main/js/ajax/budgetSettingAjax.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/main/js/ajax/updateBudgetAjax.js' />" type="text/javascript"></script>
 		
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>

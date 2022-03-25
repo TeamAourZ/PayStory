@@ -27,7 +27,7 @@
 							<div id="budgetBox">
 								<h6 class="font-weight-bold text-secondary">예산</h6>
 								<div class="input-group">
-									<input type="month" id="secondModalDate" class="form-control">
+									<input type="month" id="secondModalDate" class="form-control" onchange="secondModalDateChange(event)">
 									<input type="text" id="inputBudget" class="form-control">
 									<div class="input-group-append">
 										<button type="button" id="budgetEditBtn" class="btn btn-primary">수정</button>

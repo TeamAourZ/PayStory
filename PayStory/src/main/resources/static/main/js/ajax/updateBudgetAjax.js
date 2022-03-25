@@ -2,7 +2,7 @@
 function budgetSettingAjax(date, budget) {
 	$.ajax({
 		type: 'post',
-		url: "/accountBook/modal/budgetSetting",
+		url: "/accountBook/modal/budgetUpdate",
 		data: {
 			"date": date,
 			"budget": budget

@@ -188,3 +188,21 @@ function withComma(num) {
 function withoutComma(num) {
 	return num.toString().replace(/,/g, '');
 }
+
+/* 년-월 분할 */
+function splitDate(date, returnValue) {
+	let year = -1;
+	let month = -1;
+
+	let selectDate = date.split('-');
+
+	if (returnValue == "year") {
+		year = selectDate[0] * 1;
+		
+		return year;
+	} else if (returnValue == "month") {
+		month = selectDate[1] * 1;
+		
+		return month;
+	}
+}
