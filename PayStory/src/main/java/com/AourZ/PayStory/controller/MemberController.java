@@ -338,13 +338,13 @@ public class MemberController {
 	@RequestMapping(value="/insertNotice", method=RequestMethod.POST)
 	public String insertNotice(int boardNo)throws Exception{
 		memberService.insertNotice(boardNo);
-		return "redirect:/member/master";
+		return "redirect:/member/master2";
 	}
 	
 	@RequestMapping(value="/deleteNotice", method=RequestMethod.POST)
 	public String deleteNotice(int boardNo)throws Exception{
 		memberService.deleteNotice(boardNo);
-		return "redirect:/member/master";
+		return "redirect:/member/master2";
 	}
 	
 	
