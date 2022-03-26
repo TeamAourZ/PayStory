@@ -299,20 +299,28 @@
 					for(let i=0; i<itemList.length; i++){
 						receiveChat += '<tr><td>'+itemList[i].expenditureItemName+
 											 '</td><td class="text-right">'+withComma(itemList[i].expenditureItemPrice)+'원</td></tr>';
+						
+						// data 추가
+						for (key in itemList[i]) {
+							data += key + "=" + itemList[i][key] + ",";
+						}
 					}
 					receiveChat += '</tr>';
 				}
+				
 				receiveChat += '<tr><th>총 지출 금액</th><td colspan="2">'+ totalAmount + '원</td><tr></table>'+
 							   '<br><br> 가계부 등록 페이지로 이동합니다. </span></span></div>';
-				for(var i=0; i<itemList.length; i++) {
-					for (key in itemList[i]) {
-						data += key + "=" + itemList[i][key] + ",";
-					}
+				
+				
+				
+		        $('#chatBox').append(receiveChat);
+				
+				if(data !== ""){
+					openNewWindow.location.href = "/accountBook/add/chat/" + dateTime + "/" + source + "/" + address + "/" + totalAmount + "/" + data + "/" + image;
+				}else {
+					openNewWindow.location.href = "/accountBook/add/chat/" + dateTime + "/" + source + "/" + address + "/" + totalAmount + "/" + image;					
 				}
 				
-				openNewWindow.location.href = "/accountBook/add/chat/" + dateTime + "/" + source + "/" + address + "/" + totalAmount + "/" + data + "/" + image;
-				
-        $('#chatBox').append(receiveChat);
 				
 			},
 			error: function(err){

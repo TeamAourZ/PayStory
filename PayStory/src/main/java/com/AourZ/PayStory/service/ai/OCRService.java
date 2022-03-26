@@ -147,7 +147,7 @@ public class OCRService {
 				}else {
 					expeditureSource = (String) formattedNameObj.getString("value");
 				}
-				//System.out.println("상호 : " + expeditureSource);
+//				System.out.println("상호 : " + expeditureSource);
 				expenditureVO.setExpenditureSource(expeditureSource);
 				
 				// 주소
@@ -158,7 +158,7 @@ public class OCRService {
 					JSONObject temp2Obj = (JSONObject) addressArray.get(0);
 					JSONObject formattedAddressObj = (JSONObject) temp2Obj.get("formatted");
 					expenditureAddress = (String) formattedAddressObj.getString("value");
-					//System.out.println("주소: " + expenditureAddress);
+//					System.out.println("주소: " + expenditureAddress);
 					expenditureVO.setExpenditureAddress(expenditureAddress);
 				}
 				
@@ -189,7 +189,7 @@ public class OCRService {
 					
 					// 프론트단에서 자동으로 보여주기 위해 (yyyy-MM-ddThh:mm) 포맷으로 저장
 					String expenditureDate = year + "-" + month + "-" + day + "T" + hour + ":" + minute;
-					//System.out.println("일시: " + expenditureDate);
+//					System.out.println("일시: " + expenditureDate);
 					expenditureVO.setExpenditureDate(expenditureDate);
 				}
 				
@@ -201,7 +201,7 @@ public class OCRService {
 				
 				// 프론트단에서 자동으로 보여주기 위해 (yyyy-MM-ddThh:mm) 포맷으로 저장
 				String expenditureDate = year + "-" + month + "-" + day + "T" + hour + ":" + minute;
-				//System.out.println("일시: " + expenditureDate);
+//				System.out.println("일시: " + expenditureDate);
 				expenditureVO.setExpenditureDate(expenditureDate);
 				
 				/************ 아이템 추출 -> VO 저장 **************/
@@ -235,8 +235,8 @@ public class OCRService {
 								// expenditureItemVO에 저장 후 expenditureItemList에 담기
 								itemVO.setExpenditureItemName(expenditureItemName);
 								itemVO.setExpenditureItemPrice(expenditureItemPrice);
-								//System.out.println("상품 번호 "+ (i+1) +" =======================");
-								//System.out.println("내용:" + expenditureItemName + "금액:" + expenditureItemPrice );
+//								System.out.println("상품 번호 "+ (i+1) +" =======================");
+//								System.out.println("내용:" + expenditureItemName + "금액:" + expenditureItemPrice );
 								expenditureItemList.add(itemVO);
 							}
 						}
@@ -251,8 +251,8 @@ public class OCRService {
 				JSONObject formattedPriceObj = (JSONObject) priceObj.get("formatted");
 				
 				int expenditureAmount = Integer.parseInt((String) formattedPriceObj.get("value"));
-				//System.out.println("=========================");
-				//System.out.println("총 금액 : " + expenditureAmount);
+//				System.out.println("=========================");
+//				System.out.println("총 금액 : " + expenditureAmount);
 				expenditureVO.setExpenditureAmount(expenditureAmount);
 			}
 		} catch (Exception e) {

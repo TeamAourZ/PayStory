@@ -349,23 +349,27 @@ public class AccountBookController {
 	}
 
 	// 챗봇에서 영수증 등록 페이지로 값 넘기면서 페이지 이동
-	@RequestMapping("/accountBook/add/chat/{dateTime}/{source}/{address}/{totalAmount}/{data}/{image}")
+	@RequestMapping(value= {"/accountBook/add/chat/{dateTime}/{source}/{address}/{totalAmount}/{data}/{image}",
+							"/accountBook/add/chat/{dateTime}/{source}/{address}/{totalAmount}/{image}"})
 	public String resultChatOCR(@PathVariable("dateTime") String dateTime, @PathVariable("source") String source,
 			@PathVariable("address") String address, @PathVariable("totalAmount") String totalAmount,
-			@PathVariable("data") String data, @PathVariable("image") String image, Model model) {
+			@PathVariable(required = false) String data, @PathVariable("image") String image, Model model) {
 
 		ExpenditureItemVO vo = new ExpenditureItemVO();
 
 		ArrayList<ExpenditureItemVO> itemsList = new ArrayList<ExpenditureItemVO>();
 
-		String[] items = data.substring(0, data.length() - 1).split(",");
-		for (int i = 0; i < items.length; i++) {
-			if (i == 0) {
-				vo.setExpenditureItemName(items[i].split("=")[1]);
-			} else if (i == 1) {
-				vo.setExpenditureItemPrice(Integer.parseInt(items[i].split("=")[1]));
+		System.out.println(data);	
+		if(data != null) {
+			String[] items = data.substring(0, data.length() - 1).split(",");
+			for (int i = 0; i < items.length; i++) {
+				if (i == 0) {
+					vo.setExpenditureItemName(items[i].split("=")[1]);
+				} else if (i == 1) {
+					vo.setExpenditureItemPrice(Integer.parseInt(items[i].split("=")[1]));
+				}
+				itemsList.add(vo);
 			}
-			itemsList.add(vo);
 		}
 
 		model.addAttribute("dateTime", dateTime);
