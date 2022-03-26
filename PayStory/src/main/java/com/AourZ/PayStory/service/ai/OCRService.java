@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 import org.json.JSONArray;
@@ -169,17 +170,30 @@ public class OCRService {
 				String year, month, day = "";
 				
 				JSONObject dateObj = (JSONObject) paymentObj.get("date");
-				JSONObject formattedDateObj = (JSONObject) dateObj.get("formatted");
-				year = (String) formattedDateObj.getString("year");
-				month = (String) formattedDateObj.getString("month");
-				day = (String) formattedDateObj.getString("day");
 				
-				if(year.equals("") || month.equals("") || day.equals("")) {
+				if(!dateObj.has("formatted")) {
 					String dateText = (String) dateObj.getString("text");
-					String[] dateTextArray = dateText.split(" ")[0].split("-|/|\\.|\\s");
-					year = 20 + dateTextArray[0];
-					month = dateTextArray[1];
-					day = dateTextArray[2];
+					String[] dateTextArray = dateText.split("-|/|\\.|\\s");
+					year = dateTextArray[0].replaceAll("[^0-9]", "");
+					if(year.length() == 2) year += 20;
+					month = dateTextArray[1].replaceAll("[^0-9]", "");
+					day = dateTextArray[2].replaceAll("[^0-9]", "");
+					
+					// 시간 
+					JSONObject timeObj = (JSONObject) paymentObj.get("time");
+					JSONObject formattedTimeObj = (JSONObject) timeObj.get("formatted");
+					String hour = (String) formattedTimeObj.getString("hour");
+					String minute = (String) formattedTimeObj.getString("minute");
+					
+					// 프론트단에서 자동으로 보여주기 위해 (yyyy-MM-ddThh:mm) 포맷으로 저장
+					String expenditureDate = year + "-" + month + "-" + day + "T" + hour + ":" + minute;
+//					System.out.println("일시: " + expenditureDate);
+					expenditureVO.setExpenditureDate(expenditureDate);
+				} else {
+					JSONObject formattedDateObj = (JSONObject) dateObj.get("formatted");
+					year = (String) formattedDateObj.getString("year");
+					month = (String) formattedDateObj.getString("month");
+					day = (String) formattedDateObj.getString("day");
 					
 					// 시간 
 					JSONObject timeObj = (JSONObject) paymentObj.get("time");
@@ -192,17 +206,6 @@ public class OCRService {
 //					System.out.println("일시: " + expenditureDate);
 					expenditureVO.setExpenditureDate(expenditureDate);
 				}
-				
-				// 시간 
-				JSONObject timeObj = (JSONObject) paymentObj.get("time");
-				JSONObject formattedTimeObj = (JSONObject) timeObj.get("formatted");
-				String hour = (String) formattedTimeObj.getString("hour");
-				String minute = (String) formattedTimeObj.getString("minute");
-				
-				// 프론트단에서 자동으로 보여주기 위해 (yyyy-MM-ddThh:mm) 포맷으로 저장
-				String expenditureDate = year + "-" + month + "-" + day + "T" + hour + ":" + minute;
-//				System.out.println("일시: " + expenditureDate);
-				expenditureVO.setExpenditureDate(expenditureDate);
 				
 				/************ 아이템 추출 -> VO 저장 **************/
 				JSONArray subResultArray = (JSONArray) resultObj.get("subResults");

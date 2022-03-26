@@ -272,7 +272,14 @@
 			data: formData,
 			processData: false,
     		contentType: false,
+    		beforeSend : function(request){
+				// Performed before calling Ajax
+				$(".ajaxSpinner").css("visibility", "visible");;
+			},
 			success: function(result) {
+				
+				$(".ajaxSpinner").css("visibility", "hidden");
+				
 				var openNewWindow = window.open("about:blank");
 				// 날짜 
 				let dateTime = result.expenditureDate;
@@ -311,8 +318,6 @@
 				receiveChat += '<tr><th>총 지출 금액</th><td colspan="2">'+ totalAmount + '원</td><tr></table>'+
 							   '<br><br> 가계부 등록 페이지로 이동합니다. </span></span></div>';
 				
-				
-				
 		        $('#chatBox').append(receiveChat);
 				
 				if(data !== ""){
@@ -320,8 +325,6 @@
 				}else {
 					openNewWindow.location.href = "/accountBook/add/chat/" + dateTime + "/" + source + "/" + address + "/" + totalAmount + "/" + image;					
 				}
-				
-				
 			},
 			error: function(err){
 				console.log(err);
