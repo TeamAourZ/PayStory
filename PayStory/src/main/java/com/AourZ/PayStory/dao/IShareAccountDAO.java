@@ -27,4 +27,7 @@ public interface IShareAccountDAO {
 	void deleteParticipant(String participantNO);
 	void deleteAccountBookWhenParticipantNull(int accountBookNo);
 	public void addShareAccountParticipant(ShareAccountBookVO shareAccountBook);
+	
+	/* 공유가계부 삭제 */
+	void deleteShareAccountBook(int accountBookNo);
 }

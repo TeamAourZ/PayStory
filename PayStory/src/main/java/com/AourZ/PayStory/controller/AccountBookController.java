@@ -1003,4 +1003,11 @@ public class AccountBookController {
 
 		return "redirect:./editParticipant?num=" + currentAccountBookNo;
 	}
+	
+	// 공유 가계부 삭제
+	@RequestMapping("/accountBook/public/delete")
+	public String deleteShareAccountBook(HttpSession httpSession) {
+		shareAccountService.deleteShareAccountBook((int) httpSession.getAttribute("accountBookNo"));
+		return "redirect:./main";
+	}
 }

@@ -152,5 +152,9 @@
 
 	<!-- <select id="" resultMap="createAccountBook" resultType=""></select> -->
 
+	<!-- 공유가계부 삭제 -->
+	<delete id="deleteShareAccountBook" parameterType="int">
+		DELETE FROM account_book WHERE accountBookNo = #{accountBookNo}
+	</delete>
 
 </mapper>

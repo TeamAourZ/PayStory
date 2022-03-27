@@ -82,5 +82,12 @@ public class ShareAccountService implements IShareAccountService {
 	public void addShareAccountParticipant(ShareAccountBookVO shareAccountBook) {
 		dao.addShareAccountParticipant(shareAccountBook);
 	}
+
+	/* ---------- 공유 가계부 삭제 ----------- */
+	@Override
+	public void deleteShareAccountBook(int accountBookNo) {
+		dao.deleteShareAccountBook(accountBookNo);
+	}
+	
 	
 }
