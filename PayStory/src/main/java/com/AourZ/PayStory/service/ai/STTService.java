@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class STTService {
-	private static final String filePath = "/upload/"; // 파일이 저장될 서버 위치
+	private static final String filePath = "/upload/chat/stt/"; // 파일이 저장될 서버 위치
 //	private static final String filePath = "C:/upload/"; // 파일이 저장될 서버 위치
 	
 	public String clovaSpeechToText(String filePathName) {
