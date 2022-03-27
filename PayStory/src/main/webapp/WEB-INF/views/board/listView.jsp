@@ -127,7 +127,7 @@
 											        		<td>[공지]  ${noticeBoardList.boardTitle}</td>
 											        		<td>PayStory 관리자</td>
 											        		<td>${noticeBoardList.boardDate}</td>
-											        		<td>${noticeBoardList.boardViews}</td>
+											        		<td><input type="hidden" value='${noticeBoardList.boardViews}'/>${noticeBoardList.boardViews}</td>
 														</tr>
 													</c:forEach>
 				                                    

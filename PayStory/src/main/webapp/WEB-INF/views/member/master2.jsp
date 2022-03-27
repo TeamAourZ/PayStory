@@ -19,7 +19,11 @@
 			.control-labell{display: inline-block; margin-bottom: 0.5rem;}
 			.row1{display: flex; flex-wrap: wrap; margin-right: 0.8rem; margin-left: 0.8rem;}
 			.mb-23{margin-bottom: 0.5rem !important; margin-left: 27px;}
-		</style>		
+		</style>
+		
+		<script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="/main/images/paystory.ico" type="image/x-icon"/>		
 		
 	</head>
 	<body>
@@ -150,7 +154,6 @@
 		</div>
 				
 		<%-------- JS : Bootstrap --------%>
-		<script src="<c:url value='/bootstrap/vendor/jquery/jquery.min.js'/>"></script>
 	    <script src="<c:url value='/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
 	    <script src="<c:url value='/bootstrap/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
 	    <script src="<c:url value='/bootstrap/js/sb-admin-2.min.js'/>"></script>

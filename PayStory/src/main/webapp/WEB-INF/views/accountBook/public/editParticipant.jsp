@@ -61,9 +61,9 @@
 
 					<!-- Page Heading -->
 
-					<div class="tab-content p-4 bg-white rounded">
+					<div class="tab-content p-4 bg-white rounded d-flex flex-column align-items-center justify-content-center">
 						<!----------------------- 추가 ---------------------------->
-						<div class="publicBox shadow">
+						<div class="publicBox shadow"> 
 							<div class="card-header">
 								<center>
 									<h5>참여자 추가</h5>
@@ -146,10 +146,8 @@
 								</div>
 
 							</c:forEach>
-
-							
 						</div>
-					
+						<button type="button" class="deleteBtn btn btn-primary">공유 가계부 삭제</button>
 					</div>
 
 				</div>

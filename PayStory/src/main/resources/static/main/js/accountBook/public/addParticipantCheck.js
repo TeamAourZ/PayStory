@@ -48,5 +48,11 @@ $(document).ready(function() {
 	
 	
 	}); // submit 종료
+	
+	// 공유가계부 삭제 버튼 클릭
+	$('.deleteBtn').on('click', function(){
+		let answer = confirm('정말 공유 가계부를 삭제하시겠습니까?');
+		if(answer) location.href='/accountBook/public/delete';
+	});
 				
 });   // ready 종료

@@ -70,6 +70,14 @@
 				            
 				            <!-- chatbox -->
 				            <div id="chatBox">
+				            	<!-- Loading Spinner --> 
+								<div class="ajaxSpinner">
+									<div>
+										<h3>영수증을 인식하고 있습니다.</h3>
+										<h3>잠시만 기다려주세요.</h3>
+										<img src="<c:url value='/main/images/spinner.gif' />" class="spinner" />
+									</div>
+								</div>
 				            	<p>${date}</p>
 				            	<hr>
 				            </div>
