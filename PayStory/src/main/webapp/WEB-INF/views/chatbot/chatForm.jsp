@@ -76,7 +76,7 @@
 				            <!-- chat input -->
 				            <div class="chatbox_input">
 			            		<form id="chatForm_file" enctype="multipart/form-data">
-			            			<i class="fa-regular fa-face-grin"></i>
+									<i class="fa-regular fa-note-sticky dataBtn"></i>
 			            			<label class="input-file-button"  for="uploadFile">
 		            					<i class="fa-solid fa-folder-plus"></i>
 			            			</label>
