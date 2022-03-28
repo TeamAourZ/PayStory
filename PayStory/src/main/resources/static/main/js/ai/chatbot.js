@@ -271,9 +271,15 @@
 			enctype: 'multipart/form-data',
 			url: "/OCR", 	
 			data: formData,
+			beforeSend : function(request){
+				// Performed before calling Ajax
+				$(".ajaxSpinner").css("visibility", "visible");;
+			},
 			processData: false,
     		contentType: false,
 			success: function(result) {
+				
+				$(".ajaxSpinner").css("visibility", "hidden");
 				
 				// 날짜 
 				let dateTime = result.expenditureDate;
@@ -300,22 +306,26 @@
 					for(let i=0; i<itemList.length; i++){
 						receiveChat += '<tr><td>'+itemList[i].expenditureItemName+
 											 '</td><td class="text-right">'+withComma(itemList[i].expenditureItemPrice)+'원</td></tr>';
+											 
+						for (key in itemList[i]) {
+							data += key + "=" + itemList[i][key] + ",";
+						}
 					}
 					receiveChat += '</tr>';
 				}
 				receiveChat += '<tr><th>총 지출 금액</th><td colspan="2">'+ totalAmount + '원</td><tr></table>'+
 							   '<br><br> 가계부 등록 버튼을 클릭하시면 가계부 등록 페이지로 이동합니다. </span></span></div>';
-				for(var i=0; i<itemList.length; i++) {
-					for (key in itemList[i]) {
-						data += key + "=" + itemList[i][key] + ",";
-					}
-				}
+				
 
         $('#chatBox').append(receiveChat);
         
         $('.dataBtn').on('click', function(){
 			let answer = confirm('가계부 등록 페이지로 이동하시겠습니까?');
-			let openNewWindow = window.open("/accountBook/add/chat/" + dateTime + "/" + source + "/" + address + "/" + totalAmount + "/" + data + "/" + image, "PopupWin");
+			if(data) {
+				let openNewWindow = window.open("/accountBook/add/chat/" + dateTime + "/" + source + "/" + address + "/" + totalAmount + "/" + data + "/" + image, "PopupWin");
+			}else {
+				let openNewWindow = window.open("/accountBook/add/chat/" + dateTime + "/" + source + "/" + address + "/" + totalAmount + "/" +  image, "PopupWin");
+			}
 		});
 			},
 			error: function(err){
