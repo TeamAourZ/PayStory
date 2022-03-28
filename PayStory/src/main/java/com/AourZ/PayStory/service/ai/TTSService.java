@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TTSService {
 	private static final String filePath = "/upload/chat/tts/"; // 파일이 저장될 서버 위치
-//	private static final String filePath = "C:/upload/"; // 파일이 저장될 서버 위치
+	//private static final String filePath = "C:/PayStory/upload/chat/tts/"; // 파일이 저장될 서버 위치
 	
 	public void clovaTextToSpeech(String filePathName) {
 		String clientId = "wd9vedste4";//애플리케이션 클라이언트 아이디값";
